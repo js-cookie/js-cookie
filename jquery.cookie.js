@@ -1,15 +1,19 @@
+/*jslint browser: true */ /*global jQuery: true */
+
 /**
  * Cookie plugin
  *
- * Copyright (c) 2006 Klaus Hartl (stilbuero.de)
+ * Copyright (c) 2010 Klaus Hartl (stilbuero.de)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
  *
  */
 
+// TODO JsDoc
+
 /**
- * Create a cookie with the given name and value and other optional parameters.
+ * Create a cookie with the given key and value and other optional parameters.
  *
  * @example $.cookie('the_cookie', 'the_value');
  * @desc Set the value of a cookie.
@@ -21,7 +25,7 @@
  * @desc Delete a cookie by passing null as value. Keep in mind that you have to use the same path and domain
  *       used when the cookie was set.
  *
- * @param String name The name of the cookie.
+ * @param String key The key of the cookie.
  * @param String value The value of the cookie.
  * @param Object options An object literal containing key/value pairs to provide optional cookie attributes.
  * @option Number|Date expires Either an integer specifying the expiration date from now on in days or a Date object.
@@ -40,12 +44,12 @@
  */
 
 /**
- * Get the value of a cookie with the given name.
+ * Get the value of a cookie with the given key.
  *
  * @example $.cookie('the_cookie');
  * @desc Get the value of a cookie.
  *
- * @param String name The name of the cookie.
+ * @param String key The key of the cookie.
  * @return The value of the cookie.
  * @type String
  *
@@ -53,45 +57,30 @@
  * @cat Plugins/Cookie
  * @author Klaus Hartl/klaus.hartl@stilbuero.de
  */
-jQuery.cookie = function(name, value, options) {
-    if (typeof value != 'undefined') { // name and value given, set cookie
-        options = options || {};
+jQuery.cookie = function (key, value, options) {
+
+    // key and value given, set cookie...
+    if (arguments.length > 1) {
+        options = jQuery.extend({}, options);
+
         if (value === null) {
-            value = '';
-            options = $.extend({}, options); // clone object since it's unexpected behavior if the expired property were changed
             options.expires = -1;
         }
-        var expires = '';
-        if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
-            var date;
-            if (typeof options.expires == 'number') {
-                date = new Date();
-                date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000));
-            } else {
-                date = options.expires;
-            }
-            expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
+
+        if (typeof options.expires === 'number') {
+            var days = options.expires, t = options.expires = new Date();
+            t.setDate(t.getDate() + days);
         }
-        // NOTE Needed to parenthesize options.path and options.domain
-        // in the following expressions, otherwise they evaluate to undefined
-        // in the packed version for some reason...
-        var path = options.path ? '; path=' + (options.path) : '';
-        var domain = options.domain ? '; domain=' + (options.domain) : '';
-        var secure = options.secure ? '; secure' : '';
-        document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
-    } else { // only name given, get cookie
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
+
+        return (document.cookie = [key, '=', encodeURIComponent(String(value)),
+            options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
+            options.path ? '; path=' + options.path : '',
+            options.domain ? '; domain=' + options.domain : '',
+            options.secure ? '; secure' : ''
+        ].join(''));
     }
+
+    // get cookie...
+    var result;
+    return (result = new RegExp('(?:^|; )' + key + '=([^;]*)').exec(document.cookie)) ? decodeURIComponent(result[1]) : null;
 };

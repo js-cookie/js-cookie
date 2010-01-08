@@ -7,21 +7,23 @@ var before = {
 module('read', before);
 
 test('Read', function () {
-    expect(2);
+    expect(3);
 
     equals($.cookie('c'), null);
     document.cookie = 'c=v';
-    equals($.cookie('c'), 'v', 'Should read cookie value');
+    equals($.cookie('c'), 'v', 'Read cookie value');
+    equals($.cookie('whatever'), null, 'Give null if cookie does not exist');
 });
 
 module('Write', before);
 
 test('Write', function () {
-    expect(2);
+    expect(3);
 
     equals($.cookie('c'), null);
-    $.cookie('c', 'v');
-    equals(document.cookie, 'c=v', 'Should write cookie value');
+    var cookie = $.cookie('c', 'v');
+    equals(document.cookie, 'c=v', 'Write cookie value');
+    equals(cookie, 'c=v', 'Return cookie');
 });
 
 module('Delete', before);
@@ -29,7 +31,7 @@ module('Delete', before);
 test('Delete', function () {
     expect(1);
 
-    document.cookie = "c=v";
+    document.cookie = 'c=v';
     $.cookie('c', null);
-    equals(document.cookie, '', 'Should delete cookie');
+    equals(document.cookie, '', 'Delete cookie');
 });
