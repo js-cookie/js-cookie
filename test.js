@@ -34,10 +34,18 @@ test('raw: true', 1, function () {
 
 module('write', before);
 
-test('simple value', 2, function () {
-    var cookie = $.cookie('c', 'v');
-    equals(cookie, 'c=v', 'should return written cookie string');
-    equals(document.cookie, 'c=v', 'should write String primitive');
+test('String primitive', 1, function () {
+    $.cookie('c', 'v');
+    equals(document.cookie, 'c=v', 'should write value');
+});
+
+test('String object', 1, function () {
+    $.cookie('c', new String('v'));
+    equals(document.cookie, 'c=v', 'should write value');
+});
+
+test('return', 1, function () {
+    equals($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
 
 test('raw: true', 1, function () {
@@ -48,8 +56,12 @@ test('raw: true', 1, function () {
 
 module('delete', before);
 
-test('delete', 1, function () {
+test('delete', 2, function () {
     document.cookie = 'c=v';
     $.cookie('c', null);
     equals(document.cookie, '', 'should delete with null as value');
+    
+    document.cookie = 'c=v';
+    $.cookie('c', undefined);
+    equals(document.cookie, '', 'should delete with undefined as value');
 });

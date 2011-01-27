@@ -58,12 +58,12 @@
  * @author Klaus Hartl/klaus.hartl@stilbuero.de
  */
 jQuery.cookie = function (key, value, options) {
-
-    // key and value given, set cookie...
-    if (arguments.length > 1 && (value === null || typeof value !== "object")) {
+    
+    // key and at least value given, set cookie...
+    if (arguments.length > 1 && String(value) !== "[object Object]") {
         options = jQuery.extend({}, options);
 
-        if (value === null) {
+        if (value === null || value === undefined) {
             options.expires = -1;
         }
 
@@ -71,10 +71,12 @@ jQuery.cookie = function (key, value, options) {
             var days = options.expires, t = options.expires = new Date();
             t.setDate(t.getDate() + days);
         }
-
+        
+        value = String(value);
+        
         return (document.cookie = [
             encodeURIComponent(key), '=',
-            options.raw ? String(value) : encodeURIComponent(String(value)),
+            options.raw ? value : encodeURIComponent(value),
             options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
             options.path ? '; path=' + options.path : '',
             options.domain ? '; domain=' + options.domain : '',
