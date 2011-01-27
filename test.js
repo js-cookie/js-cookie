@@ -22,8 +22,6 @@ test('not existing', 1, function () {
 test('decode', 1, function () {
     document.cookie = encodeURIComponent(' c') + '=' + encodeURIComponent(' v');
     equals($.cookie(' c'), ' v', 'should decode key and value');
-    
-    // TODO test with ';' use encodeURI?
 });
 
 test('raw: true', 1, function () {
