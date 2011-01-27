@@ -1,47 +1,55 @@
 var before = {
     setup: function () {
-        document.cookie = 'c=; expires=' + new Date(0).toUTCString();
-        document.cookie = encodeURIComponent(' foo ') + '=; expires=' + new Date(0).toUTCString();
-        document.cookie = 'raw=; expires=' + new Date(0).toUTCString();
+        cookies = document.cookie.split('; ')
+        for (var i = 0, c; (c = (cookies)[i]) && (c = c.split('=')[0]); i++) {
+            document.cookie = c + '=; expires=' + new Date(0).toUTCString();
+        }
     }
 };
 
+
 module('read', before);
 
-test('Read', function () {
-    expect(5);
-
-    equals($.cookie('c'), null);
+test('simple value', 1, function () {
     document.cookie = 'c=v';
-    equals($.cookie('c'), 'v', 'Read cookie value');
-
-    document.cookie = encodeURIComponent(' foo ') + '=' + encodeURIComponent(' bar ');
-    equals($.cookie(' foo '), ' bar ', 'Decode key/value');
-
-    document.cookie = 'raw=%20whatever';
-    equals($.cookie('raw', { raw: true }), '%20whatever', 'Do not decode with raw set true');
-
-    equals($.cookie('whatever'), null, 'Give null if cookie does not exist');
+    equals($.cookie('c'), 'v', 'should return value');    
 });
 
-module('Write', before);
+test('not existing', 1, function () {
+    equals($.cookie('whatever'), null, 'should return null');
+});
 
-test('Write', function () {
-    expect(4);
+test('decode', 1, function () {
+    document.cookie = encodeURIComponent(' c') + '=' + encodeURIComponent(' v');
+    equals($.cookie(' c'), ' v', 'should decode key and value');
+    
+    // TODO test with ';' use encodeURI?
+});
 
-    equals($.cookie('c'), null);
+test('raw: true', 1, function () {
+    document.cookie = 'c=%20v';
+    equals($.cookie('c', { raw: true }), '%20v', 'should not decode');
+});
+
+
+module('write', before);
+
+test('simple value', 2, function () {
     var cookie = $.cookie('c', 'v');
-    equals(document.cookie, 'c=v', 'Write cookie value');
-    equals(cookie, 'c=v', 'Return cookie string');
-    equals($.cookie('raw', ' whatever', { raw: true }).split('=')[1], ' whatever', 'Do not encode with raw set true');
+    equals(cookie, 'c=v', 'should return written cookie string');
+    equals(document.cookie, 'c=v', 'should write String primitive');
 });
 
-module('Delete', before);
+test('raw: true', 1, function () {
+    equals($.cookie('c', ' v', { raw: true }).split('=')[1],
+        ' v', 'should not encode');
+});
 
-test('Delete', function () {
-    expect(1);
 
+module('delete', before);
+
+test('delete', 1, function () {
     document.cookie = 'c=v';
     $.cookie('c', null);
-    equals(document.cookie, '', 'Delete cookie');
+    equals(document.cookie, '', 'should delete with null as value');
 });
