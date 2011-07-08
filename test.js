@@ -12,7 +12,7 @@ module('read', before);
 
 test('simple value', 1, function () {
     document.cookie = 'c=v';
-    equals($.cookie('c'), 'v', 'should return value');    
+    equals($.cookie('c'), 'v', 'should return value');
 });
 
 test('not existing', 1, function () {
@@ -58,7 +58,7 @@ test('delete', 2, function () {
     document.cookie = 'c=v';
     $.cookie('c', null);
     equals(document.cookie, '', 'should delete with null as value');
-    
+
     document.cookie = 'c=v';
     $.cookie('c', undefined);
     equals(document.cookie, '', 'should delete with undefined as value');

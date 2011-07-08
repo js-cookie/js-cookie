@@ -58,7 +58,7 @@
  * @author Klaus Hartl/klaus.hartl@stilbuero.de
  */
 jQuery.cookie = function (key, value, options) {
-    
+
     // key and at least value given, set cookie...
     if (arguments.length > 1 && String(value) !== "[object Object]") {
         options = jQuery.extend({}, options);
@@ -71,9 +71,9 @@ jQuery.cookie = function (key, value, options) {
             var days = options.expires, t = options.expires = new Date();
             t.setDate(t.getDate() + days);
         }
-        
+
         value = String(value);
-        
+
         return (document.cookie = [
             encodeURIComponent(key), '=',
             options.raw ? value : encodeURIComponent(value),
