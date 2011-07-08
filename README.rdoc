@@ -2,22 +2,33 @@
 
 A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
 
+== Installation
+
+Include script *after* the jQuery library (unless you are packaging scripts somehow else):
+
+    <script src="/path/to/jquery.cookie.js"></script>
+
 == Usage
 
-    // Create session cookie...
+Create session cookie:
+
     $.cookie('the_cookie', 'the_value');
 
-    // Create expiring cookie, 7 days from then...
+Create expiring cookie, 7 days from then:
+
     $.cookie('the_cookie', 'the_value', { expires: 7 });
 
-    // Create expiring cookie, valid across entire page...
+Create expiring cookie, valid across entire page:
+
     $.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
 
-    // Read cookie...
+Read cookie:
+
     $.cookie('the_cookie'); // => 'the_value'
     $.cookie('not_existing'); // => null
 
-    // Delete cookie by passing null as value...
+Delete cookie by passing null as value:
+
     $.cookie('the_cookie', null);
 
 == Options
@@ -46,6 +57,8 @@ Default: +false+. If true, the cookie transmission requires a secure protocol (h
 
 Default: +false+. By default the cookie is encoded/decoded when creating/reading, using +encodeURIComponent+/+decodeURIComponent+.
 Turn off by setting +raw: true+.
+
+== Changelog
 
 == Development
 
