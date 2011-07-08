@@ -35,17 +35,13 @@ Delete cookie by passing null as value:
 
     expires: 365
 
-Define lifetime of the cookie. Value can be a +Number+ (which will be interpreted as days from creation) or a +Date+ object.
-If omitted, the cookie is a session cookie.
+Define lifetime of the cookie. Value can be a +Number+ (which will be interpreted as days from time of creation) or a +Date+ object. If omitted, the cookie is a session cookie.
 
     path: '/'
 
-Define the path where cookie is valid. Default: path of page where the cookie was created.
-<strong>By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).</strong>
+Default: path of page where the cookie was created.
 
-If you want to make it available for instance across the entire page use <code>path: '/'</code>.
-
-If you want to delete a cookie with a particular path, you need to include that path in the call.
+Define the path where cookie is valid. <b>By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).</b> If you want to make it available for instance across the entire page use <code>path: '/'</code>. If you want to delete a cookie with a particular path, you need to include that path in the call.
 
     domain: 'example.com'
 
@@ -57,8 +53,9 @@ Default: +false+. If true, the cookie transmission requires a secure protocol (h
 
     raw: true
 
-Default: +false+. By default the cookie is encoded/decoded when creating/reading, using +encodeURIComponent+/+decodeURIComponent+.
-Turn off by setting <code>raw: true</code>.
+Default: +false+.
+
+By default the cookie is encoded/decoded when creating/reading, using +encodeURIComponent+/+decodeURIComponent+. Turn off by setting <code>raw: true</code>.
 
 == Changelog
 
