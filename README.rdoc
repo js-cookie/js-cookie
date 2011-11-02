@@ -31,6 +31,8 @@ Delete cookie by passing null as value:
 
     $.cookie('the_cookie', null);
 
+Note when clearing cookies, you must pass the exact same options that were used to initially set the cookie.
+
 == Options
 
     expires: 365
