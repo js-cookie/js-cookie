@@ -8,7 +8,7 @@
  *
  */
 (function($) {
-    $.cookie = function (key, value, options) {
+    $.cookie = function(key, value, options) {
 
         // key and at least value given, set cookie...
         if (arguments.length > 1 && (Object.prototype.toString.call(value) === "[object String]" || value === null || value === undefined)) {
@@ -37,7 +37,7 @@
 
         // key and possibly options given, get cookie...
         options = value || {};
-        var result, decode = options.raw ? function (s) { return s; } : decodeURIComponent;
+        var result, decode = options.raw ? function(s) { return s; } : decodeURIComponent;
         return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
     };
 })(jQuery);
