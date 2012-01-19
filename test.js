@@ -42,6 +42,11 @@ test('String object', 1, function () {
     equals(document.cookie, 'c=v', 'should write value');
 });
 
+test('value "[object Object]"', 1, function() {
+    $.cookie('c', '[object Object]');
+    equals($.cookie('c'), '[object Object]', 'should write value');
+});
+
 test('return', 1, function () {
     equals($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
