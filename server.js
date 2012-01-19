@@ -3,11 +3,11 @@ var http = require('http'),
     path = require('path'),
     fs   = require('fs');
 
-http.createServer(function (request, response) {
+http.createServer(function(request, response) {
     var uri      = url.parse(request.url).pathname,
         filename = path.join(process.cwd(), uri);
 
-    fs.readFile(filename, 'binary', function (err, file) {
+    fs.readFile(filename, 'binary', function(err, file) {
         if (err) {
             response.writeHead(500, { 'Content-Type': 'text/plain' });
             response.write(err + '\n');
@@ -19,6 +19,6 @@ http.createServer(function (request, response) {
         response.write(file, 'utf-8');
         response.end();
     });
-}).listen(8124, '127.0.0.1');
+}).listen(8124, '0.0.0.0');
 
-console.log('Server running at http://127.0.0.1:8124/');
+console.log('Test suite at http://0.0.0.0:8124/test.html');
