@@ -37,7 +37,13 @@
 
         // key and possibly options given, get cookie...
         options = value || {};
-        var result, decode = options.raw ? function(s) { return s; } : decodeURIComponent;
-        return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
+        var decode = options.raw ? function(s) { return s; } : decodeURIComponent;
+
+        var parts = document.cookie.split('; ');
+        for (var i = 0, part; part = parts[i]; i++) {
+            var pair = part.split('=');
+            if (decode(pair[0]) === key) return decode(pair[1] || ''); // IE saves cookies with empty string as "c; ", e.g. without "=" as opposed to EOMB
+        }
+        return null;
     };
 })(jQuery);

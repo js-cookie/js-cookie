@@ -15,6 +15,11 @@ test('simple value', 1, function () {
     equals($.cookie('c'), 'v', 'should return value');
 });
 
+test('empty value', 1, function () {
+    $.cookie('c', '');
+    equals($.cookie('c'), '', 'should return value');
+});
+
 test('not existing', 1, function () {
     equals($.cookie('whatever'), null, 'should return null');
 });
