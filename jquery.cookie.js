@@ -11,7 +11,7 @@
     $.cookie = function (key, value, options) {
 
         // key and at least value given, set cookie...
-        if (arguments.length > 1 && Object.prototype.toString.call(value) !== "[object Object]") {
+        if (arguments.length > 1 && (Object.prototype.toString.call(value) === "[object String]" || value === null || value === undefined)) {
             options = $.extend({}, options);
 
             if (value === null || value === undefined) {
