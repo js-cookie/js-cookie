@@ -59,9 +59,9 @@ Default: `false`.
 
 By default the cookie is encoded/decoded when creating/reading, using `encodeURIComponent`/`decodeURIComponent`. Turn off by setting `raw: true`.
 
-== Changelog
+## Changelog
 
-== Development
+## Development
 
 - Source hosted at [GitHub](https://github.com/carhartl/jquery-cookie)
 - Report issues, questions, feature requests on [GitHub Issues](https://github.com/carhartl/jquery-cookie/issues)
