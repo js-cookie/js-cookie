@@ -68,6 +68,6 @@ By default the cookie is encoded/decoded when creating/reading, using `encodeURI
 
 Pull requests are very welcome! Make sure your patches are well tested. Please create a topic branch for every separate change you make.
 
-== Authors
+## Authors
 
 [Klaus Hartl](https://github.com/carhartl)
