@@ -31,7 +31,7 @@ Delete cookie by passing null as value:
 
     $.cookie('the_cookie', null);
 
-Note when clearing cookies, you must pass the exact same options that were used to initially set the cookie.
+*Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie.*
 
 == Options
 
@@ -43,7 +43,7 @@ Define lifetime of the cookie. Value can be a +Number+ (which will be interprete
 
 Default: path of page where the cookie was created.
 
-Define the path where cookie is valid. <b>By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).</b> If you want to make it available for instance across the entire page use <code>path: '/'</code>. If you want to delete a cookie with a particular path, you need to include that path in the call.
+Define the path where cookie is valid. <b>By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).</b> If you want to make it available for instance across the entire page use <code>path: '/'</code>.
 
     domain: 'example.com'
 
