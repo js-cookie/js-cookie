@@ -52,7 +52,12 @@ test('value "[object Object]"', 1, function() {
     equals($.cookie('c'), '[object Object]', 'should write value');
 });
 
-test('return', 1, function () {
+test('number', 1, function() {
+    $.cookie('c', 1234);
+    equals($.cookie('c'), '1234', 'should write value');
+});
+
+test('return value', 1, function () {
     equals($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
 
