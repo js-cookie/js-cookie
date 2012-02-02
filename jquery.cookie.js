@@ -1,5 +1,5 @@
 /**
- * jQuery Cookie plugin
+ * jQuery Cookie plugin - https://github.com/carhartl/jquery-cookie
  *
  * Copyright (c) 2010 Klaus Hartl (stilbuero.de)
  * Dual licensed under the MIT and GPL licenses:
