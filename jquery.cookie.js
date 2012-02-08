@@ -1,11 +1,11 @@
-/**
- * jQuery Cookie plugin - https://github.com/carhartl/jquery-cookie
+/*!
+ * jQuery Cookie Plugin
+ * https://github.com/carhartl/jquery-cookie
  *
- * Copyright (c) 2010 Klaus Hartl, @carhartl
- * Dual licensed under the MIT and GPL licenses:
+ * Copyright 2011, Klaus Hartl
+ * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://www.opensource.org/licenses/mit-license.php
- * http://www.gnu.org/licenses/gpl.html
- *
+ * http://www.opensource.org/licenses/GPL-2.0
  */
 (function($) {
     $.cookie = function(key, value, options) {
