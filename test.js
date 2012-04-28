@@ -20,6 +20,13 @@ test('empty value', 1, function () {
     equal($.cookie('c'), '', 'should return value');
 });
 
+test('simple value with expires', 1, function () {
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 5);
+    document.cookie = 'c=testcookie; expires=' + tomorrow.toUTCString();
+    equal($.cookie('c'), 'testcookie', 'should return value');
+});
+
 test('not existing', 1, function () {
     equal($.cookie('whatever'), null, 'should return null');
 });
@@ -55,6 +62,19 @@ test('value "[object Object]"', 1, function() {
 test('number', 1, function() {
     $.cookie('c', 1234);
     equal($.cookie('c'), '1234', 'should write value');
+});
+
+test('with expires 7 days from now', 1, function() {
+  var seven_days_from_now = new Date();
+  seven_days_from_now.setDate(seven_days_from_now.getDate() + 7);
+  equal($.cookie('c', 'v', {expires:7}), 'c=v; expires='+seven_days_from_now.toUTCString(), 'should return the cookie string with expires');
+});
+
+test('with expires yesterday', 2, function() {
+  var yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  equal($.cookie('c', 'v', {expires:-1}), 'c=v; expires='+yesterday.toUTCString(), 'should return the cookie string with expires');
+  equal(document.cookie, '', 'should not save expired cookie');
 });
 
 test('return value', 1, function () {
