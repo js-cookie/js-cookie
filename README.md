@@ -25,6 +25,7 @@ Create expiring cookie, valid across entire page:
 Read cookie:
 
     $.cookie('the_cookie'); // => 'the_value'
+    $.cookie('the_cookie', {raw: true}); // => 'the_value' NOT URL decoded
     $.cookie('not_existing'); // => null
 
 Delete cookie by passing null as value:
@@ -34,6 +35,8 @@ Delete cookie by passing null as value:
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie.*
 
 ## Options
+
+Options can be set globally by setting properties of the `$.cookie.defaults` object or individually for each call to `$.cookie()` by passing a plain object to the options argument. Per-call options override the ones set by `$.cookie.defaults`.
 
     expires: 365
 
