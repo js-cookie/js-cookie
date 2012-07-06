@@ -43,7 +43,7 @@ Define lifetime of the cookie. Value can be a `Number` (which will be interprete
 
 Default: path of page where the cookie was created.
 
-Define the path where cookie is valid. *By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).* If you want to make it available for instance across the entire page use `path: '/'`.
+Define the path where cookie is valid. *By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).* If you want to make it available for instance across the entire domain use `path: '/'`.
 
     domain: 'example.com'
 
