@@ -39,7 +39,7 @@
         var decode = options.raw ? function(s) { return s; } : decodeURIComponent;
 
         var pairs = document.cookie.split('; ');
-        for (var i = 0, pair; pair = pairs[i] && pairs[i].split('='); i++) {
+        for (var i = 0, pair; (pair = pairs[i] && pairs[i].split('=')); i++) {
             if (decode(pair[0]) === key) return decode(pair[1] || ''); // IE saves cookies with empty string as "c; ", e.g. without "=" as opposed to EOMB, thus pair[1] may be undefined
         }
         return null;
