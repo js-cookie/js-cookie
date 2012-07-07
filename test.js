@@ -4,6 +4,8 @@ var before = {
         for (var i = 0, c; (c = (cookies)[i]) && (c = c.split('=')[0]); i++) {
             document.cookie = c + '=; expires=' + new Date(0).toUTCString();
         }
+
+        $.cookie.defaults = {};
     }
 };
 
@@ -35,16 +37,16 @@ test('raw: true', 1, function () {
     document.cookie = 'c=%20v';
     equal($.cookie('c', { raw: true }), '%20v', 'should not decode');
 });
-test('$.cookie.defaults.raw = true', 1, function () {
-    document.cookie = 'c=%20v';
-    $.cookie.defaults.raw = true;
-    equal($.cookie('c'), '%20v', 'should not decode');
-    $.cookie.defaults.raw = false;
-});
 
 test('embedded equals', 1, function() {
   $.cookie('c', 'foo=bar', { raw: true });
   equal($.cookie('c', { raw: true }), 'foo=bar', 'should include the entire value');
+});
+
+test('defaults', 1, function () {
+    document.cookie = 'c=%20v';
+    $.cookie.defaults.raw = true;
+    equal($.cookie('c'), '%20v', 'should use raw from defaults');
 });
 
 
@@ -79,11 +81,9 @@ test('raw: true', 1, function () {
         ' v', 'should not encode');
 });
 
-test('$.cookie.defaults.raw = true', 1, function () {
+test('defaults', 1, function () {
     $.cookie.defaults.raw = true;
-    equal($.cookie('c', ' v').split('=')[1],
-        ' v', 'should not encode');
-    $.cookie.defaults.raw = false;
+    equal($.cookie('c', ' v').split('=')[1], ' v', 'should use raw from defaults');
 });
 
 
