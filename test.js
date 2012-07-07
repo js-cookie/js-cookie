@@ -16,6 +16,8 @@ test('simple value', 1, function () {
 });
 
 test('empty value', 1, function () {
+    // IE saves cookies with empty string as "c; ", e.g. without "=" as opposed to EOMB, which
+    // resulted in a bug while reading such a cookie.
     $.cookie('c', '');
     equal($.cookie('c'), '', 'should return value');
 });
@@ -34,17 +36,22 @@ test('raw: true', 1, function () {
     equal($.cookie('c', { raw: true }), '%20v', 'should not decode');
 });
 
+test('embedded equals', 1, function() {
+  $.cookie('c', 'foo=bar', { raw: true });
+  equal($.cookie('c', { raw: true }), 'foo=bar', 'should include the entire value');
+});
+
 
 module('write', before);
 
 test('String primitive', 1, function () {
     $.cookie('c', 'v');
-    equal(document.cookie, 'c=v', 'should write value');
+    equal($.cookie('c'), 'v', 'should write value');
 });
 
 test('String object', 1, function () {
     $.cookie('c', new String('v'));
-    equal(document.cookie, 'c=v', 'should write value');
+    equal($.cookie('c'), 'v', 'should write value');
 });
 
 test('value "[object Object]"', 1, function() {
