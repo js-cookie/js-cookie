@@ -43,7 +43,7 @@ test('[] used in name', 1, function () {
   equal($.cookie('c[999]'), 'foo', 'should return value');
 });
 
-test('embedded equals', 1, function() {
+test('embedded equals', 1, function () {
   $.cookie('c', 'foo=bar', { raw: true });
   equal($.cookie('c', { raw: true }), 'foo=bar', 'should include the entire value');
 });
@@ -67,12 +67,12 @@ test('String object', 1, function () {
     equal($.cookie('c'), 'v', 'should write value');
 });
 
-test('value "[object Object]"', 1, function() {
+test('value "[object Object]"', 1, function () {
     $.cookie('c', '[object Object]');
     equal($.cookie('c'), '[object Object]', 'should write value');
 });
 
-test('number', 1, function() {
+test('number', 1, function () {
     $.cookie('c', 1234);
     equal($.cookie('c'), '1234', 'should write value');
 });
