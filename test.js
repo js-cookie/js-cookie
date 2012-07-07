@@ -35,6 +35,12 @@ test('raw: true', 1, function () {
     document.cookie = 'c=%20v';
     equal($.cookie('c', { raw: true }), '%20v', 'should not decode');
 });
+test('$.cookie.defaults.raw = true', 1, function () {
+    document.cookie = 'c=%20v';
+    $.cookie.defaults.raw = true;
+    equal($.cookie('c'), '%20v', 'should not decode');
+    $.cookie.defaults.raw = false;
+});
 
 test('embedded equals', 1, function() {
   $.cookie('c', 'foo=bar', { raw: true });
@@ -71,6 +77,13 @@ test('return value', 1, function () {
 test('raw: true', 1, function () {
     equal($.cookie('c', ' v', { raw: true }).split('=')[1],
         ' v', 'should not encode');
+});
+
+test('$.cookie.defaults.raw = true', 1, function () {
+    $.cookie.defaults.raw = true;
+    equal($.cookie('c', ' v').split('=')[1],
+        ' v', 'should not encode');
+    $.cookie.defaults.raw = false;
 });
 
 

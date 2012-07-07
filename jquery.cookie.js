@@ -12,7 +12,7 @@
 
         // key and at least value given, set cookie...
         if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value === null || value === undefined)) {
-            options = $.extend({}, options);
+            options = $.extend({}, $.cookie.defaults, options);
 
             if (value === null || value === undefined) {
                 options.expires = -1;
@@ -35,7 +35,7 @@
         }
 
         // key and possibly options given, get cookie...
-        options = value || {};
+        options = value || $.cookie.defaults || {};
         var decode = options.raw ? function(s) { return s; } : decodeURIComponent;
 
         var cookies = document.cookie.split('; ');
@@ -46,4 +46,7 @@
         }
         return null;
     };
+
+    $.cookie.defaults = {};
+
 })(jQuery);
