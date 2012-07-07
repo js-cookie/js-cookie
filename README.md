@@ -18,21 +18,21 @@ Create expiring cookie, 7 days from then:
 
     $.cookie('the_cookie', 'the_value', { expires: 7 });
 
-Create expiring cookie, valid across entire page:
+Create expiring cookie, valid across entire site:
 
     $.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
 
 Read cookie:
 
-    $.cookie('the_cookie'); // => 'the_value'
-    $.cookie('the_cookie', {raw: true}); // => 'the_value' NOT URL decoded
+    $.cookie('the_cookie'); // => "the_value"
+    $.cookie('the_cookie', { raw: true }); // => "the_value" not URL decoded
     $.cookie('not_existing'); // => null
 
 Delete cookie by passing null as value:
 
     $.cookie('the_cookie', null);
 
-*Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie.*
+*Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
 ## Options
 
@@ -40,7 +40,7 @@ Options can be set globally by setting properties of the `$.cookie.defaults` obj
 
     expires: 365
 
-Define lifetime of the cookie. Value can be a `Number` (which will be interpreted as days from time of creation) or a `Date` object. If omitted, the cookie becomes a session cookie.
+Define lifetime of the cookie. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` object. If omitted, the cookie becomes a session cookie.
 
     path: '/'
 
@@ -56,7 +56,7 @@ If true, the cookie transmission requires a secure protocol (https). Default: `f
 
     raw: true
 
-By default the cookie is encoded/decoded when creating/reading, using `encodeURIComponent`/`decodeURIComponent`. Turn off by setting `raw: true`. Default: `false`.
+By default the cookie value is encoded/decoded when creating/reading, using `encodeURIComponent`/`decodeURIComponent`. Turn off by setting `raw: true`. Default: `false`.
 
 ## Changelog
 
