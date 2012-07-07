@@ -35,7 +35,12 @@ test('decode', 1, function () {
 
 test('raw: true', 1, function () {
     document.cookie = 'c=%20v';
-    equal($.cookie('c', { raw: true }), '%20v', 'should not decode');
+    equal($.cookie('c', { raw: true }), '%20v', 'should not decode value');
+});
+
+test('[] used in name', 1, function () {
+  document.cookie = 'c[999]=foo';
+  equal($.cookie('c[999]'), 'foo', 'should return value');
 });
 
 test('embedded equals', 1, function() {
