@@ -9,6 +9,15 @@
  * http://www.opensource.org/licenses/GPL-2.0
  */
 (function($, document) {
+
+	var pluses = /\+/g;
+	function raw(s) {
+		return s;
+	}
+	function decoded(s) {
+		return decodeURIComponent(s.replace(pluses, ' '));
+	}
+
 	$.cookie = function(key, value, options) {
 
 		// key and at least value given, set cookie...
@@ -37,8 +46,7 @@
 
 		// key and possibly options given, get cookie...
 		options = value || $.cookie.defaults || {};
-		var decode = options.raw ? function(s) { return s; } : decodeURIComponent;
-
+		var decode = options.raw ? raw : decoded;
 		var cookies = document.cookie.split('; ');
 		for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
 			if (decode(parts.shift()) === key) {

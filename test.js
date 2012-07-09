@@ -33,6 +33,11 @@ test('decode', 1, function () {
 	equal($.cookie(' c'), ' v', 'should decode key and value');
 });
 
+test('decode pluses to space for server side written cookie', 1, function () {
+	document.cookie = 'c=foo+bar'
+	equal($.cookie('c'), 'foo bar', 'should convert pluses back to space');
+});
+
 test('raw: true', 1, function () {
 	document.cookie = 'c=%20v';
 	equal($.cookie('c', { raw: true }), '%20v', 'should not decode value');
