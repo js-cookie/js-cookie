@@ -24,13 +24,6 @@ test('empty value', 1, function () {
     equal($.cookie('c'), '', 'should return value');
 });
 
-test('simple value with expires', 1, function () {
-  var tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 5);
-    document.cookie = 'c=testcookie; expires=' + tomorrow.toUTCString();
-    equal($.cookie('c'), 'testcookie', 'should return value');
-});
-
 test('not existing', 1, function () {
     equal($.cookie('whatever'), null, 'should return null');
 });
@@ -84,24 +77,32 @@ test('number', 1, function () {
     equal($.cookie('c'), '1234', 'should write value');
 });
 
-test('with expires 7 days from now', 1, function() {
-  var seven_days_from_now = new Date();
-  seven_days_from_now.setDate(seven_days_from_now.getDate() + 7);
-  equal($.cookie('c', 'v', {expires:7}), 'c=v; expires='+seven_days_from_now.toUTCString(), 'should return the cookie string with expires');
+test('expires option as days from now', 1, function() {
+  var sevenDaysFromNow = new Date();
+  sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
+  equal($.cookie('c', 'v', { expires: 7 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
+      'should write the cookie string with expires');
 });
 
-test('with expires yesterday', 2, function() {
+test('expires option as Date instance', 1, function() {
+  var sevenDaysFromNow = new Date();
+  sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
+  equal($.cookie('c', 'v', { expires: sevenDaysFromNow }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
+      'should write the cookie string with expires');
+});
+
+test('invalid expires option (in the past)', 1, function() {
   var yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
-  equal($.cookie('c', 'v', {expires:-1}), 'c=v; expires='+yesterday.toUTCString(), 'should return the cookie string with expires');
-  equal(document.cookie, '', 'should not save expired cookie');
+  $.cookie('c', 'v', { expires: yesterday });
+  equal($.cookie('c'), null, 'should not save already expired cookie');
 });
 
 test('return value', 1, function () {
     equal($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
 
-test('raw: true', 1, function () {
+test('raw option set to true', 1, function () {
     equal($.cookie('c', ' v', { raw: true }).split('=')[1],
         ' v', 'should not encode');
 });
