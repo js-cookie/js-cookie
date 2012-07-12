@@ -129,3 +129,19 @@ test('delete', 2, function () {
 	$.cookie('c', undefined);
 	equal(document.cookie, '', 'should delete with undefined as value');
 });
+
+module('removeCookie', before);
+
+test('delete', 1, function() {
+	document.cookie = 'c=v';
+	$.removeCookie('c');
+	equal(document.cookie, '', 'should delete the cookie');
+});
+
+test('return', 2, function() {
+	deepEqual($.removeCookie('c'), null, "should return null if cookie was'nt found");
+	
+	document.cookie = 'c=v';
+	deepEqual($.removeCookie('c'), true, "should return true if the cookie was successfully deleted");
+	
+});

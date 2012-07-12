@@ -32,6 +32,13 @@ Delete cookie by passing null as value:
 
     $.cookie('the_cookie', null);
 
+Delete cookie by calling $.removeCookie:
+
+    //returns null  => No cookie found
+    //returns true  => Cookie deleted sucessfully
+    //returns false => Failed to delete the cookie
+    $.removeCookie('the_cookie', /* options */);
+
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
 ## Options
