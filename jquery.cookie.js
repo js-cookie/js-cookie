@@ -62,9 +62,9 @@
 		options = options || {};
 		if( $.cookie(key, options) !== null ) {
 			$.cookie(key, null, options);
-			return !$.cookie(key, options);
+			return true;
 		}
-		return null
+		return false
 	};
 
 })(jQuery, document);
