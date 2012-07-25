@@ -36,7 +36,7 @@ Delete cookie by calling $.removeCookie:
 
     //returns false  => No cookie found
     //returns true  => A cookie was found
-    $.removeCookie('the_cookie', /* options */);
+    $.removeCookie('the_cookie'[,  options ]);
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
