@@ -64,7 +64,7 @@
 			$.cookie(key, null, options);
 			return true;
 		}
-		return false
+		return false;
 	};
 
 })(jQuery, document);

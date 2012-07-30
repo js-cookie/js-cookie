@@ -139,8 +139,8 @@ test('delete', 1, function() {
 });
 
 test('return', 2, function() {
-	deepEqual($.removeCookie('c'), false, "should return false if a cookie was'nt found");
+	equal($.removeCookie('c'), false, "should return false if a cookie wasn't found");
 	
 	document.cookie = 'c=v';
-	deepEqual($.removeCookie('c'), true, "should return true if the cookie was found");
+	equal($.removeCookie('c'), true, "should return true if the cookie was found");
 });

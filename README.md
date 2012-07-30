@@ -28,10 +28,6 @@ Read cookie:
     $.cookie('the_cookie', { raw: true }); // => "the_value" not URL decoded
     $.cookie('not_existing'); // => null
 
-Delete cookie by passing null as value:
-
-    $.cookie('the_cookie', null);
-
 Delete cookie by calling $.removeCookie:
 
     //returns false  => No cookie found
