@@ -59,7 +59,6 @@
 	$.cookie.defaults = {};
 
 	$.removeCookie = function(key, options) {
-		options = options || {};
 		if( $.cookie(key, options) !== null ) {
 			$.cookie(key, null, options);
 			return true;
