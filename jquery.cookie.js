@@ -21,10 +21,10 @@
 	$.cookie = function(key, value, options) {
 
 		// key and at least value given, set cookie...
-		if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value == null)) {
+		if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value === null)) {
 			options = $.extend({}, $.cookie.defaults, options);
 
-			if (value == null) {
+			if (value === null) {
 				options.expires = -1;
 			}
 

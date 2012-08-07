@@ -120,14 +120,10 @@ test('defaults', 1, function () {
 
 module('delete', before);
 
-test('delete', 2, function () {
+test('delete', 1, function () {
 	document.cookie = 'c=v';
 	$.cookie('c', null);
 	equal(document.cookie, '', 'should delete with null as value');
-
-	document.cookie = 'c=v';
-	$.cookie('c', undefined);
-	equal(document.cookie, '', 'should delete with undefined as value');
 });
 
 module('removeCookie', before);
