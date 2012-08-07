@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.opensource.org/licenses/GPL-2.0
  */
-(function($, document) {
+(function($, document, undefined) {
 
 	var pluses = /\+/g;
 	function raw(s) {
@@ -21,7 +21,7 @@
 	$.cookie = function(key, value, options) {
 
 		// key and at least value given, set cookie...
-		if (arguments.length > 1 && (!/Object/.test(Object.prototype.toString.call(value)) || value === null)) {
+		if (value !== undefined && !/Object/.test(Object.prototype.toString.call(value))) {
 			options = $.extend({}, $.cookie.defaults, options);
 
 			if (value === null) {
