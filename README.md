@@ -28,9 +28,11 @@ Read cookie:
     $.cookie('the_cookie', { raw: true }); // => "the_value" not URL decoded
     $.cookie('not_existing'); // => null
 
-Delete cookie by passing null as value:
+Delete cookie by calling $.removeCookie:
 
-    $.cookie('the_cookie', null);
+    //returns false  => No cookie found
+    //returns true  => A cookie was found
+    $.removeCookie('the_cookie'[,  options ]);
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
