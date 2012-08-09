@@ -8,17 +8,19 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.opensource.org/licenses/GPL-2.0
  */
-(function($, document, undefined) {
+(function ($, document, undefined) {
 
 	var pluses = /\+/g;
+
 	function raw(s) {
 		return s;
 	}
+
 	function decoded(s) {
 		return decodeURIComponent(s.replace(pluses, ' '));
 	}
 
-	$.cookie = function(key, value, options) {
+	$.cookie = function (key, value, options) {
 
 		// key and at least value given, set cookie...
 		if (value !== undefined && !/Object/.test(Object.prototype.toString.call(value))) {
@@ -53,13 +55,14 @@
 				return decode(parts.join('='));
 			}
 		}
+
 		return null;
 	};
 
 	$.cookie.defaults = {};
 
-	$.removeCookie = function(key, options) {
-		if( $.cookie(key, options) !== null ) {
+	$.removeCookie = function (key, options) {
+		if ($.cookie(key, options) !== null) {
 			$.cookie(key, null, options);
 			return true;
 		}

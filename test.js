@@ -120,11 +120,12 @@ test('defaults', 1, function () {
 
 module('delete', before);
 
-test('delete', 1, function () {
+test('delete (deprecated)', 1, function () {
 	document.cookie = 'c=v';
 	$.cookie('c', null);
-	equal(document.cookie, '', 'should delete with null as value');
+	equal(document.cookie, '', 'should delete the cookie');
 });
+
 
 module('removeCookie', before);
 
@@ -136,24 +137,24 @@ test('delete', 1, function() {
 
 test('return', 2, function() {
 	equal($.removeCookie('c'), false, "should return false if a cookie wasn't found");
-	
+
 	document.cookie = 'c=v';
-	equal($.removeCookie('c'), true, "should return true if the cookie was found");
+	equal($.removeCookie('c'), true, 'should return true if the cookie was found');
 });
 
 test('passing options', 2, function() {
 	var oldCookie = $.cookie;
-	
-	$.cookie = function( arg0, arg1, arg2 ) {
-		if( arg1 === null ) {
+
+	$.cookie = function(arg0, arg1, arg2) {
+		if (arg1 === null) {
 			equal(arg2.test, 'options', 'The options should be passed');
 		} else {
 			equal(arg1.test, 'options', 'The options should be passed');
 		}
 	};
-	
+
 	document.cookie = 'c=v';
 	$.removeCookie('c', { test: 'options' });
-	
+
 	$.cookie = oldCookie;
 });
