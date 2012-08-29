@@ -15,7 +15,7 @@ http.createServer(function(request, response) {
 			return;
 		}
 
-		response.writeHead(200);
+		response.writeHead(200, filename.match(/\.js$/) ? { 'Content-Type': 'text/javascript' } : {});
 		response.write(file, 'utf-8');
 		response.end();
 	});
