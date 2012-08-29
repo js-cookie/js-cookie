@@ -22,7 +22,7 @@
 
 	var config = $.cookie = function (key, value, options) {
 
-		// key and at least value given, set cookie...
+		// write
 		if (value !== undefined) {
 			options = $.extend({}, $.cookie.defaults, options);
 
@@ -46,7 +46,7 @@
 			].join(''));
 		}
 
-		// key and possibly options given, get cookie...
+		// read
 		var decode = config.raw ? raw : decoded;
 		var cookies = document.cookie.split('; ');
 		for (var i = 0, parts; (parts = cookies[i] && cookies[i].split('=')); i++) {
