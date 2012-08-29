@@ -6,6 +6,8 @@ var before = {
 		}
 
 		$.cookie.defaults = {};
+		delete $.cookie.raw;
+		delete $.cookie.json;
 	}
 };
 
@@ -38,25 +40,31 @@ test('decode pluses to space for server side written cookie', 1, function () {
 	equal($.cookie('c'), 'foo bar', 'should convert pluses back to space');
 });
 
-test('raw: true', 1, function () {
-	document.cookie = 'c=%20v';
-	equal($.cookie('c', { raw: true }), '%20v', 'should not decode value');
-});
-
 test('[] used in name', 1, function () {
 	document.cookie = 'c[999]=foo';
 	equal($.cookie('c[999]'), 'foo', 'should return value');
 });
 
-test('embedded equals', 1, function () {
-	$.cookie('c', 'foo=bar', { raw: true });
-	equal($.cookie('c', { raw: true }), 'foo=bar', 'should include the entire value');
+test('raw: true', 2, function () {
+	$.cookie.raw = true;
+
+	document.cookie = 'c=%20v';
+	equal($.cookie('c'), '%20v', 'should not decode value');
+
+	// see https://github.com/carhartl/jquery-cookie/issues/50
+	$.cookie('c', 'foo=bar');
+	equal($.cookie('c'), 'foo=bar', 'should include the entire value');
 });
 
-test('defaults', 1, function () {
-	document.cookie = 'c=%20v';
-	$.cookie.defaults.raw = true;
-	equal($.cookie('c'), '%20v', 'should use raw from defaults');
+test('json: true', 1, function () {
+	$.cookie.json = true;
+
+	if ('JSON' in window) {
+		document.cookie = 'c=' + JSON.stringify({ foo: 'bar' });
+		deepEqual($.cookie('c'), { foo: 'bar'}, 'should parse JSON');
+	} else {
+		ok(true);
+	}
 });
 
 
@@ -107,16 +115,27 @@ test('return value', 1, function () {
 	equal($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
 
-test('raw option set to true', 1, function () {
-	equal($.cookie('c', ' v', { raw: true }).split('=')[1],
-		' v', 'should not encode');
+test('defaults', 2, function () {
+	$.cookie.defaults.path = '/';
+	ok($.cookie('c', 'v').match(/path=\//), 'should use options from defaults');
+	ok($.cookie('c', 'v', { path: '/foo' }).match(/path=\/foo/), 'options argument has precedence');
 });
 
-test('defaults', 1, function () {
-	$.cookie.defaults.raw = true;
-	equal($.cookie('c', ' v').split('=')[1], ' v', 'should use raw from defaults');
+test('raw: true', 1, function () {
+	$.cookie.raw = true;
+	equal($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
 });
 
+test('json: true', 1, function () {
+	$.cookie.json = true;
+
+	if ('JSON' in window) {
+		$.cookie('c', { foo: 'bar' });
+		equal(document.cookie, 'c=' + encodeURIComponent(JSON.stringify({ foo: 'bar' })), 'should stringify JSON');
+	} else {
+		ok(true);
+	}
+});
 
 module('delete', before);
 
