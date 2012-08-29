@@ -24,7 +24,7 @@
 
 		// write
 		if (value !== undefined) {
-			options = $.extend({}, $.cookie.defaults, options);
+			options = $.extend({}, config.defaults, options);
 
 			if (value === null) {
 				options.expires = -1;
@@ -59,7 +59,7 @@
 		return null;
 	};
 
-	$.cookie.defaults = {};
+	config.defaults = {};
 
 	$.removeCookie = function (key, options) {
 		if ($.cookie(key, options) !== null) {
