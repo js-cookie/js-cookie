@@ -62,7 +62,7 @@
 	config.defaults = {};
 
 	$.removeCookie = function (key, options) {
-		if ($.cookie(key, options) !== null) {
+		if ($.cookie(key) !== null) {
 			$.cookie(key, null, options);
 			return true;
 		}

@@ -161,19 +161,20 @@ test('return', 2, function() {
 	equal($.removeCookie('c'), true, 'should return true if the cookie was found');
 });
 
-test('passing options', 2, function() {
+test('with options', 2, function() {
 	var oldCookie = $.cookie;
 
 	$.cookie = function(arg0, arg1, arg2) {
 		if (arg1 === null) {
-			equal(arg2.test, 'options', 'The options should be passed');
+			equal(arg2.foo, 'bar', 'should pass options when deleting cookie');	
 		} else {
-			equal(arg1.test, 'options', 'The options should be passed');
+			// see https://github.com/carhartl/jquery-cookie/issues/99
+			equal(arguments.length, 1, "should look up cookie instead of writing a new");
 		}
 	};
 
 	document.cookie = 'c=v';
-	$.removeCookie('c', { test: 'options' });
+	$.removeCookie('c', { foo: 'bar' });
 
 	$.cookie = oldCookie;
 });
