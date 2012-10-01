@@ -30,8 +30,8 @@ Read cookie:
 Delete cookie:
 
     // Returns true when cookie was found, false when no cookie was found...
-    $.removeCookie('the_cookie'); 
-    
+    $.removeCookie('the_cookie');
+
     // Same path as when the cookie was written...
     $.removeCookie('the_cookie', { path: '/' });
 
@@ -66,6 +66,16 @@ Define the domain where the cookie is valid. Default: domain of page where the c
     secure: true
 
 If true, the cookie transmission requires a secure protocol (https). Default: `false`.
+
+## Tests
+
+Requires Node. Startup server:
+
+    $ node server.js
+
+Open in browser:
+
+        $ open http://0.0.0.0:8124/test.html
 
 ## Development
 
