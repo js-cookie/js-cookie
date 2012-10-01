@@ -1,4 +1,3 @@
-/*jshint eqnull:true */
 /*!
  * jQuery Cookie Plugin v1.2
  * https://github.com/carhartl/jquery-cookie
