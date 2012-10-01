@@ -25,30 +25,31 @@ Create expiring cookie, valid across entire site:
 Read cookie:
 
     $.cookie('the_cookie'); // => "the_value"
-    $.cookie('the_cookie', { raw: true }); // => "the_value" not URL decoded
     $.cookie('not_existing'); // => null
 
 Delete cookie:
 
-    // returns false => No cookie found
-    // returns true  => A cookie was found
-    $.removeCookie('the_cookie'[, options]);
+    // Returns true when cookie was found, false when no cookie was found...
+    $.removeCookie('the_cookie'); 
+    
+    // Same path as when the cookie was written...
+    $.removeCookie('the_cookie', { path: '/' });
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
 ## Configuration
 
-    raw: true
-    
-By default the cookie value is encoded/decoded when creating/reading, using `encodeURIComponent`/`decodeURIComponent`. Turn off by setting `raw: true`. Default: `false`.
-    
-    json: true
-    
-Automatically store JSON objects passed as the cookie value. Assumes `JSON.stringify`and `JSON.parse`.
+    $.cookie.raw = true;
+
+By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true.
+
+    $.cookie.json = true;
+
+Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`.
 
 ## Cookie Options
 
-Options can be set globally by setting properties of the `$.cookie.defaults` object or individually for each call to `$.cookie()` by passing a plain object to the options argument. Per-call options override the ones set by `$.cookie.defaults`.
+Cookie attributes can be set globally by setting properties of the `$.cookie.defaults` object or individually for each call to `$.cookie()` by passing a plain object to the options argument. Per-call options override the default options.
 
     expires: 365
 
