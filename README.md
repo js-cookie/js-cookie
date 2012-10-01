@@ -39,13 +39,13 @@ Delete cookie:
 
 ## Configuration
 
+By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true:
+
     $.cookie.raw = true;
 
-By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true.
+Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
 
     $.cookie.json = true;
-
-Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`.
 
 ## Cookie Options
 
@@ -75,7 +75,7 @@ Requires Node. Startup server:
 
 Open in browser:
 
-        $ open http://0.0.0.0:8124/test.html
+    $ open http://0.0.0.0:8124/test.html
 
 ## Development
 
