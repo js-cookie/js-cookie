@@ -185,7 +185,7 @@ test('with options', 2, function() {
 
 	$.cookie = function(arg0, arg1, arg2) {
 		if (arg1 === null) {
-			equal(arg2.foo, 'bar', 'should pass options when deleting cookie');	
+			equal(arg2.foo, 'bar', 'should pass options when deleting cookie');
 		} else {
 			// see https://github.com/carhartl/jquery-cookie/issues/99
 			equal(arguments.length, 1, "should look up cookie instead of writing a new");
