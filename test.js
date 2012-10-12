@@ -67,6 +67,24 @@ test('json: true', 1, function () {
 	}
 });
 
+asyncTest('malformed cookie value in IE (#88, #117)', 1, function() {
+	// Sandbox in an iframe so that we can poke around with document.cookie.
+	var iframe = document.createElement('iframe');
+	iframe.onload = function() {
+		start();
+		if (iframe.contentWindow.ok) {
+			equal(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
+		} else {
+			// Skip the test where we can't stub document.cookie using
+			// Object.defineProperty. Seems to work fine in
+			// Chrome, Firefox and IE 8+.
+			ok(true, 'N/A');
+		}
+	};
+	iframe.src = '/sandbox.html';
+	document.body.appendChild(iframe)
+});
+
 
 module('write', before);
 
