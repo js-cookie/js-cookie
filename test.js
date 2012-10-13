@@ -82,7 +82,7 @@ asyncTest('malformed cookie value in IE (#88, #117)', 1, function() {
 		}
 	};
 	iframe.src = '/sandbox.html';
-	document.body.appendChild(iframe)
+	document.body.appendChild(iframe);
 });
 
 
