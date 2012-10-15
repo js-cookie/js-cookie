@@ -8,6 +8,9 @@ Include script *after* the jQuery library (unless you are packaging scripts some
 
     <script src="/path/to/jquery.cookie.js"></script>
 
+**Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and such being blocked
+in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). GitHub is not a CDN.
+
 ## Usage
 
 Create session cookie:
