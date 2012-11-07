@@ -1,4 +1,4 @@
-# jquery.cookie
+ # jquery.cookie
 
 A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
 
@@ -42,9 +42,13 @@ Delete cookie:
 
 ## Configuration
 
+### raw
+
 By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true:
 
     $.cookie.raw = true;
+
+### json
 
 Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
 
@@ -52,19 +56,35 @@ Turn on automatic storage of JSON objects passed as the cookie value. Assumes `J
 
 ## Cookie Options
 
+### expires
+
 Cookie attributes can be set globally by setting properties of the `$.cookie.defaults` object or individually for each call to `$.cookie()` by passing a plain object to the options argument. Per-call options override the default options.
 
     expires: 365
 
 Define lifetime of the cookie. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` object. If omitted, the cookie becomes a session cookie.
 
+### path
+
     path: '/'
 
 Define the path where the cookie is valid. *By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).* If you want to make it available for instance across the entire domain use `path: '/'`. Default: path of page where the cookie was created.
 
+**Note regarding Internet Explorer:**
+
+> Due to an obscure bug in the underlying WinINET InternetGetCookie implementation, IE’s document.cookie will not return a cookie if it was set with a path attribute containing a filename.
+
+(From [Internet Explorer Cookie Internals (FAQ)](http://blogs.msdn.com/b/ieinternals/archive/2009/08/20/wininet-ie-cookie-internals-faq.aspx))
+
+This means one cannot set a path using `path: window.location.pathname` in case such pathname contains a filename like so: `/check.html` (or at least, such cookie cannot be read correctly).
+
+### domain
+
     domain: 'example.com'
 
 Define the domain where the cookie is valid. Default: domain of page where the cookie was created.
+
+### secure
 
     secure: true
 
