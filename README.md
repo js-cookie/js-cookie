@@ -1,4 +1,4 @@
- # jquery.cookie
+# jquery.cookie
 
 A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
 
