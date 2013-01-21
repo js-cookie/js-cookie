@@ -14,38 +14,45 @@ var before = {
 
 module('read', before);
 
-test('simple value', 1, function () {
+test('simple value', function () {
+	expect(1);
 	document.cookie = 'c=v';
 	equal($.cookie('c'), 'v', 'should return value');
 });
 
-test('empty value', 1, function () {
+test('empty value', function () {
+	expect(1);
 	// IE saves cookies with empty string as "c; ", e.g. without "=" as opposed to EOMB, which
 	// resulted in a bug while reading such a cookie.
 	$.cookie('c', '');
 	equal($.cookie('c'), '', 'should return value');
 });
 
-test('not existing', 1, function () {
+test('not existing', function () {
+	expect(1);
 	equal($.cookie('whatever'), null, 'should return null');
 });
 
-test('decode', 1, function () {
+test('decode', function () {
+	expect(1);
 	document.cookie = encodeURIComponent(' c') + '=' + encodeURIComponent(' v');
 	equal($.cookie(' c'), ' v', 'should decode key and value');
 });
 
-test('decode pluses to space for server side written cookie', 1, function () {
+test('decode pluses to space for server side written cookie', function () {
+	expect(1);
 	document.cookie = 'c=foo+bar'
 	equal($.cookie('c'), 'foo bar', 'should convert pluses back to space');
 });
 
-test('[] used in name', 1, function () {
+test('[] used in name', function () {
+	expect(1);
 	document.cookie = 'c[999]=foo';
 	equal($.cookie('c[999]'), 'foo', 'should return value');
 });
 
-test('raw: true', 2, function () {
+test('raw: true', function () {
+	expect(2);
 	$.cookie.raw = true;
 
 	document.cookie = 'c=%20v';
@@ -56,7 +63,8 @@ test('raw: true', 2, function () {
 	equal($.cookie('c'), 'foo=bar', 'should include the entire value');
 });
 
-test('json: true', 1, function () {
+test('json: true', function () {
+	expect(1);
 	$.cookie.json = true;
 
 	if ('JSON' in window) {
@@ -67,7 +75,8 @@ test('json: true', 1, function () {
 	}
 });
 
-asyncTest('malformed cookie value in IE (#88, #117)', 1, function() {
+asyncTest('malformed cookie value in IE (#88, #117)', function() {
+	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = document.createElement('iframe');
 	iframe.onload = function() {
@@ -88,58 +97,68 @@ asyncTest('malformed cookie value in IE (#88, #117)', 1, function() {
 
 module('write', before);
 
-test('String primitive', 1, function () {
+test('String primitive', function () {
+	expect(1);
 	$.cookie('c', 'v');
 	equal($.cookie('c'), 'v', 'should write value');
 });
 
-test('String object', 1, function () {
+test('String object', function () {
+	expect(1);
 	$.cookie('c', new String('v'));
 	equal($.cookie('c'), 'v', 'should write value');
 });
 
-test('value "[object Object]"', 1, function () {
+test('value "[object Object]"', function () {
+	expect(1);
 	$.cookie('c', '[object Object]');
 	equal($.cookie('c'), '[object Object]', 'should write value');
 });
 
-test('number', 1, function () {
+test('number', function () {
+	expect(1);
 	$.cookie('c', 1234);
 	equal($.cookie('c'), '1234', 'should write value');
 });
 
-test('expires option as days from now', 1, function() {
+test('expires option as days from now', function() {
+	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
 	equal($.cookie('c', 'v', { expires: 7 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
 		'should write the cookie string with expires');
 });
 
-test('expires option as Date instance', 1, function() {
+test('expires option as Date instance', function() {
+	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
 	equal($.cookie('c', 'v', { expires: sevenDaysFromNow }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
 		'should write the cookie string with expires');
 });
 
-test('invalid expires option (in the past)', 1, function() {
+test('invalid expires option (in the past)', function() {
+	expect(1);
 	var yesterday = new Date();
 	yesterday.setDate(yesterday.getDate() - 1);
 	$.cookie('c', 'v', { expires: yesterday });
 	equal($.cookie('c'), null, 'should not save already expired cookie');
 });
 
-test('return value', 1, function () {
+test('return value', function () {
+	expect(1);
 	equal($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
 
-test('defaults', 2, function () {
+test('defaults', function () {
+	expect(2);
 	$.cookie.defaults.path = '/';
 	ok($.cookie('c', 'v').match(/path=\//), 'should use options from defaults');
 	ok($.cookie('c', 'v', { path: '/foo' }).match(/path=\/foo/), 'options argument has precedence');
 });
 
-test('raw: true', 1, function () {
+test('raw: true', function () {
+	expect(1);
 	$.cookie.raw = true;
 	equal($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
 });
