@@ -2,11 +2,15 @@ HEAD
 ----
 - Configuration options: `raw`, `json`. Replaces raw option, becomes config:
 
-```javascript
-$.cookie.raw = true; // bypass encoding/decoding the cookie value
-$.cookie.json = true; // automatically JSON stringify/parse value
-```
-Thus the default options now cleanly contain cookie attributes only.
+  ```javascript
+  $.cookie.raw = true; // bypass encoding/decoding the cookie value
+  $.cookie.json = true; // automatically JSON stringify/parse value
+  ```
+  
+  Thus the default options now cleanly contain cookie attributes only.
+
+- Removing licensing under GPL Version 2, the plugin is now released under MIT License only
+(following the jQuery library itself here).
 
 1.2.0
 -----
@@ -14,4 +18,4 @@ Thus the default options now cleanly contain cookie attributes only.
 
 1.1
 ---
-- Default options.
+- Adding default options.

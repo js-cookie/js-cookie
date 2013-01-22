@@ -1,11 +1,9 @@
 /*!
- * jQuery Cookie Plugin v1.3
+ * jQuery Cookie Plugin v1.3.0
  * https://github.com/carhartl/jquery-cookie
  *
- * Copyright 2011, Klaus Hartl
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.opensource.org/licenses/GPL-2.0
+ * Copyright 2013 Klaus Hartl
+ * Released under the MIT license
  */
 (function ($, document, undefined) {
 
