@@ -14,8 +14,16 @@
 	}
 
 	function decoded(s) {
-		return decodeURIComponent(s.replace(pluses, ' '));
+		return unRfc2068(decodeURIComponent(s.replace(pluses, ' ')));
 	}
+	
+	function unRfc2068(value) {
+		if (value.indexOf('"') === 0) {
+			// This is a quoted cookie as according to RFC2068, unescape
+			value = value.slice(1, -1).replace('\\"', '"').replace('\\\\', '\\');
+		}
+		return value;
+	};
 
 	var config = $.cookie = function (key, value, options) {
 

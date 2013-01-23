@@ -12,6 +12,8 @@ HEAD
 - Removing licensing under GPL Version 2, the plugin is now released under MIT License only
 (following the jQuery library itself here).
 
+- Properly handle RFC 2068 quoted cookie values.
+
 1.2.0
 -----
 - Adding `$.removeCookie('foo')` for deleting a cookie, using `$.cookie('foo', null)` is now deprecated.
