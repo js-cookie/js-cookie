@@ -95,8 +95,8 @@ test('json: true', function () {
 asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
-	var iframe = document.createElement('iframe');
-	iframe.onload = function() {
+	var iframe = $('<iframe src="sandbox.html"></iframe>')[0];
+	$(iframe).on('load', function() {
 		start();
 		if (iframe.contentWindow.ok) {
 			equal(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
@@ -106,8 +106,7 @@ asyncTest('malformed cookie value in IE (#88, #117)', function() {
 			// Chrome, Firefox and IE 8+.
 			ok(true, 'N/A');
 		}
-	};
-	iframe.src = '/sandbox.html';
+	});
 	document.body.appendChild(iframe);
 });
 
