@@ -35,8 +35,8 @@ test('not existing', function () {
 
 test('rfc2068 quoted string', function () {
 	expect(1);
-	document.cookie = 'c="v@address.com\\"\\\\"';
-	equal($.cookie('c'), 'v@address.com"\\', 'should decode rfc2068 quoted string');
+	document.cookie = 'c="v@address.com\\"\\\\\\""';
+	equal($.cookie('c'), 'v@address.com"\\"', 'should decode rfc2068 quoted string');
 });
 
 test('decode', function () {
