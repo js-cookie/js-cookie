@@ -2,7 +2,7 @@
   "name": "cookie",
   "version": "1.3.0",
   "title":  "jQuery Cookie",
-  "description": "A simple, lightweight jQuery plugin for reading, writing and deleting cookies",
+  "description": "A simple, lightweight jQuery plugin for reading, writing and deleting cookies.",
   "author": {
     "name": "Klaus Hartl",
     "url": "https://github.com/carhartl"
@@ -18,5 +18,5 @@
   },
   "bugs": "https://github.com/carhartl/jquery-cookie/issues",
   "homepage": "https://github.com/carhartl/jquery-cookie",
-  "docs": "https://github.com/carhartl/jquery-cookie"
+  "docs": "https://github.com/carhartl/jquery-cookie#readme"
 }
