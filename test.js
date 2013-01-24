@@ -1,6 +1,6 @@
 var before = {
 	setup: function () {
-		cookies = document.cookie.split('; ')
+		var cookies = document.cookie.split('; ');
 		for (var i = 0, c; (c = (cookies)[i]) && (c = c.split('=')[0]); i++) {
 			document.cookie = c + '=; expires=' + new Date(0).toUTCString();
 		}
@@ -47,7 +47,7 @@ test('decode', function () {
 
 test('decode pluses to space for server side written cookie', function () {
 	expect(1);
-	document.cookie = 'c=foo+bar'
+	document.cookie = 'c=foo+bar';
 	equal($.cookie('c'), 'foo bar', 'should convert pluses back to space');
 });
 
