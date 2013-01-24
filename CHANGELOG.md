@@ -14,6 +14,8 @@ HEAD
 
 - Properly handle RFC 2068 quoted cookie values.
 
+- `$.cookie()` returns all available cookies.
+
 1.2.0
 -----
 - Adding `$.removeCookie('foo')` for deleting a cookie, using `$.cookie('foo', null)` is now deprecated.

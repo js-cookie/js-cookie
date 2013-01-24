@@ -29,6 +29,10 @@ Read cookie:
 
     $.cookie('the_cookie'); // => "the_value"
     $.cookie('not_existing'); // => null
+    
+Read all available cookies:
+
+    $.cookie(); // => { "the_cookie": "the_value", "...remaining": "cookies" }
 
 Delete cookie:
 

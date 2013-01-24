@@ -54,15 +54,27 @@
 		// read
 		var decode = config.raw ? raw : decoded;
 		var cookies = document.cookie.split('; ');
+		var result = key ? null : {};
 		for (var i = 0, l = cookies.length; i < l; i++) {
 			var parts = cookies[i].split('=');
-			if (decode(parts.shift()) === key) {
-				var cookie = decode(parts.join('='));
-				return config.json ? JSON.parse(cookie) : cookie;
+			var name = decode(parts.shift());
+			var cookie = decode(parts.join('='));
+			
+			if (config.json) {
+				cookie = JSON.parse(cookie);
+			}
+			
+			if (key && key === name) {
+				result = cookie;
+				break;
+			}
+			
+			if (!key) {
+				result[name] = cookie;
 			}
 		}
 
-		return null;
+		return result;
 	};
 
 	config.defaults = {};
