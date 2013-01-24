@@ -1,4 +1,4 @@
-HEAD
+1.3.0
 ----
 - Configuration options: `raw`, `json`. Replaces raw option, becomes config:
 
@@ -10,9 +10,13 @@ HEAD
   Thus the default options now cleanly contain cookie attributes only.
 
 - Removing licensing under GPL Version 2, the plugin is now released under MIT License only
-(following the jQuery library itself here).
+(keeping it simple and following the jQuery library itself here).
 
-- Properly handle RFC 2068 quoted cookie values.
+- Bugfix: Properly handle RFC 2068 quoted cookie values.
+
+- Added component.json for bower.
+
+- Added jQuery plugin package manifest.
 
 - `$.cookie()` returns all available cookies.
 
