@@ -1,32 +1,38 @@
 /*global module */
-module.exports = function( grunt ) {
-    'use strict';
+module.exports = function (grunt) {
+	'use strict';
 
-    grunt.initConfig({
-        qunit: {
-            files: ['test.html']
-        },
-        jshint: {
-            options: {
-                boss: true,
-                browser: true,
-                curly: false,
-                devel: true,
-                eqeqeq: false,
-                eqnull: true,
-                expr: true,
-                evil: true,
-                immed: false,
-                laxcomma: true,
-                newcap: false,
-                noarg: true,
-                smarttabs: true,
-                sub: true,
-                undef: true
-            }
-        }
-    });
+	grunt.initConfig({
+		qunit: {
+			files: ['test.html']
+		},
+		lint: {
+			files: [
+				'grunt.js',
+				'jquery.cookie.js'
+			]
+		},
+		jshint: {
+			options: {
+				boss: true,
+				browser: true,
+				curly: true,
+				eqeqeq: true,
+				eqnull: true,
+				expr: true,
+				evil: true,
+				newcap: true,
+				noarg: true,
+				undef: true
+			},
+			globals: {
+				jQuery: true
+			}
+		}
+	});
 
-    // Travis CI task.
-    grunt.registerTask('ci', 'qunit');
+	grunt.registerTask('default', 'lint qunit');
+
+	// Travis CI task.
+	grunt.registerTask('ci', 'default');
 };

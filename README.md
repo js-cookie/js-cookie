@@ -29,7 +29,7 @@ Read cookie:
 
     $.cookie('the_cookie'); // => "the_value"
     $.cookie('not_existing'); // => null
-    
+
 Read all available cookies:
 
     $.cookie(); // => { "the_cookie": "the_value", "...remaining": "cookies" }
@@ -103,6 +103,10 @@ Requires Node. Startup server:
 Open in browser:
 
     $ open http://0.0.0.0:8124/test.html
+
+For quick *non cross-browser* testing use grunt:
+
+    $ grunt
 
 ## Development
 
