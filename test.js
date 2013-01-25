@@ -177,7 +177,8 @@ test('raw: true', function () {
 	equal($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
 });
 
-test('json: true', 1, function () {
+test('json: true', function () {
+	expect(1);
 	$.cookie.json = true;
 
 	if ('JSON' in window) {
@@ -191,7 +192,8 @@ test('json: true', 1, function () {
 
 module('delete', before);
 
-test('delete (deprecated)', 1, function () {
+test('delete (deprecated)', function () {
+	expect(1);
 	document.cookie = 'c=v';
 	$.cookie('c', null);
 	equal(document.cookie, '', 'should delete the cookie');
@@ -200,20 +202,23 @@ test('delete (deprecated)', 1, function () {
 
 module('removeCookie', before);
 
-test('delete', 1, function() {
+test('delete', function() {
+	expect(1);
 	document.cookie = 'c=v';
 	$.removeCookie('c');
 	equal(document.cookie, '', 'should delete the cookie');
 });
 
-test('return', 2, function() {
+test('return', function() {
+	expect(2);
 	equal($.removeCookie('c'), false, "should return false if a cookie wasn't found");
 
 	document.cookie = 'c=v';
 	equal($.removeCookie('c'), true, 'should return true if the cookie was found');
 });
 
-test('with options', 2, function() {
+test('with options', function() {
+	expect(2);
 	var oldCookie = $.cookie;
 
 	$.cookie = function(arg0, arg1, arg2) {
