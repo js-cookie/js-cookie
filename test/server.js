@@ -21,4 +21,4 @@ http.createServer(function(request, response) {
 	});
 }).listen(8124, '0.0.0.0');
 
-console.log('Test suite at http://0.0.0.0:8124/test.html');
+console.log('Test suite at http://0.0.0.0:8124/test/index.html');

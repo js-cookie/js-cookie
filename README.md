@@ -98,11 +98,11 @@ If true, the cookie transmission requires a secure protocol (https). Default: `f
 
 Requires Node. Startup server:
 
-    $ node server.js
+    $ node test/server.js
 
 Open in browser:
 
-    $ open http://0.0.0.0:8124/test.html
+    $ open http://0.0.0.0:8124/test/index.html
 
 For quick *non cross-browser* testing use grunt:
 
