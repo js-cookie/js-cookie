@@ -169,6 +169,7 @@ test('defaults', function () {
 	$.cookie.defaults.path = '/';
 	ok($.cookie('c', 'v').match(/path=\//), 'should use options from defaults');
 	ok($.cookie('c', 'v', { path: '/foo' }).match(/path=\/foo/), 'options argument has precedence');
+	$.removeCookie('c');
 });
 
 test('raw: true', function () {
