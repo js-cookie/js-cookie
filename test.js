@@ -110,6 +110,15 @@ asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	document.body.appendChild(iframe);
 });
 
+test('should return all cookies', function() {
+	document.cookie = 'c=v';
+	document.cookie = 'foo=bar';
+	deepEqual($.cookie(), {
+		c: 'v',
+		foo: 'bar'
+	}, 'should return all cookies');
+});
+
 
 module('write', before);
 
