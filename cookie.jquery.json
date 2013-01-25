@@ -7,6 +7,12 @@
     "name": "Klaus Hartl",
     "url": "https://github.com/carhartl"
   },
+  "maintainers": [
+    {
+      "name": "Fagner Martins",
+      "url": "https://github.com/FagnerMartinsBrack"
+    }
+  ],
   "licenses": [
     {
       "type": "MIT",
