@@ -81,7 +81,7 @@ test('json: true', function () {
 	}
 });
 
-+test('no arguments', function () {
+test('no arguments', function () {
 	document.cookie = 'x=y';
 	var count = document.cookie.split(';').length;
 	var cookies = $.cookie();
