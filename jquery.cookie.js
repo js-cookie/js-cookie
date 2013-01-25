@@ -23,7 +23,7 @@
 			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 		return value;
-	};
+	}
 
 	var config = $.cookie = function (key, value, options) {
 
