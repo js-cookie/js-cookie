@@ -57,7 +57,7 @@ test('[] used in name', function () {
 	equal($.cookie('c[999]'), 'foo', 'should return value');
 });
 
-test('raw: true', function () {
+test('raw = true', function () {
 	expect(2);
 	$.cookie.raw = true;
 
@@ -69,13 +69,24 @@ test('raw: true', function () {
 	equal($.cookie('c'), 'foo=bar', 'should include the entire value');
 });
 
-test('json: true', function () {
+test('json = true', function () {
 	expect(1);
 	$.cookie.json = true;
 
 	if ('JSON' in window) {
 		document.cookie = 'c=' + JSON.stringify({ foo: 'bar' });
 		deepEqual($.cookie('c'), { foo: 'bar'}, 'should parse JSON');
+	} else {
+		ok(true);
+	}
+});
+
+test('not existing with json = true', function () {
+	expect(1);
+	$.cookie.json = true;
+
+	if ('JSON' in window) {
+		equal($.cookie('whatever'), null, 'should return null');
 	} else {
 		ok(true);
 	}
@@ -99,13 +110,20 @@ asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	document.body.appendChild(iframe);
 });
 
-test('should return all cookies', function() {
-	document.cookie = 'c=v';
-	document.cookie = 'foo=bar';
+test('return all cookies', function() {
+	$.cookie('c', 'v');
+	$.cookie('foo', 'bar');
 	deepEqual($.cookie(), {
 		c: 'v',
 		foo: 'bar'
 	}, 'should return all cookies');
+	$.each($.cookie(), $.removeCookie);
+	
+	$.cookie.json = true;
+	$.cookie('c', { foo: 'bar' });
+	deepEqual($.cookie(), {
+		c: { foo: 'bar' }
+	}, 'should return all cookies with JSON parsed');
 });
 
 
@@ -172,13 +190,13 @@ test('defaults', function () {
 	$.removeCookie('c');
 });
 
-test('raw: true', function () {
+test('raw = true', function () {
 	expect(1);
 	$.cookie.raw = true;
 	equal($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
 });
 
-test('json: true', function () {
+test('json = true', function () {
 	expect(1);
 	$.cookie.json = true;
 

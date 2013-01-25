@@ -25,6 +25,10 @@
 		return value;
 	}
 
+	function fromJSON(value) {
+		return config.json ? JSON.parse(value) : value;
+	}
+
 	var config = $.cookie = function (key, value, options) {
 
 		// write
@@ -60,17 +64,13 @@
 			var name = decode(parts.shift());
 			var cookie = decode(parts.join('='));
 
-			if (config.json) {
-				cookie = JSON.parse(cookie);
-			}
-
 			if (key && key === name) {
-				result = cookie;
+				result = fromJSON(cookie);
 				break;
 			}
 
 			if (!key) {
-				result[name] = cookie;
+				result[name] = fromJSON(cookie);
 			}
 		}
 
