@@ -1,5 +1,10 @@
+1.3.1
+-----
+- Fixing issue where it was no longer possible to check for an arbitrary cookie,
+  while json is set to true, there was a SyntaxError thrown from JSON.parse.
+
 1.3.0
-----
+-----
 - Configuration options: `raw`, `json`. Replaces raw option, becomes config:
 
   ```javascript
