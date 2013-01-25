@@ -1,4 +1,4 @@
-# jquery.cookie
+# jquery.cookie [![Build Status](https://travis-ci.org/carhartl/jquery-cookie.png?branch=master)](https://travis-ci.org/carhartl/jquery-cookie)
 
 A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
 
