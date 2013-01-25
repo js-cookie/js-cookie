@@ -81,17 +81,6 @@ test('json: true', function () {
 	}
 });
 
-test('no arguments', function () {
-	document.cookie = 'x=y';
-	var count = document.cookie.split(';').length;
-	var cookies = $.cookie();
-	equal(typeof cookies, 'object', 'should return object');
-	var found = 0;
-	for (var key in cookies) { found++; }
-	equal(found, count, 'should contain all cookies');
-	equal(cookies.x, 'y', 'should contain cookie values');
-});
-
 asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
