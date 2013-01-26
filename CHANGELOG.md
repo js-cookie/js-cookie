@@ -1,7 +1,13 @@
+HEAD
+-----
+- Support for AMD.
+
 1.3.1
 -----
-- Fixing issue where it was no longer possible to check for an arbitrary cookie,
+- Fixed issue where it was no longer possible to check for an arbitrary cookie,
   while json is set to true, there was a SyntaxError thrown from JSON.parse.
+
+- Fixed issue where RFC 2068 decoded cookies were not properly read.
 
 1.3.0
 -----
