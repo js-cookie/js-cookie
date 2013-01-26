@@ -51,12 +51,6 @@ test('decode pluses to space for server side written cookie', function () {
 	equal($.cookie('c'), 'foo bar', 'should convert pluses back to space');
 });
 
-test('[] used in name', function () {
-	expect(1);
-	document.cookie = 'c[999]=foo';
-	equal($.cookie('c[999]'), 'foo', 'should return value');
-});
-
 test('raw = true', function () {
 	expect(2);
 	$.cookie.raw = true;
