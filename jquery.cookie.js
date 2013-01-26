@@ -5,7 +5,15 @@
  * Copyright 2013 Klaus Hartl
  * Released under the MIT license
  */
-(function ($, document, undefined) {
+(function (factory) {
+	if (typeof define === 'function' && define.amd && define.amd.jQuery) {
+		// AMD. Register as anonymous module.
+		define(['jquery'], factory);
+	} else {
+		// Browser globals.
+		factory(jQuery);
+	}
+}(function ($) {
 
 	var pluses = /\+/g;
 
@@ -83,4 +91,4 @@
 		return false;
 	};
 
-})(jQuery, document);
+}));
