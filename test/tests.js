@@ -1,18 +1,14 @@
-var before = {
-	setup: function () {
-		var cookies = document.cookie.split('; ');
-		for (var i = 0, c; (c = (cookies)[i]) && (c = c.split('=')[0]); i++) {
-			document.cookie = c + '=; expires=' + new Date(0).toUTCString();
-		}
-
+var lifecycle = {
+	teardown: function () {
 		$.cookie.defaults = {};
 		delete $.cookie.raw;
 		delete $.cookie.json;
+		$.each($.cookie(), $.removeCookie);
 	}
 };
 
 
-module('read', before);
+module('read', lifecycle);
 
 test('simple value', function () {
 	expect(1);
@@ -33,10 +29,10 @@ test('not existing', function () {
 	equal($.cookie('whatever'), null, 'should return null');
 });
 
-test('rfc2068 quoted string', function () {
+test('RFC 2068 quoted string', function () {
 	expect(1);
 	document.cookie = 'c="v@address.com\\"\\\\\\""';
-	equal($.cookie('c'), 'v@address.com"\\"', 'should decode rfc2068 quoted string');
+	equal($.cookie('c'), 'v@address.com"\\"', 'should decode RFC 2068 quoted string');
 });
 
 test('decode', function () {
@@ -121,7 +117,7 @@ test('return all cookies', function() {
 });
 
 
-module('write', before);
+module('write', lifecycle);
 
 test('String primitive', function () {
 	expect(1);
@@ -178,10 +174,9 @@ test('return value', function () {
 
 test('defaults', function () {
 	expect(2);
-	$.cookie.defaults.path = '/';
-	ok($.cookie('c', 'v').match(/path=\//), 'should use options from defaults');
-	ok($.cookie('c', 'v', { path: '/foo' }).match(/path=\/foo/), 'options argument has precedence');
-	$.removeCookie('c');
+	$.cookie.defaults.path = '/foo';
+	ok($.cookie('c', 'v').match(/path=\/foo/), 'should use options from defaults');
+	ok($.cookie('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
 test('raw = true', function () {
@@ -203,7 +198,7 @@ test('json = true', function () {
 });
 
 
-module('delete', before);
+module('delete', lifecycle);
 
 test('delete (deprecated)', function () {
 	expect(1);
@@ -213,7 +208,7 @@ test('delete (deprecated)', function () {
 });
 
 
-module('removeCookie', before);
+module('removeCookie', lifecycle);
 
 test('delete', function() {
 	expect(1);
