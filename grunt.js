@@ -3,6 +3,10 @@ module.exports = function (grunt) {
 	'use strict';
 
 	grunt.initConfig({
+		pkg: '<json:cookie.jquery.json>',
+		meta: {
+			banner: '/*! <%= pkg.title %> v<%= pkg.version %> | <%= pkg.licenses[0].type %> */'
+		},
 		qunit: {
 			files: ['test/index.html']
 		},
@@ -28,6 +32,12 @@ module.exports = function (grunt) {
 			globals: {
 				define: true,
 				jQuery: true
+			}
+		},
+		min: {
+			dist: {
+				src: ['<banner>', 'jquery.cookie.js'],
+				dest: 'jquery.cookie-<%= pkg.version %>.min.js'
 			}
 		}
 	});
