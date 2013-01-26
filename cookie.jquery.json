@@ -9,6 +9,10 @@
   },
   "maintainers": [
     {
+      "name": "Klaus Hartl",
+      "url": "https://github.com/carhartl"
+    },
+    {
       "name": "Fagner Martins",
       "url": "https://github.com/FagnerMartinsBrack"
     }
