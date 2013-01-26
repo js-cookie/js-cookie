@@ -14,19 +14,15 @@
 	}
 
 	function decoded(s) {
-		return unRfc2068(decodeURIComponent(s.replace(pluses, ' ')));
+		return decodeURIComponent(s.replace(pluses, ' '));
 	}
 
-	function unRfc2068(value) {
-		if (value.indexOf('"') === 0) {
+	function converted(s) {
+		if (s.indexOf('"') === 0) {
 			// This is a quoted cookie as according to RFC2068, unescape
-			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
-		return value;
-	}
-
-	function fromJSON(value) {
-		return config.json ? JSON.parse(value) : value;
+		return config.json ? JSON.parse(s) : s;
 	}
 
 	var config = $.cookie = function (key, value, options) {
@@ -65,12 +61,12 @@
 			var cookie = decode(parts.join('='));
 
 			if (key && key === name) {
-				result = fromJSON(cookie);
+				result = converted(cookie);
 				break;
 			}
 
 			if (!key) {
-				result[name] = fromJSON(cookie);
+				result[name] = converted(cookie);
 			}
 		}
 
