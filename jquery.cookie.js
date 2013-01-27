@@ -58,7 +58,7 @@
 		// read
 		var decode = config.raw ? raw : decoded;
 		var cookies = document.cookie.split('; ');
-		var result = key ? null : {};
+		var result = key ? undefined : {};
 		for (var i = 0, l = cookies.length; i < l; i++) {
 			var parts = cookies[i].split('=');
 			var name = decode(parts.shift());
@@ -80,7 +80,7 @@
 	config.defaults = {};
 
 	$.removeCookie = function (key, options) {
-		if ($.cookie(key) !== null) {
+		if ($.cookie(key) !== undefined) {
 			$.cookie(key, '', $.extend(options, { expires: -1 }));
 			return true;
 		}

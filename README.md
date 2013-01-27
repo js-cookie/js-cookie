@@ -30,7 +30,7 @@ Create expiring cookie, valid across entire site:
 Read cookie:
 
     $.cookie('the_cookie'); // => "the_value"
-    $.cookie('not_existing'); // => null
+    $.cookie('not_existing'); // => undefined
 
 Read all available cookies:
 

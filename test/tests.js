@@ -26,7 +26,7 @@ test('empty value', function () {
 
 test('not existing', function () {
 	expect(1);
-	equal($.cookie('whatever'), null, 'should return null');
+	strictEqual($.cookie('whatever'), undefined, 'return undefined');
 });
 
 test('RFC 2068 quoted string', function () {
@@ -209,10 +209,10 @@ test('deletion', function() {
 
 test('return', function() {
 	expect(2);
-	equal($.removeCookie('c'), false, "should return false if a cookie wasn't found");
+	strictEqual($.removeCookie('c'), false, "return false if the cookie wasn't found");
 
 	document.cookie = 'c=v';
-	equal($.removeCookie('c'), true, 'should return true if the cookie was found');
+	strictEqual($.removeCookie('c'), true, 'return true if the cookie was found');
 });
 
 test('with options', function() {
@@ -225,6 +225,7 @@ test('with options', function() {
 		if (callCount === 1)  {
 			// see https://github.com/carhartl/jquery-cookie/issues/99
 			equal(arguments.length, 1, 'look up cookie instead of accidently writing a new');
+			return 'cookie'; // act as if a cookie was found...
 		}
 		if (callCount === 2) {
 			equal(arguments[2].foo, 'bar', 'pass along options when deleting cookie');

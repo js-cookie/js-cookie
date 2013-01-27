@@ -5,6 +5,10 @@ HEAD
 - Removed deprecated method `$.cookie('name', null)` for deleting a cookie,
   use `$.removeCookie('name')`.
 
+- `$.cookie('name')` now returns `undefined` in case such cookie does not exist
+  (was `null`). Because the return value is still falsy, testing for existence
+  of a cookie like `if ( $.cookie('foo') )` keeps working without change.
+
 1.3.1
 -----
 - Fixed issue where it was no longer possible to check for an arbitrary cookie,
@@ -20,7 +24,7 @@ HEAD
   $.cookie.raw = true; // bypass encoding/decoding the cookie value
   $.cookie.json = true; // automatically JSON stringify/parse value
   ```
-  
+
   Thus the default options now cleanly contain cookie attributes only.
 
 - Removing licensing under GPL Version 2, the plugin is now released under MIT License only
