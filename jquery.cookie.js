@@ -39,10 +39,6 @@
 		if (value !== undefined) {
 			options = $.extend({}, config.defaults, options);
 
-			if (value === null) {
-				options.expires = -1;
-			}
-
 			if (typeof options.expires === 'number') {
 				var days = options.expires, t = options.expires = new Date();
 				t.setDate(t.getDate() + days);
@@ -85,7 +81,7 @@
 
 	$.removeCookie = function (key, options) {
 		if ($.cookie(key) !== null) {
-			$.cookie(key, null, options);
+			$.cookie(key, '', $.extend(options, { expires: -1 }));
 			return true;
 		}
 		return false;

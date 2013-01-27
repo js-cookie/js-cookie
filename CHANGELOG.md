@@ -2,6 +2,9 @@ HEAD
 -----
 - Support for AMD.
 
+- Removed deprecated method `$.cookie('name', null)` for deleting a cookie,
+  use `$.removeCookie('name')`.
+
 1.3.1
 -----
 - Fixed issue where it was no longer possible to check for an arbitrary cookie,

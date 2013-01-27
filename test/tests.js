@@ -198,19 +198,9 @@ test('json = true', function () {
 });
 
 
-module('delete', lifecycle);
-
-test('delete (deprecated)', function () {
-	expect(1);
-	document.cookie = 'c=v';
-	$.cookie('c', null);
-	equal(document.cookie, '', 'should delete the cookie');
-});
-
-
 module('removeCookie', lifecycle);
 
-test('delete', function() {
+test('deletion', function() {
 	expect(1);
 	document.cookie = 'c=v';
 	$.removeCookie('c');
@@ -226,20 +216,24 @@ test('return', function() {
 });
 
 test('with options', function() {
-	expect(2);
-	var oldCookie = $.cookie;
+	expect(3);
+	var originalCookie = $.cookie;
+	var callCount = 0;
 
-	$.cookie = function(arg0, arg1, arg2) {
-		if (arg1 === null) {
-			equal(arg2.foo, 'bar', 'should pass options when deleting cookie');
-		} else {
+	$.cookie = function() {
+		callCount++;
+		if (callCount === 1)  {
 			// see https://github.com/carhartl/jquery-cookie/issues/99
-			equal(arguments.length, 1, "should look up cookie instead of writing a new");
+			equal(arguments.length, 1, 'look up cookie instead of accidently writing a new');
+		}
+		if (callCount === 2) {
+			equal(arguments[2].foo, 'bar', 'pass along options when deleting cookie');
 		}
 	};
 
 	document.cookie = 'c=v';
 	$.removeCookie('c', { foo: 'bar' });
+	equal(callCount, 2);
 
-	$.cookie = oldCookie;
+	$.cookie = originalCookie;
 });
