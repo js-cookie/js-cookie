@@ -64,7 +64,7 @@ test('json = true', function () {
 	$.cookie.json = true;
 
 	if ('JSON' in window) {
-		document.cookie = 'c=' + JSON.stringify({ foo: 'bar' });
+		$.cookie('c', { foo: 'bar' });
 		deepEqual($.cookie('c'), { foo: 'bar'}, 'should parse JSON');
 	} else {
 		ok(true);
@@ -202,7 +202,7 @@ module('removeCookie', lifecycle);
 
 test('deletion', function() {
 	expect(1);
-	document.cookie = 'c=v';
+	$.cookie('c', 'v');
 	$.removeCookie('c');
 	equal(document.cookie, '', 'should delete the cookie');
 });
@@ -211,7 +211,7 @@ test('return', function() {
 	expect(2);
 	strictEqual($.removeCookie('c'), false, "return false if the cookie wasn't found");
 
-	document.cookie = 'c=v';
+	$.cookie('c', 'v');
 	strictEqual($.removeCookie('c'), true, 'return true if the cookie was found');
 });
 
