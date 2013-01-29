@@ -232,7 +232,6 @@ test('with options', function() {
 		}
 	};
 
-	document.cookie = 'c=v';
 	$.removeCookie('c', { foo: 'bar' });
 	equal(callCount, 2);
 
