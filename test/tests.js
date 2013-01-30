@@ -100,7 +100,7 @@ asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	document.body.appendChild(iframe);
 });
 
-test('return all cookies', function() {
+test('call without arguments', function() {
 	$.cookie('c', 'v');
 	$.cookie('foo', 'bar');
 	deepEqual($.cookie(), {
@@ -113,7 +113,7 @@ test('return all cookies', function() {
 	$.cookie('c', { foo: 'bar' });
 	deepEqual($.cookie(), {
 		c: { foo: 'bar' }
-	}, 'should return all cookies with JSON parsed');
+	}, 'returns all cookies with JSON parsed');
 });
 
 
