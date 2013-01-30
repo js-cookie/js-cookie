@@ -61,9 +61,9 @@ test('raw = true', function () {
 
 test('json = true', function () {
 	expect(1);
-	$.cookie.json = true;
 
 	if ('JSON' in window) {
+		$.cookie.json = true;
 		$.cookie('c', { foo: 'bar' });
 		deepEqual($.cookie('c'), { foo: 'bar'}, 'should parse JSON');
 	} else {
@@ -73,10 +73,23 @@ test('json = true', function () {
 
 test('not existing with json = true', function () {
 	expect(1);
-	$.cookie.json = true;
 
 	if ('JSON' in window) {
+		$.cookie.json = true;
 		strictEqual($.cookie('whatever'), undefined, "won't throw exception");
+	} else {
+		ok(true);
+	}
+});
+
+test('invalid JSON string with json = true', function () {
+	expect(1);
+	
+
+	if ('JSON' in window) {
+		$.cookie.json = true;
+		$.cookie('c', 'v');
+		strictEqual($.cookie('c'), undefined, "won't throw exception, returns undefined");
 	} else {
 		ok(true);
 	}

@@ -30,7 +30,9 @@
 			// This is a quoted cookie as according to RFC2068, unescape
 			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
-		return config.json ? JSON.parse(s) : s;
+		try {
+			return config.json ? JSON.parse(s) : s;
+		} catch(er) {}
 	}
 
 	var config = $.cookie = function (key, value, options) {
