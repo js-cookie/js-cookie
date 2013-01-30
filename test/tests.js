@@ -13,7 +13,7 @@ module('read', lifecycle);
 test('simple value', function () {
 	expect(1);
 	document.cookie = 'c=v';
-	equal($.cookie('c'), 'v', 'should return value');
+	strictEqual($.cookie('c'), 'v', 'should return value');
 });
 
 test('empty value', function () {
@@ -21,7 +21,7 @@ test('empty value', function () {
 	// IE saves cookies with empty string as "c; ", e.g. without "=" as opposed to EOMB, which
 	// resulted in a bug while reading such a cookie.
 	$.cookie('c', '');
-	equal($.cookie('c'), '', 'should return value');
+	strictEqual($.cookie('c'), '', 'should return value');
 });
 
 test('not existing', function () {
@@ -32,19 +32,19 @@ test('not existing', function () {
 test('RFC 2068 quoted string', function () {
 	expect(1);
 	document.cookie = 'c="v@address.com\\"\\\\\\""';
-	equal($.cookie('c'), 'v@address.com"\\"', 'should decode RFC 2068 quoted string');
+	strictEqual($.cookie('c'), 'v@address.com"\\"', 'should decode RFC 2068 quoted string');
 });
 
 test('decode', function () {
 	expect(1);
 	document.cookie = encodeURIComponent(' c') + '=' + encodeURIComponent(' v');
-	equal($.cookie(' c'), ' v', 'should decode key and value');
+	strictEqual($.cookie(' c'), ' v', 'should decode key and value');
 });
 
 test('decode pluses to space for server side written cookie', function () {
 	expect(1);
 	document.cookie = 'c=foo+bar';
-	equal($.cookie('c'), 'foo bar', 'should convert pluses back to space');
+	strictEqual($.cookie('c'), 'foo bar', 'should convert pluses back to space');
 });
 
 test('raw = true', function () {
@@ -52,11 +52,11 @@ test('raw = true', function () {
 	$.cookie.raw = true;
 
 	document.cookie = 'c=%20v';
-	equal($.cookie('c'), '%20v', 'should not decode value');
+	strictEqual($.cookie('c'), '%20v', 'should not decode value');
 
 	// see https://github.com/carhartl/jquery-cookie/issues/50
 	$.cookie('c', 'foo=bar');
-	equal($.cookie('c'), 'foo=bar', 'should include the entire value');
+	strictEqual($.cookie('c'), 'foo=bar', 'should include the entire value');
 });
 
 test('json = true', function () {
@@ -76,7 +76,7 @@ test('not existing with json = true', function () {
 	$.cookie.json = true;
 
 	if ('JSON' in window) {
-		equal($.cookie('whatever'), null, 'should return null');
+		strictEqual($.cookie('whatever'), undefined, "won't throw exception");
 	} else {
 		ok(true);
 	}
@@ -89,7 +89,7 @@ asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	$(iframe).on('load', function() {
 		start();
 		if (iframe.contentWindow.ok) {
-			equal(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
+			strictEqual(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
 		} else {
 			// Skip the test where we can't stub document.cookie using
 			// Object.defineProperty. Seems to work fine in
@@ -122,32 +122,32 @@ module('write', lifecycle);
 test('String primitive', function () {
 	expect(1);
 	$.cookie('c', 'v');
-	equal($.cookie('c'), 'v', 'should write value');
+	strictEqual($.cookie('c'), 'v', 'should write value');
 });
 
 test('String object', function () {
 	expect(1);
 	$.cookie('c', new String('v'));
-	equal($.cookie('c'), 'v', 'should write value');
+	strictEqual($.cookie('c'), 'v', 'should write value');
 });
 
 test('value "[object Object]"', function () {
 	expect(1);
 	$.cookie('c', '[object Object]');
-	equal($.cookie('c'), '[object Object]', 'should write value');
+	strictEqual($.cookie('c'), '[object Object]', 'should write value');
 });
 
 test('number', function () {
 	expect(1);
 	$.cookie('c', 1234);
-	equal($.cookie('c'), '1234', 'should write value');
+	strictEqual($.cookie('c'), '1234', 'should write value');
 });
 
 test('expires option as days from now', function() {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-	equal($.cookie('c', 'v', { expires: 7 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
+	strictEqual($.cookie('c', 'v', { expires: 7 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
 		'should write the cookie string with expires');
 });
 
@@ -155,21 +155,13 @@ test('expires option as Date instance', function() {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-	equal($.cookie('c', 'v', { expires: sevenDaysFromNow }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
+	strictEqual($.cookie('c', 'v', { expires: sevenDaysFromNow }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
 		'should write the cookie string with expires');
-});
-
-test('invalid expires option (in the past)', function() {
-	expect(1);
-	var yesterday = new Date();
-	yesterday.setDate(yesterday.getDate() - 1);
-	$.cookie('c', 'v', { expires: yesterday });
-	equal($.cookie('c'), null, 'should not save already expired cookie');
 });
 
 test('return value', function () {
 	expect(1);
-	equal($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
+	strictEqual($.cookie('c', 'v'), 'c=v', 'should return written cookie string');
 });
 
 test('defaults', function () {
@@ -182,7 +174,7 @@ test('defaults', function () {
 test('raw = true', function () {
 	expect(1);
 	$.cookie.raw = true;
-	equal($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
+	strictEqual($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
 });
 
 test('json = true', function () {
@@ -191,7 +183,7 @@ test('json = true', function () {
 
 	if ('JSON' in window) {
 		$.cookie('c', { foo: 'bar' });
-		equal(document.cookie, 'c=' + encodeURIComponent(JSON.stringify({ foo: 'bar' })), 'should stringify JSON');
+		strictEqual(document.cookie, 'c=' + encodeURIComponent(JSON.stringify({ foo: 'bar' })), 'should stringify JSON');
 	} else {
 		ok(true);
 	}
@@ -204,7 +196,7 @@ test('deletion', function() {
 	expect(1);
 	$.cookie('c', 'v');
 	$.removeCookie('c');
-	equal(document.cookie, '', 'should delete the cookie');
+	strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
 test('return', function() {
@@ -224,16 +216,16 @@ test('with options', function() {
 		callCount++;
 		if (callCount === 1)  {
 			// see https://github.com/carhartl/jquery-cookie/issues/99
-			equal(arguments.length, 1, 'look up cookie instead of accidently writing a new');
+			strictEqual(arguments.length, 1, 'look up cookie instead of accidently writing a new');
 			return 'cookie'; // act as if a cookie was found...
 		}
 		if (callCount === 2) {
-			equal(arguments[2].foo, 'bar', 'pass along options when deleting cookie');
+			strictEqual(arguments[2].foo, 'bar', 'pass along options when deleting cookie');
 		}
 	};
 
 	$.removeCookie('c', { foo: 'bar' });
-	equal(callCount, 2);
+	strictEqual(callCount, 2);
 
 	$.cookie = originalCookie;
 });
