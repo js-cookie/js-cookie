@@ -85,7 +85,7 @@ test('not existing with json = true', function () {
 asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
-	var iframe = $('<iframe src="sandbox.html"></iframe>')[0];
+	var iframe = $('<iframe src="malformed_cookie.html"></iframe>')[0];
 	$(iframe).on('load', function() {
 		start();
 		if (iframe.contentWindow.ok) {
