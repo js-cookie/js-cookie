@@ -106,8 +106,8 @@ Open in browser:
 
     $ open http://0.0.0.0:8124/test/index.html
 
-For quick *non cross-browser* testing use grunt:
-
+For quick *non cross-browser* testing use grunt, install grunt CLI and project dependencies as outlined in this guide: <http://gruntjs.com/getting-started>, then run:
+    
     $ grunt
 
 ## Development
