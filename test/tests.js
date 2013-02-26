@@ -187,7 +187,8 @@ test('defaults', function () {
 test('raw = true', function () {
 	expect(1);
 	$.cookie.raw = true;
-	strictEqual($.cookie('c', ' v').split('=')[1], ' v', 'should not encode');
+	strictEqual($.cookie('c[1]', 'v[1]'), 'c[1]=v[1]', 'should not encode');
+	$.each($.cookie(), $.removeCookie);
 });
 
 test('json = true', function () {
@@ -241,4 +242,12 @@ test('with options', function() {
 	strictEqual(callCount, 2);
 
 	$.cookie = originalCookie;
+});
+
+test('[] used in name', function () {
+	expect(1);
+	$.cookie.raw = true;
+	document.cookie = 'c[1]=foo';
+	$.removeCookie('c[1]');
+	strictEqual(document.cookie, '', 'delete the cookie');
 });
