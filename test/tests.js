@@ -84,7 +84,7 @@ test('not existing with json = true', function () {
 
 test('invalid JSON string with json = true', function () {
 	expect(1);
-	
+
 
 	if ('JSON' in window) {
 		$.cookie.json = true;
@@ -121,7 +121,7 @@ test('call without arguments', function() {
 		foo: 'bar'
 	}, 'should return all cookies');
 	$.each($.cookie(), $.removeCookie);
-	
+
 	$.cookie.json = true;
 	$.cookie('c', { foo: 'bar' });
 	deepEqual($.cookie(), {
@@ -242,6 +242,15 @@ test('with options', function() {
 	strictEqual(callCount, 2);
 
 	$.cookie = originalCookie;
+});
+
+test('passing options reference', function() {
+	expect(1);
+	var options = { path: '/' };
+	$.cookie('c', 'v', options);
+
+	$.removeCookie('c', options);
+	deepEqual(options, { path: '/' }, "won't alter options object");
 });
 
 test('[] used in name', function () {

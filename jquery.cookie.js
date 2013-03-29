@@ -85,7 +85,8 @@
 
 	$.removeCookie = function (key, options) {
 		if ($.cookie(key) !== undefined) {
-			$.cookie(key, '', $.extend(options, { expires: -1 }));
+			// Must not alter options, thus extending a fresh object...
+			$.cookie(key, '', $.extend({}, options, { expires: -1 }));
 			return true;
 		}
 		return false;
