@@ -9,6 +9,9 @@ HEAD
   (was `null`). Because the return value is still falsy, testing for existence
   of a cookie like `if ( $.cookie('foo') )` keeps working without change.
 
+- Renamed bower package definition (component.json -> bower.json) for usage
+  with up-to-date bower.
+
 1.3.1
 -----
 - Fixed issue where it was no longer possible to check for an arbitrary cookie,
