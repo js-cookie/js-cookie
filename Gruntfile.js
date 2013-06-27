@@ -23,8 +23,23 @@ module.exports = function (grunt) {
 				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */\n'
 			},
 			build: {
-				src: 'jquery.cookie.js',
-				dest: 'build/jquery.cookie-<%= pkg.version %>.min.js'
+				files: {
+					'build/jquery.cookie-<%= pkg.version %>.min.js': 'jquery.cookie.js'
+				}
+			}
+		},
+		watch: {
+			files: ['jquery.cookie.js', 'test/tests.js'],
+			tasks: 'default'
+		},
+		compare_size: {
+			files: [ 'build/jquery.cookie-<%= pkg.version %>.min.js', 'jquery.cookie.js' ],
+			options: {
+				compress: {
+					gz: function( fileContents ) {
+						return require( 'gzip-js' ).zip( fileContents, {} ).length;
+					}
+				}
 			}
 		}
 	});
@@ -32,7 +47,9 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-compare-size');
 
-	grunt.registerTask('default', ['jshint', 'qunit']);
-	grunt.registerTask('ci', ['default']);
+	grunt.registerTask('default', ['jshint', 'qunit', 'uglify', 'compare_size']);
+	grunt.registerTask('ci', ['jshint', 'qunit']);
 };
