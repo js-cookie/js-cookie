@@ -29,15 +29,21 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
-			files: ['jquery.cookie.js', 'test/tests.js'],
+			files: [
+				'jquery.cookie.js',
+				'test/tests.js'
+			],
 			tasks: 'default'
 		},
 		compare_size: {
-			files: [ 'build/jquery.cookie-<%= pkg.version %>.min.js', 'jquery.cookie.js' ],
+			files: [
+				'build/jquery.cookie-<%= pkg.version %>.min.js',
+				'jquery.cookie.js'
+			],
 			options: {
 				compress: {
-					gz: function( fileContents ) {
-						return require( 'gzip-js' ).zip( fileContents, {} ).length;
+					gz: function (fileContents) {
+						return require('gzip-js').zip(fileContents, {}).length;
 					}
 				}
 			}
