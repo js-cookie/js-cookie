@@ -96,26 +96,8 @@ Define the domain where the cookie is valid. Default: domain of page where the c
 
 If true, the cookie transmission requires a secure protocol (https). Default: `false`.
 
-## Tests
-
-Requires Node. Startup server:
-
-    $ node test/server.js
-
-Open in browser:
-
-    $ open http://0.0.0.0:8124/test/index.html
-
-For quick *non cross-browser* testing use grunt, install grunt CLI and project dependencies as outlined in this guide: <http://gruntjs.com/getting-started>, then run:
-    
-    $ grunt
-
-## Development
-
-- Source hosted at [GitHub](https://github.com/carhartl/jquery-cookie)
-- Report issues, questions, feature requests on [GitHub Issues](https://github.com/carhartl/jquery-cookie/issues)
-
-Pull requests are very welcome! Make sure your patches are well tested. Please create a topic branch for every separate change you make.
+##Wanna help?
+Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Authors
 
