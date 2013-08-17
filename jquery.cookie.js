@@ -17,27 +17,29 @@
 
 	var pluses = /\+/g;
 
-	function raw(s) {
-		return s;
-	}
-
-	function decoded(s) {
+	function decode(s) {
+		if (config.raw) {
+			return s;
+		}
 		return decodeURIComponent(s.replace(pluses, ' '));
 	}
 
-	function converted(s) {
+	function decodeAndParse(s) {
 		if (s.indexOf('"') === 0) {
-			// This is a quoted cookie as according to RFC2068, unescape
+			// This is a quoted cookie as according to RFC2068, unescape...
 			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
+
+		s = decode(s);
+
 		try {
 			return config.json ? JSON.parse(s) : s;
-		} catch(er) {}
+		} catch(e) {}
 	}
 
 	var config = $.cookie = function (key, value, options) {
 
-		// write
+		// Write
 		if (value !== undefined) {
 			options = $.extend({}, config.defaults, options);
 
@@ -59,22 +61,21 @@
 			].join(''));
 		}
 
-		// read
-		var decode = config.raw ? raw : decoded;
+		// Read
 		var cookies = document.cookie.split('; ');
 		var result = key ? undefined : {};
 		for (var i = 0, l = cookies.length; i < l; i++) {
 			var parts = cookies[i].split('=');
 			var name = decode(parts.shift());
-			var cookie = decode(parts.join('='));
+			var cookie = parts.join('=');
 
 			if (key && key === name) {
-				result = converted(cookie);
+				result = decodeAndParse(cookie);
 				break;
 			}
 
 			if (!key) {
-				result[name] = converted(cookie);
+				result[name] = decodeAndParse(cookie);
 			}
 		}
 
