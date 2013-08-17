@@ -96,7 +96,8 @@ Define the domain where the cookie is valid. Default: domain of page where the c
 
 If true, the cookie transmission requires a secure protocol (https). Default: `false`.
 
-##Wanna help?
+## Contributing
+
 Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Authors
