@@ -100,7 +100,7 @@ test('invalid JSON string with json = true', function () {
 	if ('JSON' in window) {
 		$.cookie('c', 'v');
 		$.cookie.json = true;
-		strictEqual($.cookie('c'), undefined, "won't throw exception, returns unquoted string");
+		strictEqual($.cookie('c'), undefined, "won't throw exception, returns undefined");
 	} else {
 		ok(true);
 	}
