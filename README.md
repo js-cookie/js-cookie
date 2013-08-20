@@ -8,7 +8,9 @@ A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
 
 Include script *after* the jQuery library (unless you are packaging scripts somehow else):
 
-    <script src="/path/to/jquery.cookie.js"></script>
+```html
+<script src="/path/to/jquery.cookie.js"></script>
+```
 
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
 in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
@@ -19,32 +21,44 @@ The plugin can also be loaded as AMD module.
 
 Create session cookie:
 
-    $.cookie('the_cookie', 'the_value');
+```javascript
+$.cookie('the_cookie', 'the_value');
+```
 
 Create expiring cookie, 7 days from then:
 
-    $.cookie('the_cookie', 'the_value', { expires: 7 });
+```javascript
+$.cookie('the_cookie', 'the_value', { expires: 7 });
+```
 
 Create expiring cookie, valid across entire site:
 
-    $.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
+```javascript
+$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
+```
 
 Read cookie:
 
-    $.cookie('the_cookie'); // => "the_value"
-    $.cookie('not_existing'); // => undefined
+```javascript
+$.cookie('the_cookie'); // => "the_value"
+$.cookie('not_existing'); // => undefined
+```
 
 Read all available cookies:
 
-    $.cookie(); // => { "the_cookie": "the_value", "...remaining": "cookies" }
+```javascript
+$.cookie(); // => { "the_cookie": "the_value", "...remaining": "cookies" }
+```
 
 Delete cookie:
 
-    // Returns true when cookie was found, false when no cookie was found...
-    $.removeCookie('the_cookie');
+```javascript
+// Returns true when cookie was found, false when no cookie was found...
+$.removeCookie('the_cookie');
 
-    // Same path as when the cookie was written...
-    $.removeCookie('the_cookie', { path: '/' });
+// Same path as when the cookie was written...
+$.removeCookie('the_cookie', { path: '/' });
+```
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
@@ -54,13 +68,17 @@ Delete cookie:
 
 By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true:
 
-    $.cookie.raw = true;
+```javascript
+$.cookie.raw = true;
+```
 
 ### json
 
 Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
 
-    $.cookie.json = true;
+```javascript
+$.cookie.json = true;
+```
 
 ## Cookie Options
 
