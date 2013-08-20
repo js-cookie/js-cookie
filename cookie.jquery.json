@@ -24,7 +24,7 @@
     }
   ],
   "dependencies": {
-    "jquery": ">=1.0"
+    "jquery": ">=1.2"
   },
   "bugs": "https://github.com/carhartl/jquery-cookie/issues",
   "homepage": "https://github.com/carhartl/jquery-cookie",

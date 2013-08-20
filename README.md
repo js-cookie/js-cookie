@@ -98,6 +98,27 @@ Define the domain where the cookie is valid. Default: domain of page where the c
 
 If true, the cookie transmission requires a secure protocol (https). Default: `false`.
 
+## Converters
+
+Provide a conversion function as optional last argument for reading, in order to change the cookie's value 
+to a different representation on the fly.
+
+Example for parsing a value into a number:
+
+```javascript
+$.cookie('foo', '42');
+$.cookie('foo', Number); // => 42
+```
+
+Dealing with cookies that have been encoded using `escape` (3rd party cookies):
+
+```javascript
+$.cookie.raw = true;
+$.cookie('foo', unescape);
+```
+
+You can pass an arbitrary conversion function.
+
 ## Contributing
 
 Check out the [Contributing Guidelines](CONTRIBUTING.md)

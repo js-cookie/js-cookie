@@ -65,7 +65,7 @@ test('json = true', function () {
 	if ('JSON' in window) {
 		$.cookie.json = true;
 		$.cookie('c', { foo: 'bar' });
-		deepEqual($.cookie('c'), { foo: 'bar'}, 'should parse JSON');
+		deepEqual($.cookie('c'), { foo: 'bar' }, 'should parse JSON');
 	} else {
 		ok(true);
 	}
@@ -284,4 +284,20 @@ test('[] used in name', function () {
 	document.cookie = 'c[1]=foo';
 	$.removeCookie('c[1]');
 	strictEqual(document.cookie, '', 'delete the cookie');
+});
+
+
+module('conversion', lifecycle);
+
+test('read converter', function() {
+	expect(1);
+	$.cookie('c', '1');
+	strictEqual($.cookie('c', Number), 1, 'converts read value');
+});
+
+test('read converter with raw = true', function() {
+	expect(1);
+	$.cookie.raw = true;
+	$.cookie('c', '1');
+	strictEqual($.cookie('c', Number), 1, 'does not decode, but converts read value');
 });
