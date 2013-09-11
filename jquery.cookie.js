@@ -21,7 +21,10 @@
 		if (config.raw) {
 			return s;
 		}
-		return decodeURIComponent(s.replace(pluses, ' '));
+		try {
+			// If we can't decode the cookie, ignore it, it's unusable.
+			return decodeURIComponent(s.replace(pluses, ' '));
+		} catch(e) {}
 	}
 
 	function decodeAndParse(s) {
@@ -33,6 +36,7 @@
 		s = decode(s);
 
 		try {
+			// If we can't parse the cookie, ignore it, it's unusable.
 			return config.json ? JSON.parse(s) : s;
 		} catch(e) {}
 	}
@@ -80,8 +84,9 @@
 				break;
 			}
 
-			if (!key) {
-				result[name] = decodeAndParse(cookie);
+			// Prevent storing a cookie that we couldn't decode.
+			if (!key && (cookie = decodeAndParse(cookie)) !== undefined) {
+				result[name] = cookie;
 			}
 		}
 

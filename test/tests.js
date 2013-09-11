@@ -106,6 +106,13 @@ test('invalid JSON string with json = true', function () {
 	}
 });
 
+test('invalid URL encoding', function () {
+	expect(1);
+	document.cookie = 'bad=foo%';
+	strictEqual($.cookie('bad'), undefined, "won't throw exception, returns undefined");
+	document.cookie = 'bad=foo'; // Allow to be deleted...
+});
+
 asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
@@ -138,6 +145,13 @@ test('Call to read all with json: true', function() {
 	$.cookie.json = true;
 	$.cookie('c', { foo: 'bar' });
 	deepEqual($.cookie(), { c: { foo: 'bar' } }, 'returns JSON parsed cookies');
+});
+
+test('Call to read all with a badly encoded cookie', function() {
+	expect(1);
+	document.cookie = 'bad=foo%';
+	document.cookie = 'good=foo';
+	deepEqual($.cookie(), { good: 'foo' }, 'returns object containing all decodable cookies');
 });
 
 

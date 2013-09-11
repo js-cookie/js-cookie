@@ -12,6 +12,9 @@ HEAD
 - Renamed bower package definition (component.json -> bower.json) for usage
   with up-to-date bower.
 
+- Badly encoded cookies no longer throw exception upon reading but do return
+  undefined (similar to how we handle JSON parse errors with json = true).
+
 1.3.1
 -----
 - Fixed issue where it was no longer possible to check for an arbitrary cookie,
