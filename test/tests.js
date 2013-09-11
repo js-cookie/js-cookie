@@ -113,11 +113,11 @@ test('invalid URL encoding', function () {
 	document.cookie = 'bad=foo'; // Allow to be deleted...
 });
 
-asyncTest('malformed cookie value in IE (#88, #117)', function() {
+asyncTest('malformed cookie value in IE (#88, #117)', function () {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = $('<iframe src="malformed_cookie.html"></iframe>')[0];
-	$(iframe).on('load', function() {
+	$(iframe).on('load', function () {
 		start();
 		if (iframe.contentWindow.ok) {
 			strictEqual(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
@@ -131,23 +131,23 @@ asyncTest('malformed cookie value in IE (#88, #117)', function() {
 	document.body.appendChild(iframe);
 });
 
-test('Call to read all when there are cookies', function() {
+test('Call to read all when there are cookies', function () {
 	$.cookie('c', 'v');
 	$.cookie('foo', 'bar');
 	deepEqual($.cookie(), { c: 'v', foo: 'bar' }, 'returns object containing all cookies');
 });
 
-test('Call to read all when there are no cookies at all', function() {
+test('Call to read all when there are no cookies at all', function () {
 	deepEqual($.cookie(), {}, 'returns empty object');
 });
 
-test('Call to read all with json: true', function() {
+test('Call to read all with json: true', function () {
 	$.cookie.json = true;
 	$.cookie('c', { foo: 'bar' });
 	deepEqual($.cookie(), { c: { foo: 'bar' } }, 'returns JSON parsed cookies');
 });
 
-test('Call to read all with a badly encoded cookie', function() {
+test('Call to read all with a badly encoded cookie', function () {
 	expect(1);
 	document.cookie = 'bad=foo%';
 	document.cookie = 'good=foo';
@@ -181,7 +181,7 @@ test('number', function () {
 	strictEqual($.cookie('c'), '1234', 'should write value');
 });
 
-test('expires option as days from now', function() {
+test('expires option as days from now', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
@@ -189,7 +189,7 @@ test('expires option as days from now', function() {
 		'should write the cookie string with expires');
 });
 
-test('expires option as Date instance', function() {
+test('expires option as Date instance', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
@@ -231,14 +231,14 @@ test('json = true', function () {
 
 module('removeCookie', lifecycle);
 
-test('deletion', function() {
+test('deletion', function () {
 	expect(1);
 	$.cookie('c', 'v');
 	$.removeCookie('c');
 	strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
-test('return', function() {
+test('return', function () {
 	expect(2);
 	strictEqual($.removeCookie('c'), false, "return false if the cookie wasn't found");
 
@@ -246,12 +246,12 @@ test('return', function() {
 	strictEqual($.removeCookie('c'), true, 'return true if the cookie was found');
 });
 
-test('with options', function() {
+test('with options', function () {
 	expect(3);
 	var originalCookie = $.cookie;
 	var callCount = 0;
 
-	$.cookie = function() {
+	$.cookie = function () {
 		callCount++;
 		if (callCount === 1)  {
 			// see https://github.com/carhartl/jquery-cookie/issues/99
@@ -269,7 +269,7 @@ test('with options', function() {
 	$.cookie = originalCookie;
 });
 
-test('passing options reference', function() {
+test('passing options reference', function () {
 	expect(1);
 	var options = { path: '/' };
 	$.cookie('c', 'v', options);
