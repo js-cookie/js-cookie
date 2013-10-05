@@ -1,5 +1,8 @@
 HEAD
 -----
+
+1.4.0
+-----
 - Support for AMD.
 
 - Removed deprecated method `$.cookie('name', null)` for deleting a cookie,

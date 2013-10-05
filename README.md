@@ -118,7 +118,7 @@ If true, the cookie transmission requires a secure protocol (https). Default: `f
 
 ## Converters
 
-Provide a conversion function as optional last argument for reading, in order to change the cookie's value 
+Provide a conversion function as optional last argument for reading, in order to change the cookie's value
 to a different representation on the fly.
 
 Example for parsing a value into a number:
