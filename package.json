@@ -18,12 +18,14 @@
   "gitHead": "bd3c9713222bace68d25fe2128c0f8633cad1269",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt": "~0.4.0",
+    "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-qunit": "~0.2.0",
     "grunt-contrib-watch": "~0.3.0",
     "grunt-compare-size": "~0.4.0",
+    "grunt-saucelabs": "~4.1.1",
+    "grunt-contrib-connect": "~0.5.0",
     "gzip-js": "~0.3.0"
   }
 }
