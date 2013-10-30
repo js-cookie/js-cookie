@@ -1,6 +1,6 @@
 # jquery.cookie [![Build Status](https://travis-ci.org/carhartl/jquery-cookie.png?branch=master)](https://travis-ci.org/carhartl/jquery-cookie) [![Code Climate](https://codeclimate.com/github/carhartl/jquery-cookie.png)](https://codeclimate.com/github/carhartl/jquery-cookie)
 
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/carhartl.svg)](https://saucelabs.com/u/carhartl)
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/jquery-cookie.svg)](https://saucelabs.com/u/jquery-cookie)
 
 A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
 

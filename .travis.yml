@@ -6,5 +6,5 @@ before_script:
 script: grunt ci --verbose
 env:
   global:
-  - secure: FjCPTpIs6l6zTvXqH9rPTXqeRCpNa0cmz2Glio8fmOhbdeNbAdQTZGPChe8wTqIQ4wRQUtg4BPZjYx4+ibhj530/QW+736d9UUX5MhixCbm9r6EzRuljlo0wGRsLRa3pHIKyxq18bdilBSYaPrbekpLSyCKM/3wJa34k8LNKdrg=
-  - secure: dJU6/DdQkuhVNSuaR1OswON7cHjRR7mDv0szIZ1rY/TRNoL6GrDr7XGpeQAtV+6Pqu1RJWb1V0VHoPble6imYqWtiq9LZu8UtU/ImKkZWZxFgMyDDJEli4Lw/+p1UMBNf7jXM3v8t9aOA0eHTwX7IA++paNIdehBOyNI8x3t6Ng=
+  - secure: HRae0kyIDDuhonvMi2SfEl1WJb4K/wX8WmzT9YkxFbmWwLjiOMkmqyuEyi76DbTC1cb9o7WwGVgbP1DhSm6n6m0Lz+PSzpprBN4QZuJc56jcc+tBA6gM81hyUufaTT0yUWz112Bu06kWIAs44w5PtG0FYZR0CuIN8fQvZi8fXCQ=
+  - secure: c+M5ECIfxDcVrr+ZlqgpGjv8kVM/hxiz3ACMCn4ZkDiaeq4Rw0wWIGZYL6aV5fhsoHgzEQ/XQPca8xKs3Umr7R3b6Vr3AEyFnW+LP67K/1Qbz4Pi3PvhDH/h4rvK7fOoTqTDCVVDEH3v4pefsz2VaKemG4iBKxrcof5aR4Rjopk=
