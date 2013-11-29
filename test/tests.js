@@ -194,6 +194,18 @@ test('expires option as days from now', function () {
 		'should write the cookie string with expires');
 });
 
+test('expires option as fraction of a day', function () {
+	expect(1);
+
+	now = new Date().getTime();
+	expires = Date.parse($.cookie('c', 'v', { expires: 0.5 }));
+
+	// When we were using Date.setDate() fractions have been ignored
+	// and expires resulted in the current date. Allow 1000 milliseconds
+	// difference for execution time.
+	ok(expires > now + 1000, 'should write expires attribute with the correct date');
+});
+
 test('expires option as Date instance', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();

@@ -52,12 +52,13 @@
 	var config = $.cookie = function (key, value, options) {
 
 		// Write
+
 		if (value !== undefined && !$.isFunction(value)) {
 			options = $.extend({}, config.defaults, options);
 
 			if (typeof options.expires === 'number') {
 				var days = options.expires, t = options.expires = new Date();
-				t.setDate(t.getDate() + days);
+				t.setTime(+t + days * 864e+5);
 			}
 
 			return (document.cookie = [
