@@ -197,8 +197,8 @@ test('expires option as days from now', function () {
 test('expires option as fraction of a day', function () {
 	expect(1);
 
-	now = new Date().getTime();
-	expires = Date.parse($.cookie('c', 'v', { expires: 0.5 }));
+	var now = new Date().getTime();
+	var expires = Date.parse($.cookie('c', 'v', { expires: 0.5 }).replace(/.+expires=/, ''));
 
 	// When we were using Date.setDate() fractions have been ignored
 	// and expires resulted in the current date. Allow 1000 milliseconds
