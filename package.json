@@ -28,6 +28,9 @@
     "grunt-contrib-connect": "~0.5.0",
     "gzip-js": "~0.3.0"
   },
+  "volo": {
+    "url": "https://raw.github.com/carhartl/jquery-cookie/v{version}/jquery.cookie.js"
+  },
   "jspm": {
     "main": "jquery.cookie",
     "files": ["jquery.cookie.js"],
