@@ -2,7 +2,7 @@
   "name": "jquery.cookie",
   "version": "1.4.0",
   "description": "A simple, lightweight jQuery plugin for reading, writing and deleting cookies.",
-  "main": "Gruntfile.js",
+  "main": "jquery.cookie.js",
   "directories": {
     "test": "test"
   },
