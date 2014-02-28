@@ -11,6 +11,7 @@
 	"undef": true,
 	"globals": {
 		"define": true,
-		"jQuery": true
+		"jQuery": true,
+		"require": true
 	}
 }
