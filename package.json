@@ -34,5 +34,14 @@
     "buildConfig": {
       "uglify": true
     }
+  },
+  "jam": {
+    "dependencies": {
+      "jquery": ">=1.2"
+    },
+    "main": "jquery.cookie.js",
+    "include": [
+      "jquery.cookie.js"
+    ]
   }
 }
