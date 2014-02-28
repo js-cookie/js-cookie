@@ -7,13 +7,13 @@
  */
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
-		// AMD. Register as anonymous module.
+		// AMD
 		define(['jquery'], factory);
 	} else if (typeof exports === 'object') {
 		// CommonJS
 		factory(require('jquery'));
 	} else {
-		// Browser globals.
+		// Browser globals
 		factory(jQuery);
 	}
 }(function ($) {
