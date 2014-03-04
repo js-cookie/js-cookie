@@ -1,6 +1,12 @@
 HEAD
 -----
 
+- Added support for CommonJS.
+
+- Added support for package managers: Jam (http://jamjs.org), volo (http://volojs.org), Component (http://component.io), jspm (http://jspm.io).
+
+- The expires option now interpretes fractions of numbers (e.g. days) correctly.
+
 1.4.0
 -----
 - Support for AMD.
