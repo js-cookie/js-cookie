@@ -1,5 +1,8 @@
 HEAD
 -----
+
+1.4.1
+-----
 - Added support for CommonJS.
 
 - Added support for package managers: Jam (http://jamjs.org), volo (http://volojs.org), Component (http://component.io), jspm (http://jspm.io).

@@ -2,7 +2,7 @@
   "name": "jquery.cookie",
   "repo": "carhartl/jquery-cookie",
   "description": "A simple, lightweight jQuery plugin for reading, writing and deleting cookies",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "keywords": [],
   "dependencies": {},
   "development": {},

@@ -1,6 +1,6 @@
 {
   "name": "cookie",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "title":  "jQuery Cookie",
   "description": "A simple, lightweight jQuery plugin for reading, writing and deleting cookies.",
   "author": {
