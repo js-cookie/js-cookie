@@ -65,25 +65,39 @@ module.exports = function (grunt) {
 					build: process.env.TRAVIS_JOB_ID,
 					concurrency: 3,
 					browsers: [
+						// iOS
+						{
+							browserName: 'iphone',
+							platform: 'OS X 10.9',
+							version: '7.1'
+						},
+						{
+							browserName: 'ipad',
+							platform: 'OS X 10.9',
+							version: '7.1'
+						},
+						// Android
+						{
+							browserName: 'android',
+							platform: 'Linux',
+							version: '4.3'
+						},
+						// OS X
 						{
 							browserName: 'safari',
-							platform: 'OS X 10.8'
+							platform: 'OS X 10.9',
+							version: '7'
 						},
 						{
-							browserName: 'firefox',
-							platform: 'Windows 7'
+							browserName: 'safari',
+							platform: 'OS X 10.8',
+							version: '6'
 						},
+						// Windows
 						{
-							browserName: 'firefox',
-							platform: 'Windows XP'
-						},
-						{
-							browserName: 'firefox',
-							platform: 'Linux'
-						},
-						{
-							browserName: 'chrome',
-							platform: 'Windows 7'
+							browserName: 'internet explorer',
+							platform: 'Windows 8.1',
+							version: '11'
 						},
 						{
 							browserName: 'internet explorer',
@@ -93,7 +107,38 @@ module.exports = function (grunt) {
 						{
 							browserName: 'internet explorer',
 							platform: 'Windows 7',
+							version: '11'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
+							version: '10'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
 							version: '9'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
+							version: '8'
+						},
+						{
+							browserName: 'firefox',
+							platform: 'Windows 7',
+							version: '28'
+						},
+						{
+							browserName: 'chrome',
+							platform: 'Windows 7',
+							version: '34'
+						},
+						// Linux
+						{
+							browserName: 'firefox',
+							platform: 'Linux',
+							version: '28'
 						}
 					],
 					testname: 'jquery.cookie qunit tests'
