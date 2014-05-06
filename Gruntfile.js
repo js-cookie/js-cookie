@@ -93,6 +93,11 @@ module.exports = function (grunt) {
 							platform: 'OS X 10.8',
 							version: '6'
 						},
+						{
+							browserName: 'firefox',
+							platform: 'OS X 10.9',
+							version: '28'
+						},
 						// Windows
 						{
 							browserName: 'internet explorer',
@@ -127,7 +132,7 @@ module.exports = function (grunt) {
 						{
 							browserName: 'firefox',
 							platform: 'Windows 7',
-							version: '28'
+							version: '29'
 						},
 						{
 							browserName: 'chrome',
@@ -138,7 +143,7 @@ module.exports = function (grunt) {
 						{
 							browserName: 'firefox',
 							platform: 'Linux',
-							version: '28'
+							version: '29'
 						}
 					],
 					testname: 'jquery.cookie qunit tests'
