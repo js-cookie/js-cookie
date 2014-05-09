@@ -29,6 +29,9 @@ module.exports = function (grunt) {
 			}
 		},
 		watch: {
+			options: {
+				livereload: true
+			},
 			files: [
 				'jquery.cookie.js',
 				'test/tests.js'
@@ -62,9 +65,10 @@ module.exports = function (grunt) {
 			},
 			tests: {
 				options: {
+					port: 9998,
 					open: 'http://127.0.0.1:9998/test/index.html',
 					keepalive: true,
-					port: 9998
+					livereload: true
 				}
 			}
 		},
