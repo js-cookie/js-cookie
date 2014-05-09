@@ -25,7 +25,7 @@
     "grunt-contrib-watch": "~0.3.0",
     "grunt-compare-size": "~0.4.0",
     "grunt-saucelabs": "~4.1.1",
-    "grunt-contrib-connect": "~0.5.0",
+    "grunt-contrib-connect": "~0.7.1",
     "gzip-js": "~0.3.0"
   },
   "volo": {

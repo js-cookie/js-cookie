@@ -39,11 +39,9 @@ You should see a green message in the console:
 You can also run the tests in the browser.  
 Start a test server from the project root:
 
-    $ grunt connect:server:keepalive
+    $ grunt connect:tests
 
-Open the following URL in a browser:
-
-    $ open http://127.0.0.1:9999/test/index.html
+This will automatically open the tests at http://127.0.0.1:9998/test/index.html in the default browser.
 
 _Note: we recommend cleaning all the browser cookies before running the tests, that can avoid false positive failures._
 
