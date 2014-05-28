@@ -27,42 +27,47 @@ The plugin can also be loaded as AMD or CommonJS module.
 Create session cookie:
 
 ```javascript
-$.cookie('the_cookie', 'the_value');
+$.cookie('name', 'value');
 ```
 
 Create expiring cookie, 7 days from then:
 
 ```javascript
-$.cookie('the_cookie', 'the_value', { expires: 7 });
+$.cookie('name', 'value', { expires: 7 });
 ```
 
 Create expiring cookie, valid across entire site:
 
 ```javascript
-$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
+$.cookie('name', 'value', { expires: 7, path: '/' });
 ```
 
 Read cookie:
 
 ```javascript
-$.cookie('the_cookie'); // => "the_value"
-$.cookie('not_existing'); // => undefined
+$.cookie('name'); // => "value"
+$.cookie('nothing'); // => undefined
 ```
 
 Read all available cookies:
 
 ```javascript
-$.cookie(); // => { "the_cookie": "the_value", "...remaining": "cookies" }
+$.cookie(); // => { "name": "value" }
 ```
 
 Delete cookie:
 
 ```javascript
-// Returns true when cookie was found, false when no cookie was found...
-$.removeCookie('the_cookie');
+// Returns true when cookie was successfully deleted, otherwise false
+$.removeCookie('name'); // => true
+$.removeCookie('nothing'); // => false
 
-// Same path as when the cookie was written...
-$.removeCookie('the_cookie', { path: '/' });
+// Need to use the same attributes (path, domain) as what the cookie was written with
+$.cookie('name', 'value', { path: '/' });
+// This won't work!
+$.removeCookie('name'); // => false
+// This will work!
+$.removeCookie('name', { path: '/' }); // => true
 ```
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
