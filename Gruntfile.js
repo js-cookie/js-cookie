@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 				'jquery.cookie.js'
 			],
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: true
 			}
 		},
 		uglify: {
