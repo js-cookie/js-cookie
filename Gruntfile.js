@@ -1,5 +1,3 @@
-/*jshint node: true */
-
 'use strict';
 
 module.exports = function (grunt) {
@@ -10,12 +8,52 @@ module.exports = function (grunt) {
 			all: ['test/index.html']
 		},
 		jshint: {
-			files: [
-				'Gruntfile.js',
-				'jquery.cookie.js'
-			],
 			options: {
-				jshintrc: true
+				curly: true,
+				eqeqeq: true,
+				expr: true,
+				// maxlen: 130,
+				newcap: true,
+				noarg: true,
+				nonbsp: true,
+				trailing: true,
+				undef: true,
+				unused: true
+			},
+			grunt: {
+				options: {
+					node: true,
+					quotmark: 'single'
+				},
+				files: {
+					src: ['Gruntfile.js']
+				}
+			},
+			source: {
+				options: {
+					browser: true,
+					camelcase: true,
+					jquery: true,
+					quotmark: 'single',
+					globals: {
+						define: true,
+						require: true
+					},
+				},
+				files: {
+					src: ['jquery.cookie.js']
+				}
+			},
+			tests: {
+				options: {
+					browser: true,
+					jquery: true,
+					qunit: true,
+					'-W053': true
+				},
+				files: {
+					src: ['test/**/*.js']
+				}
 			}
 		},
 		uglify: {
@@ -34,7 +72,7 @@ module.exports = function (grunt) {
 			},
 			files: [
 				'jquery.cookie.js',
-				'test/tests.js'
+				'test/**/*.js'
 			],
 			tasks: 'default'
 		},
