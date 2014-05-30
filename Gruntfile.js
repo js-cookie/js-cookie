@@ -52,12 +52,6 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			all: {
-				options: {
-					base: '.',
-					directory: 'test'
-				}
-			},
 			saucelabs: {
 				options: {
 					port: 9999
