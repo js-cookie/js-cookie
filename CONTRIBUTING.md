@@ -41,7 +41,7 @@ Start a test server from the project root:
 
     $ grunt connect:tests
 
-This will automatically open the tests at http://127.0.0.1:9998/test/index.html in the default browser, with livereload enabled.
+This will automatically open the test suite at http://127.0.0.1:9998 in the default browser, with livereload enabled.
 
 _Note: we recommend cleaning all the browser cookies before running the tests, that can avoid false positive failures._
 

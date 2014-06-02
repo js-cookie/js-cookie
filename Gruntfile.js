@@ -92,13 +92,15 @@ module.exports = function (grunt) {
 		connect: {
 			saucelabs: {
 				options: {
-					port: 9999
+					port: 9999,
+					base: ['.', 'test']
 				}
 			},
 			tests: {
 				options: {
 					port: 9998,
-					open: 'http://127.0.0.1:9998/test/index.html',
+					base: ['.', 'test'],
+					open: 'http://127.0.0.1:9998',
 					keepalive: true,
 					livereload: true
 				}
@@ -107,7 +109,7 @@ module.exports = function (grunt) {
 		'saucelabs-qunit': {
 			all: {
 				options: {
-					urls: ['http://127.0.0.1:9999/test/index.html'],
+					urls: ['http://127.0.0.1:9999'],
 					build: process.env.TRAVIS_JOB_ID,
 					browsers: [
 						// iOS
