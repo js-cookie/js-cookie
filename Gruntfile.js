@@ -163,7 +163,11 @@ module.exports = function (grunt) {
 		}
 	}
 
-	grunt.registerTask('default', ['jshint', 'qunit', 'uglify', 'compare_size']);
 	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('ci', ['jshint', 'qunit', 'saucelabs']);
+	grunt.registerTask('test', ['jshint', 'qunit']);
+
+	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
+	grunt.registerTask('ci', ['test', 'saucelabs']);
+
+	grunt.registerTask('default', 'dev');
 };
