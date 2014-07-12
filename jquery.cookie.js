@@ -56,7 +56,7 @@
 
 		// Write
 
-		if (value !== undefined && !$.isFunction(value)) {
+		if (arguments.length > 1 && !$.isFunction(value)) {
 			options = $.extend({}, config.defaults, options);
 
 			if (typeof options.expires === 'number') {

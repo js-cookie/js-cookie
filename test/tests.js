@@ -194,6 +194,18 @@ test('number', function () {
 	strictEqual($.cookie('c'), '1234', 'should write value');
 });
 
+test('null', function () {
+	expect(1);
+	$.cookie('c', null);
+	strictEqual($.cookie('c'), 'null', 'should write value');
+});
+
+test('undefined', function () {
+	expect(1);
+	$.cookie('c', undefined);
+	strictEqual($.cookie('c'), 'undefined', 'should write value');
+});
+
 test('expires option as days from now', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
