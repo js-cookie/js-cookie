@@ -1,3 +1,4 @@
+/*jshint node:true, quotmark:single */
 'use strict';
 
 module.exports = function (grunt) {
@@ -5,56 +6,15 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		qunit: {
-			all: ['test/index.html']
+			all: 'test/index.html'
 		},
 		jshint: {
 			options: {
-				curly: true,
-				eqeqeq: true,
-				expr: true,
-				// maxlen: 130,
-				newcap: true,
-				noarg: true,
-				nonbsp: true,
-				trailing: true,
-				undef: true,
-				unused: true
+				jshintrc: true
 			},
-			grunt: {
-				options: {
-					node: true,
-					quotmark: 'single'
-				},
-				files: {
-					src: ['Gruntfile.js']
-				}
-			},
-			source: {
-				options: {
-					browser: true,
-					camelcase: true,
-					jquery: true,
-					quotmark: 'single',
-					globals: {
-						define: true,
-						require: true
-					},
-				},
-				files: {
-					src: ['jquery.cookie.js']
-				}
-			},
-			tests: {
-				options: {
-					browser: true,
-					jquery: true,
-					qunit: true,
-					'-W053': true
-				},
-				files: {
-					src: ['test/**/*.js']
-				}
-			}
+			grunt: 'Gruntfile.js',
+			source: 'src/**/*.js',
+			tests: 'test/**/*.js'
 		},
 		uglify: {
 			options: {
@@ -62,7 +22,7 @@ module.exports = function (grunt) {
 			},
 			build: {
 				files: {
-					'build/jquery.cookie-<%= pkg.version %>.min.js': 'jquery.cookie.js'
+					'build/jquery.cookie-<%= pkg.version %>.min.js': 'src/jquery.cookie.js'
 				}
 			}
 		},
@@ -70,16 +30,13 @@ module.exports = function (grunt) {
 			options: {
 				livereload: true
 			},
-			files: [
-				'jquery.cookie.js',
-				'test/**/*.js'
-			],
+			files: '{src,test}/**/*.js',
 			tasks: 'default'
 		},
 		compare_size: {
 			files: [
 				'build/jquery.cookie-<%= pkg.version %>.min.js',
-				'jquery.cookie.js'
+				'src/jquery.cookie.js'
 			],
 			options: {
 				compress: {
