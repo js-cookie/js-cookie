@@ -29,11 +29,11 @@
     "gzip-js": "~0.3.0"
   },
   "volo": {
-    "url": "https://raw.github.com/carhartl/jquery-cookie/v{version}/jquery.cookie.js"
+    "url": "https://raw.github.com/carhartl/jquery-cookie/v{version}/src/jquery.cookie.js"
   },
   "jspm": {
     "main": "jquery.cookie",
-    "files": ["jquery.cookie.js"],
+    "files": ["src/jquery.cookie.js"],
     "buildConfig": {
       "uglify": true
     }
@@ -42,9 +42,9 @@
     "dependencies": {
       "jquery": ">=1.2"
     },
-    "main": "jquery.cookie.js",
+    "main": "src/jquery.cookie.js",
     "include": [
-      "jquery.cookie.js"
+      "src/jquery.cookie.js"
     ]
   }
 }
