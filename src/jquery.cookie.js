@@ -106,10 +106,6 @@
 	config.defaults = {};
 
 	$.removeCookie = function (key, options) {
-		if ($.cookie(key) === undefined) {
-			return false;
-		}
-
 		// Must not alter options, thus extending a fresh object...
 		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
 		return !$.cookie(key);

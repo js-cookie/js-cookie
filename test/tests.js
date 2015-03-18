@@ -282,6 +282,11 @@ test('when sucessfully deleted', function () {
 	strictEqual($.removeCookie('c'), true, 'returns true');
 });
 
+test('when cookie does not exist', function () {
+	expect(1);
+	strictEqual($.removeCookie('c'), true, 'returns true');
+});
+
 test('when deletion failed', function () {
 	expect(1);
 	$.cookie('c', 'v');
@@ -297,11 +302,6 @@ test('when deletion failed', function () {
 	strictEqual($.removeCookie('c'), false, 'returns false');
 
 	$.cookie = originalCookie;
-});
-
-test('when cookie does not exist', function () {
-	expect(1);
-	strictEqual($.removeCookie('c'), false, 'returns false');
 });
 
 test('with options', function () {
