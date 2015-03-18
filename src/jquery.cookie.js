@@ -76,12 +76,12 @@
 		// Read
 
 		var result = key ? undefined : {},
-
-		// To prevent the for loop in the first place assign an empty array
-		// in case there are no cookies at all. Also prevents odd result when
-		// calling $.cookie().
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all. Also prevents odd result when
+			// calling $.cookie().
 			cookies = document.cookie ? document.cookie.split('; ') : [],
-			i = 0, l = cookies.length;
+			i = 0,
+			l = cookies.length;
 
 		for (; i < l; i++) {
 			var parts = cookies[i].split('='),
