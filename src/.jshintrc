@@ -5,6 +5,7 @@
 	"quotmark": "single",
 	"globals": {
 		"define": true,
+		"module": true,
 		"require": true
 	},
 

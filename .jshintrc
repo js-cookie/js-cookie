@@ -8,8 +8,5 @@
 	"nonbsp": true,
 	"trailing": true,
 	"undef": true,
-	"unused": true,
-	"globals": {
-		"module": true
-	}
+	"unused": true
 }
