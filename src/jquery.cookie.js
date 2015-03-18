@@ -61,7 +61,7 @@
 
 			if (typeof options.expires === 'number') {
 				var days = options.expires, t = options.expires = new Date();
-				t.setTime(+t + days * 864e+5);
+				t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
 			}
 
 			return (document.cookie = [

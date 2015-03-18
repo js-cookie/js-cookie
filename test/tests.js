@@ -209,8 +209,8 @@ test('undefined', function () {
 test('expires option as days from now', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
-	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-	strictEqual($.cookie('c', 'v', { expires: 7 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
+	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
+	strictEqual($.cookie('c', 'v', { expires: 21 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
 		'should write the cookie string with expires');
 });
 
