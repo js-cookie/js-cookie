@@ -14,7 +14,7 @@
 		module.exports = factory(require('jquery'));
 	} else {
 		// Browser globals
-		factory(jQuery);
+		window.Cookies = factory(jQuery);
 	}
 }(function ($) {
 
@@ -111,4 +111,9 @@
 		return !$.cookie(key);
 	};
 
+	$.cookie.get = $.cookie;
+	$.cookie.set = $.cookie;
+	$.cookie.remove = $.removeCookie;
+
+	return $.cookie;
 }));

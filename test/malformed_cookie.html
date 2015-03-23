@@ -7,7 +7,7 @@
 		<script>
 			try {
 				Object.defineProperty(document, "cookie", { get: function() { return "first=one; ; second=two"; } });
-				window.testValue = $.cookie("second");
+				window.testValue = Cookies.get("second");
 				window.ok = true;
 			} catch (er) {
 			}
