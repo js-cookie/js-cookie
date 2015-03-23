@@ -18,15 +18,15 @@
   "gitHead": "bd3c9713222bace68d25fe2128c0f8633cad1269",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-qunit": "~0.2.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-compare-size": "~0.4.0",
-    "grunt-saucelabs": "~7.0.0",
-    "grunt-contrib-connect": "~0.7.1",
-    "gzip-js": "~0.3.0"
+    "grunt": "0.4.5",
+    "grunt-contrib-jshint": "0.11.1",
+    "grunt-contrib-uglify": "0.8.0",
+    "grunt-contrib-qunit": "0.5.2",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-compare-size": "0.4.x",
+    "grunt-saucelabs": "8.6.0",
+    "grunt-contrib-connect": "0.9.0",
+    "gzip-js": "0.3.2"
   },
   "volo": {
     "url": "https://raw.github.com/carhartl/jquery-cookie/v{version}/src/jquery.cookie.js"
