@@ -49,7 +49,7 @@
 
 	function read(s, converter) {
 		var value = config.raw ? s : parseCookieValue(s);
-		return $.isFunction(converter) ? converter(value) : value;
+		return isFunction(converter) ? converter(value) : value;
 	}
 
 	function extend() {
@@ -65,11 +65,15 @@
 		return result;
 	}
 
+	function isFunction(obj) {
+		return Object.prototype.toString.call(obj) === '[object Function]';
+	}
+
 	var config = $.cookie = function (key, value, options) {
 
 		// Write
 
-		if (arguments.length > 1 && !$.isFunction(value)) {
+		if (arguments.length > 1 && !isFunction(value)) {
 			options = extend(config.defaults, options);
 
 			if (typeof options.expires === 'number') {
