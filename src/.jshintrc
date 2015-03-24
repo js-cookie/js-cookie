@@ -1,7 +1,6 @@
 {
 	"browser": true,
 	"camelcase": true,
-	"jquery": true,
 	"quotmark": "single",
 	"globals": {
 		"define": true,
