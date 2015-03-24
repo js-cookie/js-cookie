@@ -346,3 +346,12 @@ test('read converter with raw = true', function() {
 	Cookies.set('c', '1');
 	strictEqual(Cookies.get('c', Number), 1, 'does not decode, but converts read value');
 });
+
+module('merge');
+
+test('passing object reference', function() {
+	expect(1);
+	var original = {};
+	Cookies._extend(original, { key: 'value' });
+	deepEqual(original, {}, 'should not alter the original object');
+});

@@ -52,12 +52,25 @@
 		return $.isFunction(converter) ? converter(value) : value;
 	}
 
+	function extend() {
+		var key, options;
+		var i = 0;
+		var result = {};
+		for (; i < arguments.length; i++) {
+			options = arguments[ i ];
+			for (key in options) {
+				result[key] = options[key];
+			}
+		}
+		return result;
+	}
+
 	var config = $.cookie = function (key, value, options) {
 
 		// Write
 
 		if (arguments.length > 1 && !$.isFunction(value)) {
-			options = $.extend({}, config.defaults, options);
+			options = extend(config.defaults, options);
 
 			if (typeof options.expires === 'number') {
 				var days = options.expires, t = options.expires = new Date();
@@ -107,13 +120,14 @@
 
 	$.removeCookie = function (key, options) {
 		// Must not alter options, thus extending a fresh object...
-		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
+		$.cookie(key, '', extend(options, { expires: -1 }));
 		return !$.cookie(key);
 	};
 
 	$.cookie.get = $.cookie;
 	$.cookie.set = $.cookie;
 	$.cookie.remove = $.removeCookie;
+	$.cookie._extend = extend;
 
 	return $.cookie;
 }));
