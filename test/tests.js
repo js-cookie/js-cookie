@@ -11,7 +11,7 @@ var lifecycle = {
 		Cookies.defaults = {};
 		delete Cookies.raw;
 		delete Cookies.json;
-		$.each(Cookies.get(), Cookies.remove);
+		Object.keys(Cookies.get()).forEach(Cookies.remove);
 	}
 };
 
