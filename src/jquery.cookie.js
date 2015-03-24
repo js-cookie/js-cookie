@@ -8,28 +8,28 @@
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD (Register as an anonymous module)
-		define(['jquery'], factory);
+		define(factory);
 	} else if (typeof exports === 'object') {
 		// Node/CommonJS
-		module.exports = factory(require('jquery'));
+		module.exports = factory();
 	} else {
 		// Browser globals
-		window.Cookies = factory(jQuery);
+		window.Cookies = factory();
 	}
-}(function ($) {
+}(function () {
 
 	var pluses = /\+/g;
 
 	function encode(s) {
-		return config.raw ? s : encodeURIComponent(s);
+		return api.raw ? s : encodeURIComponent(s);
 	}
 
 	function decode(s) {
-		return config.raw ? s : decodeURIComponent(s);
+		return api.raw ? s : decodeURIComponent(s);
 	}
 
 	function stringifyCookieValue(value) {
-		return encode(config.json ? JSON.stringify(value) : String(value));
+		return encode(api.json ? JSON.stringify(value) : String(value));
 	}
 
 	function parseCookieValue(s) {
@@ -43,12 +43,12 @@
 			// If we can't decode the cookie, ignore it, it's unusable.
 			// If we can't parse the cookie, ignore it, it's unusable.
 			s = decodeURIComponent(s.replace(pluses, ' '));
-			return config.json ? JSON.parse(s) : s;
+			return api.json ? JSON.parse(s) : s;
 		} catch(e) {}
 	}
 
 	function read(s, converter) {
-		var value = config.raw ? s : parseCookieValue(s);
+		var value = api.raw ? s : parseCookieValue(s);
 		return isFunction(converter) ? converter(value) : value;
 	}
 
@@ -69,12 +69,12 @@
 		return Object.prototype.toString.call(obj) === '[object Function]';
 	}
 
-	var config = $.cookie = function (key, value, options) {
+	var api = function (key, value, options) {
 
 		// Write
 
 		if (arguments.length > 1 && !isFunction(value)) {
-			options = extend(config.defaults, options);
+			options = extend(api.defaults, options);
 
 			if (typeof options.expires === 'number') {
 				var days = options.expires, t = options.expires = new Date();
@@ -95,7 +95,7 @@
 		var result = key ? undefined : {},
 			// To prevent the for loop in the first place assign an empty array
 			// in case there are no cookies at all. Also prevents odd result when
-			// calling $.cookie().
+			// calling "get()".
 			cookies = document.cookie ? document.cookie.split('; ') : [],
 			i = 0,
 			l = cookies.length;
@@ -120,18 +120,16 @@
 		return result;
 	};
 
-	config.defaults = {};
+	api.get = api.set = api;
+	api.defaults = {};
 
-	$.removeCookie = function (key, options) {
+	api.remove = function (key, options) {
 		// Must not alter options, thus extending a fresh object...
-		$.cookie(key, '', extend(options, { expires: -1 }));
-		return !$.cookie(key);
+		api(key, '', extend(options, { expires: -1 }));
+		return !api(key);
 	};
 
-	$.cookie.get = $.cookie;
-	$.cookie.set = $.cookie;
-	$.cookie.remove = $.removeCookie;
-	$.cookie._extend = extend;
+	api._extend = extend;
 
-	return $.cookie;
+	return api;
 }));

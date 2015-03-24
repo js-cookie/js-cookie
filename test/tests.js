@@ -126,8 +126,9 @@ test('invalid URL encoding', function () {
 asyncTest('malformed cookie value in IE (#88, #117)', function () {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
-	var iframe = $('<iframe src="malformed_cookie.html"></iframe>')[0];
-	$(iframe).on('load', function () {
+	var iframe = document.createElement('iframe');
+	iframe.src = "malformed_cookie.html";
+	iframe.addEventListener('load', function () {
 		start();
 		if (iframe.contentWindow.ok) {
 			strictEqual(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
