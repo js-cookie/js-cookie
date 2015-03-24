@@ -7,8 +7,8 @@
   "dependencies": {},
   "development": {},
   "license": "MIT",
-  "main": "src/jquery.cookie.js",
+  "main": "src/js.cookie.js",
   "scripts": [
-    "src/jquery.cookie.js"
+    "src/js.cookie.js"
   ]
 }

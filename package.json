@@ -2,7 +2,7 @@
   "name": "js.cookie",
   "version": "1.4.1",
   "description": "A simple, lightweight javascript API for handling cookies",
-  "main": "src/jquery.cookie.js",
+  "main": "src/js.cookie.js",
   "directories": {
     "test": "test"
   },
@@ -31,16 +31,16 @@
     "url": "https://raw.github.com/carhartl/jquery-cookie/v{version}/src/jquery.cookie.js"
   },
   "jspm": {
-    "main": "jquery.cookie",
-    "files": ["src/jquery.cookie.js"],
+    "main": "js.cookie",
+    "files": ["src/js.cookie.js"],
     "buildConfig": {
       "uglify": true
     }
   },
   "jam": {
-    "main": "src/jquery.cookie.js",
+    "main": "src/js.cookie.js",
     "include": [
-      "src/jquery.cookie.js"
+      "src/js.cookie.js"
     ]
   }
 }
