@@ -129,7 +129,5 @@
 		return !api(key);
 	};
 
-	api._extend = extend;
-
 	return api;
 }));
