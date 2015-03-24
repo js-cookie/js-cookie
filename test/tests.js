@@ -288,26 +288,6 @@ test('when cookie does not exist', function () {
 	strictEqual(Cookies.remove('c'), true, 'returns true');
 });
 
-// The following test relies on internals, any change here might not be deterministic in the future.
-// Rewrite it later.
-
-//test('when deletion failed', function () {
-//	expect(1);
-//	$.cookie('c', 'v');
-//
-//	var originalCookie = $.cookie;
-//	$.cookie = function () {
-//		// Stub deletion...
-//		if (arguments.length === 1) {
-//			return originalCookie.apply(null, arguments);
-//		}
-//	};
-//
-//	strictEqual($.removeCookie('c'), false, 'returns false');
-//
-//	$.cookie = originalCookie;
-//});
-
 test('with options', function () {
 	expect(1);
 	var options = { path: '/' };
