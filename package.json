@@ -1,7 +1,7 @@
 {
-  "name": "jquery.cookie",
+  "name": "js.cookie",
   "version": "1.4.1",
-  "description": "A simple, lightweight jQuery plugin for reading, writing and deleting cookies.",
+  "description": "A simple, lightweight javascript API for handling cookies",
   "main": "src/jquery.cookie.js",
   "directories": {
     "test": "test"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/carhartl/jquery-cookie.git"
+    "url": "git://github.com/js-cookie/js-cookie.git"
   },
   "author": "Klaus Hartl",
   "license": "MIT",
@@ -38,9 +38,6 @@
     }
   },
   "jam": {
-    "dependencies": {
-      "jquery": ">=1.2"
-    },
     "main": "src/jquery.cookie.js",
     "include": [
       "src/jquery.cookie.js"

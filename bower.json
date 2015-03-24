@@ -1,12 +1,9 @@
 {
-  "name": "jquery.cookie",
+  "name": "js.cookie",
   "version": "1.4.1",
   "main": [
     "src/jquery.cookie.js"
   ],
-  "dependencies": {
-    "jquery": ">=1.2"
-  },
   "ignore": [
     "test",
     ".*",

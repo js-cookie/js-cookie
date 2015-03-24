@@ -1,6 +1,6 @@
 ##Issues
 
-- Report issues or feature requests on [GitHub Issues](https://github.com/carhartl/jquery-cookie/issues).
+- Report issues or feature requests on [GitHub Issues](https://github.com/js-cookie/js-cookie/issues).
 - If reporting a bug, please add a [simplified example](http://sscce.org/).
 
 ##Pull requests

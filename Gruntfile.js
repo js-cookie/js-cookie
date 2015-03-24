@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 			},
 			build: {
 				files: {
-					'build/jquery.cookie-<%= pkg.version %>.min.js': 'src/jquery.cookie.js'
+					'build/js.cookie-<%= pkg.version %>.min.js': 'src/jquery.cookie.js'
 				}
 			}
 		},
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
 		},
 		compare_size: {
 			files: [
-				'build/jquery.cookie-<%= pkg.version %>.min.js',
+				'build/js.cookie-<%= pkg.version %>.min.js',
 				'src/jquery.cookie.js'
 			],
 			options: {

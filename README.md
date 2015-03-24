@@ -1,20 +1,20 @@
-# jquery.cookie [![Build Status](https://travis-ci.org/carhartl/jquery-cookie.png?branch=master)](https://travis-ci.org/carhartl/jquery-cookie) [![Code Climate](https://codeclimate.com/github/carhartl/jquery-cookie.png)](https://codeclimate.com/github/carhartl/jquery-cookie)
+# Javascript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.png?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.png)](https://codeclimate.com/github/js-cookie/js-cookie)
 
-A simple, lightweight jQuery plugin for reading, writing and deleting cookies.
+A simple, lightweight javascript API for handling cookies
 
-**If you're viewing this at https://github.com/carhartl/jquery-cookie, you're reading the documentation for the master branch.
+**If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release (1.4.1).](https://github.com/carhartl/jquery-cookie/tree/v1.4.1)**
 
 ## Build Status Matrix
 
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/jquery-cookie.svg)](https://saucelabs.com/u/jquery-cookie)
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/js-cookie.svg)](https://saucelabs.com/u/js-cookie)
 
 ## Installation
 
-Include script *after* the jQuery library (unless you are packaging scripts somehow else):
+Include the script (unless you are packaging scripts somehow else):
 
 ```html
-<script src="/path/to/jquery.cookie.js"></script>
+<script src="/path/to/js.cookie.js"></script>
 ```
 
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
@@ -27,47 +27,47 @@ The plugin can also be loaded as AMD or CommonJS module.
 Create session cookie:
 
 ```javascript
-$.cookie('name', 'value');
+Cookies.set('name', 'value');
 ```
 
 Create expiring cookie, 7 days from then:
 
 ```javascript
-$.cookie('name', 'value', { expires: 7 });
+Cookies.set('name', 'value', { expires: 7 });
 ```
 
 Create expiring cookie, valid across entire site:
 
 ```javascript
-$.cookie('name', 'value', { expires: 7, path: '/' });
+Cookies.set('name', 'value', { expires: 7, path: '/' });
 ```
 
 Read cookie:
 
 ```javascript
-$.cookie('name'); // => "value"
-$.cookie('nothing'); // => undefined
+Cookies.get('name'); // => "value"
+Cookies.get('nothing'); // => undefined
 ```
 
 Read all available cookies:
 
 ```javascript
-$.cookie(); // => { "name": "value" }
+Cookies.get(); // => { "name": "value" }
 ```
 
 Delete cookie:
 
 ```javascript
 // Returns true when cookie was successfully deleted, otherwise false
-$.removeCookie('name'); // => true
-$.removeCookie('nothing'); // => false
+Cookies.remove('name'); // => true
+Cookies.remove('nothing'); // => false
 
 // Need to use the same attributes (path, domain) as what the cookie was written with
-$.cookie('name', 'value', { path: '/' });
+Cookies.set('name', 'value', { path: '/' });
 // This won't work!
-$.removeCookie('name'); // => false
+Cookies.remove('name'); // => false
 // This will work!
-$.removeCookie('name', { path: '/' }); // => true
+Cookies.remove('name', { path: '/' }); // => true
 ```
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
@@ -79,7 +79,7 @@ $.removeCookie('name', { path: '/' }); // => true
 By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true:
 
 ```javascript
-$.cookie.raw = true;
+Cookies.raw = true;
 ```
 
 ### json
@@ -87,12 +87,12 @@ $.cookie.raw = true;
 Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
 
 ```javascript
-$.cookie.json = true;
+Cookies.json = true;
 ```
 
 ## Cookie Options
 
-Cookie attributes can be set globally by setting properties of the `$.cookie.defaults` object or individually for each call to `$.cookie()` by passing a plain object to the options argument. Per-call options override the default options.
+Cookie attributes can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set()` by passing a plain object to the options argument. Per-call options override the default options.
 
 ### expires
 
@@ -134,15 +134,15 @@ to a different representation on the fly.
 Example for parsing a value into a number:
 
 ```javascript
-$.cookie('foo', '42');
-$.cookie('foo', Number); // => 42
+Cookies.set('foo', '42');
+Cookies.get('foo', Number); // => 42
 ```
 
 Dealing with cookies that have been encoded using `escape` (3rd party cookies):
 
 ```javascript
-$.cookie.raw = true;
-$.cookie('foo', unescape);
+Cookies.raw = true;
+Cookies.get('foo', unescape);
 ```
 
 You can pass an arbitrary conversion function.
