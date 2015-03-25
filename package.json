@@ -15,7 +15,6 @@
   },
   "author": "Klaus Hartl",
   "license": "MIT",
-  "readmeFilename": "README.md",
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-contrib-jshint": "0.11.1",
