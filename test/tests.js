@@ -1,10 +1,37 @@
-// Required for exposing test results to the Sauce Labs API.
-// Can be removed when the following issue is fixed:
-// https://github.com/axemclion/grunt-saucelabs/issues/84
-QUnit.done(function (details) {
-	window.global_test_results = details;
-});
+// https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
+(function() {
+	"use strict";
 
+	var log = [];
+
+	QUnit.done(function (test_results) {
+		var tests = [];
+		for (var i = 0, len = log.length; i < len; i++) {
+			var details = log[i];
+			tests.push({
+				name: details.name,
+				result: details.result,
+				expected: details.expected,
+				actual: details.actual,
+				source: details.source
+			});
+		}
+		test_results.tests = tests;
+		// Required for exposing test results to the Sauce Labs API.
+		// Can be removed when the following issue is fixed:
+		// https://github.com/axemclion/grunt-saucelabs/issues/84
+		window.global_test_results = test_results;
+	});
+
+	QUnit.testStart(function (testDetails) {
+		QUnit.log(function (details) {
+			if (!details.result) {
+				details.name = testDetails.name;
+				log.push(details);
+			}
+		});
+	});
+}());
 
 var lifecycle = {
 	teardown: function () {
@@ -127,8 +154,16 @@ asyncTest('malformed cookie value in IE (#88, #117)', function () {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = document.createElement('iframe');
-	iframe.src = "malformed_cookie.html";
-	iframe.addEventListener('load', function () {
+	var addEvent = function (element, eventName, fn) {
+		var method = "addEventListener";
+		if (element.attachEvent) {
+			eventName = 'on' + eventName;
+			method = "attachEvent";
+		}
+		element[ method ](eventName, fn);
+	};
+	iframe.src = 'malformed_cookie.html';
+	addEvent(iframe, 'load', function () {
 		start();
 		if (iframe.contentWindow.ok) {
 			strictEqual(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');

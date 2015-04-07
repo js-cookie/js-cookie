@@ -5,6 +5,7 @@ before_script:
   - npm install -g grunt-cli
 script: grunt ci --verbose
 env:
+  # Encrypted SAUCE_USERNAME and SAUCE_ACCESS_KEY used by travis
   global:
-    - secure: HRae0kyIDDuhonvMi2SfEl1WJb4K/wX8WmzT9YkxFbmWwLjiOMkmqyuEyi76DbTC1cb9o7WwGVgbP1DhSm6n6m0Lz+PSzpprBN4QZuJc56jcc+tBA6gM81hyUufaTT0yUWz112Bu06kWIAs44w5PtG0FYZR0CuIN8fQvZi8fXCQ=
-    - secure: c+M5ECIfxDcVrr+ZlqgpGjv8kVM/hxiz3ACMCn4ZkDiaeq4Rw0wWIGZYL6aV5fhsoHgzEQ/XQPca8xKs3Umr7R3b6Vr3AEyFnW+LP67K/1Qbz4Pi3PvhDH/h4rvK7fOoTqTDCVVDEH3v4pefsz2VaKemG4iBKxrcof5aR4Rjopk=
+    - secure: L9cF+B5WiIQyVLWswbl1d7nE+jZIQTQAPiMRwbzvLbFTkUaY9PS9qbdBcVURO/TJSEmXOV6rypMmoFdhAUPmBzlQc5Xe6eZdQmSTPafA78Yf56xBmlCqQWban1cKA7hvPs5IJfIJD7x6FrRl0SiuHFwBz3PGSKCqQgfYtFv2qDk=
+    - secure: YTvbZ17foXbk1MpykaD0q1h1JO5PGo16Vnb9gLkR+whVONrzZicgXc3ztaBWp8zCVeIrWYxLKXRcR4QNJxwiyAzF4hm4dXU53cQdqq8iiSK0RfpB6bATPoySrGUycVs8dDRaxKLM3GIfVhf1Cw6DRUNl40vtzy7POy9EBMTHsH4=
