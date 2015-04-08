@@ -1,5 +1,7 @@
 # Javascript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.png?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.png)](https://codeclimate.com/github/js-cookie/js-cookie)
 
+--
+
 A simple, lightweight javascript API for handling cookies
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
