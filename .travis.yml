@@ -3,10 +3,11 @@ node_js:
   - '0.10'
 before_script:
   - npm install -g grunt-cli
+  - chmod ugo+x travis.sh
 # Only use grunt-ci for commits pushed to this repo. Fall back to regular test
 # for pull requests (as secure variables won't be exposed there).
-script: |
-  test $SAUCE_ACCESS_KEY == 'false' && grunt ci --verbose || npm test
+script:
+  - ./travis.sh
 env:
   # Encrypted SAUCE_USERNAME and SAUCE_ACCESS_KEY used by travis
   global:
