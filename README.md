@@ -1,6 +1,6 @@
 # Migrating from jquery-cookie
 
-JavaScript Cookie 1.x internal behavior is backward compatible with jquery-cookie. The only difference is the API. To migrate from jquery-cookie to JavaScript Cookie, just rename the API accordingly:
+JavaScript Cookie 1.x internal behavior is totally backward compatible with jquery-cookie. To migrate from jquery-cookie to JavaScript Cookie, just rename the API accordingly:
 
 `$.cookie('name', 'value')` === `Cookies.set('name', 'value')`  
 `$.cookie('name')` === `Cookies.get('name')`  
