@@ -1,5 +1,6 @@
 #!/bin/bash
-if [ "${SAUCE_ACCESS_KEY}" = "false" ]; then
-  grunt ci --verbose; else
+if [ -z "$SAUCE_ACCESS_KEY" ]; then
   npm test
+else
+  grunt ci --verbose
 fi
