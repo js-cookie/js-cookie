@@ -9,22 +9,18 @@
 	var jQuery;
 	if (typeof define === 'function' && define.amd) {
 		// AMD (Register as an anonymous module)
-		if (window.jQuery) {
-			define(['jquery'], factory);
-		} else {
-			define(factory);
-		}
+		define(['jquery'], factory);
 	} else if (typeof exports === 'object') {
 		// Node/CommonJS
 		try {
 			jQuery = require('jquery');
-		} catch(e) {} 
+		} catch(e) {}
 		module.exports = factory(jQuery);
 	} else {
 		// Browser globals
 		window.Cookies = factory(window.jQuery);
 	}
-}(function () {
+}(function ($) {
 
 	var pluses = /\+/g;
 
@@ -136,6 +132,11 @@
 		api(key, '', extend(options, { expires: -1 }));
 		return !api(key);
 	};
+
+	if ( $ ) {
+		$.cookie = api;
+		$.removeCookie = api.remove;
+	}
 
 	return api;
 }));

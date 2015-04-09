@@ -6,7 +6,12 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		qunit: {
-			all: 'test/index.html'
+			all: {
+				options: {
+					httpBase: 'http://127.0.0.1:9998'
+				},
+				src: ['test/index.html', 'test/amd.html']
+			}
 		},
 		nodeunit: {
 			all: 'test/node.js'
@@ -53,6 +58,12 @@ module.exports = function (grunt) {
 			saucelabs: {
 				options: {
 					port: 9999,
+					base: ['.', 'test']
+				}
+			},
+			build: {
+				options: {
+					port: 9998,
 					base: ['.', 'test']
 				}
 			},
@@ -167,7 +178,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'qunit', 'nodeunit']);
+	grunt.registerTask('test', ['jshint', 'connect:build', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
