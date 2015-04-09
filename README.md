@@ -1,3 +1,12 @@
+# Migrating from jquery-cookie
+
+JavaScript Cookie 1.x internal behavior is backward compatible with jquery-cookie. The only difference is the API. To migrate from jquery-cookie to JavaScript Cookie, just rename the API accordingly:
+
+`$.cookie('name', 'value')` === `Cookies.set('name', 'value')`  
+`$.cookie('name')` === `Cookies.get('name')`  
+`$.removeCookie('name')` === `Cookies.remove('name')`  
+`$.cookie()` === `Cookies.get()`
+
 # JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie)
 
 A simple, lightweight JavaScript API for handling cookies
