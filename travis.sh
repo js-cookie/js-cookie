@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
+if [ "${SAUCE_ACCESS_KEY}" = "false" ]; then
   grunt ci --verbose; else
   npm test
 fi
