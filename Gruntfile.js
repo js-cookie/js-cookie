@@ -83,6 +83,7 @@ module.exports = function (grunt) {
 					urls: ['http://127.0.0.1:9999'],
 					testname: 'Sauce Test for js-cookie',
 					build: process.env.TRAVIS_JOB_ID,
+					pollInterval: 5000,
 					browsers: [
 						// iOS
 						{
