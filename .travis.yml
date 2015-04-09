@@ -3,7 +3,6 @@ node_js:
   - '0.10'
 before_script:
   - npm install -g grunt-cli
-  - chmod ugo+x travis.sh
 # Only use grunt-ci for commits pushed to this repo. Fall back to regular test
 # for pull requests (as secure variables won't be exposed there).
 script:
