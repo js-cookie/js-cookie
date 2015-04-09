@@ -8,6 +8,9 @@ module.exports = function (grunt) {
 		qunit: {
 			all: 'test/index.html'
 		},
+		nodeunit: {
+			all: 'test/node.js'
+		},
 		jshint: {
 			options: {
 				jshintrc: true
@@ -164,7 +167,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'qunit']);
+	grunt.registerTask('test', ['jshint', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
