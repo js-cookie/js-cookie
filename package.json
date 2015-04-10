@@ -30,9 +30,6 @@
     "qunitjs": "1.18.0",
     "requirejs": "2.1.17"
   },
-  "volo": {
-    "url": "https://raw.github.com/carhartl/jquery-cookie/v{version}/src/jquery.cookie.js"
-  },
   "jspm": {
     "main": "js.cookie",
     "files": [
