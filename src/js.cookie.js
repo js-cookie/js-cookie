@@ -6,21 +6,17 @@
  * Released under the MIT license
  */
 (function (factory) {
-	var jQuery;
 	if (typeof define === 'function' && define.amd) {
 		// AMD (Register as an anonymous module)
-		define(['jquery'], factory);
+		define(factory);
 	} else if (typeof exports === 'object') {
 		// Node/CommonJS
-		try {
-			jQuery = require('jquery');
-		} catch(e) {}
-		module.exports = factory(jQuery);
+		module.exports = factory();
 	} else {
 		// Browser globals
-		window.Cookies = factory(window.jQuery);
+		window.Cookies = factory();
 	}
-}(function ($) {
+}(function () {
 
 	var pluses = /\+/g;
 
@@ -132,11 +128,6 @@
 		api(key, '', extend(options, { expires: -1 }));
 		return !api(key);
 	};
-
-	if ( $ ) {
-		$.cookie = api;
-		$.removeCookie = api.remove;
-	}
 
 	return api;
 }));
