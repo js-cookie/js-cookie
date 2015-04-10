@@ -256,7 +256,7 @@ test('json = true', function () {
 
 	if ('JSON' in window) {
 		Cookies.set('c', { foo: 'bar' });
-		strictEqual(document.cookie, 'c=' + JSON.stringify({ foo: 'bar' }), 'should stringify JSON');
+		strictEqual(document.cookie, 'c=' + JSON.stringify({ foo: 'bar' }).replace(/"/g, '%22'), 'should stringify JSON');
 	} else {
 		ok(true);
 	}

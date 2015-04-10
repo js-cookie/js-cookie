@@ -17,6 +17,16 @@
 		window.Cookies = factory();
 	}
 }(function () {
+	function encode(s) {
+		return s
+			.replace(/"/g, '%22');
+	}
+
+	function decode(s) {
+		return s
+			.replace(/%22/g, '"');
+	}
+
 	function parseCookieValue(s) {
 		var value = s;
 		if (s.indexOf('"') === 0) {
@@ -64,7 +74,7 @@
 			}
 
 			return (document.cookie = [
-				key, '=', api.json ? JSON.stringify(value) : String(value),
+				key, '=', encode(api.json ? JSON.stringify(value) : String(value)),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
@@ -85,7 +95,7 @@
 		for (; i < l; i++) {
 			var parts = cookies[i].split('='),
 				name = parts.shift(),
-				cookie = parts.join('=');
+				cookie = decode(parts.join('='));
 
 			if (key === name) {
 				// If second argument (value) is a function it's a converter...
