@@ -6,7 +6,15 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		qunit: {
-			all: 'test/index.html'
+			all: {
+				options: {
+					httpBase: 'http://127.0.0.1:9998'
+				},
+				src: ['test/index.html', 'test/amd.html']
+			}
+		},
+		nodeunit: {
+			all: 'test/node.js'
 		},
 		jshint: {
 			options: {
@@ -53,6 +61,12 @@ module.exports = function (grunt) {
 					base: ['.', 'test']
 				}
 			},
+			build: {
+				options: {
+					port: 9998,
+					base: ['.', 'test']
+				}
+			},
 			tests: {
 				options: {
 					port: 9998,
@@ -69,6 +83,7 @@ module.exports = function (grunt) {
 					urls: ['http://127.0.0.1:9999'],
 					testname: 'Sauce Test for js-cookie',
 					build: process.env.TRAVIS_JOB_ID,
+					pollInterval: 5000,
 					browsers: [
 						// iOS
 						{
@@ -164,7 +179,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'qunit']);
+	grunt.registerTask('test', ['jshint', 'connect:build', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
