@@ -17,38 +17,20 @@
 		window.Cookies = factory();
 	}
 }(function () {
-
-	var pluses = /\+/g;
-
-	function encode(s) {
-		return api.raw ? s : encodeURIComponent(s);
-	}
-
-	function decode(s) {
-		return api.raw ? s : decodeURIComponent(s);
-	}
-
-	function stringifyCookieValue(value) {
-		return encode(api.json ? JSON.stringify(value) : String(value));
-	}
-
 	function parseCookieValue(s) {
+		var value = s;
 		if (s.indexOf('"') === 0) {
 			// This is a quoted cookie as according to RFC2068, unescape...
-			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+			value = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 
 		try {
-			// Replace server-side written pluses with spaces.
-			// If we can't decode the cookie, ignore it, it's unusable.
-			// If we can't parse the cookie, ignore it, it's unusable.
-			s = decodeURIComponent(s.replace(pluses, ' '));
-			return api.json ? JSON.parse(s) : s;
+			return api.json ? JSON.parse(s) : value;
 		} catch(e) {}
 	}
 
 	function read(s, converter) {
-		var value = api.raw ? s : parseCookieValue(s);
+		var value = parseCookieValue(s);
 		return isFunction(converter) ? converter(value) : value;
 	}
 
@@ -82,7 +64,7 @@
 			}
 
 			return (document.cookie = [
-				encode(key), '=', stringifyCookieValue(value),
+				key, '=', api.json ? JSON.stringify(value) : String(value),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
@@ -102,7 +84,7 @@
 
 		for (; i < l; i++) {
 			var parts = cookies[i].split('='),
-				name = decode(parts.shift()),
+				name = parts.shift(),
 				cookie = parts.join('=');
 
 			if (key === name) {

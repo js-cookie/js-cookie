@@ -36,7 +36,6 @@
 var lifecycle = {
 	teardown: function () {
 		Cookies.defaults = {};
-		delete Cookies.raw;
 		delete Cookies.json;
 		Object.keys(Cookies.get()).forEach(Cookies.remove);
 	}
@@ -70,26 +69,9 @@ test('RFC 2068 quoted string', function () {
 	strictEqual(Cookies.get('c'), 'v@address.com"\\"', 'should decode RFC 2068 quoted string');
 });
 
-test('decode', function () {
+// github.com/carhartl/jquery-cookie/issues/50
+test('equality sign in cookie value', function () {
 	expect(1);
-	document.cookie = encodeURIComponent(' c') + '=' + encodeURIComponent(' v');
-	strictEqual(Cookies.get(' c'), ' v', 'should decode key and value');
-});
-
-test('decode pluses to space for server side written cookie', function () {
-	expect(1);
-	document.cookie = 'c=foo+bar';
-	strictEqual(Cookies.get('c'), 'foo bar', 'should convert pluses back to space');
-});
-
-test('raw = true', function () {
-	expect(2);
-	Cookies.raw = true;
-
-	document.cookie = 'c=%20v';
-	strictEqual(Cookies.get('c'), '%20v', 'should not decode value');
-
-	// see https://github.com/carhartl/jquery-cookie/issues/50
 	Cookies.set('c', 'foo=bar');
 	strictEqual(Cookies.get('c'), 'foo=bar', 'should include the entire value');
 });
@@ -141,13 +123,10 @@ test('invalid JSON string with json = true', function () {
 	}
 });
 
-test('invalid URL encoding', function () {
+test('percent character in cookie value', function () {
 	expect(1);
 	document.cookie = 'bad=foo%';
-	strictEqual(Cookies.get('bad'), undefined, "won't throw exception, returns undefined");
-	// Delete manually here because it requires raw === true...
-	Cookies.raw = true;
-	Cookies.remove('bad');
+	strictEqual(Cookies.get('bad'), 'foo%', 'should read the percent character');
 });
 
 asyncTest('malformed cookie value in IE (#88, #117)', function () {
@@ -192,17 +171,6 @@ test('Call to read all with json: true', function () {
 	Cookies.set('c', { foo: 'bar' });
 	deepEqual(Cookies.get(), { c: { foo: 'bar' } }, 'returns JSON parsed cookies');
 });
-
-test('Call to read all with a badly encoded cookie', function () {
-	expect(1);
-	document.cookie = 'bad=foo%';
-	document.cookie = 'good=foo';
-	deepEqual(Cookies.get(), { good: 'foo' }, 'returns object containing all decodable cookies');
-	// Delete manually here because it requires raw === true...
-	Cookies.raw = true;
-	Cookies.remove('bad');
-});
-
 
 module('write', lifecycle);
 
@@ -282,21 +250,13 @@ test('defaults', function () {
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
-test('raw = true', function () {
-	expect(1);
-	Cookies.raw = true;
-	strictEqual(Cookies.set('c[1]', 'v[1]'), 'c[1]=v[1]', 'should not encode');
-	// Delete manually here because it requires raw === true...
-	Cookies.remove('c[1]');
-});
-
 test('json = true', function () {
 	expect(1);
 	Cookies.json = true;
 
 	if ('JSON' in window) {
 		Cookies.set('c', { foo: 'bar' });
-		strictEqual(document.cookie, 'c=' + encodeURIComponent(JSON.stringify({ foo: 'bar' })), 'should stringify JSON');
+		strictEqual(document.cookie, 'c=' + JSON.stringify({ foo: 'bar' }), 'should stringify JSON');
 	} else {
 		ok(true);
 	}
@@ -341,7 +301,6 @@ test('passing options reference', function () {
 
 test('[] used in name', function () {
 	expect(1);
-	Cookies.raw = true;
 	document.cookie = 'c[1]=foo';
 	Cookies.remove('c[1]');
 	strictEqual(document.cookie, '', 'delete the cookie');
@@ -354,11 +313,4 @@ test('read converter', function() {
 	expect(1);
 	Cookies.set('c', '1');
 	strictEqual(Cookies.get('c', Number), 1, 'converts read value');
-});
-
-test('read converter with raw = true', function() {
-	expect(1);
-	Cookies.raw = true;
-	Cookies.set('c', '1');
-	strictEqual(Cookies.get('c', Number), 1, 'does not decode, but converts read value');
 });
