@@ -8,6 +8,7 @@ To start migrating from jquery-cookie to JavaScript Cookie, just rename the API 
 `$.removeCookie('name')` === `Cookies.remove('name')`  
 `$.cookie()` === `Cookies.get()`
 
+
 # JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie)
 
 A simple, lightweight JavaScript API for handling cookies
