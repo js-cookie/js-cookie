@@ -27,15 +27,16 @@
 			.replace(/%22/g, '"');
 	}
 
-	function parseCookieValue(s) {
-		var value = s;
-		if (s.indexOf('"') === 0) {
+	function parseCookieValue(value) {
+		if (value.indexOf('"') === 0) {
 			// This is a quoted cookie as according to RFC2068, unescape...
-			value = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 
+		value = decode(value);
+
 		try {
-			return api.json ? JSON.parse(s) : value;
+			return api.json ? JSON.parse(value) : value;
 		} catch(e) {}
 	}
 
@@ -95,7 +96,7 @@
 		for (; i < l; i++) {
 			var parts = cookies[i].split('='),
 				name = parts.shift(),
-				cookie = decode(parts.join('='));
+				cookie = parts.join('=');
 
 			if (key === name) {
 				// If second argument (value) is a function it's a converter...
