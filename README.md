@@ -74,14 +74,6 @@ Cookies.remove('name', { path: '/' }); // => true
 
 ## Configuration
 
-### raw
-
-By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true:
-
-```javascript
-Cookies.raw = true;
-```
-
 ### json
 
 Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
@@ -141,7 +133,6 @@ Cookies.get('foo', Number); // => 42
 Dealing with cookies that have been encoded using `escape` (3rd party cookies):
 
 ```javascript
-Cookies.raw = true;
 Cookies.get('foo', unescape);
 ```
 
