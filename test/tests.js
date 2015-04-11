@@ -289,7 +289,7 @@ test('Quote as the first character in the cookie value', function () {
 });
 
 test('RFC 6265 special characters', function () {
-	expect(4);
+	expect(5);
 	
 	Cookies.set('whitespace', ' ');
 	strictEqual(Cookies.get('whitespace'), ' ', 'should handle the whitespace character');
@@ -302,6 +302,9 @@ test('RFC 6265 special characters', function () {
 	
 	Cookies.set('backslash', '\\');
 	strictEqual(Cookies.get('backslash'), '\\', 'should handle the backslash character');
+	
+	Cookies.set('multiple', '" ,;\\" ,;\\');
+	strictEqual(Cookies.get('multiple'), '" ,;\\" ,;\\', 'should handle multiple special characters');
 });
 
 module('removeCookie', lifecycle);

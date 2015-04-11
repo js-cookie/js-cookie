@@ -17,20 +17,24 @@
 		window.Cookies = factory();
 	}
 }(function () {
+	var chars = {
+		',': '%2C',
+		';': '%3B',
+		' ': '%20',
+		'"': '%22'
+	};
 	function encode(value) {
-		return value
-			.replace(/,/, '%2C')
-			.replace(/;/, '%3B')
-			.replace(/ /, '%20')
-			.replace(/"/g, '%22');
+		for (var character in chars) {
+			value = value.replace(new RegExp(character, 'g'), chars[character]);
+		}
+		return value;
 	}
 
 	function decode(value) {
-		return value
-			.replace(/%2C/, ',')
-			.replace(/%3B/, ';')
-			.replace(/%20/, ' ')
-			.replace(/%22/g, '"');
+		for (var character in chars) {
+			value = value.replace(new RegExp(chars[character], 'g'), character);
+		}
+		return value;
 	}
 
 	function parseCookieValue(value) {
