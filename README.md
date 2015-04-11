@@ -151,6 +151,18 @@ You can pass an arbitrary conversion function.
 
 Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
+## Manual release steps
+
+* Remove the "-pre" suffix of the "version" attribute of `bower.json`, `package.json` and `component.json`
+* Remove the "-pre" suffix of the version number in the `CHANGELOG.md` and `src/js.cookie.js` files
+* Commit with the message "Release version x.x.x"
+* Create version tag in git
+* Create a github release and upload the minified file
+* Release on npm
+* Increment and add the "-pre" suffix to the "version" attribute of `bower.json`, `package.json` and `component.json`
+* Increment and add the "-pre" suffix to the version number in the `CHANGELOG.md` and `src/js.cookie.js` files
+* Commit with the message "Prepare for the next development iteration"
+
 ## Authors
 
 [Klaus Hartl](https://github.com/carhartl)
