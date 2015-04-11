@@ -262,6 +262,25 @@ test('json = true', function () {
 	}
 });
 
+// github.com/carhartl/jquery-cookie/pull/62
+test('provide a way for decoding PHP whitespace encoding', function () {
+	expect(1);
+	document.cookie = 'c=foo+bar';
+	var actual = Cookies.get('c', function (value) {
+		return value.replace(/\+/g, ' ');
+	});
+	strictEqual(actual, 'foo bar', 'should convert pluses back to space');
+});
+
+// github.com/carhartl/jquery-cookie/pull/166
+test('provide a way for decoding chinese characters', function () {
+	expect(1);
+	document.cookie = 'c=%u5317%u4eac';
+	var actual = Cookies.get('c', function (value) {
+		return unescape(value);
+	});
+	strictEqual(actual, '北京', 'should convert chinese characters correctly');
+});
 
 module('removeCookie', lifecycle);
 
@@ -305,7 +324,6 @@ test('[] used in name', function () {
 	Cookies.remove('c[1]');
 	strictEqual(document.cookie, '', 'delete the cookie');
 });
-
 
 module('conversion', lifecycle);
 
