@@ -17,13 +17,19 @@
 		window.Cookies = factory();
 	}
 }(function () {
-	function encode(s) {
-		return s
+	function encode(value) {
+		return value
+			.replace(/,/, '%2C')
+			.replace(/;/, '%3B')
+			.replace(/ /, '%20')
 			.replace(/"/g, '%22');
 	}
 
-	function decode(s) {
-		return s
+	function decode(value) {
+		return value
+			.replace(/%2C/, ',')
+			.replace(/%3B/, ';')
+			.replace(/%20/, ' ')
 			.replace(/%22/g, '"');
 	}
 

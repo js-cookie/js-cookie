@@ -285,8 +285,23 @@ test('json = true', function () {
 test('Quote as the first character in the cookie value', function () {
 	expect(1);
 	Cookies.set('c', '"');
-	var actual = Cookies.get('c');
-	strictEqual(actual, '"', 'should read the quote value');
+	strictEqual(Cookies.get('c'), '"', 'should handle the quote character');
+});
+
+test('RFC 6265 special characters', function () {
+	expect(4);
+	
+	Cookies.set('whitespace', ' ');
+	strictEqual(Cookies.get('whitespace'), ' ', 'should handle the whitespace character');
+	
+	Cookies.set('comma', ',');
+	strictEqual(Cookies.get('comma'), ',', 'should handle the comma character');
+	
+	Cookies.set('semicolon', ';');
+	strictEqual(Cookies.get('semicolon'), ';', 'should handle the semicolon character');
+	
+	Cookies.set('backslash', '\\');
+	strictEqual(Cookies.get('backslash'), '\\', 'should handle the backslash character');
 });
 
 module('removeCookie', lifecycle);
