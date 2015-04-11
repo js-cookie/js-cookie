@@ -1,6 +1,12 @@
 HEAD
 -----
 
+1.5.0-pre
+-----
+- Make jquery as an optional dependency
+- Create a new api for handling cookies without jquery
+- Added support for returning the new api in CommonJS environments
+
 1.4.1
 -----
 - Added support for CommonJS.
