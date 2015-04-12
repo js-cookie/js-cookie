@@ -288,23 +288,81 @@ test('Quote as the first character in the cookie value', function () {
 	strictEqual(Cookies.get('c'), '"', 'should handle the quote character');
 });
 
-test('RFC 6265 special characters', function () {
+test('RFC 6265 disallowed characters in cookie-octet', function () {
 	expect(5);
-	
+
 	Cookies.set('whitespace', ' ');
 	strictEqual(Cookies.get('whitespace'), ' ', 'should handle the whitespace character');
-	
+
 	Cookies.set('comma', ',');
 	strictEqual(Cookies.get('comma'), ',', 'should handle the comma character');
-	
+
 	Cookies.set('semicolon', ';');
 	strictEqual(Cookies.get('semicolon'), ';', 'should handle the semicolon character');
-	
+
 	Cookies.set('backslash', '\\');
 	strictEqual(Cookies.get('backslash'), '\\', 'should handle the backslash character');
-	
+
 	Cookies.set('multiple', '" ,;\\" ,;\\');
 	strictEqual(Cookies.get('multiple'), '" ,;\\" ,;\\', 'should handle multiple special characters');
+});
+
+test('RFC 6265 disallowed characters in cookie-name', function () {
+	expect(18);
+
+	Cookies.set('(', 'v');
+	strictEqual(Cookies.get('('), 'v', 'should handle the opening parens character');
+
+	Cookies.set(')', 'v');
+	strictEqual(Cookies.get(')'), 'v', 'should handle the closing parens character');
+
+	Cookies.set('<', 'v');
+	strictEqual(Cookies.get('<'), 'v', 'should handle the less-than character');
+
+	Cookies.set('>', 'v');
+	strictEqual(Cookies.get('>'), 'v', 'should handle the greater-than character');
+
+	Cookies.set('@', 'v');
+	strictEqual(Cookies.get('@'), 'v', 'should handle the at character');
+
+	Cookies.set(',', 'v');
+	strictEqual(Cookies.get(','), 'v', 'should handle the comma character');
+
+	Cookies.set(';', 'v');
+	strictEqual(Cookies.get(';'), 'v', 'should handle the semicolon character');
+
+	Cookies.set(':', 'v');
+	strictEqual(Cookies.get(':'), 'v', 'should handle the colon character');
+
+	Cookies.set('\\', 'v');
+	strictEqual(Cookies.get('\\'), 'v', 'should handle the backslash character');
+
+	Cookies.set('"', 'v');
+	strictEqual(Cookies.get('"'), 'v', 'should handle the double quote character');
+
+	Cookies.set('/', 'v');
+	strictEqual(Cookies.get('/'), 'v', 'should handle the slash character');
+
+	Cookies.set('[', 'v');
+	strictEqual(Cookies.get('['), 'v', 'should handle the opening square brackets character');
+
+	Cookies.set(']', 'v');
+	strictEqual(Cookies.get(']'), 'v', 'should handle the closing square brackets character');
+
+	Cookies.set('?', 'v');
+	strictEqual(Cookies.get('?'), 'v', 'should handle the question mark character');
+
+	Cookies.set('=', 'v');
+	strictEqual(Cookies.get('='), 'v', 'should handle the equal sign character');
+
+	Cookies.set('{', 'v');
+	strictEqual(Cookies.get('{'), 'v', 'should handle the opening curly brackets character');
+
+	Cookies.set('}', 'v');
+	strictEqual(Cookies.get('}'), 'v', 'should handle the closing curly brackets character');
+
+	Cookies.set('	', 'v');
+	strictEqual(Cookies.get('	'), 'v', 'should handle the horizontal tab character');
 });
 
 module('removeCookie', lifecycle);

@@ -17,22 +17,30 @@
 		window.Cookies = factory();
 	}
 }(function () {
-	var chars = {
-		',': '%2C',
+	var unallowedChars = {
 		';': '%3B',
-		' ': '%20',
+		',': '%2C',
 		'"': '%22'
 	};
-	function encode(value) {
-		for (var character in chars) {
-			value = value.replace(new RegExp(character, 'g'), chars[character]);
+	var unallowedCharsInName = extend(unallowedChars, {
+		'=': '%3D',
+		'\t': '%09'
+	});
+	var unallowedCharsInValue = extend(unallowedChars, {
+		' ': '%20'
+	});
+	function encode(value, charmap) {
+		for (var character in charmap) {
+			value = value
+				.replace(new RegExp(character, 'g'), charmap[character]);
 		}
 		return value;
 	}
 
-	function decode(value) {
-		for (var character in chars) {
-			value = value.replace(new RegExp(chars[character], 'g'), character);
+	function decode(value, charmap) {
+		for (var character in charmap) {
+			value = value
+				.replace(new RegExp(charmap[character], 'g'), character);
 		}
 		return value;
 	}
@@ -43,7 +51,7 @@
 			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 
-		value = decode(value);
+		value = decode(value, unallowedCharsInValue);
 
 		try {
 			return api.json ? JSON.parse(value) : value;
@@ -85,7 +93,7 @@
 			}
 
 			return (document.cookie = [
-				key, '=', encode(api.json ? JSON.stringify(value) : String(value)),
+				encode(key, unallowedCharsInName), '=', encode(api.json ? JSON.stringify(value) : String(value), unallowedCharsInValue),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
@@ -105,7 +113,7 @@
 
 		for (; i < l; i++) {
 			var parts = cookies[i].split('='),
-				name = parts.shift(),
+				name = decode(parts.shift(), unallowedCharsInName),
 				cookie = parts.join('=');
 
 			if (key === name) {
