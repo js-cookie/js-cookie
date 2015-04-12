@@ -36,7 +36,6 @@
 var lifecycle = {
 	teardown: function () {
 		Cookies.defaults = {};
-		delete Cookies.json;
 		Object.keys(Cookies.get()).forEach(Cookies.remove);
 	}
 };
@@ -74,53 +73,6 @@ test('equality sign in cookie value', function () {
 	expect(1);
 	Cookies.set('c', 'foo=bar');
 	strictEqual(Cookies.get('c'), 'foo=bar', 'should include the entire value');
-});
-
-test('json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.json = true;
-		Cookies.set('c', { foo: 'bar' });
-		deepEqual(Cookies.get('c'), { foo: 'bar' }, 'should parse JSON');
-	} else {
-		ok(true);
-	}
-});
-
-test('not existing with json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.json = true;
-		strictEqual(Cookies.get('whatever'), undefined, "won't throw exception");
-	} else {
-		ok(true);
-	}
-});
-
-test('string with json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.json = true;
-		Cookies.set('c', 'v');
-		strictEqual(Cookies.get('c'), 'v', 'should return value');
-	} else {
-		ok(true);
-	}
-});
-
-test('invalid JSON string with json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.set('c', 'v');
-		Cookies.json = true;
-		strictEqual(Cookies.get('c'), undefined, "won't throw exception, returns undefined");
-	} else {
-		ok(true);
-	}
 });
 
 test('percent character in cookie value', function () {
@@ -164,12 +116,6 @@ test('Call to read all when there are cookies', function () {
 
 test('Call to read all when there are no cookies at all', function () {
 	deepEqual(Cookies.get(), {}, 'returns empty object');
-});
-
-test('Call to read all with json: true', function () {
-	Cookies.json = true;
-	Cookies.set('c', { foo: 'bar' });
-	deepEqual(Cookies.get(), { c: { foo: 'bar' } }, 'returns JSON parsed cookies');
 });
 
 //github.com/carhartl/jquery-cookie/pull/62
@@ -268,18 +214,6 @@ test('defaults', function () {
 	Cookies.defaults.path = '/foo';
 	ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use options from defaults');
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
-});
-
-test('json = true', function () {
-	expect(1);
-	Cookies.json = true;
-
-	if ('JSON' in window) {
-		Cookies.set('c', { foo: 'bar' });
-		strictEqual(document.cookie, 'c=' + JSON.stringify({ foo: 'bar' }).replace(/"/g, '%22'), 'should stringify JSON');
-	} else {
-		ok(true);
-	}
 });
 
 test('Quote as the first character in the cookie value', function () {

@@ -51,11 +51,7 @@
 			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 
-		value = decode(value, unallowedCharsInValue);
-
-		try {
-			return api.json ? JSON.parse(value) : value;
-		} catch(e) {}
+		return decode(value, unallowedCharsInValue);
 	}
 
 	function read(s, converter) {
@@ -93,7 +89,7 @@
 			}
 
 			return (document.cookie = [
-				encode(key, unallowedCharsInName), '=', encode(api.json ? JSON.stringify(value) : String(value), unallowedCharsInValue),
+				encode(key, unallowedCharsInName), '=', encode(String(value), unallowedCharsInValue),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
