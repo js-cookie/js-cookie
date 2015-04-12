@@ -79,16 +79,6 @@ This project assumes [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1
 ### Encoding
 All special characters that are not allowed in the cookie-value or cookie-name in at least one supported browser are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
 
-## Configuration
-
-### json
-
-Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
-
-```javascript
-Cookies.json = true;
-```
-
 ## Cookie Options
 
 Cookie attributes can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set()` by passing a plain object to the options argument. Per-call options override the default options.
