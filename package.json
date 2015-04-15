@@ -28,20 +28,5 @@
     "gzip-js": "0.3.2",
     "qunitjs": "1.18.0",
     "requirejs": "2.1.17"
-  },
-  "jspm": {
-    "main": "js.cookie",
-    "files": [
-      "src/js.cookie.js"
-    ],
-    "buildConfig": {
-      "uglify": true
-    }
-  },
-  "jam": {
-    "main": "src/js.cookie.js",
-    "include": [
-      "src/js.cookie.js"
-    ]
   }
 }
