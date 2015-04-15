@@ -45,14 +45,14 @@ Cookies.set('name', 'value', { expires: 7, path: '/' });
 Read cookie:
 
 ```javascript
-Cookies.get('name'); // => "value"
+Cookies.get('name'); // => 'value'
 Cookies.get('nothing'); // => undefined
 ```
 
 Read all available cookies:
 
 ```javascript
-Cookies.get(); // => { "name": "value" }
+Cookies.get(); // => { name: 'value' }
 ```
 
 Delete cookie:
@@ -72,15 +72,34 @@ Cookies.remove('name', { path: '/' }); // => true
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
-## Configuration
+## JSON
 
-### json
+js-cookie provides automatic JSON storage for cookies.
 
-Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
+When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to the `JSON.stringify` api (if available):
 
 ```javascript
-Cookies.json = true;
+Cookies.set('name', { foo: 'bar' });
 ```
+
+When reading a cookie with the default `Cookies.get()` api, you receive the stringified representation stored in the cookie:
+
+```javascript
+Cookies.get('name'); // => '{"foo":"bar"}'
+```
+
+When reading a cookie with the `Cookies.getJSON()` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api (if available):
+
+```javascript
+Cookies.getJSON('name'); // => { foo: 'bar' }
+```
+
+## RFC 6265
+
+This project assumes [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) as a reference for everything. That said, some custom rules are applied in order to provide robustness and cross-browser compatibility.
+
+### Encoding
+All special characters that are not allowed in the cookie-value or cookie-name in at least one supported browser are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
 
 ## Cookie Options
 
@@ -123,11 +142,13 @@ If true, the cookie transmission requires a secure protocol (https). Default: `f
 Provide a conversion function as optional last argument for reading, in order to change the cookie's value
 to a different representation on the fly.
 
-Example for parsing a value into a number:
+Example for parsing the value from a cookie generated with PHP's `setcookie()` method:
 
 ```javascript
-Cookies.set('foo', '42');
-Cookies.get('foo', Number); // => 42
+// 'cookie+with+space' => 'cookie with space'
+Cookies.get('foo', function (value) {
+    return value.replace(/\+/g, ' ');
+});
 ```
 
 Dealing with cookies that have been encoded using `escape` (3rd party cookies):
@@ -135,8 +156,6 @@ Dealing with cookies that have been encoded using `escape` (3rd party cookies):
 ```javascript
 Cookies.get('foo', unescape);
 ```
-
-You can pass an arbitrary conversion function.
 
 ## Contributing
 
