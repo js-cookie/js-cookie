@@ -22,6 +22,22 @@ in Internet Explorer on Windows 7 for instance (because of the wrong MIME type).
 
 The plugin can also be loaded as AMD or CommonJS module.
 
+## Package Managers
+
+js-cookie support the following package managers
+
+### [npm](https://www.npmjs.com/)
+
+```shell
+$ npm install js-cookie
+```
+
+### [Bower](http://bower.io/)
+
+```shell
+$ bower install js-cookie
+```
+
 ## Basic Usage
 
 Create a session cookie, valid to the current page:
