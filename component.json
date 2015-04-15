@@ -2,7 +2,7 @@
   "name": "js.cookie",
   "repo": "js-cookie/js-cookie",
   "description": "A simple, lightweight javascript API for handling cookies",
-  "version": "1.5.0-pre",
+  "version": "1.5.0",
   "keywords": [],
   "dependencies": {},
   "development": {},

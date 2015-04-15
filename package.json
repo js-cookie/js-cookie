@@ -1,7 +1,7 @@
 {
   "name": "js.cookie",
-  "version": "1.5.0-pre",
-  "description": "A simple, lightweight javascript API for handling cookies",
+  "version": "1.5.0",
+  "description": "A simple, lightweight JavaScript API for handling cookies",
   "main": "src/js.cookie.js",
   "directories": {
     "test": "test"
