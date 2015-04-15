@@ -82,16 +82,24 @@ When creating a cookie you can pass an Array or Object Literal instead of a stri
 Cookies.set('name', { foo: 'bar' });
 ```
 
-When reading a cookie with the default `Cookies.get()` api, you receive the stringified representation stored in the cookie:
+When reading a cookie with the default `Cookies.get` api, you receive the stringified representation stored in the cookie:
 
 ```javascript
 Cookies.get('name'); // => '{"foo":"bar"}'
 ```
 
-When reading a cookie with the `Cookies.getJSON()` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api (if available):
+```javascript
+Cookies.get(); // => { name: '{"foo":"bar"}' }
+```
+
+When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api (if available):
 
 ```javascript
 Cookies.getJSON('name'); // => { foo: 'bar' }
+```
+
+```javascript
+Cookies.getJSON(); // => { name: { foo: 'bar' } }
 ```
 
 ## RFC 6265
