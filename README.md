@@ -13,7 +13,7 @@ To start migrating from jquery-cookie to JavaScript Cookie, just rename the API 
 A simple, lightweight JavaScript API for handling cookies
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
-[View documentation for the latest release (1.4.1).](https://github.com/carhartl/jquery-cookie/tree/v1.4.1)**
+[View documentation for the latest release (1.5.0).](https://github.com/js-cookie/js-cookie/tree/v1.5.0)**
 
 ## Build Status Matrix
 
@@ -171,6 +171,7 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Release on npm
 * Increment and add the "-pre" suffix to the "version" attribute of `bower.json`, `package.json` and `component.json`
 * Increment and add the "-pre" suffix to the version number in the `CHANGELOG.md` and `src/js.cookie.js` files
+* Link the documentation of the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
 
 ## Authors
