@@ -1,5 +1,5 @@
 {
-  "name": "js.cookie",
+  "name": "js-cookie",
   "repo": "js-cookie/js-cookie",
   "description": "A simple, lightweight javascript API for handling cookies",
   "version": "1.5.0",

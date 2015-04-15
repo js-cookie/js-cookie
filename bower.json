@@ -1,5 +1,5 @@
 {
-  "name": "js.cookie",
+  "name": "js-cookie",
   "version": "1.5.0",
   "main": [
     "src/js.cookie.js"
