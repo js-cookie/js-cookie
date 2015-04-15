@@ -1,6 +1,10 @@
 HEAD
 -----
 
+2.0.0-pre
+---------
+- Work in progress
+
 1.5.0
 -----
 - Make jquery as an optional dependency
