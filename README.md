@@ -7,6 +7,8 @@ A simple, lightweight JavaScript API for handling cookies
 
 ## Build Status Matrix
 
+js-cookie is intended to work in any relevant browser. For the sake practicality though, we test only against browsers that have a considerable market share.
+
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/js-cookie.svg)](https://saucelabs.com/u/js-cookie)
 
 ## Installation
