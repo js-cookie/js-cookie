@@ -1,5 +1,5 @@
 // https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
-(function() {
+(function () {
 	"use strict";
 
 	var log = [];
@@ -36,8 +36,6 @@
 var lifecycle = {
 	teardown: function () {
 		Cookies.defaults = {};
-		delete Cookies.raw;
-		delete Cookies.json;
 		Object.keys(Cookies.get()).forEach(Cookies.remove);
 	}
 };
@@ -70,84 +68,17 @@ test('RFC 2068 quoted string', function () {
 	strictEqual(Cookies.get('c'), 'v@address.com"\\"', 'should decode RFC 2068 quoted string');
 });
 
-test('decode', function () {
+// github.com/carhartl/jquery-cookie/issues/50
+test('equality sign in cookie value', function () {
 	expect(1);
-	document.cookie = encodeURIComponent(' c') + '=' + encodeURIComponent(' v');
-	strictEqual(Cookies.get(' c'), ' v', 'should decode key and value');
-});
-
-test('decode pluses to space for server side written cookie', function () {
-	expect(1);
-	document.cookie = 'c=foo+bar';
-	strictEqual(Cookies.get('c'), 'foo bar', 'should convert pluses back to space');
-});
-
-test('raw = true', function () {
-	expect(2);
-	Cookies.raw = true;
-
-	document.cookie = 'c=%20v';
-	strictEqual(Cookies.get('c'), '%20v', 'should not decode value');
-
-	// see https://github.com/carhartl/jquery-cookie/issues/50
 	Cookies.set('c', 'foo=bar');
 	strictEqual(Cookies.get('c'), 'foo=bar', 'should include the entire value');
 });
 
-test('json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.json = true;
-		Cookies.set('c', { foo: 'bar' });
-		deepEqual(Cookies.get('c'), { foo: 'bar' }, 'should parse JSON');
-	} else {
-		ok(true);
-	}
-});
-
-test('not existing with json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.json = true;
-		strictEqual(Cookies.get('whatever'), undefined, "won't throw exception");
-	} else {
-		ok(true);
-	}
-});
-
-test('string with json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.json = true;
-		Cookies.set('c', 'v');
-		strictEqual(Cookies.get('c'), 'v', 'should return value');
-	} else {
-		ok(true);
-	}
-});
-
-test('invalid JSON string with json = true', function () {
-	expect(1);
-
-	if ('JSON' in window) {
-		Cookies.set('c', 'v');
-		Cookies.json = true;
-		strictEqual(Cookies.get('c'), undefined, "won't throw exception, returns undefined");
-	} else {
-		ok(true);
-	}
-});
-
-test('invalid URL encoding', function () {
+test('percent character in cookie value', function () {
 	expect(1);
 	document.cookie = 'bad=foo%';
-	strictEqual(Cookies.get('bad'), undefined, "won't throw exception, returns undefined");
-	// Delete manually here because it requires raw === true...
-	Cookies.raw = true;
-	Cookies.remove('bad');
+	strictEqual(Cookies.get('bad'), 'foo%', 'should read the percent character');
 });
 
 asyncTest('malformed cookie value in IE (#88, #117)', function () {
@@ -187,22 +118,25 @@ test('Call to read all when there are no cookies at all', function () {
 	deepEqual(Cookies.get(), {}, 'returns empty object');
 });
 
-test('Call to read all with json: true', function () {
-	Cookies.json = true;
-	Cookies.set('c', { foo: 'bar' });
-	deepEqual(Cookies.get(), { c: { foo: 'bar' } }, 'returns JSON parsed cookies');
-});
-
-test('Call to read all with a badly encoded cookie', function () {
+//github.com/carhartl/jquery-cookie/pull/62
+test('provide a way for decoding PHP whitespace encoding', function () {
 	expect(1);
-	document.cookie = 'bad=foo%';
-	document.cookie = 'good=foo';
-	deepEqual(Cookies.get(), { good: 'foo' }, 'returns object containing all decodable cookies');
-	// Delete manually here because it requires raw === true...
-	Cookies.raw = true;
-	Cookies.remove('bad');
+	document.cookie = 'c=foo+bar';
+	var actual = Cookies.get('c', function (value) {
+		return value.replace(/\+/g, ' ');
+	});
+	strictEqual(actual, 'foo bar', 'should convert pluses back to space');
 });
 
+// github.com/carhartl/jquery-cookie/pull/166
+test('provide a way for decoding chinese characters', function () {
+	expect(1);
+	document.cookie = 'c=%u5317%u4eac';
+	var actual = Cookies.get('c', function (value) {
+		return unescape(value);
+	});
+	strictEqual(actual, '北京', 'should convert chinese characters correctly');
+});
 
 module('write', lifecycle);
 
@@ -282,26 +216,95 @@ test('defaults', function () {
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
-test('raw = true', function () {
-	expect(1);
-	Cookies.raw = true;
-	strictEqual(Cookies.set('c[1]', 'v[1]'), 'c[1]=v[1]', 'should not encode');
-	// Delete manually here because it requires raw === true...
-	Cookies.remove('c[1]');
+test('Quote in the cookie value', function () {
+	expect(3);
+
+	Cookies.set('quote', '"');
+	strictEqual(Cookies.get('quote'), '"', 'should print the quote character');
+
+	Cookies.set('without-last', '"content');
+	strictEqual(Cookies.get('without-last'), '"content', 'should print the quote character');
+
+	Cookies.set('without-first', 'content"');
+	strictEqual(Cookies.get('without-first'), 'content"', 'should print the quote character');
 });
 
-test('json = true', function () {
-	expect(1);
-	Cookies.json = true;
+test('RFC 6265 disallowed characters in cookie-octet', function () {
+	expect(5);
 
-	if ('JSON' in window) {
-		Cookies.set('c', { foo: 'bar' });
-		strictEqual(document.cookie, 'c=' + encodeURIComponent(JSON.stringify({ foo: 'bar' })), 'should stringify JSON');
-	} else {
-		ok(true);
-	}
+	Cookies.set('whitespace', ' ');
+	strictEqual(Cookies.get('whitespace'), ' ', 'should handle the whitespace character');
+
+	Cookies.set('comma', ',');
+	strictEqual(Cookies.get('comma'), ',', 'should handle the comma character');
+
+	Cookies.set('semicolon', ';');
+	strictEqual(Cookies.get('semicolon'), ';', 'should handle the semicolon character');
+
+	Cookies.set('backslash', '\\');
+	strictEqual(Cookies.get('backslash'), '\\', 'should handle the backslash character');
+
+	Cookies.set('multiple', '" ,;\\" ,;\\');
+	strictEqual(Cookies.get('multiple'), '" ,;\\" ,;\\', 'should handle multiple special characters');
 });
 
+test('RFC 6265 disallowed characters in cookie-name', function () {
+	expect(18);
+
+	Cookies.set('(', 'v');
+	strictEqual(Cookies.get('('), 'v', 'should handle the opening parens character');
+
+	Cookies.set(')', 'v');
+	strictEqual(Cookies.get(')'), 'v', 'should handle the closing parens character');
+
+	Cookies.set('<', 'v');
+	strictEqual(Cookies.get('<'), 'v', 'should handle the less-than character');
+
+	Cookies.set('>', 'v');
+	strictEqual(Cookies.get('>'), 'v', 'should handle the greater-than character');
+
+	Cookies.set('@', 'v');
+	strictEqual(Cookies.get('@'), 'v', 'should handle the at character');
+
+	Cookies.set(',', 'v');
+	strictEqual(Cookies.get(','), 'v', 'should handle the comma character');
+
+	Cookies.set(';', 'v');
+	strictEqual(Cookies.get(';'), 'v', 'should handle the semicolon character');
+
+	Cookies.set(':', 'v');
+	strictEqual(Cookies.get(':'), 'v', 'should handle the colon character');
+
+	Cookies.set('\\', 'v');
+	strictEqual(Cookies.get('\\'), 'v', 'should handle the backslash character');
+
+	Cookies.set('"', 'v');
+	strictEqual(Cookies.get('"'), 'v', 'should handle the double quote character');
+
+	Cookies.set('/', 'v');
+	strictEqual(Cookies.get('/'), 'v', 'should handle the slash character');
+
+	Cookies.set('[', 'v');
+	strictEqual(Cookies.get('['), 'v', 'should handle the opening square brackets character');
+
+	Cookies.set(']', 'v');
+	strictEqual(Cookies.get(']'), 'v', 'should handle the closing square brackets character');
+
+	Cookies.set('?', 'v');
+	strictEqual(Cookies.get('?'), 'v', 'should handle the question mark character');
+
+	Cookies.set('=', 'v');
+	strictEqual(Cookies.get('='), 'v', 'should handle the equal sign character');
+
+	Cookies.set('{', 'v');
+	strictEqual(Cookies.get('{'), 'v', 'should handle the opening curly brackets character');
+
+	Cookies.set('}', 'v');
+	strictEqual(Cookies.get('}'), 'v', 'should handle the closing curly brackets character');
+
+	Cookies.set('	', 'v');
+	strictEqual(Cookies.get('	'), 'v', 'should handle the horizontal tab character');
+});
 
 module('removeCookie', lifecycle);
 
@@ -341,24 +344,84 @@ test('passing options reference', function () {
 
 test('[] used in name', function () {
 	expect(1);
-	Cookies.raw = true;
 	document.cookie = 'c[1]=foo';
 	Cookies.remove('c[1]');
 	strictEqual(document.cookie, '', 'delete the cookie');
 });
 
+module('converters', lifecycle);
 
-module('conversion', lifecycle);
-
-test('read converter', function() {
+test('read converter', function () {
 	expect(1);
 	Cookies.set('c', '1');
 	strictEqual(Cookies.get('c', Number), 1, 'converts read value');
 });
 
-test('read converter with raw = true', function() {
-	expect(1);
-	Cookies.raw = true;
-	Cookies.set('c', '1');
-	strictEqual(Cookies.get('c', Number), 1, 'does not decode, but converts read value');
+module('JSON handling', lifecycle);
+
+test('Number', function () {
+	expect(2);
+	Cookies.set('c', 1);
+	strictEqual(Cookies.getJSON('c'), 1, 'should handle a Number');
+	strictEqual(Cookies.get('c'), '1', 'should return a String');
+});
+
+test('Boolean', function () {
+	expect(2);
+	Cookies.set('c', true);
+	strictEqual(Cookies.getJSON('c'), true, 'should handle a Boolean');
+	strictEqual(Cookies.get('c'), 'true', 'should return a Boolean');
+});
+
+test('Array Literal', function () {
+	expect(2);
+	Cookies.set('c', ['v']);
+	deepEqual(Cookies.getJSON('c'), ['v'], 'should handle Array Literal');
+	strictEqual(Cookies.get('c'), '["v"]', 'should return a String');
+});
+
+test('Array Constructor', function () {
+	/*jshint -W009 */
+	expect(2);
+	var value = new Array();
+	value[0] = 'v';
+	Cookies.set('c', value);
+	deepEqual(Cookies.getJSON('c'), ['v'], 'should handle Array Constructor');
+	strictEqual(Cookies.get('c'), '["v"]', 'should return a String');
+});
+
+test('Object Literal', function () {
+	expect(2);
+	Cookies.set('c', {k: 'v'});
+	deepEqual(Cookies.getJSON('c'), {k: 'v'}, 'should handle Object Literal');
+	strictEqual(Cookies.get('c'), '{"k":"v"}', 'should return a String');
+});
+
+test('Object Constructor', function () {
+	/*jshint -W010 */
+	expect(2);
+	var value = new Object();
+	value.k = 'v';
+	Cookies.set('c', value);
+	deepEqual(Cookies.getJSON('c'), {k: 'v'}, 'should handle Object Constructor');
+	strictEqual(Cookies.get('c'), '{"k":"v"}', 'should return a String');
+});
+
+test('Use String(value) for unsupported objects that do not stringify into JSON', function() {
+	expect(4);
+
+	Cookies.set('date', new Date(2015, 04, 13, 0, 0, 0, 0));
+	strictEqual(Cookies.get('date').indexOf('"'), -1, 'should not quote the stringified Date object');
+	strictEqual(Cookies.getJSON('date').indexOf('"'), -1, 'should not quote the stringified Date object');
+
+	Cookies.set('function', function (){});
+	strictEqual(Cookies.get('function'), undefined, 'should return undefined for function object');
+	strictEqual(Cookies.getJSON('function'), undefined, 'should return undefined for function object');
+});
+
+test('Call to read all cookies with mixed json', function () {
+	Cookies.set('c', { foo: 'bar' });
+	Cookies.set('c2', 'v');
+	deepEqual(Cookies.getJSON(), { c: { foo: 'bar' }, c2: 'v' }, 'returns JSON parsed cookies');
+	deepEqual(Cookies.get(), { c: '{"foo":"bar"}', c2: 'v' }, 'returns unparsed cookies');
 });
