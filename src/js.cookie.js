@@ -48,8 +48,7 @@
 
 	function processRead (value, converter, json) {
 		if (value.charAt(0) === '"') {
-			// This is a quoted cookie as according to RFC2068, unescape...
-			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+			value = value.slice(1, -1);
 		}
 
 		value = decode(value, unallowedCharsInValue);
