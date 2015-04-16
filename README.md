@@ -62,15 +62,10 @@ Delete cookie:
 Cookies.remove('name'); // => true
 Cookies.remove('nothing'); // => false
 
-// IMPORTANT!
 // Need to use the same path, domain and secure attributes that were used when writing the cookie
 Cookies.set('name', 'value', { path: '/' });
-
-// This won't work!
-Cookies.remove('name'); // => false
-
-// This will work!
-Cookies.remove('name', { path: '/' }); // => true
+Cookies.remove('name'); // This won't work!
+Cookies.remove('name', { path: '/' }); // This will work!
 ```
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
@@ -105,12 +100,10 @@ Cookies.getJSON('name'); // => { foo: 'bar' }
 Cookies.getJSON(); // => { name: { foo: 'bar' } }
 ```
 
-## RFC 6265
+## Encoding
 
-This project assumes [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) as a reference for everything. That said, some custom rules are applied in order to provide robustness and cross-browser compatibility.
-
-### Encoding
-All special characters that are not allowed in the cookie-value or cookie-name in at least one supported browser are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
+This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant.
+However, all special characters that are not allowed in the cookie-value or cookie-name are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
 
 ## Cookie Attributes
 
@@ -120,7 +113,7 @@ Cookie attributes defaults can be set globally by setting properties of the `Coo
 
 Define when the cookie will be removed. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` instance. If omitted, the cookie becomes a session cookie.
 
-**Browser default:** Removed when the user closes the browser.
+**Browser default:** Cookie is removed when the user closes the browser.
 
 **Examples:**
 
