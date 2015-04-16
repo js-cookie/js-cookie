@@ -229,12 +229,6 @@ test('RFC 6265 - cookie-octet enclosed in DQUOTE', function () {
 	strictEqual(Cookies.get('c'), 'v', 'should decode the quotes');
 });
 
-test('RFC 6265 - cookie-octet with quotes enclosed in DQUOTE', function() {
-	expect(1);
-	document.cookie = 'c="with"quotes"';
-	strictEqual(Cookies.get('c'), 'with"quotes', 'should decode the quotes');
-});
-
 test('RFC 6265 - disallowed characters in cookie-octet', function () {
 	expect(5);
 
