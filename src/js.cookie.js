@@ -6,57 +6,75 @@
  * Released under the MIT license
  */
 (function (factory) {
-	var jQuery;
 	if (typeof define === 'function' && define.amd) {
 		// AMD (Register as an anonymous module)
-		define(['jquery'], factory);
+		define(factory);
 	} else if (typeof exports === 'object') {
 		// Node/CommonJS
-		try {
-			jQuery = require('jquery');
-		} catch(e) {}
-		module.exports = factory(jQuery);
+		module.exports = factory();
 	} else {
 		// Browser globals
-		window.Cookies = factory(window.jQuery);
+		window.Cookies = factory();
 	}
-}(function ($) {
+}(function () {
+	var unallowedChars = {
+		';': '%3B',
+		',': '%2C',
+		'"': '%22'
+	};
+	var unallowedCharsInName = extend(unallowedChars, {
+		'=': '%3D',
+		'\t': '%09'
+	});
+	var unallowedCharsInValue = extend(unallowedChars, {
+		' ': '%20'
+	});
 
-	var pluses = /\+/g;
-
-	function encode(s) {
-		return api.raw ? s : encodeURIComponent(s);
+	function encode (value, charmap) {
+		for (var character in charmap) {
+			value = value
+				.replace(new RegExp(character, 'g'), charmap[character]);
+		}
+		return value;
 	}
 
-	function decode(s) {
-		return api.raw ? s : decodeURIComponent(s);
+	function decode (value, charmap) {
+		for (var character in charmap) {
+			value = value
+				.replace(new RegExp(charmap[character], 'g'), character);
+		}
+		return value;
 	}
 
-	function stringifyCookieValue(value) {
-		return encode(api.json ? JSON.stringify(value) : String(value));
+	function processWrite (value) {
+		var stringified;
+		try {
+			stringified = JSON.stringify(value);
+			if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(stringified)) {
+				value = stringified;
+			}
+		} catch(e) {}
+		return encode(String(value), unallowedCharsInValue);
 	}
 
-	function parseCookieValue(s) {
-		if (s.indexOf('"') === 0) {
+	function processRead (value, converter, json) {
+		if (value.indexOf('"') === 0) {
 			// This is a quoted cookie as according to RFC2068, unescape...
-			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
 		}
 
-		try {
-			// Replace server-side written pluses with spaces.
-			// If we can't decode the cookie, ignore it, it's unusable.
-			// If we can't parse the cookie, ignore it, it's unusable.
-			s = decodeURIComponent(s.replace(pluses, ' '));
-			return api.json ? JSON.parse(s) : s;
-		} catch(e) {}
-	}
+		value = decode(value, unallowedCharsInValue);
 
-	function read(s, converter) {
-		var value = api.raw ? s : parseCookieValue(s);
+		if (json) {
+			try {
+				value = JSON.parse(value);
+			} catch(e) {}
+		}
+
 		return isFunction(converter) ? converter(value) : value;
 	}
 
-	function extend() {
+	function extend () {
 		var key, options;
 		var i = 0;
 		var result = {};
@@ -69,15 +87,21 @@
 		return result;
 	}
 
-	function isFunction(obj) {
+	function isFunction (obj) {
 		return Object.prototype.toString.call(obj) === '[object Function]';
 	}
 
 	var api = function (key, value, options) {
+		var converter;
+
+		if (isFunction(value)) {
+			converter = value;
+			value = undefined;
+		}
 
 		// Write
 
-		if (arguments.length > 1 && !isFunction(value)) {
+		if (arguments.length > 1 && !converter) {
 			options = extend(api.defaults, options);
 
 			if (typeof options.expires === 'number') {
@@ -86,7 +110,7 @@
 			}
 
 			return (document.cookie = [
-				encode(key), '=', stringifyCookieValue(value),
+				encode(key, unallowedCharsInName), '=', processWrite(value),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 				options.path    ? '; path=' + options.path : '',
 				options.domain  ? '; domain=' + options.domain : '',
@@ -106,18 +130,16 @@
 
 		for (; i < l; i++) {
 			var parts = cookies[i].split('='),
-				name = decode(parts.shift()),
+				name = decode(parts.shift(), unallowedCharsInName),
 				cookie = parts.join('=');
 
 			if (key === name) {
-				// If second argument (value) is a function it's a converter...
-				result = read(cookie, value);
+				result = processRead(cookie, converter, this.json);
 				break;
 			}
 
-			// Prevent storing a cookie that we couldn't decode.
-			if (!key && (cookie = read(cookie)) !== undefined) {
-				result[name] = cookie;
+			if (!key) {
+				result[name] = processRead(cookie, converter, this.json);
 			}
 		}
 
@@ -125,6 +147,11 @@
 	};
 
 	api.get = api.set = api;
+	api.getJSON = function() {
+		return api.get.apply({
+			json: true
+		}, [].slice.call(arguments));
+	};
 	api.defaults = {};
 
 	api.remove = function (key, options) {
@@ -132,11 +159,6 @@
 		api(key, '', extend(options, { expires: -1 }));
 		return !api(key);
 	};
-
-	if ( $ ) {
-		$.cookie = api;
-		$.removeCookie = api.remove;
-	}
 
 	return api;
 }));

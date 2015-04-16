@@ -1,13 +1,3 @@
-# Migrating from jquery-cookie
-
-JavaScript Cookie 1.x internal behavior is totally backward compatible with jquery-cookie.  
-To start migrating from jquery-cookie to JavaScript Cookie, just rename the API accordingly:
-
-`$.cookie('name', 'value')` === `Cookies.set('name', 'value')`  
-`$.cookie('name')` === `Cookies.get('name')`  
-`$.removeCookie('name')` === `Cookies.remove('name')`  
-`$.cookie()` === `Cookies.get()`
-
 # JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie)
 
 A simple, lightweight JavaScript API for handling cookies
@@ -32,21 +22,21 @@ in Internet Explorer on Windows 7 for instance (because of the wrong MIME type).
 
 The plugin can also be loaded as AMD or CommonJS module.
 
-## Usage
+## Basic Usage
 
-Create session cookie:
+Create a session cookie, valid to the current page:
 
 ```javascript
 Cookies.set('name', 'value');
 ```
 
-Create expiring cookie, 7 days from then:
+Create a cookie that expires 7 days from now, valid to the current page:
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7 });
 ```
 
-Create expiring cookie, valid across entire site:
+Create an expiring cookie, valid across the entire site:
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7, path: '/' });
@@ -55,14 +45,14 @@ Cookies.set('name', 'value', { expires: 7, path: '/' });
 Read cookie:
 
 ```javascript
-Cookies.get('name'); // => "value"
+Cookies.get('name'); // => 'value'
 Cookies.get('nothing'); // => undefined
 ```
 
 Read all available cookies:
 
 ```javascript
-Cookies.get(); // => { "name": "value" }
+Cookies.get(); // => { name: 'value' }
 ```
 
 Delete cookie:
@@ -72,49 +62,87 @@ Delete cookie:
 Cookies.remove('name'); // => true
 Cookies.remove('nothing'); // => false
 
-// Need to use the same attributes (path, domain) as what the cookie was written with
+// IMPORTANT!
+// Need to use the same path, domain and secure attributes that were used when writing the cookie
 Cookies.set('name', 'value', { path: '/' });
+
 // This won't work!
 Cookies.remove('name'); // => false
+
 // This will work!
 Cookies.remove('name', { path: '/' }); // => true
 ```
 
-*Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
+*Note: when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
 
-## Configuration
+## JSON
 
-### raw
+js-cookie provides automatic JSON storage for cookies.
 
-By default the cookie value is encoded/decoded when writing/reading, using `encodeURIComponent`/`decodeURIComponent`. Bypass this by setting raw to true:
-
-```javascript
-Cookies.raw = true;
-```
-
-### json
-
-Turn on automatic storage of JSON objects passed as the cookie value. Assumes `JSON.stringify` and `JSON.parse`:
+When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to the `JSON.stringify` api (if available):
 
 ```javascript
-Cookies.json = true;
+Cookies.set('name', { foo: 'bar' });
 ```
 
-## Cookie Options
+When reading a cookie with the default `Cookies.get` api, you receive the stringified representation stored in the cookie:
 
-Cookie attributes can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set()` by passing a plain object to the options argument. Per-call options override the default options.
+```javascript
+Cookies.get('name'); // => '{"foo":"bar"}'
+```
+
+```javascript
+Cookies.get(); // => { name: '{"foo":"bar"}' }
+```
+
+When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api (if available):
+
+```javascript
+Cookies.getJSON('name'); // => { foo: 'bar' }
+```
+
+```javascript
+Cookies.getJSON(); // => { name: { foo: 'bar' } }
+```
+
+## RFC 6265
+
+This project assumes [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) as a reference for everything. That said, some custom rules are applied in order to provide robustness and cross-browser compatibility.
+
+### Encoding
+All special characters that are not allowed in the cookie-value or cookie-name in at least one supported browser are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
+
+## Cookie Attributes
+
+Cookie attributes defaults can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set(...)` by passing a plain object in the last argument. Per-call attributes override the default attributes.
 
 ### expires
 
-    expires: 365
+Define when the cookie will be removed. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` instance. If omitted, the cookie becomes a session cookie.
 
-Define lifetime of the cookie. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` object. If omitted, the cookie becomes a session cookie.
+**Browser default:** Removed when the user closes the browser.
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { expires: 365 });
+Cookies.get('name'); // => 'value'
+Cookies.remove('name');
+```
 
 ### path
 
-    path: '/'
+Define the path where the cookie is available.
 
-Define the path where the cookie is valid. *By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).* If you want to make it available for instance across the entire domain use `path: '/'`. Default: path of page where the cookie was created.
+**Browser default:** Path of the page where the cookie was created
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { path: '/' });
+Cookies.get('name'); // => 'value'
+Cookies.remove('name', { path: '/' });
+```
 
 **Note regarding Internet Explorer:**
 
@@ -126,36 +154,50 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 ### domain
 
-    domain: 'example.com'
+Define the domain where the cookie is available
 
-Define the domain where the cookie is valid. Default: domain of page where the cookie was created.
+**Browser default:** Domain of the page where the cookie was created
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { domain: 'sub.domain.com' });
+Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
+```
 
 ### secure
 
-    secure: true
+A `Boolean` indicating if the cookie transmission requires a secure protocol (https)
 
-If true, the cookie transmission requires a secure protocol (https). Default: `false`.
+**Browser default:** Doesn't require secure protocol
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { secure: true });
+Cookies.get('name'); // => 'value' (if already in secure protocol)
+Cookies.remove('name', { secure: true });
+```
 
 ## Converters
 
-Provide a conversion function as optional last argument for reading, in order to change the cookie's value
+Provide a conversion function as optional second argument for reading, in order to change the cookie's value
 to a different representation on the fly.
 
-Example for parsing a value into a number:
+Example for parsing the value from a cookie generated with PHP's `setcookie()` method:
 
 ```javascript
-Cookies.set('foo', '42');
-Cookies.get('foo', Number); // => 42
+// 'cookie+with+space' => 'cookie with space'
+Cookies.get('foo', function (value) {
+    return value.replace(/\+/g, ' ');
+});
 ```
 
 Dealing with cookies that have been encoded using `escape` (3rd party cookies):
 
 ```javascript
-Cookies.raw = true;
 Cookies.get('foo', unescape);
 ```
-
-You can pass an arbitrary conversion function.
 
 ## Contributing
 
