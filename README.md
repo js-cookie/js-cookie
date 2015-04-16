@@ -64,11 +64,11 @@ Cookies.remove('nothing'); // => false
 
 // Need to use the same path, domain and secure attributes that were used when writing the cookie
 Cookies.set('name', 'value', { path: '/' });
-Cookies.remove('name'); // This won't work!
-Cookies.remove('name', { path: '/' }); // This will work!
+Cookies.remove('name'); // fail!
+Cookies.remove('name', { path: '/' }); // removed!
 ```
 
-*Note: when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
+*IMPORTANT! when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
 
 ## JSON
 
