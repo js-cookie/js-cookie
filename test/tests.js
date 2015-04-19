@@ -369,6 +369,60 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 	Cookies.remove('	');
 });
 
+test('cookie-name - browser processing for 2 bytes characters', function () {
+	expect(2);
+
+	Cookies.set('ã', 'v');
+	strictEqual(Cookies.get('ã'), 'v', 'should handle the ã character');
+	strictEqual(document.cookie, '%C3%A3=v', 'should encode the ã character');
+	Cookies.remove('ã');
+});
+
+test('cookie-name - browser processing for 3 bytes characters', function () {
+	expect(2);
+
+	Cookies.set('₯', 'v');
+	strictEqual(Cookies.get('₯'), 'v', 'should handle the ₯ character');
+	strictEqual(document.cookie, '%E2%82%AF=v', 'should encode the ₯ character');
+	Cookies.remove('₯');
+});
+
+test('cookie-name - browser processing for 4 bytes characters', function () {
+	expect(2);
+
+	Cookies.set('𩸽', 'v');
+	strictEqual(Cookies.get('𩸽'), 'v', 'should_handle the 𩸽 character');
+	strictEqual(document.cookie, '%F0%A9%B8%BD=v', 'should encode the 𩸽 character');
+	Cookies.remove('𩸽');
+});
+
+test('cookie-value - browser processing for 2 bytes characters', function () {
+	expect(2);
+
+	Cookies.set('c', 'ã');
+	strictEqual(Cookies.get('c'), 'ã', 'should handle the ã character');
+	strictEqual(document.cookie, 'c=%C3%A3', 'should encode the ã character');
+	Cookies.remove('c');
+});
+
+test('cookie-value - browser processing for 3 bytes characters', function () {
+	expect(2);
+
+	Cookies.set('c', '₯');
+	strictEqual(Cookies.get('c'), '₯', 'should handle the ₯ character');
+	strictEqual(document.cookie, 'c=%E2%82%AF', 'should encode the ₯ character');
+	Cookies.remove('c');
+});
+
+test('cookie-value - browser processing for 4 bytes characters', function () {
+	expect(2);
+
+	Cookies.set('c', '𩸽');
+	strictEqual(Cookies.get('c'), '𩸽', 'should handle the 𩸽 character');
+	strictEqual(document.cookie, 'c=%F0%A9%B8%BD', 'should encode the 𩸽 character');
+	Cookies.remove('c');
+});
+
 //test('server processing for 2 bytes characters', function () {
 //	expect(1);
 //	Cookies.set('ã', 'ã');
