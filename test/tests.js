@@ -266,7 +266,7 @@ test('RFC 6265 - disallowed characters in cookie-octet', function () {
 });
 
 test('RFC 6265 - disallowed characters in cookie-name', function () {
-	expect(36);
+	expect(38);
 
 	Cookies.set('(', 'v');
 	strictEqual(Cookies.get('('), 'v', 'should handle the opening parens character');
@@ -295,12 +295,12 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 
 	Cookies.set(',', 'v');
 	strictEqual(Cookies.get(','), 'v', 'should handle the comma character');
-	strictEqual(document.cookie, '%2C=v', 'comma is not allowed');
+	strictEqual(document.cookie, '%2C=v', 'comma is not allowed, need to encode');
 	Cookies.remove(',');
 
 	Cookies.set(';', 'v');
 	strictEqual(Cookies.get(';'), 'v', 'should handle the semicolon character');
-	strictEqual(document.cookie, '%3B=v', 'semicolon is not allowed');
+	strictEqual(document.cookie, '%3B=v', 'semicolon is not allowed, need to encode');
 	Cookies.remove(';');
 
 	Cookies.set(':', 'v');
@@ -315,7 +315,7 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 
 	Cookies.set('"', 'v');
 	strictEqual(Cookies.get('"'), 'v', 'should handle the double quote character');
-	strictEqual(document.cookie, '%22=v', 'double quote is not allowed');
+	strictEqual(document.cookie, '%22=v', 'double quote is not allowed, need to encode');
 	Cookies.remove('"');
 
 	Cookies.set('/', 'v');
@@ -340,7 +340,7 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 
 	Cookies.set('=', 'v');
 	strictEqual(Cookies.get('='), 'v', 'should handle the equal sign character');
-	strictEqual(document.cookie, '%3D=v', 'equal sign is not allowed');
+	strictEqual(document.cookie, '%3D=v', 'equal sign is not allowed, need to encode');
 	Cookies.remove('=');
 
 	Cookies.set('{', 'v');
@@ -355,8 +355,13 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 
 	Cookies.set('	', 'v');
 	strictEqual(Cookies.get('	'), 'v', 'should handle the horizontal tab character');
-	strictEqual(document.cookie, '%09=v', 'horizontal tab is not allowed');
+	strictEqual(document.cookie, '%09=v', 'horizontal tab is not allowed, need to encode');
 	Cookies.remove('	');
+
+	Cookies.set(' ', 'v');
+	strictEqual(Cookies.get(' '), 'v', 'should handle whitespace character');
+	strictEqual(document.cookie, '%20=v', 'whitespace is not allowed, need to encode');
+	Cookies.remove(' ');
 });
 
 test('cookie-name - 2 bytes characters', function () {
