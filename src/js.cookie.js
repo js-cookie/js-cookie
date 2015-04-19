@@ -17,31 +17,24 @@
 		window.Cookies = factory();
 	}
 }(function () {
-	var unallowedChars = {
-		';': '%3B',
-		',': '%2C',
-		'"': '%22'
+	var unallowedCharsInName = {
+		'\\(': '%28',
+		'\\)': '%29'
 	};
-	var unallowedCharsInName = extend(unallowedChars, {
-		'=': '%3D',
-		'\t': '%09'
-	});
-	var unallowedCharsInValue = extend(unallowedChars, {
-		' ': '%20'
-	});
-
 	function encode (value, charmap) {
-		for (var character in charmap) {
+		value = encodeURIComponent(value);
+		for ( var character in charmap ) {
 			value = value
 				.replace(new RegExp(character, 'g'), charmap[character]);
 		}
 		return value;
 	}
 
-	function decode (value, charmap) {
-		for (var character in charmap) {
-			value = value
-				.replace(new RegExp(charmap[character], 'g'), character);
+	function decode (value) {
+		var matches = value.match(/(%[0-9A-Z]{2})+/g);
+		while ( matches && matches.length ) {
+			var match = matches.shift();
+			value = value.replace(new RegExp(match, 'g'), decodeURIComponent(match));
 		}
 		return value;
 	}
@@ -51,7 +44,7 @@
 			value = value.slice(1, -1);
 		}
 
-		value = decode(value, unallowedCharsInValue);
+		value = decode(value);
 
 		if (json) {
 			try {
@@ -101,7 +94,7 @@
 				}
 			} catch(e) {}
 
-			value = encode(String(value), unallowedCharsInValue);
+			value = encode(String(value));
 
 			return (document.cookie = [
 				encode(key, unallowedCharsInName), '=', value,
@@ -126,7 +119,7 @@
 
 		for (; i < cookies.length; i++) {
 			var parts = cookies[i].split('='),
-				name = decode(parts.shift(), unallowedCharsInName),
+				name = decode(parts.shift()),
 				cookie = parts.join('=');
 
 			if (key === name) {
