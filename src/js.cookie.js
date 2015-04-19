@@ -46,21 +46,9 @@
 		return value;
 	}
 
-	function processWrite (value) {
-		var stringified;
-		try {
-			stringified = JSON.stringify(value);
-			if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(stringified)) {
-				value = stringified;
-			}
-		} catch(e) {}
-		return encode(String(value), unallowedCharsInValue);
-	}
-
 	function processRead (value, converter, json) {
-		if (value.indexOf('"') === 0) {
-			// This is a quoted cookie as according to RFC2068, unescape...
-			value = value.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+		if (value.charAt(0) === '"') {
+			value = value.slice(1, -1);
 		}
 
 		value = decode(value, unallowedCharsInValue);
@@ -71,64 +59,72 @@
 			} catch(e) {}
 		}
 
-		return isFunction(converter) ? converter(value) : value;
+		return converter ? converter(value) : value;
 	}
 
 	function extend () {
-		var key, options;
 		var i = 0;
 		var result = {};
 		for (; i < arguments.length; i++) {
-			options = arguments[ i ];
-			for (key in options) {
+			var options = arguments[ i ];
+			for (var key in options) {
 				result[key] = options[key];
 			}
 		}
 		return result;
 	}
 
-	function isFunction (obj) {
-		return Object.prototype.toString.call(obj) === '[object Function]';
-	}
-
 	var api = function (key, value, options) {
-		var converter;
+		var converter, result;
+		var args = [].slice.call(arguments);
 
-		if (isFunction(value)) {
+		if (typeof value === 'function') {
 			converter = value;
-			value = undefined;
+			args.length = 1;
 		}
 
 		// Write
 
-		if (arguments.length > 1 && !converter) {
+		if (args.length > 1) {
 			options = extend(api.defaults, options);
 
 			if (typeof options.expires === 'number') {
-				var days = options.expires, t = options.expires = new Date();
-				t.setMilliseconds(t.getMilliseconds() + days * 864e+5);
+				var expires = new Date();
+				expires.setMilliseconds(expires.getMilliseconds() + options.expires * 864e+5);
+				options.expires = expires;
 			}
 
+			try {
+				result = JSON.stringify(value);
+				if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(result)) {
+					value = result;
+				}
+			} catch(e) {}
+
+			value = encode(String(value), unallowedCharsInValue);
+
 			return (document.cookie = [
-				encode(key, unallowedCharsInName), '=', processWrite(value),
-				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-				options.path    ? '; path=' + options.path : '',
-				options.domain  ? '; domain=' + options.domain : '',
-				options.secure  ? '; secure' : ''
+				encode(key, unallowedCharsInName), '=', value,
+				options.expires && '; expires=' + options.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
+				options.path    && '; path=' + options.path,
+				options.domain  && '; domain=' + options.domain,
+				options.secure  && '; secure'
 			].join(''));
 		}
 
 		// Read
 
-		var result = key ? undefined : {},
-			// To prevent the for loop in the first place assign an empty array
-			// in case there are no cookies at all. Also prevents odd result when
-			// calling "get()".
-			cookies = document.cookie ? document.cookie.split('; ') : [],
-			i = 0,
-			l = cookies.length;
+		if (!key) {
+			result = {};
+		}
 
-		for (; i < l; i++) {
+		// To prevent the for loop in the first place assign an empty array
+		// in case there are no cookies at all. Also prevents odd result when
+		// calling "get()"
+		var cookies = document.cookie ? document.cookie.split('; ') : [];
+		var i = 0;
+
+		for (; i < cookies.length; i++) {
 			var parts = cookies[i].split('='),
 				name = decode(parts.shift(), unallowedCharsInName),
 				cookie = parts.join('=');
@@ -148,7 +144,7 @@
 
 	api.get = api.set = api;
 	api.getJSON = function() {
-		return api.get.apply({
+		return api.apply({
 			json: true
 		}, [].slice.call(arguments));
 	};
