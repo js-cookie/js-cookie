@@ -69,9 +69,9 @@ module.exports = function (grunt) {
 			},
 			tests: {
 				options: {
-					port: 9998,
+					port: 10000,
 					base: ['.', 'test'],
-					open: 'http://127.0.0.1:9998',
+					open: 'http://127.0.0.1:10000',
 					keepalive: true,
 					livereload: true
 				}
