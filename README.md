@@ -22,21 +22,21 @@ in Internet Explorer on Windows 7 for instance (because of the wrong MIME type).
 
 The plugin can also be loaded as AMD or CommonJS module.
 
-## Usage
+## Basic Usage
 
-Create session cookie:
+Create a session cookie, valid to the current page:
 
 ```javascript
 Cookies.set('name', 'value');
 ```
 
-Create expiring cookie, 7 days from then:
+Create a cookie that expires 7 days from now, valid to the current page:
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7 });
 ```
 
-Create expiring cookie, valid across entire site:
+Create an expiring cookie, valid across the entire site:
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7, path: '/' });
@@ -62,15 +62,13 @@ Delete cookie:
 Cookies.remove('name'); // => true
 Cookies.remove('nothing'); // => false
 
-// Need to use the same attributes (path, domain) as what the cookie was written with
+// Need to use the same path, domain and secure attributes that were used when writing the cookie
 Cookies.set('name', 'value', { path: '/' });
-// This won't work!
-Cookies.remove('name'); // => false
-// This will work!
-Cookies.remove('name', { path: '/' }); // => true
+Cookies.remove('name'); // fail!
+Cookies.remove('name', { path: '/' }); // removed!
 ```
 
-*Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
+*IMPORTANT! when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
 
 ## JSON
 
@@ -102,28 +100,42 @@ Cookies.getJSON('name'); // => { foo: 'bar' }
 Cookies.getJSON(); // => { name: { foo: 'bar' } }
 ```
 
-## RFC 6265
+## Encoding
 
-This project assumes [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) as a reference for everything. That said, some custom rules are applied in order to provide robustness and cross-browser compatibility.
+This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant.
+However, all special characters that are not allowed in the cookie-value or cookie-name are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
 
-### Encoding
-All special characters that are not allowed in the cookie-value or cookie-name in at least one supported browser are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
+## Cookie Attributes
 
-## Cookie Options
-
-Cookie attributes can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set()` by passing a plain object to the options argument. Per-call options override the default options.
+Cookie attributes defaults can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set(...)` by passing a plain object in the last argument. Per-call attributes override the default attributes.
 
 ### expires
 
-    expires: 365
+Define when the cookie will be removed. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` instance. If omitted, the cookie becomes a session cookie.
 
-Define lifetime of the cookie. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` object. If omitted, the cookie becomes a session cookie.
+**Browser default:** Cookie is removed when the user closes the browser.
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { expires: 365 });
+Cookies.get('name'); // => 'value'
+Cookies.remove('name');
+```
 
 ### path
 
-    path: '/'
+Define the path where the cookie is available.
 
-Define the path where the cookie is valid. *By default the path of the cookie is the path of the page where the cookie was created (standard browser behavior).* If you want to make it available for instance across the entire domain use `path: '/'`. Default: path of page where the cookie was created.
+**Browser default:** Path of the page where the cookie was created
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { path: '/' });
+Cookies.get('name'); // => 'value'
+Cookies.remove('name', { path: '/' });
+```
 
 **Note regarding Internet Explorer:**
 
@@ -135,19 +147,34 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 ### domain
 
-    domain: 'example.com'
+Define the domain where the cookie is available
 
-Define the domain where the cookie is valid. Default: domain of page where the cookie was created.
+**Browser default:** Domain of the page where the cookie was created
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { domain: 'sub.domain.com' });
+Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
+```
 
 ### secure
 
-    secure: true
+A `Boolean` indicating if the cookie transmission requires a secure protocol (https)
 
-If true, the cookie transmission requires a secure protocol (https). Default: `false`.
+**Browser default:** Doesn't require secure protocol
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { secure: true });
+Cookies.get('name'); // => 'value' (if already in secure protocol)
+Cookies.remove('name', { secure: true });
+```
 
 ## Converters
 
-Provide a conversion function as optional last argument for reading, in order to change the cookie's value
+Provide a conversion function as optional second argument for reading, in order to change the cookie's value
 to a different representation on the fly.
 
 Example for parsing the value from a cookie generated with PHP's `setcookie()` method:
