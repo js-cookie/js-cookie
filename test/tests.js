@@ -62,12 +62,6 @@ test('not existing', function () {
 	strictEqual(Cookies.get('whatever'), undefined, 'return undefined');
 });
 
-test('RFC 2068 quoted string', function () {
-	expect(1);
-	document.cookie = 'c="v@address.com\\"\\\\\\""';
-	strictEqual(Cookies.get('c'), 'v@address.com"\\"', 'should decode RFC 2068 quoted string');
-});
-
 // github.com/carhartl/jquery-cookie/issues/50
 test('equality sign in cookie value', function () {
 	expect(1);
@@ -216,7 +210,7 @@ test('defaults', function () {
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
-test('Quote in the cookie value', function () {
+test('Handling quotes in the cookie value for read and write', function () {
 	expect(3);
 
 	Cookies.set('quote', '"');
@@ -229,7 +223,13 @@ test('Quote in the cookie value', function () {
 	strictEqual(Cookies.get('without-first'), 'content"', 'should print the quote character');
 });
 
-test('RFC 6265 disallowed characters in cookie-octet', function () {
+test('RFC 6265 - cookie-octet enclosed in DQUOTE', function () {
+	expect(1);
+	document.cookie = 'c="v"';
+	strictEqual(Cookies.get('c'), 'v', 'should decode the quotes');
+});
+
+test('RFC 6265 - disallowed characters in cookie-octet', function () {
 	expect(5);
 
 	Cookies.set('whitespace', ' ');
@@ -248,7 +248,7 @@ test('RFC 6265 disallowed characters in cookie-octet', function () {
 	strictEqual(Cookies.get('multiple'), '" ,;\\" ,;\\', 'should handle multiple special characters');
 });
 
-test('RFC 6265 disallowed characters in cookie-name', function () {
+test('RFC 6265 - disallowed characters in cookie-name', function () {
 	expect(18);
 
 	Cookies.set('(', 'v');
