@@ -43,11 +43,11 @@ window.submitToServer = function () {
 				start();
 				afterLoading.call(null, iframe.contentWindow.Cookies);
 			};
-			form.action = 'post_iframe.html?bust='.concat(+new Date);
+			form.action = 'post_iframe.html?bust='.concat(+new Date());
 			form.submit();
 		}
-	}
-}
+	};
+};
 
 var lifecycle = {
 	teardown: function () {
@@ -327,7 +327,7 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 test('server processing for 2 bytes characters', function () {
 	expect(1);
 	Cookies.set('ã', 'ã');
-	submitToServer().then(function (Cookies) {
+	window.submitToServer().then(function (Cookies) {
 		strictEqual(Cookies.get('ã'), 'ã', 'should handle ã character');
 	});
 });
@@ -335,7 +335,7 @@ test('server processing for 2 bytes characters', function () {
 test('server processing for 3 bytes characters', function () {
 	expect(1);
 	Cookies.set('₯', '₯');
-	submitToServer().then(function (Cookies) {
+	window.submitToServer().then(function (Cookies) {
 		strictEqual(Cookies.get('₯'), '₯', 'should handle ₯ character');
 	});
 });
@@ -343,7 +343,7 @@ test('server processing for 3 bytes characters', function () {
 test('server processing for 4 bytes characters', function () {
 	expect(1);
 	Cookies.set('𩸽', '𩸽');
-	submitToServer().then(function (Cookies) {
+	window.submitToServer().then(function (Cookies) {
 		strictEqual(Cookies.get('𩸽'), '𩸽', 'should handle 𩸽 character');
 	});
 });
