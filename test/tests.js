@@ -252,22 +252,22 @@ test('RFC 6265 - disallowed characters in cookie-octet', function () {
 
 	Cookies.set('whitespace', ' ');
 	strictEqual(Cookies.get('whitespace'), ' ', 'should handle the whitespace character');
-	strictEqual(document.cookie, 'whitespace=%20', 'need to encode the whitespace character');
+	strictEqual(document.cookie, 'whitespace=%20', 'whitespace is not allowed, need to encode');
 	Cookies.remove('whitespace');
 
 	Cookies.set('comma', ',');
 	strictEqual(Cookies.get('comma'), ',', 'should handle the comma character');
-	strictEqual(document.cookie, 'comma=%2C', 'need to encode the comma character');
+	strictEqual(document.cookie, 'comma=%2C', 'comma is not allowed, need to encode');
 	Cookies.remove('comma');
 
 	Cookies.set('semicolon', ';');
 	strictEqual(Cookies.get('semicolon'), ';', 'should handle the semicolon character');
-	strictEqual(document.cookie, 'semicolon=%3B', 'need to encode the semicolon character');
+	strictEqual(document.cookie, 'semicolon=%3B', 'semicolon is not allowed, need to encode');
 	Cookies.remove('semicolon');
 
 	Cookies.set('backslash', '\\');
 	strictEqual(Cookies.get('backslash'), '\\', 'should handle the backslash character');
-	strictEqual(document.cookie, 'backslash=\\', 'there is no need to encode the backslash character');
+	strictEqual(document.cookie, 'backslash=%5C', 'backslash is not allowed, need to encode');
 	Cookies.remove('backslash');
 
 	Cookies.set('multiple', '" ,;\\" ,;\\');
@@ -280,92 +280,92 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 
 	Cookies.set('(', 'v');
 	strictEqual(Cookies.get('('), 'v', 'should handle the opening parens character');
-	strictEqual(document.cookie, '(=v', 'there is no need to encode the opening parens character');
+	strictEqual(document.cookie, '%28=v', 'opening parens is not allowed, need to encode');
 	Cookies.remove('(');
 
 	Cookies.set(')', 'v');
 	strictEqual(Cookies.get(')'), 'v', 'should handle the closing parens character');
-	strictEqual(document.cookie, ')=v', 'there is no need to encode the closing parens character');
+	strictEqual(document.cookie, '%29=v', 'closing parens is not allowed, need to encode');
 	Cookies.remove(')');
 
 	Cookies.set('<', 'v');
 	strictEqual(Cookies.get('<'), 'v', 'should handle the less-than character');
-	strictEqual(document.cookie, '<=v', 'there is no need to encode the less-than character');
+	strictEqual(document.cookie, '%3C=v', 'less-than is not allowed, need to encode');
 	Cookies.remove('<');
 
 	Cookies.set('>', 'v');
 	strictEqual(Cookies.get('>'), 'v', 'should handle the greater-than character');
-	strictEqual(document.cookie, '>=v', 'there is no need to encode the greater-than character');
+	strictEqual(document.cookie, '%3E=v', 'greater-than is not allowed, need to encode');
 	Cookies.remove('>');
 
 	Cookies.set('@', 'v');
 	strictEqual(Cookies.get('@'), 'v', 'should handle the at character');
-	strictEqual(document.cookie, '@=v', 'there is no need to encode the at character');
+	strictEqual(document.cookie, '%40=v', 'at is not allowed, need to encode');
 	Cookies.remove('@');
 
 	Cookies.set(',', 'v');
 	strictEqual(Cookies.get(','), 'v', 'should handle the comma character');
-	strictEqual(document.cookie, '%2C=v', 'need to encode the comma character');
+	strictEqual(document.cookie, '%2C=v', 'comma is not allowed');
 	Cookies.remove(',');
 
 	Cookies.set(';', 'v');
 	strictEqual(Cookies.get(';'), 'v', 'should handle the semicolon character');
-	strictEqual(document.cookie, '%3B=v', 'need to encode the semicolon character');
+	strictEqual(document.cookie, '%3B=v', 'semicolon is not allowed');
 	Cookies.remove(';');
 
 	Cookies.set(':', 'v');
 	strictEqual(Cookies.get(':'), 'v', 'should handle the colon character');
-	strictEqual(document.cookie, ':=v', 'there is no need to encode the colon character');
+	strictEqual(document.cookie, '%3A=v', 'colon is not allowed, need to encode');
 	Cookies.remove(':');
 
 	Cookies.set('\\', 'v');
 	strictEqual(Cookies.get('\\'), 'v', 'should handle the backslash character');
-	strictEqual(document.cookie, '\\=v', 'there is no need to encode the backslash character');
+	strictEqual(document.cookie, '%5C=v', 'backslash is not allowed, need to encode');
 	Cookies.remove('\\');
 
 	Cookies.set('"', 'v');
 	strictEqual(Cookies.get('"'), 'v', 'should handle the double quote character');
-	strictEqual(document.cookie, '%22=v', 'need to encode the double quote character');
+	strictEqual(document.cookie, '%22=v', 'double quote is not allowed');
 	Cookies.remove('"');
 
 	Cookies.set('/', 'v');
 	strictEqual(Cookies.get('/'), 'v', 'should handle the slash character');
-	strictEqual(document.cookie, '/=v', 'there is no need to encode the slash character');
+	strictEqual(document.cookie, '%2F=v', 'slash is not allowed, need to encode');
 	Cookies.remove('/');
 
 	Cookies.set('[', 'v');
 	strictEqual(Cookies.get('['), 'v', 'should handle the opening square brackets character');
-	strictEqual(document.cookie, '[=v', 'there is no need to encode the opening square brackets character');
+	strictEqual(document.cookie, '%5B=v', 'opening square brackets is not allowed, need to encode');
 	Cookies.remove('[');
 
 	Cookies.set(']', 'v');
 	strictEqual(Cookies.get(']'), 'v', 'should handle the closing square brackets character');
-	strictEqual(document.cookie, ']=v', 'there is no need to encode the closing square brackets character');
+	strictEqual(document.cookie, '%5D=v', 'closing square brackets is not allowed, need to encode');
 	Cookies.remove(']');
 
 	Cookies.set('?', 'v');
 	strictEqual(Cookies.get('?'), 'v', 'should handle the question mark character');
-	strictEqual(document.cookie, '?=v', 'there is no need to encode the question mark character');
+	strictEqual(document.cookie, '%3F=v', 'question mark is not allowed, need to encode');
 	Cookies.remove('?');
 
 	Cookies.set('=', 'v');
 	strictEqual(Cookies.get('='), 'v', 'should handle the equal sign character');
-	strictEqual(document.cookie, '%3D=v', 'need to encode the equal sign character');
+	strictEqual(document.cookie, '%3D=v', 'equal sign is not allowed');
 	Cookies.remove('=');
 
 	Cookies.set('{', 'v');
 	strictEqual(Cookies.get('{'), 'v', 'should handle the opening curly brackets character');
-	strictEqual(document.cookie, '{=v', 'there is no need to encode the opening curly brackets character');
+	strictEqual(document.cookie, '%7B=v', 'opening curly brackets is not allowed, need to encode');
 	Cookies.remove('{');
 
 	Cookies.set('}', 'v');
 	strictEqual(Cookies.get('}'), 'v', 'should handle the closing curly brackets character');
-	strictEqual(document.cookie, '}=v', 'there is no need to encode the closing curly brackets character');
+	strictEqual(document.cookie, '%7D=v', 'closing curly brackets is not allowed, need to encode');
 	Cookies.remove('}');
 
 	Cookies.set('	', 'v');
 	strictEqual(Cookies.get('	'), 'v', 'should handle the horizontal tab character');
-	strictEqual(document.cookie, '%09=v', 'need to encode the horizontal tab character');
+	strictEqual(document.cookie, '%09=v', 'horizontal tab is not allowed');
 	Cookies.remove('	');
 });
 
