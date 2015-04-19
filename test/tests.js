@@ -33,6 +33,22 @@
 	});
 }());
 
+window.submitToServer = function () {
+	stop();
+	return {
+		then: function (afterLoading) {
+			var iframe = document.getElementById('post_iframe');
+			var form = document.getElementById('post_form');
+			iframe.onload = function () {
+				start();
+				afterLoading.call(null, iframe.contentWindow.Cookies);
+			};
+			form.action = 'post_iframe.html?bust='.concat(+new Date);
+			form.submit();
+		}
+	}
+}
+
 var lifecycle = {
 	teardown: function () {
 		Cookies.defaults = {};
@@ -210,6 +226,8 @@ test('defaults', function () {
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
+module('encoding', lifecycle);
+
 test('Handling quotes in the cookie value for read and write', function () {
 	expect(3);
 
@@ -304,6 +322,30 @@ test('RFC 6265 - disallowed characters in cookie-name', function () {
 
 	Cookies.set('	', 'v');
 	strictEqual(Cookies.get('	'), 'v', 'should handle the horizontal tab character');
+});
+
+test('server processing for 2 bytes characters', function () {
+	expect(1);
+	Cookies.set('ã', 'ã');
+	submitToServer().then(function (Cookies) {
+		strictEqual(Cookies.get('ã'), 'ã', 'should handle ã character');
+	});
+});
+
+test('server processing for 3 bytes characters', function () {
+	expect(1);
+	Cookies.set('₯', '₯');
+	submitToServer().then(function (Cookies) {
+		strictEqual(Cookies.get('₯'), '₯', 'should handle ₯ character');
+	});
+});
+
+test('server processing for 4 bytes characters', function () {
+	expect(1);
+	Cookies.set('𩸽', '𩸽');
+	submitToServer().then(function (Cookies) {
+		strictEqual(Cookies.get('𩸽'), '𩸽', 'should handle 𩸽 character');
+	});
 });
 
 module('removeCookie', lifecycle);

@@ -73,7 +73,17 @@ module.exports = function (grunt) {
 					base: ['.', 'test'],
 					open: 'http://127.0.0.1:10000',
 					keepalive: true,
-					livereload: true
+					livereload: true,
+					middleware: function(connect, options, middlewares) {
+						// Log the information when cookies are sent to the server
+						middlewares.unshift(function(request, response, next) {
+							if ( request.headers.cookie ) {
+								console.log('Cookie: ' + request.headers.cookie);
+							}
+							return next();
+						});
+						return middlewares;
+					}
 				}
 			}
 		},
