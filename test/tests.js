@@ -237,7 +237,7 @@ test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function () {
 	strictEqual(Cookies.get('c'), 'v', 'should decode the quotes');
 });
 
-test('RFC 6265 - disallowed characters in cookie-octet', function () {
+test('RFC 6265 - unallowed characters in cookie-octet', function () {
 	expect(9);
 
 	Cookies.set('whitespace', ' ');
@@ -265,7 +265,7 @@ test('RFC 6265 - disallowed characters in cookie-octet', function () {
 	Cookies.remove('multiple');
 });
 
-test('RFC 6265 - disallowed characters in cookie-name', function () {
+test('RFC 6265 - unallowed characters in cookie-name', function () {
 	expect(38);
 
 	Cookies.set('(', 'v');
