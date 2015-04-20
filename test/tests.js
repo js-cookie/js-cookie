@@ -218,7 +218,7 @@ test('should decode a malformed char that matches the decodeURIComponent regex',
 });
 
 test('should be able to conditionally decode a single malformed cookie', function () {
-	expect(3);
+	expect(4);
 	var cookies = Cookies.withConverter(function (value, name) {
 		if ( name === 'escaped' ) {
 			return unescape(value);
