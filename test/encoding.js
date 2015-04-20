@@ -189,7 +189,7 @@ test('RFC 6265 - character allowed in the cookie-value "|"', function () {
 	strictEqual(document.cookie, 'c=|', 'pipe is allowed, should not encode');
 });
 
-test('RFC 6265 - characters allowed in the cookie-value should not be encoded globally', function () {
+test('RFC 6265 - characters allowed in the cookie-value should globally not be encoded', function () {
 	expect(1);
 	Cookies.set('c', '{{');
 	strictEqual(document.cookie, 'c={{', 'should not encode all the character occurrences');
@@ -408,6 +408,12 @@ test('RFC 6265 - character allowed in the cookie-name "|"', function () {
 	Cookies.set('|', 'v');
 	strictEqual(Cookies.get('|'), 'v', 'should handle the pipe character');
 	strictEqual(document.cookie, '|=v', 'pipe is allowed, should not encode');
+});
+
+test('RFC 6265 - characters allowed in the cookie-name should globally not be encoded', function () {
+	expect(1);
+	Cookies.set('||', 'v');
+	strictEqual(document.cookie, '||=v', 'should not encode all character occurrences');
 });
 
 test('cookie-name - 2 bytes characters', function () {
