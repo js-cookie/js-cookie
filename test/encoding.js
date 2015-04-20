@@ -350,8 +350,64 @@ test('RFC 6265 - character not allowed in the cookie-name "\\t"', function () {
 test('RFC 6265 - character not allowed in the cookie-name " "', function () {
 	expect(2);
 	Cookies.set(' ', 'v');
-	strictEqual(Cookies.get(' '), 'v', 'should handle whitespace character');
+	strictEqual(Cookies.get(' '), 'v', 'should handle the whitespace character');
 	strictEqual(document.cookie, '%20=v', 'whitespace is not allowed, need to encode');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "#"', function () {
+	expect(2);
+	Cookies.set('#', 'v');
+	strictEqual(Cookies.get('#'), 'v', 'should handle the sharp character');
+	strictEqual(document.cookie, '#=v', 'sharp is allowed, should not encode');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "$"', function () {
+	expect(2);
+	Cookies.set('$', 'v');
+	strictEqual(Cookies.get('$'), 'v', 'should handle the dollar sign character');
+	strictEqual(document.cookie, '$=v', 'dollar sign is allowed, should not encode');
+});
+
+test('RFC 6265 - character allowed in cookie-name "%"', function () {
+	expect(2);
+	Cookies.set('%', 'v');
+	strictEqual(Cookies.get('%'), 'v', 'should handle the percent character');
+	strictEqual(document.cookie, '%25=v', 'percent is allowed, but need to be escaped');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "&"', function () {
+	expect(2);
+	Cookies.set('&', 'v');
+	strictEqual(Cookies.get('&'), 'v', 'should handle the ampersand character');
+	strictEqual(document.cookie, '&=v', 'ampersand is allowed, should not encode');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "+"', function () {
+	expect(2);
+	Cookies.set('+', 'v');
+	strictEqual(Cookies.get('+'), 'v', 'should handle the plus character');
+	strictEqual(document.cookie, '+=v', 'plus is allowed, should not encode');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "^"', function () {
+	expect(2);
+	Cookies.set('^', 'v');
+	strictEqual(Cookies.get('^'), 'v', 'should handle the caret character');
+	strictEqual(document.cookie, '^=v', 'caret is allowed, should not encode');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "`"', function () {
+	expect(2);
+	Cookies.set('`', 'v');
+	strictEqual(Cookies.get('`'), 'v', 'should handle the grave accent character');
+	strictEqual(document.cookie, '`=v', 'grave accent is allowed, should not encode');
+});
+
+test('RFC 6265 - character allowed in the cookie-name "|"', function () {
+	expect(2);
+	Cookies.set('|', 'v');
+	strictEqual(Cookies.get('|'), 'v', 'should handle the pipe character');
+	strictEqual(document.cookie, '|=v', 'pipe is allowed, should not encode');
 });
 
 test('cookie-name - 2 bytes characters', function () {
