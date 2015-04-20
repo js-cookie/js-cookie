@@ -230,6 +230,11 @@ test('should be able to conditionally decode a single malformed cookie', functio
 	document.cookie = 'encoded=%E4%BA%AC';
 	strictEqual(cookies.get('encoded'), '京', 'should use the default encoding for the rest');
 
+	deepEqual(cookies.get(), {
+		escaped: '北',
+		encoded: '京'
+	}, 'should retrieve everything');
+
 	Object.keys(cookies.get()).forEach(cookies.remove);
 	strictEqual(document.cookie, '', 'should remove everything');
 });
