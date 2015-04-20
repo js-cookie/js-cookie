@@ -26,6 +26,7 @@ test('equality sign in cookie value', function () {
 	strictEqual(Cookies.get('c'), 'foo=bar', 'should include the entire value');
 });
 
+// github.com/carhartl/jquery-cookie/issues/215
 test('percent character in cookie value', function () {
 	expect(1);
 	document.cookie = 'bad=foo%';
@@ -38,7 +39,9 @@ test('percent character in cookie value mixed with encoded values', function () 
 	strictEqual(Cookies.get('bad'), 'foo%bar"baz%bax=', 'should read the percent character');
 });
 
-asyncTest('malformed cookie value in IE (#88, #117)', function () {
+// github.com/carhartl/jquery-cookie/pull/88
+// github.com/carhartl/jquery-cookie/pull/117
+asyncTest('malformed cookie value in IE', function () {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = document.createElement('iframe');
@@ -76,13 +79,19 @@ test('Call to read all when there are no cookies at all', function () {
 });
 
 // github.com/carhartl/jquery-cookie/pull/166
-test('provide a way for decoding chinese characters', function () {
+test('provide a way for decoding characters encoded by the escape function', function () {
 	expect(1);
 	document.cookie = 'c=%u5317%u4eac';
 	var actual = Cookies.get('c', function (value) {
 		return unescape(value);
 	});
 	strictEqual(actual, '北京', 'should convert chinese characters correctly');
+});
+
+test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function () {
+	expect(1);
+	document.cookie = 'c="v"';
+	strictEqual(Cookies.get('c'), 'v', 'should simply ignore quoted strings');
 });
 
 module('write', lifecycle);
