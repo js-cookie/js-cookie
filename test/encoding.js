@@ -1,3 +1,5 @@
+/*global lifecycle: true*/
+
 module('cookie-value encoding', lifecycle);
 
 test('cookie-value with double quotes', function () {

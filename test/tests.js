@@ -1,3 +1,5 @@
+/*global lifecycle: true*/
+
 module('read', lifecycle);
 
 test('simple value', function () {
