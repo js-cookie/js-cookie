@@ -118,16 +118,6 @@ test('Call to read all when there are no cookies at all', function () {
 	deepEqual(Cookies.get(), {}, 'returns empty object');
 });
 
-//github.com/carhartl/jquery-cookie/pull/62
-test('provide a way for decoding PHP whitespace encoding', function () {
-	expect(1);
-	document.cookie = 'c=foo+bar';
-	var actual = Cookies.get('c', function (value) {
-		return value.replace(/\+/g, ' ');
-	});
-	strictEqual(actual, 'foo bar', 'should convert pluses back to space');
-});
-
 // github.com/carhartl/jquery-cookie/pull/166
 test('provide a way for decoding chinese characters', function () {
 	expect(1);
@@ -237,7 +227,7 @@ test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function () {
 	strictEqual(Cookies.get('c'), 'v', 'should decode the quotes');
 });
 
-test('RFC 6265 - unallowed characters in cookie-octet', function () {
+test('RFC 6265 - unallowed characters in cookie value', function () {
 	expect(9);
 
 	Cookies.set('whitespace', ' ');
@@ -263,6 +253,140 @@ test('RFC 6265 - unallowed characters in cookie-octet', function () {
 	Cookies.set('multiple', '" ,;\\" ,;\\');
 	strictEqual(Cookies.get('multiple'), '" ,;\\" ,;\\', 'should handle multiple special characters');
 	Cookies.remove('multiple');
+});
+
+test('RFC 6265 - sharp is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '#');
+	strictEqual(Cookies.get('c'), '#', 'should handle the sharp character');
+	strictEqual(document.cookie, 'c=#', 'sharp is allowed, should not encode');
+});
+
+test('RFC 6265 - dollar sign is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '$');
+	strictEqual(Cookies.get('c'), '$', 'should handle the dollar sign character');
+	strictEqual(document.cookie, 'c=$', 'dollar sign is allowed, should not encode');
+});
+
+test('RFC 6265 - percent is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '%');
+	strictEqual(Cookies.get('c'), '%', 'should handle the percent character');
+	strictEqual(document.cookie, 'c=%25', 'percent is allowed, but encode to escape');
+});
+
+test('RFC 6265 - ampersand is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '&');
+	strictEqual(Cookies.get('c'), '&', 'should handle the ampersand character');
+	strictEqual(document.cookie, 'c=&', 'ampersand is allowed, should not encode');
+});
+
+// github.com/carhartl/jquery-cookie/pull/62
+test('RFC 6265 - plus is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '+');
+	strictEqual(Cookies.get('c'), '+', 'should handle the plus character');
+	strictEqual(document.cookie, 'c=+', 'plus is allowed, should not encode');
+});
+
+test('RFC 6265 - colon is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', ':');
+	strictEqual(Cookies.get('c'), ':', 'should handle the colon character');
+	strictEqual(document.cookie, 'c=:', 'colon is allowed, should not encode');
+});
+
+test('RFC 6265 - less-than is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '<');
+	strictEqual(Cookies.get('c'), '<', 'should handle the less-than character');
+	strictEqual(document.cookie, 'c=<', 'less-than is allowed, should not encode');
+});
+
+test('RFC 6265 - greater-than is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '>');
+	strictEqual(Cookies.get('c'), '>', 'should handle the greater-than character');
+	strictEqual(document.cookie, 'c=>', 'greater-than is allowed, should not encode');
+});
+
+test('RFC 6265 - equal sign is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '=');
+	strictEqual(Cookies.get('c'), '=', 'should handle the equal sign character');
+	strictEqual(document.cookie, 'c==', 'equal sign is allowed, should not encode');
+});
+
+test('RFC 6265 - slash is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '/');
+	strictEqual(Cookies.get('c'), '/', 'should handle the slash character');
+	strictEqual(document.cookie, 'c=/', 'slash is allowed, should not encode');
+});
+
+test('RFC 6265 - question mark is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '?');
+	strictEqual(Cookies.get('c'), '?', 'should handle the question mark character');
+	strictEqual(document.cookie, 'c=?', 'question mark is allowed, should not encode');
+});
+
+test('RFC 6265 - at is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '@');
+	strictEqual(Cookies.get('c'), '@', 'should handle the at character');
+	strictEqual(document.cookie, 'c=@', 'at is allowed, should not encode');
+});
+
+test('RFC 6265 - opening square bracket is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '[');
+	strictEqual(Cookies.get('c'), '[', 'should handle the opening square bracket character');
+	strictEqual(document.cookie, 'c=[', 'opening square bracket is allowed, should not encode');
+});
+
+test('RFC 6265 - closing square bracket is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', ']');
+	strictEqual(Cookies.get('c'), ']', 'should handle the closing square bracket character');
+	strictEqual(document.cookie, 'c=]', 'closing square bracket is allowed, should not encode');
+});
+
+test('RFC 6265 - caret is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '^');
+	strictEqual(Cookies.get('c'), '^', 'should handle the caret character');
+	strictEqual(document.cookie, 'c=^', 'caret is allowed, should not encode');
+});
+
+test('RFC 6265 - grave accent is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '`');
+	strictEqual(Cookies.get('c'), '`', 'should handle the grave accent character');
+	strictEqual(document.cookie, 'c=`', 'grave accent is allowed, should not encode');
+});
+
+test('RFC 6265 - opening curly bracket is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '{');
+	strictEqual(Cookies.get('c'), '{', 'should handle the opening curly bracket character');
+	strictEqual(document.cookie, 'c={', 'opening curly bracket is allowed, should not encode');
+});
+
+test('RFC 6265 - closing curly bracket is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '}');
+	strictEqual(Cookies.get('c'), '}', 'should handle the closing curly bracket character');
+	strictEqual(document.cookie, 'c=}', 'closing curly bracket is allowed, should not encode');
+});
+
+test('RFC 6265 - pipe is allowed in cookie value', function () {
+	expect(2);
+	Cookies.set('c', '|');
+	strictEqual(Cookies.get('c'), '|', 'should handle the pipe character');
+	strictEqual(document.cookie, 'c=|', 'pipe is allowed, should not encode');
 });
 
 test('RFC 6265 - unallowed characters in cookie-name', function () {

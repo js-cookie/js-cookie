@@ -1,3 +1,4 @@
+/*global escape: true */
 /*!
  * Javascript Cookie v2.0.0-pre
  * https://github.com/js-cookie/js-cookie
@@ -17,19 +18,6 @@
 		window.Cookies = factory();
 	}
 }(function () {
-	var unallowedCharsInName = {
-		'\\(': '%28',
-		'\\)': '%29'
-	};
-	function encode (value, charmap) {
-		value = encodeURIComponent(value);
-		for ( var character in charmap ) {
-			value = value
-				.replace(new RegExp(character, 'g'), charmap[character]);
-		}
-		return value;
-	}
-
 	function decode (value) {
 		var matches = value.match(/(%[0-9A-Z]{2})+/g);
 		while ( matches && matches.length ) {
@@ -94,10 +82,14 @@
 				}
 			} catch(e) {}
 
-			value = encode(String(value));
+			value = encodeURIComponent(String(value));
+			value = value.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+
+			key = encodeURIComponent(String(key));
+			key = key.replace(/[\(\)]/g, escape);
 
 			return (document.cookie = [
-				encode(key, unallowedCharsInName), '=', value,
+				key, '=', value,
 				options.expires && '; expires=' + options.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
 				options.path    && '; path=' + options.path,
 				options.domain  && '; domain=' + options.domain,
