@@ -132,9 +132,9 @@
 		api.defaults = {};
 
 		api.remove = function (key, options) {
-			// Must not alter options, thus extending a fresh object...
-			api(key, '', extend(options, { expires: -1 }));
-			return !api(key);
+			api(key, '', extend(options, {
+				expires: -1
+			}));
 		};
 
 		api.withConverter = init;

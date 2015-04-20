@@ -164,24 +164,13 @@ test('defaults', function () {
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
-module('removeCookie', lifecycle);
+module('remove', lifecycle);
 
 test('deletion', function () {
 	expect(1);
 	Cookies.set('c', 'v');
 	Cookies.remove('c');
 	strictEqual(document.cookie, '', 'should delete the cookie');
-});
-
-test('when sucessfully deleted', function () {
-	expect(1);
-	Cookies.set('c', 'v');
-	strictEqual(Cookies.remove('c'), true, 'returns true');
-});
-
-test('when cookie does not exist', function () {
-	expect(1);
-	strictEqual(Cookies.remove('c'), true, 'returns true');
 });
 
 test('with options', function () {
