@@ -19,12 +19,7 @@
 	}
 }(function () {
 	function decode (value) {
-		var matches = value.match(/(%[0-9A-Z]{2})+/g);
-		while ( matches && matches.length ) {
-			var match = matches.shift();
-			value = value.replace(match, decodeURIComponent(match));
-		}
-		return value;
+		return value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
 	}
 
 	function processRead (value, converter, json) {
