@@ -210,15 +210,6 @@ test('passing options reference', function () {
 	deepEqual(options, { path: '/' }, "won't alter options object");
 });
 
-// TODO: Need to handle this without the raw option because [] are not allowed in cookie-name
-// github.com/carhartl/jquery-cookie/issues/155
-//test('[] used in name', function () {
-//	expect(1);
-//	document.cookie = 'c[1]=foo';
-//	Cookies.remove('c[1]');
-//	strictEqual(document.cookie, '', 'delete the cookie');
-//});
-
 module('converters', lifecycle);
 
 test('read converter', function () {
