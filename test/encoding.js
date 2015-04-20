@@ -235,6 +235,12 @@ test('RFC 6265 - character not allowed in the cookie-name ")"', function () {
 	strictEqual(document.cookie, '%29=v', 'closing parens is not allowed, need to encode');
 });
 
+test('RFC 6265 - should replace parens globally', function () {
+	expect(1);
+	Cookies.set('(())', 'v');
+	strictEqual(document.cookie, '%28%28%29%29=v', 'encode with global replace');
+});
+
 test('RFC 6265 - character not allowed in the cookie-name "<"', function () {
 	expect(2);
 	Cookies.set('<', 'v');
