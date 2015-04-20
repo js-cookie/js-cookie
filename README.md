@@ -102,8 +102,9 @@ Cookies.getJSON(); // => { name: { foo: 'bar' } }
 
 ## Encoding
 
-This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant.
-However, all special characters that are not allowed in the cookie-value or cookie-name are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
+This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant.  
+All special characters that are not allowed in the cookie-value or cookie-name are encoded with each UTF-8 Hex equivalent.  
+The only character in cookie-name and cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret the input as literal.
 
 ## Cookie Attributes
 
