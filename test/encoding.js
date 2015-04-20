@@ -193,6 +193,30 @@ test('RFC 6265 - characters allowed in the cookie value should not be encoded gl
 	strictEqual(document.cookie, 'c={{', 'should not encode all the character occurrences');
 });
 
+test('cookie-value - 2 bytes character (ã)', function () {
+	expect(2);
+
+	Cookies.set('c', 'ã');
+	strictEqual(Cookies.get('c'), 'ã', 'should handle the ã character');
+	strictEqual(document.cookie, 'c=%C3%A3', 'should encode the ã character');
+});
+
+test('cookie-value - 3 bytes character (₯)', function () {
+	expect(2);
+
+	Cookies.set('c', '₯');
+	strictEqual(Cookies.get('c'), '₯', 'should handle the ₯ character');
+	strictEqual(document.cookie, 'c=%E2%82%AF', 'should encode the ₯ character');
+});
+
+test('cookie-value - 4 bytes character (𩸽)', function () {
+	expect(2);
+
+	Cookies.set('c', '𩸽');
+	strictEqual(Cookies.get('c'), '𩸽', 'should handle the 𩸽 character');
+	strictEqual(document.cookie, 'c=%F0%A9%B8%BD', 'should encode the 𩸽 character');
+});
+
 module('cookie-name encoding', lifecycle);
 
 test('RFC 6265 - unallowed characters in cookie-name', function () {
@@ -319,31 +343,4 @@ test('cookie-name - 4 bytes characters', function () {
 	strictEqual(Cookies.get('𩸽'), 'v', 'should_handle the 𩸽 character');
 	strictEqual(document.cookie, '%F0%A9%B8%BD=v', 'should encode the 𩸽 character');
 	Cookies.remove('𩸽');
-});
-
-test('cookie-value - 2 bytes characters', function () {
-	expect(2);
-
-	Cookies.set('c', 'ã');
-	strictEqual(Cookies.get('c'), 'ã', 'should handle the ã character');
-	strictEqual(document.cookie, 'c=%C3%A3', 'should encode the ã character');
-	Cookies.remove('c');
-});
-
-test('cookie-value - 3 bytes characters', function () {
-	expect(2);
-
-	Cookies.set('c', '₯');
-	strictEqual(Cookies.get('c'), '₯', 'should handle the ₯ character');
-	strictEqual(document.cookie, 'c=%E2%82%AF', 'should encode the ₯ character');
-	Cookies.remove('c');
-});
-
-test('cookie-value - 4 bytes characters', function () {
-	expect(2);
-
-	Cookies.set('c', '𩸽');
-	strictEqual(Cookies.get('c'), '𩸽', 'should handle the 𩸽 character');
-	strictEqual(document.cookie, 'c=%F0%A9%B8%BD', 'should encode the 𩸽 character');
-	Cookies.remove('c');
 });
