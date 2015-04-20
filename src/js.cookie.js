@@ -22,7 +22,7 @@
 		var matches = value.match(/(%[0-9A-Z]{2})+/g);
 		while ( matches && matches.length ) {
 			var match = matches.shift();
-			value = value.replace(new RegExp(match, 'g'), decodeURIComponent(match));
+			value = value.replace(match, decodeURIComponent(match));
 		}
 		return value;
 	}
