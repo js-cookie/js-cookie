@@ -22,22 +22,6 @@
 		return value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
 	}
 
-	function processRead (value, converter, json) {
-		if (value.charAt(0) === '"') {
-			value = value.slice(1, -1);
-		}
-
-		value = decode(value);
-
-		if (json) {
-			try {
-				value = JSON.parse(value);
-			} catch(e) {}
-		}
-
-		return converter ? converter(value) : value;
-	}
-
 	function extend () {
 		var i = 0;
 		var result = {};
@@ -50,92 +34,108 @@
 		return result;
 	}
 
-	var api = function (key, value, options) {
-		var converter, result;
-		var args = [].slice.call(arguments);
-
-		if (typeof value === 'function') {
-			converter = value;
-			args.length = 1;
-		}
-
-		// Write
-
-		if (args.length > 1) {
-			options = extend(api.defaults, options);
-
-			if (typeof options.expires === 'number') {
-				var expires = new Date();
-				expires.setMilliseconds(expires.getMilliseconds() + options.expires * 864e+5);
-				options.expires = expires;
+	function init(converter) {
+		var processRead = function (value, name, json) {
+			if (value.charAt(0) === '"') {
+				value = value.slice(1, -1);
 			}
 
-			try {
-				result = JSON.stringify(value);
-				if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(result)) {
-					value = result;
+			value = converter && converter(value, name) || decode(value);
+
+			if (json) {
+				try {
+					value = JSON.parse(value);
+				} catch(e) {}
+			}
+
+			return value;
+		};
+		var api = function (key, value, options) {
+			var result;
+			var args = [].slice.call(arguments);
+
+			// Write
+
+			if (args.length > 1) {
+				options = extend(api.defaults, options);
+
+				if (typeof options.expires === 'number') {
+					var expires = new Date();
+					expires.setMilliseconds(expires.getMilliseconds() + options.expires * 864e+5);
+					options.expires = expires;
 				}
-			} catch(e) {}
 
-			value = encodeURIComponent(String(value));
-			value = value.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+				try {
+					result = JSON.stringify(value);
+					if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(result)) {
+						value = result;
+					}
+				} catch(e) {}
 
-			key = encodeURIComponent(String(key));
-			key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
-			key = key.replace(/[\(\)]/g, escape);
+				value = encodeURIComponent(String(value));
+				value = value.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
 
-			return (document.cookie = [
-				key, '=', value,
-				options.expires && '; expires=' + options.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
-				options.path    && '; path=' + options.path,
-				options.domain  && '; domain=' + options.domain,
-				options.secure  && '; secure'
-			].join(''));
-		}
+				key = encodeURIComponent(String(key));
+				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+				key = key.replace(/[\(\)]/g, escape);
 
-		// Read
-
-		if (!key) {
-			result = {};
-		}
-
-		// To prevent the for loop in the first place assign an empty array
-		// in case there are no cookies at all. Also prevents odd result when
-		// calling "get()"
-		var cookies = document.cookie ? document.cookie.split('; ') : [];
-		var i = 0;
-
-		for (; i < cookies.length; i++) {
-			var parts = cookies[i].split('='),
-				name = decode(parts.shift()),
-				cookie = parts.join('=');
-
-			if (key === name) {
-				result = processRead(cookie, converter, this.json);
-				break;
+				return (document.cookie = [
+					key, '=', value,
+					options.expires && '; expires=' + options.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
+					options.path    && '; path=' + options.path,
+					options.domain  && '; domain=' + options.domain,
+					options.secure  && '; secure'
+				].join(''));
 			}
+
+			// Read
 
 			if (!key) {
-				result[name] = processRead(cookie, converter, this.json);
+				result = {};
 			}
-		}
 
-		return result;
-	};
+			// To prevent the for loop in the first place assign an empty array
+			// in case there are no cookies at all. Also prevents odd result when
+			// calling "get()"
+			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var i = 0;
 
-	api.get = api.set = api;
-	api.getJSON = function() {
-		return api.apply({
-			json: true
-		}, [].slice.call(arguments));
-	};
-	api.defaults = {};
+			for (; i < cookies.length; i++) {
+				var parts = cookies[i].split('='),
+					name = decode(parts.shift()),
+					cookie = parts.join('=');
 
-	api.remove = function (key, options) {
-		// Must not alter options, thus extending a fresh object...
-		api(key, '', extend(options, { expires: -1 }));
-		return !api(key);
-	};
+				if (key === name) {
+					result = processRead(cookie, name, this.json);
+					break;
+				}
 
-	return api;
+				if (!key) {
+					result[name] = processRead(cookie, name, this.json);
+				}
+			}
+
+			return result;
+		};
+
+		api.get = api.set = api;
+		api.getJSON = function () {
+			return api.apply({
+				json: true
+			}, [].slice.call(arguments));
+		};
+		api.defaults = {};
+
+		api.remove = function (key, options) {
+			// Must not alter options, thus extending a fresh object...
+			api(key, '', extend(options, { expires: -1 }));
+			return !api(key);
+		};
+
+		api.withConverter = init;
+
+		return api;
+	}
+
+	return init();
 }));
