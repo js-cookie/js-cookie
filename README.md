@@ -34,38 +34,38 @@ The plugin can also be loaded as AMD or CommonJS module.
 
 ## Usage
 
-Create session cookie:
+**Create session cookie:**
 
 ```javascript
 Cookies.set('name', 'value');
 ```
 
-Create expiring cookie, 7 days from then:
+**Create expiring cookie, 7 days from then:**
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7 });
 ```
 
-Create expiring cookie, valid across entire site:
+**Create expiring cookie, valid across entire site:**
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7, path: '/' });
 ```
 
-Read cookie:
+**Read cookie:**
 
 ```javascript
 Cookies.get('name'); // => "value"
 Cookies.get('nothing'); // => undefined
 ```
 
-Read all available cookies:
+**Read all available cookies:**
 
 ```javascript
 Cookies.get(); // => { "name": "value" }
 ```
 
-Delete cookie:
+**Delete cookie:**
 
 ```javascript
 // Returns true when cookie was successfully deleted, otherwise false
@@ -81,6 +81,20 @@ Cookies.remove('name', { path: '/' }); // => true
 ```
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
+
+**Avoid namespace conflicts:**
+
+```javascript
+// Restore the Cookies namespace to its original value
+var NewCookies = Cookies.noConflict();
+NewCookies.set('name', 'value');
+```
+
+*If there is any danger of a conflict with the namespace `Cookies`, the
+`.noConflict` method will allow you define a new namespace and preserve the
+original namespace.*
+
+*This is especially useful when running the script on third party sites e.g. as part of a widget or SDK.*
 
 ## Configuration
 
