@@ -4,5 +4,9 @@
 
 	"-W053": true,
 
-	"extends": "../.jshintrc"
+	"extends": "../.jshintrc",
+
+	"globals": {
+		"CookiesTemp": true
+	}
 }
