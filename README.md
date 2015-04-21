@@ -82,6 +82,18 @@ Cookies.remove('name', { path: '/' }); // => true
 
 *Note: when deleting a cookie, you must pass the exact same path, domain and secure options that were used to set the cookie, unless you're relying on the default options that is.*
 
+## Namespace conflicts
+
+If there is any danger of a conflict with the namespace `Cookies`, the `noConflict` method will allow you to define a new namespace and preserve the original one. This is especially useful when running the script on third party sites e.g. as part of a widget or SDK.
+
+```javascript
+// Assign the js-cookie api to a different variable and restore the original "window.Cookies"
+var Cookies2 = Cookies.noConflict();
+Cookies2.set('name', 'value');
+```
+
+*Note: The `.noConflict` method is not necessary when using AMD or CommonJS, thus it is not exposed in those environments.*
+
 ## Configuration
 
 ### raw

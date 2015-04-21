@@ -362,3 +362,15 @@ test('read converter with raw = true', function() {
 	Cookies.set('c', '1');
 	strictEqual(Cookies.get('c', Number), 1, 'does not decode, but converts read value');
 });
+
+module('noConflict', lifecycle);
+
+test('do not conflict with existent globals', function() {
+	expect(2);
+	var Cookies = window.Cookies.noConflict();
+	Cookies.set('c', 'v');
+	strictEqual(Cookies.get('c'), 'v', 'should work correctly');
+	strictEqual(window.Cookies, 'existent global', 'should restore the original global');
+	window.Cookies = Cookies;
+});
+

@@ -18,7 +18,12 @@
 		module.exports = factory(jQuery);
 	} else {
 		// Browser globals
-		window.Cookies = factory(window.jQuery);
+		var _OldCookies = window.Cookies;
+		var api = window.Cookies = factory(window.jQuery);
+		api.noConflict = function() {
+			window.Cookies = _OldCookies;
+			return api;
+		};
 	}
 }(function ($) {
 
