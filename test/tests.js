@@ -362,3 +362,22 @@ test('read converter with raw = true', function() {
 	Cookies.set('c', '1');
 	strictEqual(Cookies.get('c', Number), 1, 'does not decode, but converts read value');
 });
+
+module('noConflict', {
+	teardown: function(){
+		Cookies = CookiesTemp;
+	}
+});
+
+test('returns Cookies api', function() {
+	expect(1);
+	CookiesTemp = Cookies.noConflict();
+	CookiesTemp.set('c', 'v');
+	strictEqual(CookiesTemp.get('c'), 'v', 'should write value');
+});
+
+test('restores original Cookies value', function() {
+	expect(1);
+	Cookies.noConflict();
+	strictEqual(Cookies, 'foobar', 'should restore original value');
+});

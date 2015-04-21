@@ -23,6 +23,7 @@
 }(function ($) {
 
 	var pluses = /\+/g;
+	var _Cookies = (typeof(window) === 'undefined') ? void 0 : window.Cookies;
 
 	function encode(s) {
 		return api.raw ? s : encodeURIComponent(s);
@@ -131,6 +132,11 @@
 		// Must not alter options, thus extending a fresh object...
 		api(key, '', extend(options, { expires: -1 }));
 		return !api(key);
+	};
+
+	api.noConflict = function() {
+		Cookies = _Cookies;
+		return api;
 	};
 
 	if ( $ ) {
