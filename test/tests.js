@@ -425,3 +425,15 @@ test('Call to read all cookies with mixed json', function () {
 	deepEqual(Cookies.getJSON(), { c: { foo: 'bar' }, c2: 'v' }, 'returns JSON parsed cookies');
 	deepEqual(Cookies.get(), { c: '{"foo":"bar"}', c2: 'v' }, 'returns unparsed cookies');
 });
+
+module('noConflict', lifecycle);
+
+test('do not conflict with existent globals', function() {
+	expect(2);
+	var Cookies = window.Cookies.noConflict();
+	Cookies.set('c', 'v');
+	strictEqual(Cookies.get('c'), 'v', 'should work correctly');
+	strictEqual(window.Cookies, 'existent global', 'should restore the original global');
+	window.Cookies = Cookies;
+});
+
