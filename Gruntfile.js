@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 			},
 			grunt: 'Gruntfile.js',
 			source: 'src/**/*.js',
-			tests: 'test/**/*.js'
+			tests: ['test/**/*.js', '!test/polyfill.js']
 		},
 		uglify: {
 			options: {
