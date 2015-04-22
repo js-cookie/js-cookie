@@ -80,16 +80,6 @@ test('Call to read all when there are no cookies at all', function () {
 	deepEqual(Cookies.get(), {}, 'returns empty object');
 });
 
-// github.com/carhartl/jquery-cookie/pull/166
-test('provide a way for decoding characters encoded by the escape function', function () {
-	expect(1);
-	document.cookie = 'c=%u5317%u4eac';
-	var actual = Cookies.get('c', function (value) {
-		return unescape(value);
-	});
-	strictEqual(actual, '北京', 'should convert chinese characters correctly');
-});
-
 test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function () {
 	expect(1);
 	document.cookie = 'c="v"';
@@ -212,10 +202,41 @@ test('passing options reference', function () {
 
 module('converters', lifecycle);
 
-test('read converter', function () {
+//github.com/carhartl/jquery-cookie/pull/166
+test('provide a way for decoding characters encoded by the escape function', function () {
 	expect(1);
-	Cookies.set('c', '1');
-	strictEqual(Cookies.get('c', Number), 1, 'converts read value');
+	document.cookie = 'c=%u5317%u4eac';
+	strictEqual(Cookies.withConverter(unescape).get('c'), '北京', 'should convert chinese characters correctly');
+});
+
+test('should decode a malformed char that matches the decodeURIComponent regex', function () {
+	expect(1);
+	document.cookie = 'c=%E3';
+	var cookies = Cookies.withConverter(unescape);
+	strictEqual(cookies.get('c'), 'ã', 'should convert the character correctly');
+	cookies.remove('c');
+});
+
+test('should be able to conditionally decode a single malformed cookie', function () {
+	expect(4);
+	var cookies = Cookies.withConverter(function (value, name) {
+		if ( name === 'escaped' ) {
+			return unescape(value);
+		}
+	});
+	document.cookie = 'escaped=%u5317';
+	strictEqual(cookies.get('escaped'), '北', 'should use a custom method for escaped cookie');
+
+	document.cookie = 'encoded=%E4%BA%AC';
+	strictEqual(cookies.get('encoded'), '京', 'should use the default encoding for the rest');
+
+	deepEqual(cookies.get(), {
+		escaped: '北',
+		encoded: '京'
+	}, 'should retrieve everything');
+
+	Object.keys(cookies.get()).forEach(cookies.remove);
+	strictEqual(document.cookie, '', 'should remove everything');
 });
 
 module('JSON handling', lifecycle);
@@ -269,15 +290,11 @@ test('Object Constructor', function () {
 });
 
 test('Use String(value) for unsupported objects that do not stringify into JSON', function() {
-	expect(4);
+	expect(2);
 
 	Cookies.set('date', new Date(2015, 04, 13, 0, 0, 0, 0));
 	strictEqual(Cookies.get('date').indexOf('"'), -1, 'should not quote the stringified Date object');
 	strictEqual(Cookies.getJSON('date').indexOf('"'), -1, 'should not quote the stringified Date object');
-
-	Cookies.set('function', function (){});
-	strictEqual(Cookies.get('function'), undefined, 'should return undefined for function object');
-	strictEqual(Cookies.getJSON('function'), undefined, 'should return undefined for function object');
 });
 
 test('Call to read all cookies with mixed json', function () {
