@@ -2,6 +2,15 @@
 
 A simple, lightweight JavaScript API for handling cookies
 
+* Works in [all](https://saucelabs.com/u/js-cookie) browsers
+* [Heavily](test) tested
+* No dependency
+* [Unobstrusive](#json) JSON support
+* Supports AMD/CommonJS
+* [RFC 6265](http://www.rfc-editor.org/rfc/rfc6265.txt) compliant
+* Enable [custom decoding](#converter)
+* **~800 bytes** gzipped!
+
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release (1.5.0).](https://github.com/js-cookie/js-cookie/tree/v1.5.0)**
 
@@ -20,23 +29,9 @@ Include the script (unless you are packaging scripts somehow else):
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
 in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
 
-The plugin can also be loaded as AMD or CommonJS module.
+The plugin can also be loaded as an AMD or CommonJS module.
 
-## Package Managers
-
-js-cookie support the following package managers
-
-### [npm](https://www.npmjs.com/)
-
-```shell
-$ npm install js-cookie
-```
-
-### [Bower](http://bower.io/)
-
-```shell
-$ bower install js-cookie
-```
+js-cookie support [npm](https://www.npmjs.com/) and [Bower](http://bower.io/) under the name `js-cookie`
 
 ## Basic Usage
 
@@ -248,4 +243,6 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Authors
 
-[Klaus Hartl](https://github.com/carhartl)
+* [Klaus Hartl](https://github.com/carhartl)
+* [Fagner Brack](https://github.com/FagnerMartinsBrack)
+* And awesome [contributors](https://github.com/js-cookie/js-cookie/graphs/contributors)
