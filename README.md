@@ -121,6 +121,8 @@ Cookies.getJSON('name'); // => { foo: 'bar' }
 Cookies.getJSON(); // => { name: { foo: 'bar' } }
 ```
 
+**Note: To support IE6-8 you need to add the JSON-js polyfill: https://github.com/douglascrockford/JSON-js**
+
 ## Encoding
 
 This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent.  
