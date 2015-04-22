@@ -29,9 +29,9 @@ Include the script (unless you are packaging scripts somehow else):
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
 in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
 
-The plugin can also be loaded as an AMD or CommonJS module.
+js-cookie supports [npm](https://www.npmjs.com/) and [Bower](http://bower.io/) under the name `js-cookie`
 
-js-cookie support [npm](https://www.npmjs.com/) and [Bower](http://bower.io/) under the name `js-cookie`
+It can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
