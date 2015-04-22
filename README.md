@@ -130,8 +130,9 @@ Cookies.getJSON(); // => { name: { foo: 'bar' } }
 
 ## Encoding
 
-This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant.
-However, all special characters that are not allowed in the cookie-value or cookie-name are encoded/decoded with each UTF-8 Hex equivalent. Special characters that consistently work among all supported browsers are not encoded/decoded this way.
+This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent.  
+The only character in cookie-name or cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret the input as literal.  
+To override the default cookie decoding you need to use a [converter](#converter).
 
 ## Cookie Attributes
 
@@ -200,24 +201,34 @@ Cookies.get('name'); // => 'value' (if already in secure protocol)
 Cookies.remove('name', { secure: true });
 ```
 
-## Converters
+## Converter
 
-Provide a conversion function as optional second argument for reading, in order to change the cookie's value
-to a different representation on the fly.
+Create a new instance of the api that overrides the default decoding implementation.  
+All methods that rely in a proper decoding to work, such as `Cookies.remove()` and `Cookies.get()`, will run the converter first for each cookie.  
+The returning String will be used as the cookie value.
+
+Example from reading one of the cookies that can only be decoded using the `escape` function:
+
+```javascript
+document.cookie = 'escaped=%u5317';
+document.cookie = 'default=%E5%8C%97';
+var cookies = Cookies.withConverter(function (value, name) {
+    if ( name === 'escaped' ) {
+        return unescape(value);
+    }
+});
+cookies.get('escaped'); // 北
+cookies.get('default'); // 北
+cookies.get(); // { escaped: '北', default: '北' }
+```
 
 Example for parsing the value from a cookie generated with PHP's `setcookie()` method:
 
 ```javascript
 // 'cookie+with+space' => 'cookie with space'
-Cookies.get('foo', function (value) {
+Cookies.withConverter(function (value) {
     return value.replace(/\+/g, ' ');
-});
-```
-
-Dealing with cookies that have been encoded using `escape` (3rd party cookies):
-
-```javascript
-Cookies.get('foo', unescape);
+}).get('foo');
 ```
 
 ## Contributing

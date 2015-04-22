@@ -1,45 +1,4 @@
-// https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
-(function () {
-	"use strict";
-
-	var log = [];
-
-	QUnit.done(function (test_results) {
-		var tests = [];
-		for (var i = 0, len = log.length; i < len; i++) {
-			var details = log[i];
-			tests.push({
-				name: details.name,
-				result: details.result,
-				expected: details.expected,
-				actual: details.actual,
-				source: details.source
-			});
-		}
-		test_results.tests = tests;
-		// Required for exposing test results to the Sauce Labs API.
-		// Can be removed when the following issue is fixed:
-		// https://github.com/axemclion/grunt-saucelabs/issues/84
-		window.global_test_results = test_results;
-	});
-
-	QUnit.testStart(function (testDetails) {
-		QUnit.log(function (details) {
-			if (!details.result) {
-				details.name = testDetails.name;
-				log.push(details);
-			}
-		});
-	});
-}());
-
-var lifecycle = {
-	teardown: function () {
-		Cookies.defaults = {};
-		Object.keys(Cookies.get()).forEach(Cookies.remove);
-	}
-};
-
+/*global lifecycle: true*/
 
 module('read', lifecycle);
 
@@ -69,13 +28,22 @@ test('equality sign in cookie value', function () {
 	strictEqual(Cookies.get('c'), 'foo=bar', 'should include the entire value');
 });
 
+// github.com/carhartl/jquery-cookie/issues/215
 test('percent character in cookie value', function () {
 	expect(1);
 	document.cookie = 'bad=foo%';
 	strictEqual(Cookies.get('bad'), 'foo%', 'should read the percent character');
 });
 
-asyncTest('malformed cookie value in IE (#88, #117)', function () {
+test('percent character in cookie value mixed with encoded values', function () {
+	expect(1);
+	document.cookie = 'bad=foo%bar%22baz%bax%3D';
+	strictEqual(Cookies.get('bad'), 'foo%bar"baz%bax=', 'should read the percent character');
+});
+
+// github.com/carhartl/jquery-cookie/pull/88
+// github.com/carhartl/jquery-cookie/pull/117
+asyncTest('malformed cookie value in IE', function () {
 	expect(1);
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = document.createElement('iframe');
@@ -112,24 +80,10 @@ test('Call to read all when there are no cookies at all', function () {
 	deepEqual(Cookies.get(), {}, 'returns empty object');
 });
 
-//github.com/carhartl/jquery-cookie/pull/62
-test('provide a way for decoding PHP whitespace encoding', function () {
+test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function () {
 	expect(1);
-	document.cookie = 'c=foo+bar';
-	var actual = Cookies.get('c', function (value) {
-		return value.replace(/\+/g, ' ');
-	});
-	strictEqual(actual, 'foo bar', 'should convert pluses back to space');
-});
-
-// github.com/carhartl/jquery-cookie/pull/166
-test('provide a way for decoding chinese characters', function () {
-	expect(1);
-	document.cookie = 'c=%u5317%u4eac';
-	var actual = Cookies.get('c', function (value) {
-		return unescape(value);
-	});
-	strictEqual(actual, '北京', 'should convert chinese characters correctly');
+	document.cookie = 'c="v"';
+	strictEqual(Cookies.get('c'), 'v', 'should simply ignore quoted strings');
 });
 
 module('write', lifecycle);
@@ -210,102 +164,6 @@ test('defaults', function () {
 	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
 });
 
-test('Handling quotes in the cookie value for read and write', function () {
-	expect(3);
-
-	Cookies.set('quote', '"');
-	strictEqual(Cookies.get('quote'), '"', 'should print the quote character');
-
-	Cookies.set('without-last', '"content');
-	strictEqual(Cookies.get('without-last'), '"content', 'should print the quote character');
-
-	Cookies.set('without-first', 'content"');
-	strictEqual(Cookies.get('without-first'), 'content"', 'should print the quote character');
-});
-
-test('RFC 6265 - cookie-octet enclosed in DQUOTE', function () {
-	expect(1);
-	document.cookie = 'c="v"';
-	strictEqual(Cookies.get('c'), 'v', 'should decode the quotes');
-});
-
-test('RFC 6265 - disallowed characters in cookie-octet', function () {
-	expect(5);
-
-	Cookies.set('whitespace', ' ');
-	strictEqual(Cookies.get('whitespace'), ' ', 'should handle the whitespace character');
-
-	Cookies.set('comma', ',');
-	strictEqual(Cookies.get('comma'), ',', 'should handle the comma character');
-
-	Cookies.set('semicolon', ';');
-	strictEqual(Cookies.get('semicolon'), ';', 'should handle the semicolon character');
-
-	Cookies.set('backslash', '\\');
-	strictEqual(Cookies.get('backslash'), '\\', 'should handle the backslash character');
-
-	Cookies.set('multiple', '" ,;\\" ,;\\');
-	strictEqual(Cookies.get('multiple'), '" ,;\\" ,;\\', 'should handle multiple special characters');
-});
-
-test('RFC 6265 - disallowed characters in cookie-name', function () {
-	expect(18);
-
-	Cookies.set('(', 'v');
-	strictEqual(Cookies.get('('), 'v', 'should handle the opening parens character');
-
-	Cookies.set(')', 'v');
-	strictEqual(Cookies.get(')'), 'v', 'should handle the closing parens character');
-
-	Cookies.set('<', 'v');
-	strictEqual(Cookies.get('<'), 'v', 'should handle the less-than character');
-
-	Cookies.set('>', 'v');
-	strictEqual(Cookies.get('>'), 'v', 'should handle the greater-than character');
-
-	Cookies.set('@', 'v');
-	strictEqual(Cookies.get('@'), 'v', 'should handle the at character');
-
-	Cookies.set(',', 'v');
-	strictEqual(Cookies.get(','), 'v', 'should handle the comma character');
-
-	Cookies.set(';', 'v');
-	strictEqual(Cookies.get(';'), 'v', 'should handle the semicolon character');
-
-	Cookies.set(':', 'v');
-	strictEqual(Cookies.get(':'), 'v', 'should handle the colon character');
-
-	Cookies.set('\\', 'v');
-	strictEqual(Cookies.get('\\'), 'v', 'should handle the backslash character');
-
-	Cookies.set('"', 'v');
-	strictEqual(Cookies.get('"'), 'v', 'should handle the double quote character');
-
-	Cookies.set('/', 'v');
-	strictEqual(Cookies.get('/'), 'v', 'should handle the slash character');
-
-	Cookies.set('[', 'v');
-	strictEqual(Cookies.get('['), 'v', 'should handle the opening square brackets character');
-
-	Cookies.set(']', 'v');
-	strictEqual(Cookies.get(']'), 'v', 'should handle the closing square brackets character');
-
-	Cookies.set('?', 'v');
-	strictEqual(Cookies.get('?'), 'v', 'should handle the question mark character');
-
-	Cookies.set('=', 'v');
-	strictEqual(Cookies.get('='), 'v', 'should handle the equal sign character');
-
-	Cookies.set('{', 'v');
-	strictEqual(Cookies.get('{'), 'v', 'should handle the opening curly brackets character');
-
-	Cookies.set('}', 'v');
-	strictEqual(Cookies.get('}'), 'v', 'should handle the closing curly brackets character');
-
-	Cookies.set('	', 'v');
-	strictEqual(Cookies.get('	'), 'v', 'should handle the horizontal tab character');
-});
-
 module('removeCookie', lifecycle);
 
 test('deletion', function () {
@@ -342,19 +200,43 @@ test('passing options reference', function () {
 	deepEqual(options, { path: '/' }, "won't alter options object");
 });
 
-test('[] used in name', function () {
-	expect(1);
-	document.cookie = 'c[1]=foo';
-	Cookies.remove('c[1]');
-	strictEqual(document.cookie, '', 'delete the cookie');
-});
-
 module('converters', lifecycle);
 
-test('read converter', function () {
+//github.com/carhartl/jquery-cookie/pull/166
+test('provide a way for decoding characters encoded by the escape function', function () {
 	expect(1);
-	Cookies.set('c', '1');
-	strictEqual(Cookies.get('c', Number), 1, 'converts read value');
+	document.cookie = 'c=%u5317%u4eac';
+	strictEqual(Cookies.withConverter(unescape).get('c'), '北京', 'should convert chinese characters correctly');
+});
+
+test('should decode a malformed char that matches the decodeURIComponent regex', function () {
+	expect(1);
+	document.cookie = 'c=%E3';
+	var cookies = Cookies.withConverter(unescape);
+	strictEqual(cookies.get('c'), 'ã', 'should convert the character correctly');
+	cookies.remove('c');
+});
+
+test('should be able to conditionally decode a single malformed cookie', function () {
+	expect(4);
+	var cookies = Cookies.withConverter(function (value, name) {
+		if ( name === 'escaped' ) {
+			return unescape(value);
+		}
+	});
+	document.cookie = 'escaped=%u5317';
+	strictEqual(cookies.get('escaped'), '北', 'should use a custom method for escaped cookie');
+
+	document.cookie = 'encoded=%E4%BA%AC';
+	strictEqual(cookies.get('encoded'), '京', 'should use the default encoding for the rest');
+
+	deepEqual(cookies.get(), {
+		escaped: '北',
+		encoded: '京'
+	}, 'should retrieve everything');
+
+	Object.keys(cookies.get()).forEach(cookies.remove);
+	strictEqual(document.cookie, '', 'should remove everything');
 });
 
 module('JSON handling', lifecycle);
@@ -408,15 +290,11 @@ test('Object Constructor', function () {
 });
 
 test('Use String(value) for unsupported objects that do not stringify into JSON', function() {
-	expect(4);
+	expect(2);
 
 	Cookies.set('date', new Date(2015, 04, 13, 0, 0, 0, 0));
 	strictEqual(Cookies.get('date').indexOf('"'), -1, 'should not quote the stringified Date object');
 	strictEqual(Cookies.getJSON('date').indexOf('"'), -1, 'should not quote the stringified Date object');
-
-	Cookies.set('function', function (){});
-	strictEqual(Cookies.get('function'), undefined, 'should return undefined for function object');
-	strictEqual(Cookies.getJSON('function'), undefined, 'should return undefined for function object');
 });
 
 test('Call to read all cookies with mixed json', function () {

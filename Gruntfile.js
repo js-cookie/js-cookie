@@ -55,13 +55,13 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			saucelabs: {
+			'build-sauce': {
 				options: {
 					port: 9999,
 					base: ['.', 'test']
 				}
 			},
-			build: {
+			'build-qunit': {
 				options: {
 					port: 9998,
 					base: ['.', 'test']
@@ -69,9 +69,9 @@ module.exports = function (grunt) {
 			},
 			tests: {
 				options: {
-					port: 9998,
+					port: 10000,
 					base: ['.', 'test'],
-					open: 'http://127.0.0.1:9998',
+					open: 'http://127.0.0.1:10000',
 					keepalive: true,
 					livereload: true
 				}
@@ -178,8 +178,8 @@ module.exports = function (grunt) {
 		}
 	}
 
-	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'connect:build', 'qunit', 'nodeunit']);
+	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
+	grunt.registerTask('test', ['jshint', 'connect:build-qunit', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
