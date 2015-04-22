@@ -74,9 +74,7 @@ Cookies.get(); // => { name: 'value' }
 Delete cookie:
 
 ```javascript
-// Returns true when cookie was successfully deleted, otherwise false
-Cookies.remove('name'); // => true
-Cookies.remove('nothing'); // => false
+Cookies.remove('name');
 
 // Need to use the same path, domain and secure attributes that were used when writing the cookie
 Cookies.set('name', 'value', { path: '/' });
