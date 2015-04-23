@@ -1,4 +1,3 @@
-/*global escape: true */
 /*!
  * Javascript Cookie v2.0.0-pre
  * https://github.com/js-cookie/js-cookie
