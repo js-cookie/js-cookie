@@ -41,7 +41,7 @@
 
 			// Write
 
-			if ([].slice.call(arguments).length > 1) {
+			if (arguments.length > 1) {
 				options = extend(api.defaults, options);
 
 				if (typeof options.expires === 'number') {
