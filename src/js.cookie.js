@@ -7,13 +7,10 @@
  */
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
-		// AMD (Register as an anonymous module)
 		define(factory);
 	} else if (typeof exports === 'object') {
-		// Node/CommonJS
 		module.exports = factory();
 	} else {
-		// Browser globals
 		var _OldCookies = window.Cookies;
 		var api = window.Cookies = factory(window.jQuery);
 		api.noConflict = function() {
