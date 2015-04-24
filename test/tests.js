@@ -48,10 +48,10 @@ asyncTest('malformed cookie value in IE', function () {
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = document.createElement('iframe');
 	var addEvent = function (element, eventName, fn) {
-		var method = "addEventListener";
+		var method = 'addEventListener';
 		if (element.attachEvent) {
 			eventName = 'on' + eventName;
-			method = "attachEvent";
+			method = 'attachEvent';
 		}
 		element[ method ](eventName, fn);
 	};
@@ -186,12 +186,12 @@ test('passing options reference', function () {
 	var options = { path: '/' };
 	Cookies.set('c', 'v', options);
 	Cookies.remove('c', options);
-	deepEqual(options, { path: '/' }, "won't alter options object");
+	deepEqual(options, { path: '/' }, 'won\'t alter options object');
 });
 
 module('converters', lifecycle);
 
-//github.com/carhartl/jquery-cookie/pull/166
+// github.com/carhartl/jquery-cookie/pull/166
 test('provide a way for decoding characters encoded by the escape function', function () {
 	expect(1);
 	document.cookie = 'c=%u5317%u4eac';
@@ -209,7 +209,7 @@ test('should decode a malformed char that matches the decodeURIComponent regex',
 test('should be able to conditionally decode a single malformed cookie', function () {
 	expect(4);
 	var cookies = Cookies.withConverter(function (value, name) {
-		if ( name === 'escaped' ) {
+		if (name === 'escaped') {
 			return unescape(value);
 		}
 	});
@@ -278,7 +278,7 @@ test('Object Constructor', function () {
 	strictEqual(Cookies.get('c'), '{"k":"v"}', 'should return a String');
 });
 
-test('Use String(value) for unsupported objects that do not stringify into JSON', function() {
+test('Use String(value) for unsupported objects that do not stringify into JSON', function () {
 	expect(2);
 
 	Cookies.set('date', new Date(2015, 04, 13, 0, 0, 0, 0));
@@ -295,7 +295,7 @@ test('Call to read all cookies with mixed json', function () {
 
 module('noConflict', lifecycle);
 
-test('do not conflict with existent globals', function() {
+test('do not conflict with existent globals', function () {
 	expect(2);
 	var Cookies = window.Cookies.noConflict();
 	Cookies.set('c', 'v');
