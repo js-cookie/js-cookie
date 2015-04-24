@@ -1,4 +1,4 @@
-/*jshint node:true, quotmark:single */
+/*jshint node:true */
 'use strict';
 
 module.exports = function (grunt) {
@@ -23,6 +23,27 @@ module.exports = function (grunt) {
 			grunt: 'Gruntfile.js',
 			source: 'src/**/*.js',
 			tests: 'test/**/*.js'
+		},
+		jscs: {
+			options: {
+				requireCommaBeforeLineBreak: true,
+				requireLineFeedAtFileEnd: true,
+				requireSemicolons: true,
+				requireSpaceBeforeKeywords: ['else', 'while', 'catch'],
+				requireSpaceAfterKeywords: true,
+				requireSpaceAfterLineComment: true,
+				requireSpaceBeforeBlockStatements: true,
+				requireSpaceBeforeObjectValues: true,
+				validateIndentation: '\t',
+				validateLineBreaks: 'LF',
+				validateQuoteMarks: true,
+				disallowSpacesInsideArrayBrackets: 'all',
+				disallowSpacesInsideParentheses: true,
+				disallowTrailingWhitespace: true
+			},
+			grunt: 'Gruntfile.js',
+			source: 'src/**/*.js',
+			tests: ['test/**/*.js', '!test/polyfill.js']
 		},
 		uglify: {
 			options: {

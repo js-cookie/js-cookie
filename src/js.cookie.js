@@ -13,16 +13,12 @@
 	} else {
 		var _OldCookies = window.Cookies;
 		var api = window.Cookies = factory(window.jQuery);
-		api.noConflict = function() {
+		api.noConflict = function () {
 			window.Cookies = _OldCookies;
 			return api;
 		};
 	}
 }(function () {
-	function decode (value) {
-		return value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
-	}
-
 	function extend () {
 		var i = 0;
 		var result = {};
@@ -35,29 +31,13 @@
 		return result;
 	}
 
-	function init(converter) {
-		var processRead = function (value, name, json) {
-			if (value.charAt(0) === '"') {
-				value = value.slice(1, -1);
-			}
-
-			value = converter && converter(value, name) || decode(value);
-
-			if (json) {
-				try {
-					value = JSON.parse(value);
-				} catch(e) {}
-			}
-
-			return value;
-		};
-		var api = function (key, value, options) {
+	function init (converter) {
+		function api (key, value, options) {
 			var result;
-			var args = [].slice.call(arguments);
 
 			// Write
 
-			if (args.length > 1) {
+			if (arguments.length > 1) {
 				options = extend(api.defaults, options);
 
 				if (typeof options.expires === 'number') {
@@ -68,10 +48,10 @@
 
 				try {
 					result = JSON.stringify(value);
-					if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(result)) {
+					if (/^[\{\[]/.test(result)) {
 						value = result;
 					}
-				} catch(e) {}
+				} catch (e) {}
 
 				value = encodeURIComponent(String(value));
 				value = value.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
@@ -99,25 +79,38 @@
 			// in case there are no cookies at all. Also prevents odd result when
 			// calling "get()"
 			var cookies = document.cookie ? document.cookie.split('; ') : [];
+			var rdecode = /(%[0-9A-Z]{2})+/g;
 			var i = 0;
 
 			for (; i < cookies.length; i++) {
-				var parts = cookies[i].split('='),
-					name = decode(parts.shift()),
-					cookie = parts.join('=');
+				var parts = cookies[i].split('=');
+				var name = parts[0].replace(rdecode, decodeURIComponent);
+				var cookie = parts.slice(1).join('=');
+
+				if (cookie.charAt(0) === '"') {
+					cookie = cookie.slice(1, -1);
+				}
+
+				cookie = converter && converter(cookie, name) || cookie.replace(rdecode, decodeURIComponent);
+
+				if (this.json) {
+					try {
+						cookie = JSON.parse(cookie);
+					} catch (e) {}
+				}
 
 				if (key === name) {
-					result = processRead(cookie, name, this.json);
+					result = cookie;
 					break;
 				}
 
 				if (!key) {
-					result[name] = processRead(cookie, name, this.json);
+					result[name] = cookie;
 				}
 			}
 
 			return result;
-		};
+		}
 
 		api.get = api.set = api;
 		api.getJSON = function () {
