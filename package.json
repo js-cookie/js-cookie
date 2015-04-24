@@ -6,6 +6,17 @@
   "directories": {
     "test": "test"
   },
+  "keywords": [
+    "jquery-plugin",
+    "cookie",
+    "cookies",
+    "browser",
+    "amd",
+    "commonjs",
+    "client",
+    "js-cookie",
+    "browserify"
+  ],
   "scripts": {
     "test": "grunt test"
   },
