@@ -13,7 +13,7 @@ To start migrating from jquery-cookie to JavaScript Cookie, just rename the API 
 A simple, lightweight JavaScript API for handling cookies
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
-[View documentation for the latest release (1.5.0).](https://github.com/js-cookie/js-cookie/tree/v1.5.0)**
+[View documentation for the latest release (1.5.1).](https://github.com/js-cookie/js-cookie/tree/v1.5.1)**
 
 ## Build Status Matrix
 

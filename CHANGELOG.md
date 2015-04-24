@@ -1,6 +1,10 @@
 HEAD
 -----
 
+2.0.0-pre
+-----
+- Work in Progress
+
 1.5.1
 -----
 - Add the `.noConflict()` method to the `Cookies` namespace
