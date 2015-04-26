@@ -95,7 +95,7 @@ Cookies2.set('name', 'value');
 
 js-cookie provides unobstrusive JSON storage for cookies.
 
-When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to `JSON.stringify`:
+When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie will store the string representation of the object according to `JSON.stringify`:
 
 ```javascript
 Cookies.set('name', { foo: 'bar' });
