@@ -35,25 +35,10 @@
     "grunt-contrib-qunit": "0.7.0",
     "grunt-contrib-uglify": "0.9.1",
     "grunt-contrib-watch": "0.6.1",
+    "grunt-jscs": "1.6.0",
     "grunt-saucelabs": "8.6.0",
     "gzip-js": "0.3.2",
-    "jquery": "2.1.3",
     "qunitjs": "1.18.0",
     "requirejs": "2.1.17"
-  },
-  "jspm": {
-    "main": "js.cookie",
-    "files": [
-      "src/js.cookie.js"
-    ],
-    "buildConfig": {
-      "uglify": true
-    }
-  },
-  "jam": {
-    "main": "src/js.cookie.js",
-    "include": [
-      "src/js.cookie.js"
-    ]
   }
 }

@@ -1,4 +1,4 @@
-/*jshint node:true, quotmark:single */
+/*jshint node:true */
 'use strict';
 
 module.exports = function (grunt) {
@@ -22,7 +22,28 @@ module.exports = function (grunt) {
 			},
 			grunt: 'Gruntfile.js',
 			source: 'src/**/*.js',
-			tests: 'test/**/*.js'
+			tests: ['test/**/*.js', '!test/polyfill.js']
+		},
+		jscs: {
+			options: {
+				requireCommaBeforeLineBreak: true,
+				requireLineFeedAtFileEnd: true,
+				requireSemicolons: true,
+				requireSpaceBeforeKeywords: ['else', 'while', 'catch'],
+				requireSpaceAfterKeywords: true,
+				requireSpaceAfterLineComment: true,
+				requireSpaceBeforeBlockStatements: true,
+				requireSpaceBeforeObjectValues: true,
+				validateIndentation: '\t',
+				validateLineBreaks: 'LF',
+				validateQuoteMarks: true,
+				disallowSpacesInsideArrayBrackets: 'all',
+				disallowSpacesInsideParentheses: true,
+				disallowTrailingWhitespace: true
+			},
+			grunt: 'Gruntfile.js',
+			source: 'src/**/*.js',
+			tests: ['test/**/*.js', '!test/polyfill.js']
 		},
 		uglify: {
 			options: {
@@ -55,13 +76,13 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			saucelabs: {
+			'build-sauce': {
 				options: {
 					port: 9999,
 					base: ['.', 'test']
 				}
 			},
-			build: {
+			'build-qunit': {
 				options: {
 					port: 9998,
 					base: ['.', 'test']
@@ -69,9 +90,9 @@ module.exports = function (grunt) {
 			},
 			tests: {
 				options: {
-					port: 9998,
+					port: 10000,
 					base: ['.', 'test'],
-					open: 'http://127.0.0.1:9998',
+					open: 'http://127.0.0.1:10000',
 					keepalive: true,
 					livereload: true
 				}
@@ -83,89 +104,92 @@ module.exports = function (grunt) {
 					urls: ['http://127.0.0.1:9999'],
 					testname: 'Sauce Test for js-cookie',
 					build: process.env.TRAVIS_JOB_ID,
-					pollInterval: 5000,
-					browsers: [
-						// iOS
-						{
-							browserName: 'iphone',
-							platform: 'OS X 10.9',
-							version: '7.1'
-						},
-						{
-							browserName: 'ipad',
-							platform: 'OS X 10.9',
-							version: '7.1'
-						},
-						// Android
-						{
-							browserName: 'android',
-							platform: 'Linux',
-							version: '4.3'
-						},
-						// OS X
-						{
-							browserName: 'safari',
-							platform: 'OS X 10.9',
-							version: '7'
-						},
-						{
-							browserName: 'safari',
-							platform: 'OS X 10.8',
-							version: '6'
-						},
-						{
-							browserName: 'firefox',
-							platform: 'OS X 10.9',
-							version: '28'
-						},
-						// Windows
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 8.1',
-							version: '11'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 8',
-							version: '10'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '11'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '10'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '9'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '8'
-						},
-						{
-							browserName: 'firefox',
-							platform: 'Windows 7',
-							version: '29'
-						},
-						{
-							browserName: 'chrome',
-							platform: 'Windows 7',
-							version: '34'
-						},
-						// Linux
-						{
-							browserName: 'firefox',
-							platform: 'Linux',
-							version: '29'
+					pollInterval: 10000,
+					statusCheckAttempts: 90,
+					throttled: 3,
+					browsers: (function() {
+						var browsers = {
+							'iOS': [{
+								browserName: 'iphone',
+								platform: 'OS X 10.10',
+								version: '8.2',
+								deviceName: 'iPhone Simulator'
+							}, {
+								browserName: 'iphone',
+								platform: 'OS X 10.10',
+								version: '8.2',
+								deviceName: 'iPad Simulator'
+							}],
+							'android': [{
+								browserName: 'android',
+								platform: 'Linux',
+								version: '5.1',
+								deviceName: 'Android Emulator'
+							}],
+							'mac': [{
+								browserName: 'safari',
+								platform: 'OS X 10.10',
+								version: '8.0'
+							}, {
+								browserName: 'firefox',
+								platform: 'OS X 10.10',
+								version: '36.0'
+							}, {
+								browserName: 'chrome',
+								platform: 'OS X 10.10',
+								versiono: '41.0'
+							}],
+							'windows7': [{
+								browserName: 'internet explorer',
+								platform: 'Windows 7',
+								version: '11.0'
+							}, {
+								browserName: 'internet explorer',
+								platform: 'Windows 7',
+								version: '10.0'
+							}, {
+								browserName: 'internet explorer',
+								platform: 'Windows 7',
+								version: '9.0'
+							}, {
+								browserName: 'opera',
+								platform: 'Windows 7',
+								version: '12.12'
+							}],
+							'windowsXP': [{
+								browserName: 'internet explorer',
+								platform: 'Windows XP',
+								version: '8.0'
+							}, {
+								browserName: 'internet explorer',
+								platform: 'Windows XP',
+								version: '7.0'
+							}, {
+								browserName: 'internet explorer',
+								platform: 'Windows XP',
+								version: '6.0'
+							}],
+							'linux': [{
+								browserName: 'opera',
+								platform: 'Linux',
+								version: '12.15'
+							}, {
+								browserName: 'firefox',
+								platform: 'Linux',
+								version: '37.0'
+							}, {
+								browserName: 'chrome',
+								platform: 'Linux',
+								version: '41.0'
+							}]
+						};
+
+						var matrix = [];
+						for ( var os in browsers ) {
+							matrix = matrix.concat(browsers[os]);
 						}
-					]
+						return matrix;
+					}())
 				}
 			}
 		}
@@ -178,8 +202,8 @@ module.exports = function (grunt) {
 		}
 	}
 
-	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'connect:build', 'qunit', 'nodeunit']);
+	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
+	grunt.registerTask('test', ['jshint', 'connect:build-qunit', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);

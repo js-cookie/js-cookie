@@ -9,7 +9,6 @@
 	"undef": true,
 	"unused": true,
 	"globals": {
-		"Cookies": true,
-		"require": true
+		"Cookies": true
 	}
 }
