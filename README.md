@@ -29,19 +29,19 @@ Include the script (unless you are packaging scripts somehow else):
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
 in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
 
-js-cookie supports [npm](https://www.npmjs.com/) and [Bower](http://bower.io/) under the name `js-cookie`
+js-cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`
 
 It can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
-Create a session cookie, valid to the current page:
+Create a session cookie, valid to the path of the current page:
 
 ```javascript
 Cookies.set('name', 'value');
 ```
 
-Create a cookie that expires 7 days from now, valid to the current page:
+Create a cookie that expires 7 days from now, valid to the path of the current page:
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7 });
@@ -93,9 +93,9 @@ Cookies2.set('name', 'value');
 
 ## JSON
 
-js-cookie provides automatic JSON storage for cookies.
+js-cookie provides unobstrusive JSON storage for cookies.
 
-When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to the `JSON.stringify` api (if available):
+When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to the `JSON.stringify` api:
 
 ```javascript
 Cookies.set('name', { foo: 'bar' });
@@ -111,7 +111,7 @@ Cookies.get('name'); // => '{"foo":"bar"}'
 Cookies.get(); // => { name: '{"foo":"bar"}' }
 ```
 
-When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api (if available):
+When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api:
 
 ```javascript
 Cookies.getJSON('name'); // => { foo: 'bar' }
@@ -125,8 +125,8 @@ Cookies.getJSON(); // => { name: { foo: 'bar' } }
 
 ## Encoding
 
-This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent.  
-The only character in cookie-name or cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret the input as literal.  
+This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent using [percent-encoding](http://en.wikipedia.org/wiki/Percent-encoding).  
+The only character in cookie-name or cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret percent input as literal.  
 To override the default cookie decoding you need to use a [converter](#converter).
 
 ## Cookie Attributes
@@ -186,13 +186,13 @@ Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
 
 A `Boolean` indicating if the cookie transmission requires a secure protocol (https)
 
-**Browser default:** Doesn't require secure protocol
+**Browser default:** No secure protocol requirement
 
 **Examples:**
 
 ```javascript
 Cookies.set('name', 'value', { secure: true });
-Cookies.get('name'); // => 'value' (if already in secure protocol)
+Cookies.get('name'); // => 'value'
 Cookies.remove('name', { secure: true });
 ```
 
