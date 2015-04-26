@@ -95,13 +95,13 @@ Cookies2.set('name', 'value');
 
 js-cookie provides unobstrusive JSON storage for cookies.
 
-When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to the `JSON.stringify` api:
+When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie store the string representation of the object according to `JSON.stringify`:
 
 ```javascript
 Cookies.set('name', { foo: 'bar' });
 ```
 
-When reading a cookie with the default `Cookies.get` api, you receive the stringified representation stored in the cookie:
+When reading a cookie with the default `Cookies.get` api, you receive the string representation stored in the cookie:
 
 ```javascript
 Cookies.get('name'); // => '{"foo":"bar"}'
@@ -111,7 +111,7 @@ Cookies.get('name'); // => '{"foo":"bar"}'
 Cookies.get(); // => { name: '{"foo":"bar"}' }
 ```
 
-When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to the `JSON.stringify` api:
+When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to `JSON.parse`:
 
 ```javascript
 Cookies.getJSON('name'); // => { foo: 'bar' }
