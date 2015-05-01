@@ -184,20 +184,20 @@ test('deletion', function () {
 	strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
-test('with options', function () {
+test('with attributes', function () {
 	expect(1);
-	var options = { path: '/' };
-	Cookies.set('c', 'v', options);
-	Cookies.remove('c', options);
+	var attributes = { path: '/' };
+	Cookies.set('c', 'v', attributes);
+	Cookies.remove('c', attributes);
 	strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
-test('passing options reference', function () {
+test('passing attributes reference', function () {
 	expect(1);
-	var options = { path: '/' };
-	Cookies.set('c', 'v', options);
-	Cookies.remove('c', options);
-	deepEqual(options, { path: '/' }, 'won\'t alter options object');
+	var attributes = { path: '/' };
+	Cookies.set('c', 'v', attributes);
+	Cookies.remove('c', attributes);
+	deepEqual(attributes, { path: '/' }, 'won\'t alter attributes object');
 });
 
 module('converters', lifecycle);
