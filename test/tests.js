@@ -137,7 +137,8 @@ test('expires option as fraction of a day', function () {
 	expect(1);
 
 	var now = new Date().getTime();
-	var expires = Date.parse(Cookies.set('c', 'v', { expires: 0.5 }).replace(/.+expires=/, ''));
+	var stringifiedDate = Cookies.set('c', 'v', { expires: 0.5 }).split('; ')[1].split('=')[1];
+	var expires = Date.parse(stringifiedDate);
 
 	// When we were using Date.setDate() fractions have been ignored
 	// and expires resulted in the current date. Allow 1000 milliseconds
