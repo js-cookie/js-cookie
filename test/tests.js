@@ -157,7 +157,9 @@ test('expires option as Date instance', function () {
 
 test('return value', function () {
 	expect(1);
-	strictEqual(Cookies.set('c', 'v'), 'c=v', 'should return written cookie string');
+	var expected = 'c=v';
+	var actual = Cookies.set('c', 'v').substring(0, expected.length);
+	strictEqual(actual, expected, 'should return written cookie string');
 });
 
 test('defaults', function () {
