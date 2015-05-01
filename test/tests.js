@@ -164,9 +164,15 @@ test('return value', function () {
 
 test('defaults', function () {
 	expect(2);
+
 	Cookies.defaults.path = '/foo';
-	ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use options from defaults');
-	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
+	ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use attributes from defaults');
+	Cookies.remove( 'c', { path: '/foo' });
+
+	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'attributes argument has precedence');
+	Cookies.remove( 'c', { path: '/bar' });
+
+	delete Cookies.defaults.path;
 });
 
 module('remove', lifecycle);
