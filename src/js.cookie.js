@@ -38,7 +38,9 @@
 			// Write
 
 			if (arguments.length > 1) {
-				options = extend(api.defaults, options);
+				options = extend({
+					path: '/'
+				}, api.defaults, options);
 
 				if (typeof options.expires === 'number') {
 					var expires = new Date();
@@ -118,9 +120,7 @@
 				json: true
 			}, [].slice.call(arguments));
 		};
-		api.defaults = {
-			path: '/'
-		};
+		api.defaults = {};
 
 		api.remove = function (key, options) {
 			api(key, '', extend(options, {

@@ -164,11 +164,11 @@ test('return value', function () {
 
 test('default path attribute', function () {
 	expect(1);
-	ok(Cookies.set('c', 'v').match(/path=\//), 'should be default to the whole site');
+	ok(Cookies.set('c', 'v').match(/path=\//), 'should read the default path');
 });
 
-test('changing defaults', function () {
-	expect(2);
+test('API for changing defaults', function () {
+	expect(3);
 
 	Cookies.defaults.path = '/foo';
 	ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use attributes from defaults');
@@ -178,6 +178,7 @@ test('changing defaults', function () {
 	Cookies.remove( 'c', { path: '/bar' });
 
 	delete Cookies.defaults.path;
+	ok(Cookies.set('c', 'v').match(/path=\//), 'should roll back to the default path');
 });
 
 module('remove', lifecycle);
