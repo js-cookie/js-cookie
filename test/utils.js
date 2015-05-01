@@ -34,7 +34,6 @@
 
 	window.lifecycle = {
 		teardown: function () {
-			Cookies.defaults = {};
 			Object.keys(Cookies.get()).forEach(Cookies.remove);
 		}
 	};
