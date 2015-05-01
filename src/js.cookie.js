@@ -118,7 +118,9 @@
 				json: true
 			}, [].slice.call(arguments));
 		};
-		api.defaults = {};
+		api.defaults = {
+			path: '/'
+		};
 
 		api.remove = function (key, options) {
 			api(key, '', extend(options, {

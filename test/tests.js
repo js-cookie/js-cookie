@@ -162,7 +162,12 @@ test('return value', function () {
 	strictEqual(actual, expected, 'should return written cookie string');
 });
 
-test('defaults', function () {
+test('default path attribute', function () {
+	expect(1);
+	ok(Cookies.set('c', 'v').match(/path=\//), 'should be default to the whole site');
+});
+
+test('changing defaults', function () {
 	expect(2);
 
 	Cookies.defaults.path = '/foo';
