@@ -23,29 +23,29 @@
 		var i = 0;
 		var result = {};
 		for (; i < arguments.length; i++) {
-			var options = arguments[ i ];
-			for (var key in options) {
-				result[key] = options[key];
+			var attributes = arguments[ i ];
+			for (var key in attributes) {
+				result[key] = attributes[key];
 			}
 		}
 		return result;
 	}
 
 	function init (converter) {
-		function api (key, value, options) {
+		function api (key, value, attributes) {
 			var result;
 
 			// Write
 
 			if (arguments.length > 1) {
-				options = extend({
+				attributes = extend({
 					path: '/'
-				}, api.defaults, options);
+				}, api.defaults, attributes);
 
-				if (typeof options.expires === 'number') {
+				if (typeof attributes.expires === 'number') {
 					var expires = new Date();
-					expires.setMilliseconds(expires.getMilliseconds() + options.expires * 864e+5);
-					options.expires = expires;
+					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
+					attributes.expires = expires;
 				}
 
 				try {
@@ -64,10 +64,10 @@
 
 				return (document.cookie = [
 					key, '=', value,
-					options.expires && '; expires=' + options.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
-					options.path    && '; path=' + options.path,
-					options.domain  && '; domain=' + options.domain,
-					options.secure  && '; secure'
+					attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
+					attributes.path    && '; path=' + attributes.path,
+					attributes.domain  && '; domain=' + attributes.domain,
+					attributes.secure  && '; secure'
 				].join(''));
 			}
 
@@ -122,8 +122,8 @@
 		};
 		api.defaults = {};
 
-		api.remove = function (key, options) {
-			api(key, '', extend(options, {
+		api.remove = function (key, attributes) {
+			api(key, '', extend(attributes, {
 				expires: -1
 			}));
 		};
