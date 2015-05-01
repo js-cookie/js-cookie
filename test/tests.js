@@ -128,8 +128,9 @@ test('expires option as days from now', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
-	strictEqual(Cookies.set('c', 'v', { expires: 21 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
-		'should write the cookie string with expires');
+	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: 21 }).substring(0, expected.length);
+	strictEqual(actual, expected, 'should write the cookie string with expires');
 });
 
 test('expires option as fraction of a day', function () {
