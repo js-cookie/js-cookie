@@ -72,12 +72,12 @@ Delete cookie:
 Cookies.remove('name');
 ```
 
-Delete cookie passing the attributes:
+Delete a cookie valid to the path of the current page:
 
 ```javascript
-Cookies.set('name', 'value', { path: '/foo' });
+Cookies.set('name', 'value', { path: '' });
 Cookies.remove('name'); // fail!
-Cookies.remove('name', { path: '/foo' }); // removed!
+Cookies.remove('name', { path: '' }); // removed!
 ```
 
 *IMPORTANT! when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
@@ -159,9 +159,9 @@ Define the path where the cookie is available.
 **Examples:**
 
 ```javascript
-Cookies.set('name', 'value', { path: '/foo' });
+Cookies.set('name', 'value', { path: '' });
 Cookies.get('name'); // => 'value'
-Cookies.remove('name', { path: '/foo' });
+Cookies.remove('name', { path: '' });
 ```
 
 **Note regarding Internet Explorer:**
