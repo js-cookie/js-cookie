@@ -220,7 +220,9 @@ test('should decode a malformed char that matches the decodeURIComponent regex',
 	document.cookie = 'c=%E3';
 	var cookies = Cookies.withConverter(unescape);
 	strictEqual(cookies.get('c'), 'ã', 'should convert the character correctly');
-	cookies.remove('c');
+	cookies.remove('c', {
+		path: ''
+	});
 });
 
 test('should be able to conditionally decode a single malformed cookie', function () {
@@ -230,6 +232,7 @@ test('should be able to conditionally decode a single malformed cookie', functio
 			return unescape(value);
 		}
 	});
+
 	document.cookie = 'escaped=%u5317';
 	strictEqual(cookies.get('escaped'), '北', 'should use a custom method for escaped cookie');
 
@@ -241,7 +244,11 @@ test('should be able to conditionally decode a single malformed cookie', functio
 		encoded: '京'
 	}, 'should retrieve everything');
 
-	Object.keys(cookies.get()).forEach(cookies.remove);
+	Object.keys(cookies.get()).forEach(function (name) {
+		cookies.remove(name, {
+			path: ''
+		});
+	});
 	strictEqual(document.cookie, '', 'should remove everything');
 });
 
@@ -320,4 +327,3 @@ test('do not conflict with existent globals', function () {
 	strictEqual(window.Cookies, 'existent global', 'should restore the original global');
 	window.Cookies = Cookies;
 });
-
