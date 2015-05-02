@@ -35,22 +35,22 @@ It can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
-Create a session cookie, valid to the path of the current page:
+Create a cookie, valid across the entire site:
 
 ```javascript
 Cookies.set('name', 'value');
 ```
 
-Create a cookie that expires 7 days from now, valid to the path of the current page:
+Create a cookie that expires 7 days from now, valid across the entire site:
 
 ```javascript
 Cookies.set('name', 'value', { expires: 7 });
 ```
 
-Create an expiring cookie, valid across the entire site:
+Create an expiring cookie, valid to the path of the current page:
 
 ```javascript
-Cookies.set('name', 'value', { expires: 7, path: '/' });
+Cookies.set('name', 'value', { expires: 7, path: '' });
 ```
 
 Read cookie:
@@ -72,9 +72,9 @@ Delete cookie:
 Cookies.remove('name');
 
 // Need to use the same path, domain and secure attributes that were used when writing the cookie
-Cookies.set('name', 'value', { path: '/' });
+Cookies.set('name', 'value', { path: '/foo' });
 Cookies.remove('name'); // fail!
-Cookies.remove('name', { path: '/' }); // removed!
+Cookies.remove('name', { path: '/foo' }); // removed!
 ```
 
 *IMPORTANT! when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
@@ -137,7 +137,7 @@ Cookie attributes defaults can be set globally by setting properties of the `Coo
 
 Define when the cookie will be removed. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` instance. If omitted, the cookie becomes a session cookie.
 
-**Browser default:** Cookie is removed when the user closes the browser.
+**Default:** Cookie is removed when the user closes the browser.
 
 **Examples:**
 
@@ -151,14 +151,14 @@ Cookies.remove('name');
 
 Define the path where the cookie is available.
 
-**Browser default:** Path of the page where the cookie was created
+**Default:** `/`
 
 **Examples:**
 
 ```javascript
-Cookies.set('name', 'value', { path: '/' });
+Cookies.set('name', 'value', { path: '/foo' });
 Cookies.get('name'); // => 'value'
-Cookies.remove('name', { path: '/' });
+Cookies.remove('name', { path: '/foo' });
 ```
 
 **Note regarding Internet Explorer:**
@@ -173,7 +173,7 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 Define the domain where the cookie is available
 
-**Browser default:** Domain of the page where the cookie was created
+**Default:** Domain of the page where the cookie was created
 
 **Examples:**
 
@@ -186,7 +186,7 @@ Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
 
 A `Boolean` indicating if the cookie transmission requires a secure protocol (https)
 
-**Browser default:** No secure protocol requirement
+**Default:** No secure protocol requirement
 
 **Examples:**
 
