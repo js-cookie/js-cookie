@@ -70,8 +70,11 @@ Delete cookie:
 
 ```javascript
 Cookies.remove('name');
+```
 
-// Need to use the same path, domain and secure attributes that were used when writing the cookie
+Delete cookie passing the attributes:
+
+```javascript
 Cookies.set('name', 'value', { path: '/foo' });
 Cookies.remove('name'); // fail!
 Cookies.remove('name', { path: '/foo' }); // removed!
