@@ -128,15 +128,17 @@ test('expires option as days from now', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
-	strictEqual(Cookies.set('c', 'v', { expires: 21 }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
-		'should write the cookie string with expires');
+	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: 21 }).substring(0, expected.length);
+	strictEqual(actual, expected, 'should write the cookie string with expires');
 });
 
 test('expires option as fraction of a day', function () {
 	expect(1);
 
 	var now = new Date().getTime();
-	var expires = Date.parse(Cookies.set('c', 'v', { expires: 0.5 }).replace(/.+expires=/, ''));
+	var stringifiedDate = Cookies.set('c', 'v', { expires: 0.5 }).split('; ')[1].split('=')[1];
+	var expires = Date.parse(stringifiedDate);
 
 	// When we were using Date.setDate() fractions have been ignored
 	// and expires resulted in the current date. Allow 1000 milliseconds
@@ -148,20 +150,35 @@ test('expires option as Date instance', function () {
 	expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-	strictEqual(Cookies.set('c', 'v', { expires: sevenDaysFromNow }), 'c=v; expires=' + sevenDaysFromNow.toUTCString(),
-		'should write the cookie string with expires');
+	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: sevenDaysFromNow }).substring(0, expected.length);
+	strictEqual(actual, expected, 'should write the cookie string with expires');
 });
 
 test('return value', function () {
 	expect(1);
-	strictEqual(Cookies.set('c', 'v'), 'c=v', 'should return written cookie string');
+	var expected = 'c=v';
+	var actual = Cookies.set('c', 'v').substring(0, expected.length);
+	strictEqual(actual, expected, 'should return written cookie string');
 });
 
-test('defaults', function () {
-	expect(2);
+test('default path attribute', function () {
+	expect(1);
+	ok(Cookies.set('c', 'v').match(/path=\//), 'should read the default path');
+});
+
+test('API for changing defaults', function () {
+	expect(3);
+
 	Cookies.defaults.path = '/foo';
-	ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use options from defaults');
-	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'options argument has precedence');
+	ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use attributes from defaults');
+	Cookies.remove( 'c', { path: '/foo' });
+
+	ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'attributes argument has precedence');
+	Cookies.remove( 'c', { path: '/bar' });
+
+	delete Cookies.defaults.path;
+	ok(Cookies.set('c', 'v').match(/path=\//), 'should roll back to the default path');
 });
 
 module('remove', lifecycle);
@@ -173,20 +190,20 @@ test('deletion', function () {
 	strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
-test('with options', function () {
+test('with attributes', function () {
 	expect(1);
-	var options = { path: '/' };
-	Cookies.set('c', 'v', options);
-	Cookies.remove('c', options);
+	var attributes = { path: '/' };
+	Cookies.set('c', 'v', attributes);
+	Cookies.remove('c', attributes);
 	strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
-test('passing options reference', function () {
+test('passing attributes reference', function () {
 	expect(1);
-	var options = { path: '/' };
-	Cookies.set('c', 'v', options);
-	Cookies.remove('c', options);
-	deepEqual(options, { path: '/' }, 'won\'t alter options object');
+	var attributes = { path: '/' };
+	Cookies.set('c', 'v', attributes);
+	Cookies.remove('c', attributes);
+	deepEqual(attributes, { path: '/' }, 'won\'t alter attributes object');
 });
 
 module('converters', lifecycle);
@@ -203,7 +220,9 @@ test('should decode a malformed char that matches the decodeURIComponent regex',
 	document.cookie = 'c=%E3';
 	var cookies = Cookies.withConverter(unescape);
 	strictEqual(cookies.get('c'), 'ã', 'should convert the character correctly');
-	cookies.remove('c');
+	cookies.remove('c', {
+		path: ''
+	});
 });
 
 test('should be able to conditionally decode a single malformed cookie', function () {
@@ -213,6 +232,7 @@ test('should be able to conditionally decode a single malformed cookie', functio
 			return unescape(value);
 		}
 	});
+
 	document.cookie = 'escaped=%u5317';
 	strictEqual(cookies.get('escaped'), '北', 'should use a custom method for escaped cookie');
 
@@ -224,7 +244,11 @@ test('should be able to conditionally decode a single malformed cookie', functio
 		encoded: '京'
 	}, 'should retrieve everything');
 
-	Object.keys(cookies.get()).forEach(cookies.remove);
+	Object.keys(cookies.get()).forEach(function (name) {
+		cookies.remove(name, {
+			path: ''
+		});
+	});
 	strictEqual(document.cookie, '', 'should remove everything');
 });
 
@@ -303,4 +327,3 @@ test('do not conflict with existent globals', function () {
 	strictEqual(window.Cookies, 'existent global', 'should restore the original global');
 	window.Cookies = Cookies;
 });
-
