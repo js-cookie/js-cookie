@@ -1,6 +1,6 @@
 /*global lifecycle: true*/
 
-QUnit.module('cookie-value encoding', lifecycle);
+QUnit.module('cookie-value', lifecycle);
 
 QUnit.test('cookie-value with double quotes', function (assert) {
 	assert.expect(1);
@@ -216,7 +216,7 @@ QUnit.test('cookie-value - 4 bytes character (𩸽)', function (assert) {
 	assert.strictEqual(document.cookie, 'c=%F0%A9%B8%BD', 'should encode the 𩸽 character');
 });
 
-QUnit.module('cookie-name encoding', lifecycle);
+QUnit.module('cookie-name', lifecycle);
 
 QUnit.test('RFC 6265 - character not allowed in the cookie-name "("', function (assert) {
 	assert.expect(2);
