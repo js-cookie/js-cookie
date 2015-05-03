@@ -33,7 +33,7 @@
 	});
 
 	window.lifecycle = {
-		teardown: function () {
+		afterEach: function () {
 			// Remove the cookies created using js-cookie default attributes
 			Object.keys(Cookies.get()).forEach(Cookies.remove);
 			// Remove the cookies created using browser default attributes
