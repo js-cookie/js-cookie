@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 				options: {
 					httpBase: 'http://127.0.0.1:9998'
 				},
-				src: ['test/index.html', 'test/amd.html']
+				src: ['test/index.html', 'test/encoding.html', 'test/amd.html']
 			}
 		},
 		nodeunit: {
