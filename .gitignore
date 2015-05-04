@@ -2,3 +2,6 @@ node_modules
 build
 .sizecache.json
 *.log*
+# Eclipse project files
+/.settings/
+/.project
