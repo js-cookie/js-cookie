@@ -50,7 +50,7 @@
 
 				try {
 					result = JSON.stringify(value);
-					if (/^[\{\[]/.test(result)) {
+					if (/^[{[]/.test(result)) {
 						value = result;
 					}
 				} catch (e) {}
