@@ -235,7 +235,7 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Manual release steps
 
-* Remove the "-pre" suffix of the "version" attribute of `bower.json`, `package.json` and `component.json`
+* Remove the "-pre" suffix of the "version" attribute of `bower.json` and `package.json`
 * Remove the "-pre" suffix of the version number in the `src/js.cookie.js` file
 * Commit with the message "Release version x.x.x"
 * Create version tag in git
