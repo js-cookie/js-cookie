@@ -241,7 +241,7 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Create version tag in git
 * Create a github release and upload the minified file
 * Release on npm
-* Increment and add the "-pre" suffix to the "version" attribute of `bower.json`, `package.json` and `component.json`
+* Increment and add the "-pre" suffix to the "version" attribute of `bower.json` and `package.json`
 * Increment and add the "-pre" suffix to the version number in the `src/js.cookie.js` file
 * Link the documentation of the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
