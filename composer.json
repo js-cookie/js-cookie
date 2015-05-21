@@ -1,0 +1,13 @@
+{
+  "name": "js-cookie/js-cookie",
+  "description": "A simple, lightweight JavaScript API for handling cookies",
+  "type": "component",
+  "license": "MIT",
+  "extra": {
+    "component": {
+      "scripts": [
+        "src/js.cookie.js"
+      ]
+    }
+  }
+}
