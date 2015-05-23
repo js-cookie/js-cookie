@@ -68,6 +68,6 @@ When js-cookie encoding tests are executed, it will request a url in the server 
 
 js-cookie will send some requests to the server from the baseurl in the format `/encoding?name=<cookie>`, where `<cookie>` represents the cookie-name to be read from the request.
 
-The server should handle those requests, internally parsing the cookie from the request and writing it again. It must set an `application/json` content type containing an object literal in the content body with `name` and `value` keys, each representing the cookie-name and the cookie-value respectively.
+The server should handle those requests, internally parsing the cookie from the request and writing it again. It must set an `application/json` content type containing an object literal in the content body with `name` and `value` keys, each representing the cookie-name and cookie-value decoded by the server-side implementation.
 
 If the server fails to respond with this specification in any request, the related QUnit test will fail. This is to make sure the server-side implementation will always be in sync with js-cookie encoding tests for maximum compatibility.
