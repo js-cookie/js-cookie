@@ -66,8 +66,8 @@ After the test suite has finished, js-cookie exposes the global `window.global_t
 
 When js-cookie encoding tests are executed, it will request a url in the server through an iframe representing each test being run. js-cookie expects the server to handle the input and return the proper `Set-Cookie` headers in the response. js-cookie will then read the response and verify if the encoding is consistent with js-cookie default encoding mechanism
 
-js-cookie will send some requests to the server from the baseurl in the format `/encoding/<cookie>`, where `<cookie>` represents the cookie-name to be read from the request.
+js-cookie will send some requests to the server from the baseurl in the format `/encoding?name=<cookie>`, where `<cookie>` represents the cookie-name to be read from the request.
 
-The server should handle those requests, internally parsing the cookie and writing it again. It must set an `application/json` content type containing an object literal in the content body with `name` and `value` keys, each representing the cookie-name and the cookie-value respectively.
+The server should handle those requests, internally parsing the cookie from the request and writing it again. It must set an `application/json` content type containing an object literal in the content body with `name` and `value` keys, each representing the cookie-name and the cookie-value respectively.
 
 If the server fails to respond with this specification in any request, the related QUnit test will fail. This is to make sure the server-side implementation will always be in sync with js-cookie encoding tests for maximum compatibility.
