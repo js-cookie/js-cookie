@@ -44,4 +44,61 @@
 			});
 		}
 	};
+
+	window.addEvent = function (element, eventName, fn) {
+		var method = 'addEventListener';
+		if (element.attachEvent) {
+			eventName = 'on' + eventName;
+			method = 'attachEvent';
+		}
+		element[ method ](eventName, fn);
+	};
+
+	window.using = function( assert ) {
+		function getQuery(key) {
+			var queries = location.href.split('?')[1];
+			if (!queries) {
+				return;
+			}
+			var pairs = queries.split( /&|=/ );
+			var indexBaseURL = pairs.indexOf(key);
+			var result = pairs[indexBaseURL + 1];
+			if (result) {
+				return decodeURIComponent(result);
+			}
+		}
+		function setCookie(name, value) {
+			return {
+				then: function(callback) {
+					var iframe = document.getElementById('request_target');
+					var serverURL = getQuery('integration_baseurl');
+					Cookies.set(name, value);
+					if (!serverURL) {
+						callback(Cookies.get(name));
+					} else {
+						var requestURL = serverURL + '/encoding/' + name;
+						var done = assert.async();
+						addEvent(iframe, 'load', function () {
+							var content = iframe.contentWindow.document.innerHTML;
+							if ( !content ) {
+								ok(false, [
+									'"' + requestURL + '"',
+									'should return an object literal in the content body',
+									'with name and value keys'
+								].join(' '));
+								return;
+							}
+							var result = JSON.parse(content);
+							callback(result[name]);
+							done();
+						});
+						iframe.src = requestURL;
+					}
+				}
+			};
+		}
+		return {
+			setCookie: setCookie
+		};
+	};
 }());
