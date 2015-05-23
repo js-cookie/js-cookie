@@ -76,11 +76,17 @@
 					if (!serverURL) {
 						callback(Cookies.get(name), document.cookie);
 					} else {
-						var requestURL = serverURL + '/encoding/' + name;
+						var requestURL = [
+							serverURL,
+							'/encoding?',
+							'name=' + encodeURIComponent(name),
+							'&value=' + encodeURIComponent(value)
+						].join('');
 						var done = assert.async();
 						addEvent(iframe, 'load', function () {
 							var iframeDocument = iframe.contentWindow.document;
-							var content = iframeDocument.innerHTML;
+							var root = iframeDocument.documentElement;
+							var content = root.textContent;
 							if ( !content ) {
 								ok(false, [
 									'"' + requestURL + '"',
@@ -91,7 +97,7 @@
 								return;
 							}
 							var result = JSON.parse(content);
-							callback(result[name], iframeDocument.cookie);
+							callback(result.value, iframeDocument.cookie);
 							done();
 						});
 						iframe.src = requestURL;
