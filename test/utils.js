@@ -74,22 +74,24 @@
 					var serverURL = getQuery('integration_baseurl');
 					Cookies.set(name, value);
 					if (!serverURL) {
-						callback(Cookies.get(name));
+						callback(Cookies.get(name), document.cookie);
 					} else {
 						var requestURL = serverURL + '/encoding/' + name;
 						var done = assert.async();
 						addEvent(iframe, 'load', function () {
-							var content = iframe.contentWindow.document.innerHTML;
+							var iframeDocument = iframe.contentWindow.document;
+							var content = iframeDocument.innerHTML;
 							if ( !content ) {
 								ok(false, [
 									'"' + requestURL + '"',
 									'should return an object literal in the content body',
 									'with name and value keys'
 								].join(' '));
+								done();
 								return;
 							}
 							var result = JSON.parse(content);
-							callback(result[name]);
+							callback(result[name], iframeDocument.cookie);
 							done();
 						});
 						iframe.src = requestURL;
