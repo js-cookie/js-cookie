@@ -3,13 +3,5 @@
   "version": "2.0.0-pre",
   "main": [
     "src/js.cookie.js"
-  ],
-  "ignore": [
-    "test",
-    ".*",
-    "*.json",
-    "*.md",
-    "*.txt",
-    "Gruntfile.js"
   ]
 }
