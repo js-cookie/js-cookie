@@ -78,7 +78,7 @@
 					} else {
 						var requestURL = [
 							serverURL,
-							'/encoding?',
+							'encoding?',
 							'name=' + encodeURIComponent(name),
 							'&value=' + encodeURIComponent(value)
 						].join('');
