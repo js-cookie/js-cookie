@@ -7,6 +7,9 @@
 	"extends": "../.jshintrc",
 	"globals": {
 		"require": true,
-		"unescape": true
+		"unescape": true,
+		"lifecycle": true,
+		"using": true,
+		"addEvent": true
 	}
 }
