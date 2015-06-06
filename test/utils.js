@@ -90,15 +90,17 @@
 							if ( !content ) {
 								ok(false, [
 									'"' + requestURL + '"',
-									'should return an object literal in the content body',
-									'with name and value keys'
+									'content should not be empty'
 								].join(' '));
 								done();
 								return;
 							}
-							var result = JSON.parse(content);
-							callback(result.value, iframeDocument.cookie);
-							done();
+							try {
+								var result = JSON.parse(content);
+								callback(result.value, iframeDocument.cookie);
+							} finally {
+								done();
+							}
 						});
 						iframe.src = requestURL;
 					}
