@@ -48,14 +48,6 @@ QUnit.test('malformed cookie value in IE', function (assert) {
 	var done = assert.async();
 	// Sandbox in an iframe so that we can poke around with document.cookie.
 	var iframe = document.createElement('iframe');
-	var addEvent = function (element, eventName, fn) {
-		var method = 'addEventListener';
-		if (element.attachEvent) {
-			eventName = 'on' + eventName;
-			method = 'attachEvent';
-		}
-		element[ method ](eventName, fn);
-	};
 	iframe.src = 'malformed_cookie.html';
 	addEvent(iframe, 'load', function () {
 		if (iframe.contentWindow.ok) {

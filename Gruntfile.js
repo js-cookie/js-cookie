@@ -3,15 +3,38 @@
 
 module.exports = function (grunt) {
 
+	function encodingMiddleware(request, response, next) {
+		var url = require('url').parse(request.url, true, true);
+		var query = url.query;
+		var pathname = url.pathname;
+
+		if (pathname !== '/encoding') {
+			next();
+			return;
+		}
+
+		var cookieName = query.name;
+		var cookieValue = query.value;
+
+		response.setHeader('content-type', 'application/json');
+		response.end(JSON.stringify({
+			name: cookieName,
+			value: cookieValue
+		}));
+	}
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		qunit: {
 			all: {
 				options: {
-					httpBase: 'http://127.0.0.1:9998'
-				},
-				src: ['test/index.html', 'test/encoding.html', 'test/amd.html']
-			}
+					urls: [
+						'http://127.0.0.1:9998/',
+						'http://127.0.0.1:9998/amd.html',
+						'http://127.0.0.1:9998/encoding.html?integration_baseurl=http://127.0.0.1:9998/'
+					]
+				}
+			},
 		},
 		nodeunit: {
 			all: 'test/node.js'
@@ -76,15 +99,19 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			'build-sauce': {
-				options: {
-					port: 9999,
-					base: ['.', 'test']
-				}
-			},
 			'build-qunit': {
 				options: {
 					port: 9998,
+					base: ['.', 'test'],
+					middleware: function (connect, options, middlewares) {
+						middlewares.unshift(encodingMiddleware);
+						return middlewares;
+					}
+				}
+			},
+			'build-sauce': {
+				options: {
+					port: 9999,
 					base: ['.', 'test']
 				}
 			},
@@ -94,7 +121,11 @@ module.exports = function (grunt) {
 					base: ['.', 'test'],
 					open: 'http://127.0.0.1:10000',
 					keepalive: true,
-					livereload: true
+					livereload: true,
+					middleware: function (connect, options, middlewares) {
+						middlewares.unshift(encodingMiddleware);
+						return middlewares;
+					}
 				}
 			}
 		},

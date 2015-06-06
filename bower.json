@@ -4,12 +4,5 @@
   "main": [
     "src/js.cookie.js"
   ],
-  "ignore": [
-    "test",
-    ".*",
-    "*.json",
-    "*.md",
-    "*.txt",
-    "Gruntfile.js"
-  ]
+  "ignore": []
 }
