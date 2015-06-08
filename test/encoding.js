@@ -2,20 +2,29 @@ QUnit.module('cookie-value', lifecycle);
 
 QUnit.test('cookie-value with double quotes', function (assert) {
 	assert.expect(1);
-	Cookies.set('c', '"');
-	assert.strictEqual(Cookies.get('c'), '"', 'should print the quote character');
+	using(assert)
+	.setCookie('c', '"')
+	.then(function (decodedValue) {
+		assert.strictEqual(decodedValue, '"', 'should print the quote character');
+	});
 });
 
 QUnit.test('cookie-value with double quotes in the left', function (assert) {
 	assert.expect(1);
-	Cookies.set('c', '"content');
-	assert.strictEqual(Cookies.get('c'), '"content', 'should print the quote character');
+	using(assert)
+	.setCookie('c', '"content')
+	.then(function (decodedValue) {
+		assert.strictEqual(decodedValue, '"content', 'should print the quote character');
+	});
 });
 
 QUnit.test('cookie-value with double quotes in the right', function (assert) {
 	assert.expect(1);
-	Cookies.set('c', 'content"');
-	assert.strictEqual(Cookies.get('c'), 'content"', 'should print the quote character');
+	using(assert)
+	.setCookie('c', 'content"')
+	.then(function (decodedValue) {
+		assert.strictEqual(decodedValue, 'content"', 'should print the quote character');
+	});
 });
 
 QUnit.test('RFC 6265 - character not allowed in the cookie-value " "', function (assert) {
