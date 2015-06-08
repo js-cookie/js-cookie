@@ -23,7 +23,7 @@ A simple, lightweight JavaScript API for handling cookies
 Include the script (unless you are packaging scripts somehow else):
 
 ```html
-<script src="/path/to/js.cookie.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.0-beta.1/js.cookie.min.js"></script>
 ```
 
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
