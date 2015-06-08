@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 			},
 		},
 		nodeunit: {
-			all: 'test/node.js'
+			all: 'test/commonjs.js'
 		},
 		jshint: {
 			options: {
