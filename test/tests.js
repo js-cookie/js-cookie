@@ -165,10 +165,10 @@ QUnit.test('API for changing defaults', function (assert) {
 
 	Cookies.defaults.path = '/foo';
 	assert.ok(Cookies.set('c', 'v').match(/path=\/foo/), 'should use attributes from defaults');
-	Cookies.remove( 'c', { path: '/foo' });
+	Cookies.remove('c', { path: '/foo' });
 
 	assert.ok(Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/), 'attributes argument has precedence');
-	Cookies.remove( 'c', { path: '/bar' });
+	Cookies.remove('c', { path: '/bar' });
 
 	delete Cookies.defaults.path;
 	assert.ok(Cookies.set('c', 'v').match(/path=\//), 'should roll back to the default path');

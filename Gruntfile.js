@@ -138,7 +138,7 @@ module.exports = function (grunt) {
 					pollInterval: 10000,
 					statusCheckAttempts: 90,
 					throttled: 3,
-					browsers: (function() {
+					browsers: (function () {
 						var browsers = {
 							'iOS': [{
 								browserName: 'iphone',
@@ -216,7 +216,7 @@ module.exports = function (grunt) {
 						};
 
 						var matrix = [];
-						for ( var os in browsers ) {
+						for (var os in browsers) {
 							matrix = matrix.concat(browsers[os]);
 						}
 						return matrix;
@@ -234,7 +234,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('test', ['jshint', 'jscs', 'connect:build-qunit', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);

@@ -1,6 +1,6 @@
 // https://github.com/axemclion/grunt-saucelabs#test-result-details-with-qunit
 (function () {
-	"use strict";
+	'use strict';
 
 	var log = [];
 
@@ -54,13 +54,13 @@
 		element[ method ](eventName, fn);
 	};
 
-	window.using = function( assert ) {
+	window.using = function (assert) {
 		function getQuery(key) {
 			var queries = location.href.split('?')[1];
 			if (!queries) {
 				return;
 			}
-			var pairs = queries.split( /&|=/ );
+			var pairs = queries.split(/&|=/);
 			var indexBaseURL = pairs.indexOf(key);
 			var result = pairs[indexBaseURL + 1];
 			if (result) {
@@ -69,7 +69,7 @@
 		}
 		function setCookie(name, value) {
 			return {
-				then: function(callback) {
+				then: function (callback) {
 					var iframe = document.getElementById('request_target');
 					var serverURL = getQuery('integration_baseurl');
 					Cookies.set(name, value);
@@ -87,7 +87,7 @@
 							var iframeDocument = iframe.contentWindow.document;
 							var root = iframeDocument.documentElement;
 							var content = root.textContent;
-							if ( !content ) {
+							if (!content) {
 								ok(false, [
 									'"' + requestURL + '"',
 									'content should not be empty'
