@@ -5,7 +5,7 @@ A simple, lightweight JavaScript API for handling cookies
 * Works in [all](https://saucelabs.com/u/js-cookie) browsers
 * [Heavily](test) tested
 * No dependency
-* [Unobstrusive](#json) JSON support
+* [Unobtrusive](#json) JSON support
 * Supports AMD/CommonJS
 * [RFC 6265](http://www.rfc-editor.org/rfc/rfc6265.txt) compliant
 * Enable [custom decoding](#converter)
