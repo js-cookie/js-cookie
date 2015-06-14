@@ -56,7 +56,7 @@
 				} catch (e) {}
 
 				value = encodeURIComponent(String(value));
-				value = value.replace(/%(23|24|26|2B|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+				value = value.replace(/%(2C|23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
 
 				key = encodeURIComponent(String(key));
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
