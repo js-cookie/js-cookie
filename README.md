@@ -13,7 +13,7 @@ A simple, lightweight JavaScript API for handling cookies
 * **~800 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
-[View documentation for the latest release (2.0.0).](https://github.com/js-cookie/js-cookie/tree/v2.0.0#readme)**
+[View documentation for the latest release (2.0.1).](https://github.com/js-cookie/js-cookie/tree/v2.0.1#readme)**
 
 ## Build Status Matrix
 
@@ -236,14 +236,12 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Manual release steps
 
-* Remove the "-pre" suffix of the "version" attribute of `package.json`
-* Remove the "-pre" suffix of the version number in the `src/js.cookie.js` file
+* Increment the "version" attribute of `package.json`
+* Increment the version number in the `src/js.cookie.js` file
 * Commit with the message "Release version x.x.x"
 * Create version tag in git
 * Create a github release and upload the minified file
 * Release on npm
-* Increment and add the "-pre" suffix to the "version" attribute of `package.json`
-* Increment and add the "-pre" suffix to the version number in the `src/js.cookie.js` file
 * Link the documentation of the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
 
