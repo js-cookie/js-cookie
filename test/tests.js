@@ -174,6 +174,33 @@ QUnit.test('API for changing defaults', function (assert) {
 	assert.ok(Cookies.set('c', 'v').match(/path=\//), 'should roll back to the default path');
 });
 
+QUnit.test('falsy secure value', function (assert) {
+	var falsyValues = [
+		false,
+		null,
+		undefined,
+		0,
+		NaN,
+		''
+	];
+
+	assert.expect(falsyValues.length);
+	var expected = 'c=v; path=/';
+
+	falsyValues.forEach(function (secureFalsyValue) {
+		var falsyName;
+
+		if ('' === secureFalsyValue) {
+			falsyName = 'Zero length string';
+		} else {
+			falsyName = secureFalsyValue + '';
+		}
+
+		var actual = Cookies.set('c', 'v', {secure: secureFalsyValue});
+		assert.strictEqual(actual, expected, falsyName + ' should not break the cookie');
+	});
+});
+
 QUnit.module('remove', lifecycle);
 
 QUnit.test('deletion', function (assert) {
