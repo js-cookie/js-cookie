@@ -67,7 +67,7 @@
 					attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
 					attributes.path    && '; path=' + attributes.path,
 					attributes.domain  && '; domain=' + attributes.domain,
-					attributes.secure  && '; secure'
+					attributes.secure ? '; secure' : ''
 				].join(''));
 			}
 

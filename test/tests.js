@@ -174,6 +174,14 @@ QUnit.test('API for changing defaults', function (assert) {
 	assert.ok(Cookies.set('c', 'v').match(/path=\//), 'should roll back to the default path');
 });
 
+// github.com/js-cookie/js-cookie/pull/54
+QUnit.test('false secure value', function (assert) {
+	assert.expect(1);
+	var expected = 'c=v; path=/';
+	var actual = Cookies.set('c', 'v', {secure: false});
+	assert.strictEqual(actual, expected, 'false should not modify path in cookie string');
+});
+
 QUnit.module('remove', lifecycle);
 
 QUnit.test('deletion', function (assert) {
