@@ -61,7 +61,7 @@ Cookies.get('name'); // => 'value'
 Cookies.get('nothing'); // => undefined
 ```
 
-Read all available cookies:
+Read all visible cookies:
 
 ```javascript
 Cookies.get(); // => { name: 'value' }
@@ -139,7 +139,7 @@ Cookie attributes defaults can be set globally by setting properties of the `Coo
 
 ### expires
 
-Define when the cookie will be removed. Value can be a `Number` which will be interpreted as days from time of creation or a `Date` instance. If omitted, the cookie becomes a session cookie.
+Define when the cookie will be removed. Value can be a [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) which will be interpreted as days from time of creation or a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) instance. If omitted, the cookie becomes a session cookie.
 
 **Default:** Cookie is removed when the user closes the browser.
 
@@ -153,7 +153,7 @@ Cookies.remove('name');
 
 ### path
 
-Define the path where the cookie is available.
+A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating the path where the cookie is visible.
 
 **Default:** `/`
 
@@ -175,9 +175,9 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 ### domain
 
-Define the domain where the cookie is available
+A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain where the cookie is visible.
 
-**Default:** Domain of the page where the cookie was created
+**Default:** Domain of the page where the cookie was created.
 
 **Examples:**
 
@@ -188,9 +188,9 @@ Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
 
 ### secure
 
-A `Boolean` indicating if the cookie transmission requires a secure protocol (https)
+Either `true` or `false`, indicating if the cookie transmission requires a secure protocol (https).
 
-**Default:** No secure protocol requirement
+**Default:** No secure protocol requirement.
 
 **Examples:**
 
