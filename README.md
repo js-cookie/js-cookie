@@ -241,9 +241,9 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Commit with the message "Release version x.x.x"
 * Create version tag in git
 * Create a github release and upload the minified file
-* Release on npm
 * Link the documentation of the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
+* Release on npm
 
 ## Authors
 
