@@ -1,5 +1,5 @@
 /*!
- * JavaScript Cookie v2.0.1
+ * JavaScript Cookie v2.0.2
  * https://github.com/js-cookie/js-cookie
  *
  * Copyright 2006, 2015 Klaus Hartl
