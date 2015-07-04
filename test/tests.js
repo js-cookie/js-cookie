@@ -192,6 +192,22 @@ QUnit.test('false secure value', function (assert) {
 	assert.strictEqual(actual, expected, 'false should not modify path in cookie string');
 });
 
+QUnit.test('undefined attribute value', function (assert) {
+	assert.expect(4);
+	assert.strictEqual(Cookies.set('c', 'v', {
+		expires: undefined
+	}), 'c=v; path=/', 'should not write undefined expires attribute');
+	assert.strictEqual(Cookies.set('c', 'v', {
+		path: undefined
+	}), 'c=v', 'should not write undefined path attribute');
+	assert.strictEqual(Cookies.set('c', 'v', {
+		domain: undefined
+	}), 'c=v; path=/', 'should not write undefined domain attribute');
+	assert.strictEqual(Cookies.set('c', 'v', {
+		secure: undefined
+	}), 'c=v; path=/', 'should not write undefined secure attribute');
+});
+
 QUnit.module('remove', lifecycle);
 
 QUnit.test('deletion', function (assert) {
