@@ -36,7 +36,7 @@
 			return /(%[0-9A-Z]{2})+/g;
 		}
 
-		function decode_cookie(parts, name) {
+		function decodeCookie(parts, name) {
 			var cookie = parts.slice(1).join('=');
 
 			if (cookie.charAt(0) === '"') {
@@ -110,12 +110,12 @@
 				var name = parts[0].replace(rdecode(), decodeURIComponent);
 
 				if (key === name) {
-					result = decode_cookie.call(this, parts, name);
+					result = decodeCookie.call(this, parts, name);
 					break;
 				}
 
 				if (!key) {
-					result[name] = decode_cookie.call(this, parts, name);
+					result[name] = decodeCookie.call(this, parts, name);
 				}
 			}
 
