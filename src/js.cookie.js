@@ -32,6 +32,28 @@
 	}
 
 	function init (converter) {
+		function rdecode() {
+			return /(%[0-9A-Z]{2})+/g;
+		}
+
+		function decodeCookie(parts, name) {
+			var cookie = parts.slice(1).join('=');
+
+			if (cookie.charAt(0) === '"') {
+				cookie = cookie.slice(1, -1);
+			}
+
+			cookie = converter && converter(cookie, name) || cookie.replace(rdecode(), decodeURIComponent);
+
+			if (this.json) {
+				try {
+					cookie = JSON.parse(cookie);
+				} catch (e) {
+				}
+			}
+			return cookie;
+		}
+
 		function api (key, value, attributes) {
 			var result;
 
@@ -81,33 +103,19 @@
 			// in case there are no cookies at all. Also prevents odd result when
 			// calling "get()"
 			var cookies = document.cookie ? document.cookie.split('; ') : [];
-			var rdecode = /(%[0-9A-Z]{2})+/g;
 			var i = 0;
 
 			for (; i < cookies.length; i++) {
 				var parts = cookies[i].split('=');
-				var name = parts[0].replace(rdecode, decodeURIComponent);
-				var cookie = parts.slice(1).join('=');
-
-				if (cookie.charAt(0) === '"') {
-					cookie = cookie.slice(1, -1);
-				}
-
-				cookie = converter && converter(cookie, name) || cookie.replace(rdecode, decodeURIComponent);
-
-				if (this.json) {
-					try {
-						cookie = JSON.parse(cookie);
-					} catch (e) {}
-				}
+				var name = parts[0].replace(rdecode(), decodeURIComponent);
 
 				if (key === name) {
-					result = cookie;
+					result = decodeCookie.call(this, parts, name);
 					break;
 				}
 
 				if (!key) {
-					result[name] = cookie;
+					result[name] = decodeCookie.call(this, parts, name);
 				}
 			}
 
