@@ -93,22 +93,24 @@
 					cookie = cookie.slice(1, -1);
 				}
 
-				cookie = converter && converter(cookie, name) || cookie.replace(rdecode, decodeURIComponent);
+				try {
+					cookie = converter && converter(cookie, name) || cookie.replace(rdecode, decodeURIComponent);
 
-				if (this.json) {
-					try {
-						cookie = JSON.parse(cookie);
-					} catch (e) {}
-				}
+					if (this.json) {
+						try {
+							cookie = JSON.parse(cookie);
+						} catch (e) {}
+					}
 
-				if (key === name) {
-					result = cookie;
-					break;
-				}
+					if (key === name) {
+						result = cookie;
+						break;
+					}
 
-				if (!key) {
-					result[name] = cookie;
-				}
+					if (!key) {
+						result[name] = cookie;
+					}
+				} catch (e) {}
 			}
 
 			return result;
