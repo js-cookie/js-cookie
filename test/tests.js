@@ -79,6 +79,15 @@ QUnit.test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function (asser
 	assert.strictEqual(Cookies.get('c'), 'v', 'should simply ignore quoted strings');
 });
 
+QUnit.test('Call to read cookie when there is another unrelated cookie with malformed encoding in the value', function (assert) {
+	assert.expect(2);
+	document.cookie = 'invalid=%A1';
+	document.cookie = 'c=v';
+	assert.strictEqual(Cookies.get('c'), 'v', 'should not throw a URI malformed exception when retrieving a single cookie');
+	assert.deepEqual(Cookies.get(), { c: 'v' }, 'should not throw a URI malformed exception when retrieving all cookies');
+	Cookies.withConverter(unescape).remove('invalid');
+});
+
 QUnit.module('write', lifecycle);
 
 QUnit.test('String primitive', function (assert) {
