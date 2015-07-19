@@ -203,7 +203,7 @@ Cookies.remove('name', { secure: true });
 ## Converter
 
 Create a new instance of the api that overrides the default decoding implementation.  
-All methods that rely in a proper decoding to work, such as `Cookies.remove()` and `Cookies.get()`, will run the converter first for each cookie.  
+All get methods that rely in a proper decoding to work, such as `Cookies.get()` and `Cookies.get('name')`, will run the converter first for each cookie.  
 The returning String will be used as the cookie value.
 
 Example from reading one of the cookies that can only be decoded using the `escape` function:
