@@ -28,7 +28,7 @@ Include the script (unless you are packaging scripts somehow else):
 ```
 
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
-in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
+in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN. For an immmediately updated CDN, you can use the RawGit mirror: [https://cdn.rawgit.com/js-cookie/js-cookie/master/src/js.cookie.js](https://cdn.rawgit.com/js-cookie/js-cookie/master/src/js.cookie.js).
 
 js-cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`
 
