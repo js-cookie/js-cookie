@@ -125,7 +125,7 @@ Cookies.getJSON('name'); // => { foo: 'bar' }
 Cookies.getJSON(); // => { name: { foo: 'bar' } }
 ```
 
-*Note: To support IE6-8 you need to include the JSON-js polyfill: https://github.com/douglascrockford/JSON-js*
+*Note: To support IE6-7 you need to include the JSON-js polyfill: https://github.com/douglascrockford/JSON-js*
 
 ## Encoding
 
