@@ -279,6 +279,28 @@ QUnit.test('should be able to conditionally decode a single malformed cookie', f
 	assert.strictEqual(document.cookie, '', 'should remove everything');
 });
 
+// github.com/js-cookie/js-cookie/issues/70
+QUnit.test('should be able to create a write decoder', function (assert) {
+	assert.expect(1);
+	Cookies.withConverter({
+		write: function (value) {
+			return value.replace('+', '%2B');
+		}
+	}).set('c', '+');
+	assert.strictEqual(document.cookie, 'c=%2B', 'should call the write converter');
+});
+
+QUnit.test('should be able to use read and write decoder', function (assert) {
+	assert.expect(1);
+	document.cookie = 'c=%2B';
+	var cookies = Cookies.withConverter({
+		read: function (value) {
+			return value.replace('%2B', '+');
+		}
+	});
+	assert.strictEqual(cookies.get('c'), '+', 'should call the read converter');
+});
+
 QUnit.module('JSON handling', lifecycle);
 
 QUnit.test('Number', function (assert) {
