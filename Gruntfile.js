@@ -223,6 +223,19 @@ module.exports = function (grunt) {
 					}())
 				}
 			}
+		},
+		release: {
+			options: {
+				commitMessage: 'Release version <%= version %>',
+				tagName: 'v<%= version %>',
+				// Release on npm should be done after linking the latest release documentation
+				// in the README
+				npm: false,
+				github: {
+					repo: 'js-cookie/js-cookie',
+					accessTokenVar: 'GH_JS_COOKIE_ACCESS_TOKEN'
+				}
+			}
 		}
 	});
 

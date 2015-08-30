@@ -261,11 +261,9 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Manual release steps
 
-* Increment the "version" attribute of `package.json`
 * Increment the version number in the `src/js.cookie.js` file
-* Commit with the message "Release version x.x.x"
-* Create version tag in git
-* Create a github release and upload the minified file
+* Run `grunt release` command with `:minor`, `:patch` or `:major` flags
+* Upload the minified file into the github release ([geddski/grunt-release#47](https://github.com/geddski/grunt-release/issues/47))
 * Link the documentation of the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
 * Release on npm
