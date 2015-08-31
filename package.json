@@ -38,6 +38,7 @@
     "grunt-jscs": "2.8.0",
     "grunt-release": "0.13.0",
     "grunt-saucelabs": "8.6.2",
+    "grunt-text-replace": "0.4.0",
     "gzip-js": "0.3.2",
     "qunitjs": "1.22.0",
     "requirejs": "2.1.22"

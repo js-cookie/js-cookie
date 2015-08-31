@@ -231,10 +231,21 @@ module.exports = function (grunt) {
 				// Release on npm should be done after linking the latest release documentation
 				// in the README
 				npm: false,
+				afterBump: ['replace:source'],
 				github: {
 					repo: 'js-cookie/js-cookie',
 					accessTokenVar: 'GH_JS_COOKIE_ACCESS_TOKEN'
 				}
+			}
+		},
+		replace: {
+			source: {
+				src: ['src/js.cookie.js'],
+				overwrite: true,
+				replacements: [{
+					from: /\* JavaScript Cookie v[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}/,
+					to: '* JavaScript Cookie v<%= pkg.version %>'
+				}]
 			}
 		}
 	});
