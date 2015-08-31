@@ -232,6 +232,7 @@ module.exports = function (grunt) {
 				// in the README
 				npm: false,
 				afterBump: ['replace:source'],
+				afterRelease: ['replace:readme-link'],
 				github: {
 					repo: 'js-cookie/js-cookie',
 					accessTokenVar: 'GH_JS_COOKIE_ACCESS_TOKEN'
@@ -245,6 +246,14 @@ module.exports = function (grunt) {
 				replacements: [{
 					from: /\* JavaScript Cookie v[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}/,
 					to: '* JavaScript Cookie v<%= pkg.version %>'
+				}]
+			},
+			'readme-link': {
+				src: ['README.md'],
+				overwrite: true,
+				replacements: [{
+					from: /\[View documentation for the latest release \([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}\).\]\(https:\/\/github\.com\/js-cookie\/js-cookie\/tree\/v[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}#readme\)/,
+					to: '[View documentation for the latest release (<%= pkg.version %>).](https://github.com/js-cookie/js-cookie/tree/v<%= pkg.version %>#readme)'
 				}]
 			}
 		}

@@ -13,6 +13,7 @@ A simple, lightweight JavaScript API for handling cookies
 * Enable [custom encoding/decoding](#converters)
 * **~800 bytes** gzipped!
 
+<!-- This string is replaced via regex when a new version is released -->
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release (2.1.0).](https://github.com/js-cookie/js-cookie/tree/v2.1.0#readme)**
 
@@ -263,7 +264,6 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 * Run `grunt release` command with `:minor`, `:patch` or `:major` flags
 * Upload the minified file into the github release ([geddski/grunt-release#47](https://github.com/geddski/grunt-release/issues/47))
-* Link the documentation of the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
 * Release on npm
 
