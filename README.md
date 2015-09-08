@@ -200,6 +200,20 @@ Cookies.get('name'); // => 'value'
 Cookies.remove('name', { secure: true });
 ```
 
+### HttpOnly
+
+Either `true` or `false`, indicating if the cookie should be only available through http(s) headers.
+
+**Default:** Not activated
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { HttpOnly: true });
+Cookies.get('name'); // => ''
+Cookies.remove('name', { HttpOnly: true });
+```
+
 ## Converter
 
 Create a new instance of the api that overrides the default decoding implementation.  
