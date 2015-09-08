@@ -1,5 +1,5 @@
 {
-  "name": "js-cookie",
+  "name": "js-cookie-fg",
   "version": "2.0.3",
   "description": "A simple, lightweight JavaScript API for handling cookies",
   "main": "src/js.cookie.js",
