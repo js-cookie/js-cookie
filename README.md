@@ -1,4 +1,4 @@
-# JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie)
+# JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie) [![npm version](https://badge.fury.io/js/js-cookie.svg)](http://badge.fury.io/js/js-cookie) [![Bower version](https://badge.fury.io/bo/js-cookie.svg)](http://badge.fury.io/bo/js-cookie)
 
 A simple, lightweight JavaScript API for handling cookies
 
