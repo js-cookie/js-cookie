@@ -188,6 +188,9 @@ Assuming a cookie that is being created on `domain.com`:
 ```javascript
 Cookies.set('name', 'value', { domain: 'sub.domain.com' });
 Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
+```
+
+```javascript
 Cookies.set('name', 'value', { domain: '.domain.com' });
 Cookies.get('name'); // => 'value' (available on 'sub.domain.com' and 'domain.com')
 ```
