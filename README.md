@@ -175,15 +175,21 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 ### domain
 
-A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain where the cookie is visible.
+A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain or subdomain where the cookie is visible. For security reasons, only subdomains of the current page are allowed.
 
-**Default:** Domain of the page where the cookie was created.
+If you want to make the cookie visible to the domain and all subdomains of `website.com`, you can pass the attribute in the format `.website.com`.
+
+**Default:** Domain or subdomain of the page where the cookie was created.
 
 **Examples:**
+
+Assuming a cookie that is being created on `domain.com`:
 
 ```javascript
 Cookies.set('name', 'value', { domain: 'sub.domain.com' });
 Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
+Cookies.set('name', 'value', { domain: '.domain.com' });
+Cookies.get('name'); // => 'value' (available on 'sub.domain.com' and 'domain.com')
 ```
 
 ### secure
