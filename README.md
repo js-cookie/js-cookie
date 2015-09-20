@@ -198,7 +198,6 @@ Cookies.get('name'); // => undefined (need to read at 'subdomain.site.com')
 
 This means one cannot omit the `domain` attribute and expect it not to be visible in a subdomain in IE.
 
-
 ### secure
 
 Either `true` or `false`, indicating if the cookie transmission requires a secure protocol (https).
