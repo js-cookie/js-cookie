@@ -177,7 +177,7 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain where the cookie should be visible. The cookie will also be visible to all subdomains.
 
-**Default:** Cookie is visible only to the domain or subdomain of the page where the cookie was created.
+**Default:** Cookie is visible only to the domain or subdomain of the page where the cookie was created, except for Internet Explorer (see below).
 
 **Examples:**
 
@@ -196,7 +196,7 @@ Cookies.get('name'); // => undefined (need to read at 'subdomain.site.com')
 
 (From [Internet Explorer Cookie Internals (FAQ)](http://blogs.msdn.com/b/ieinternals/archive/2009/08/20/wininet-ie-cookie-internals-faq.aspx))
 
-This means one cannot omit the `domain` attribute and expect it not to be visible in a subdomain in IE.
+This means that if you omit the `domain` attribute, it will be visible for a subdomain in IE.
 
 ### secure
 
