@@ -175,16 +175,28 @@ This means one cannot set a path using `path: window.location.pathname` in case 
 
 ### domain
 
-A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain where the cookie is visible.
+A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) indicating a valid domain where the cookie should be visible. The cookie will also be visible to all subdomains.
 
-**Default:** Domain of the page where the cookie was created.
+**Default:** Cookie is visible only to the domain or subdomain of the page where the cookie was created, except for Internet Explorer (see below).
 
 **Examples:**
 
+Assuming a cookie that is being created on `site.com`:
+
 ```javascript
-Cookies.set('name', 'value', { domain: 'sub.domain.com' });
-Cookies.get('name'); // => undefined (need to read at 'sub.domain.com')
+Cookies.set('name', 'value', { domain: 'subdomain.site.com' });
+Cookies.get('name'); // => undefined (need to read at 'subdomain.site.com')
 ```
+
+**Note regarding Internet Explorer default behavior:**
+
+> Q3: If I don’t specify a DOMAIN attribute (for) a cookie, IE sends it to all nested subdomains anyway?  
+> A: Yes, a cookie set on example.com will be sent to sub2.sub1.example.com.  
+> Internet Explorer differs from other browsers in this regard.
+
+(From [Internet Explorer Cookie Internals (FAQ)](http://blogs.msdn.com/b/ieinternals/archive/2009/08/20/wininet-ie-cookie-internals-faq.aspx))
+
+This means that if you omit the `domain` attribute, it will be visible for a subdomain in IE.
 
 ### secure
 
