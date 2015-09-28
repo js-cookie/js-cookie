@@ -236,15 +236,6 @@ cookies.get('default'); // 北
 cookies.get(); // { escaped: '北', default: '北' }
 ```
 
-Example for parsing the value from a cookie generated with PHP's `setcookie()` method:
-
-```javascript
-// 'cookie+with+space' => 'cookie with space'
-Cookies.withConverter(function (value) {
-    return value.replace(/\+/g, ' ');
-}).get('foo');
-```
-
 You can also pass an object literal:
 
 ```javascript
