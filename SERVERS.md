@@ -37,3 +37,21 @@ var Cookies = Cookies.withConverter({
 ```
 
 Rack seems to have [a similar problem](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-132503017).
+
+## Tomcat 7.x
+
+It seems that there is a situation where Tomcat does not [read the parens correctly](https://github.com/js-cookie/js-cookie/issues/92#issue-107743407). To fix this you need to write a custom write converter:
+
+```javascript
+var Cookies = Cookies.withConverter({
+  write: function (value) {
+      // Encode all characters according to the "encodeURIComponent" spec
+      return encodeURIComponent(value)
+          // Revert the characters that are unnecessarly encoded but are
+          // allowed in a cookie value
+          .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent)
+          // Encode the parens that are interpreted incorrectly by Tomcat
+          .replace(/[\(\)]/g, escape);
+  }
+});
+```
