@@ -1,5 +1,6 @@
 {
   "name": "js-cookie",
+  "license": "MIT",
   "main": [
     "src/js.cookie.js"
   ],
