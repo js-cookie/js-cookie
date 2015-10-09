@@ -6,13 +6,14 @@
  * Released under the MIT license
  */
 (function (factory) {
+	var _OldCookies, api;
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
 	} else if (typeof exports === 'object') {
 		module.exports = factory();
 	} else {
-		var _OldCookies = window.Cookies;
-		var api = window.Cookies = factory();
+		_OldCookies = window.Cookies;
+		api = window.Cookies = factory();
 		api.noConflict = function () {
 			window.Cookies = _OldCookies;
 			return api;
@@ -20,11 +21,10 @@
 	}
 }(function () {
 	function extend () {
-		var i = 0;
-		var result = {};
+		var i = 0, result = {}, attributes, key;
 		for (; i < arguments.length; i++) {
-			var attributes = arguments[ i ];
-			for (var key in attributes) {
+			attributes = arguments[ i ];
+			for (key in attributes) {
 				result[key] = attributes[key];
 			}
 		}
@@ -33,7 +33,7 @@
 
 	function init (converter) {
 		function api (key, value, attributes) {
-			var result;
+			var result, expires, cookies, rdecode, parts, i, name, cookie;
 
 			// Write
 
@@ -43,7 +43,7 @@
 				}, api.defaults, attributes);
 
 				if (typeof attributes.expires === 'number') {
-					var expires = new Date();
+					expires = new Date();
 					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
 					attributes.expires = expires;
 				}
@@ -80,14 +80,14 @@
 			// To prevent the for loop in the first place assign an empty array
 			// in case there are no cookies at all. Also prevents odd result when
 			// calling "get()"
-			var cookies = document.cookie ? document.cookie.split('; ') : [];
-			var rdecode = /(%[0-9A-Z]{2})+/g;
-			var i = 0;
+			cookies = document.cookie ? document.cookie.split('; ') : [];
+			rdecode = /(%[0-9A-Z]{2})+/g;
+			i = 0;
 
 			for (; i < cookies.length; i++) {
-				var parts = cookies[i].split('=');
-				var name = parts[0].replace(rdecode, decodeURIComponent);
-				var cookie = parts.slice(1).join('=');
+				parts = cookies[i].split('=');
+				name = parts[0].replace(rdecode, decodeURIComponent);
+				cookie = parts.slice(1).join('=');
 
 				if (cookie.charAt(0) === '"') {
 					cookie = cookie.slice(1, -1);
