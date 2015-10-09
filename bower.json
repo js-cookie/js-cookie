@@ -7,6 +7,11 @@
     "travis.sh",
     "test",
     "Gruntfile.js",
-    "package.json"
+    "package.json",
+    ".gitignore",
+    ".jshintignore",
+    ".jshintrc",
+    ".tm_properties",
+    ".travis.yml"
   ]
 }
