@@ -36,10 +36,11 @@ var PHPCookies = Cookies.withConverter({
     },
     read: function (value) {
         return value
-            // Decode all characters according to the "encodeURIComponent" spec
-            .replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
-            // Decode the plus sign to spaces
+            // Decode the plus sign to spaces first, otherwise "legit" encoded pluses
+            // will be replaced incorrectly
             .replace(/\+/g, ' ')
+            // Decode all characters according to the "encodeURIComponent" spec
+            .replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
     }
 });
 ```
