@@ -4,5 +4,15 @@
   "main": [
     "src/js.cookie.js"
   ],
-  "ignore": []
+  "ignore": [
+    "travis.sh",
+    "test",
+    "Gruntfile.js",
+    "package.json",
+    ".gitignore",
+    ".jshintignore",
+    ".jshintrc",
+    ".tm_properties",
+    ".travis.yml"
+  ]
 }
