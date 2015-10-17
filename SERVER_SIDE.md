@@ -15,7 +15,15 @@ This presents two types of problems:
 1. PHP writes a cookie via `setcookie()` and all spaces get converted to `+` signs. js-cookie read `+` signs and uses them literally, since it is a valid cookie character.
 2. js-cookie writes a cookie with a value that contains `+` signs and stores it as is, since it is a valid cookie character. PHP read a cookie and converts `+` signs to spaces.
 
-To make both PHP and js-cookie play nicely together you need to write custom converters:
+To make both PHP and js-cookie play nicely together?
+
+**In PHP**, use `setrawcookie()` instead of `setcookie()`:
+
+```php
+setrawcookie($name, rawurlencode($value));
+```
+
+**In JavaScript**, use a custom converter:
 
 ```javascript
 var Cookies = Cookies.withConverter({
