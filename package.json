@@ -1,6 +1,6 @@
 {
   "name": "js-cookie",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A simple, lightweight JavaScript API for handling cookies",
   "main": "src/js.cookie.js",
   "directories": {
