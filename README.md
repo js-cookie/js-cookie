@@ -3,7 +3,7 @@
 A simple, lightweight JavaScript API for handling cookies
 
 * Works in [all](https://saucelabs.com/u/js-cookie) browsers
-* Accepts any character
+* Accepts [any](#encoding) character
 * [Heavily](test) tested
 * No dependency
 * [Unobtrusive](#json) JSON support
