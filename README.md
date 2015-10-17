@@ -260,7 +260,7 @@ Cookies.withConverter({
 
 ## Server-side integration
 
-Check out the [Servers Docs](SERVERS.md)
+Check out the [Servers Docs](SERVER_SIDE.md)
 
 ## Contributing
 
