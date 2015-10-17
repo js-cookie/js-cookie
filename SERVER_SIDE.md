@@ -64,3 +64,25 @@ var TomcatCookies = Cookies.withConverter({
   }
 });
 ```
+
+Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with js-cookie.
+
+## JBoss 7.1.1
+
+It seems that the servlet implementation of JBoss 7.1.1 [does not read some characters correctly](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-148944674), even though they are allowed as per [RFC 6265](https://tools.ietf.org/html/rfc6265#section-4.1.1). To fix this you need to write a custom converter to send those characters correctly:
+
+```javascript
+var JBossCookies = Cookies.withConverter({
+    write: function (value) {
+        // Encode all characters according to the "encodeURIComponent" spec
+        return encodeURIComponent(value)
+            // Revert the characters that are unnecessarly encoded but are
+            // allowed in a cookie value
+            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent)
+            // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
+            .replace(/[\[\]]/g, encodeURIComponent);
+    }
+});
+```
+
+Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with js-cookie.
