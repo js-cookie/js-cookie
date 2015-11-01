@@ -1,6 +1,6 @@
 # Server-side integration
 
-There are some servers that are not compliant with the [RFC 6265](http://tools.ietf.org/html/rfc6265). For those, some characters that are not encoded by js-cookie might be treated differently.
+There are some servers that are not compliant with the [RFC 6265](http://tools.ietf.org/html/rfc6265). For those, some characters that are not encoded by JavaScript Cookie might be treated differently.
 
 Here we document the most important server-side peculiarities and their workarounds. Feel free to send a [Pull Request](https://github.com/js-cookie/js-cookie/blob/master/CONTRIBUTING.md#pull-requests) if you see something that can be improved.
 
@@ -12,10 +12,10 @@ In PHP, `setcookie()` function encodes cookie values using `urlencode()` functio
 
 This presents two types of problems:
 
-1. PHP writes a cookie via `setcookie()` and all spaces get converted to `+` signs. js-cookie read `+` signs and uses them literally, since it is a valid cookie character.
-2. js-cookie writes a cookie with a value that contains `+` signs and stores it as is, since it is a valid cookie character. PHP read a cookie and converts `+` signs to spaces.
+1. PHP writes a cookie via `setcookie()` and all spaces get converted to `+` signs. JavaScript Cookie read `+` signs and uses them literally, since it is a valid cookie character.
+2. JavaScript Cookie writes a cookie with a value that contains `+` signs and stores it as is, since it is a valid cookie character. PHP read a cookie and converts `+` signs to spaces.
 
-To make both PHP and js-cookie play nicely together?
+To make both PHP and JavaScript Cookie play nicely together?
 
 **In PHP**, use `setrawcookie()` instead of `setcookie()`:
 
@@ -65,7 +65,7 @@ var TomcatCookies = Cookies.withConverter({
 });
 ```
 
-Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with js-cookie.
+Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.
 
 ## JBoss 7.1.1
 
@@ -85,4 +85,4 @@ var JBossCookies = Cookies.withConverter({
 });
 ```
 
-Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with js-cookie.
+Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.
