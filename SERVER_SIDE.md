@@ -4,7 +4,7 @@ There are some servers that are not compliant with the [RFC 6265](http://tools.i
 
 Here we document the most important server-side peculiarities and their workarounds. Feel free to send a [Pull Request](https://github.com/js-cookie/js-cookie/blob/master/CONTRIBUTING.md#pull-requests) if you see something that can be improved.
 
-*Disclaimer: This was built based on community provided information.*
+*Disclaimer: This was built based on community provided information. The examples below should be used only as a reference.*
 
 ## PHP
 
@@ -23,7 +23,9 @@ To make both PHP and JavaScript Cookie play nicely together?
 setrawcookie($name, rawurlencode($value));
 ```
 
-**In JavaScript**, use a custom converter:
+**In JavaScript**, use a custom converter.
+
+**Example**:
 
 ```javascript
 var PHPCookies = Cookies.withConverter({
@@ -49,7 +51,9 @@ Rack seems to have [a similar problem](https://github.com/js-cookie/js-cookie/is
 
 ## Tomcat 7.x
 
-It seems that there is a situation where Tomcat does not [read the parens correctly](https://github.com/js-cookie/js-cookie/issues/92#issue-107743407). To fix this you need to write a custom write converter:
+It seems that there is a situation where Tomcat does not [read the parens correctly](https://github.com/js-cookie/js-cookie/issues/92#issue-107743407). To fix this you need to write a custom write converter.
+
+**Example**:
 
 ```javascript
 var TomcatCookies = Cookies.withConverter({
@@ -69,7 +73,9 @@ Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java
 
 ## JBoss 7.1.1
 
-It seems that the servlet implementation of JBoss 7.1.1 [does not read some characters correctly](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-148944674), even though they are allowed as per [RFC 6265](https://tools.ietf.org/html/rfc6265#section-4.1.1). To fix this you need to write a custom converter to send those characters correctly:
+It seems that the servlet implementation of JBoss 7.1.1 [does not read some characters correctly](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-148944674), even though they are allowed as per [RFC 6265](https://tools.ietf.org/html/rfc6265#section-4.1.1). To fix this you need to write a custom converter to send those characters correctly.
+
+**Example**:
 
 ```javascript
 var JBossCookies = Cookies.withConverter({
