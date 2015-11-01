@@ -4,7 +4,7 @@ There are some servers that are not compliant with the [RFC 6265](http://tools.i
 
 Here we document the most important server-side peculiarities and their workarounds. Feel free to send a [Pull Request](https://github.com/js-cookie/js-cookie/blob/master/CONTRIBUTING.md#pull-requests) if you see something that can be improved.
 
-*Disclaimer: This was built based on community provided information. The examples below should be used only as a reference.*
+*Disclaimer: This documentation is entirely based on community provided information. The examples below should be used only as a reference.*
 
 ## PHP
 
