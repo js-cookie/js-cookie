@@ -236,24 +236,17 @@ cookies.get('default'); // 北
 cookies.get(); // { escaped: '北', default: '北' }
 ```
 
-You can also pass an Object Literal:
-
-```javascript
-Cookies.withConverter({
-    read: function (value, name) {
-        // Convert
-    }
-});
-```
-
 ### Write
 
 Create a new instance of the api that overrides the default encoding implementation:
 
 ```javascript
 Cookies.withConverter({
+    read: function (value, name) {
+        // Read converter
+    },
     write: function (value, name) {
-        // Convert
+        // Write converter
     }
 });
 ```
