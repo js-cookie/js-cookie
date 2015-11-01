@@ -236,7 +236,7 @@ cookies.get('default'); // 北
 cookies.get(); // { escaped: '北', default: '北' }
 ```
 
-You can also pass an object literal:
+You can also pass an Object Literal:
 
 ```javascript
 Cookies.withConverter({
