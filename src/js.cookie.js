@@ -66,7 +66,7 @@
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 				key = key.replace(/[\(\)]/g, escape);
 
-				var cookieString = key, '=', value;
+				var cookieString = key + '=' + value;
 				if (attributes.expires) {
 					cookieString += '; expires=' + attributes.expires.toUTCString(); // use expires attribute, max-age is not supported by IE
 				}
