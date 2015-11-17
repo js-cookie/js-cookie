@@ -66,13 +66,22 @@
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 				key = key.replace(/[\(\)]/g, escape);
 
-				return (document.cookie = [
-					key, '=', value,
-					attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
-					attributes.path    && '; path=' + attributes.path,
-					attributes.domain  && '; domain=' + attributes.domain,
-					attributes.secure ? '; secure' : ''
-				].join(''));
+				var cookieString = key + '=' + value;
+				if (attributes.expires) {
+					cookieString += '; expires=' + attributes.expires.toUTCString(); // use expires attribute, max-age is not supported by IE
+				}
+				if (attributes.path) {
+					cookieString += '; path=' + attributes.path;
+				}
+				if (attributes.domain) {
+					cookieString += '; domain=' + attributes.domain;
+				}
+				if (attributes.secure) {
+					cookieString += '; secure';
+				}
+
+				document.cookie = cookieString;
+				return cookieString;
 			}
 
 			// Read
