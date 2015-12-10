@@ -122,23 +122,25 @@
 			return result;
 		}
 
-		api.get = api.set = api;
-		api.getJSON = function () {
+		api.defaults = {};
+
+		var api2 = api.bind({});
+		api2.set = api2.get = api2;
+		api2.getJSON = function () {
 			return api.apply({
 				json: true
 			}, [].slice.call(arguments));
 		};
-		api.defaults = {};
 
-		api.remove = function (key, attributes) {
-			api(key, '', extend(attributes, {
+		api2.remove = function (key, attributes) {
+			api2(key, '', extend(attributes, {
 				expires: -1
 			}));
 		};
 
-		api.withConverter = init;
+		api2.withConverter = init;
 
-		return api;
+		return api2;
 	}
 
 	return init(function () {});
