@@ -31,6 +31,12 @@
 		return result;
 	}
 
+	function bind (func, context) {
+		return function() {
+			return func.apply(context, arguments);
+		};
+	}
+
 	function init (converter) {
 		function api (key, value, attributes) {
 			var result;
@@ -124,7 +130,7 @@
 
 		api.defaults = {};
 
-		var api2 = api.bind({});
+		var api2 = bind(api, {});
 		api2.set = api2.get = api2;
 		api2.getJSON = function () {
 			return api.apply({
