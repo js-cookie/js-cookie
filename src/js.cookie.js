@@ -31,6 +31,12 @@
 		return result;
 	}
 
+	function bind (func, context) {
+		return function () {
+			return func.apply(context, arguments);
+		};
+	}
+
 	function init (converter) {
 		function api (key, value, attributes) {
 			var result;
@@ -122,23 +128,24 @@
 			return result;
 		}
 
-		api.get = api.set = api;
-		api.getJSON = function () {
+		var api2 = bind(api, {});
+		api2.set = api2.get = api2;
+		api2.getJSON = function () {
 			return api.apply({
 				json: true
 			}, [].slice.call(arguments));
 		};
-		api.defaults = {};
+		api2.defaults = api.defaults = {};
 
-		api.remove = function (key, attributes) {
-			api(key, '', extend(attributes, {
+		api2.remove = function (key, attributes) {
+			api2(key, '', extend(attributes, {
 				expires: -1
 			}));
 		};
 
-		api.withConverter = init;
+		api2.withConverter = init;
 
-		return api;
+		return api2;
 	}
 
 	return init(function () {});
