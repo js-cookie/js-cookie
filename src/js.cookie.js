@@ -128,8 +128,6 @@
 			return result;
 		}
 
-		api.defaults = {};
-
 		var api2 = bind(api, {});
 		api2.set = api2.get = api2;
 		api2.getJSON = function () {
@@ -137,6 +135,7 @@
 				json: true
 			}, [].slice.call(arguments));
 		};
+		api2.defaults = api.defaults = {};
 
 		api2.remove = function (key, attributes) {
 			api2(key, '', extend(attributes, {
