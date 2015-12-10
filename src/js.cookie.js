@@ -32,7 +32,7 @@
 	}
 
 	function bind (func, context) {
-		return function() {
+		return function () {
 			return func.apply(context, arguments);
 		};
 	}
