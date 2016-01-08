@@ -217,6 +217,14 @@ QUnit.test('deletion', function (assert) {
 	assert.strictEqual(document.cookie, '', 'should delete the cookie');
 });
 
+QUnit.test('delete all', function (assert) {
+	assert.expect(1);
+	Cookies.set('a', 'v1');
+	Cookies.set('b', 'v2');
+	Cookies.removeAll();
+	assert.strictEqual(document.cookie, '', 'should delete all the cookies');
+});
+
 QUnit.test('with attributes', function (assert) {
 	assert.expect(1);
 	var attributes = { path: '/' };
