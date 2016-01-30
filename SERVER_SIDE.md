@@ -49,7 +49,9 @@ var PHPCookies = Cookies.withConverter({
 
 Rack seems to have [a similar problem](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-132503017).
 
-## Tomcat 7.x
+## Tomcat
+
+### Version >= 7.x
 
 It seems that there is a situation where Tomcat does not [read the parens correctly](https://github.com/js-cookie/js-cookie/issues/92#issue-107743407). To fix this you need to write a custom write converter.
 
@@ -68,6 +70,17 @@ var TomcatCookies = Cookies.withConverter({
   }
 });
 ```
+
+### Version >= 8.0.15
+
+Since Tomcat 8.0.15, it is possible to configure RFC 6265 compliance by changing your `conf/context.xml` file and adding the new [CookieProcessor](https://tomcat.apache.org/tomcat-8.0-doc/config/cookie-processor.html) nested inside the Context element. It would be like this:
+
+```xml
+<Context>
+  <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"/>
+</context>
+```
+And you're all done.
 
 Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.
 
