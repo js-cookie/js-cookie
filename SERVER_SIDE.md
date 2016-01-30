@@ -71,6 +71,15 @@ var TomcatCookies = Cookies.withConverter({
 
 Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.
 
+## Tomcat 8
+
+Since Tomat 8.0.15, there is a simple way to [say tomcat to be compliant with the RFC 6265](https://tomcat.apache.org/tomcat-8.0-doc/config/cookie-processor.html). It comes down to change your conf/context.xml file, adding the new CookieProcessor element nested inside the Context element. It would be like this:
+
+```xml
+<Context> <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"/> </context>
+```
+And you're all done.
+
 ## JBoss 7.1.1
 
 It seems that the servlet implementation of JBoss 7.1.1 [does not read some characters correctly](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-148944674), even though they are allowed as per [RFC 6265](https://tools.ietf.org/html/rfc6265#section-4.1.1). To fix this you need to write a custom converter to send those characters correctly.
