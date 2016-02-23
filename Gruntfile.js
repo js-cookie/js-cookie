@@ -231,8 +231,18 @@ module.exports = function (grunt) {
 				// Release on npm should be done after linking the latest release documentation
 				// in the README
 				npm: false,
+				// The push is done via grunt-shell
+				push: false,
+				// As from the date of this comment, this is implicit, but undocumented
+				// remote: 'origin',
 				afterBump: ['replace:source'],
-				afterRelease: ['replace:readme-link', 'shell:commit-post-release'],
+				afterRelease: [
+					'replace:readme-link',
+					'shell:stage-post-release-message',
+					'shell:commit-post-release-message',
+					'prompt:choose-refspec-to-push-post-release-message',
+					'shell:push-post-release-message'
+				],
 				github: {
 					repo: 'js-cookie/js-cookie',
 					accessTokenVar: 'GH_JS_COOKIE_ACCESS_TOKEN'
@@ -258,8 +268,30 @@ module.exports = function (grunt) {
 			}
 		},
 		shell: {
-			'commit-post-release': {
+			'stage-post-release-message': {
+				command: 'git add README.md'
+			},
+			'commit-post-release-message': {
 				command: 'git commit -m "Prepare for the next development iteration"'
+			},
+			'push-post-release-message': {
+				command: function () {
+					var refspec = grunt.config('jscookie.release.push.refspec') || 'HEAD';
+					return 'git push origin ' + refspec;
+				}
+			}
+		},
+		prompt: {
+			'choose-refspec-to-push-post-release-message': {
+				options: {
+					questions: [{
+						config: 'jscookie.release.push.refspec',
+						type: 'list',
+						message: 'Push all changes to:',
+						choices: ['HEAD', 'master'],
+						default: 'master'
+					}]
+				}
 			}
 		}
 	});
