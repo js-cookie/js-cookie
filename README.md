@@ -264,7 +264,6 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 * Run `grunt release` command with `:minor`, `:patch` or `:major` flags
 * Upload the minified file into the github release ([geddski/grunt-release#47](https://github.com/geddski/grunt-release/issues/47))
-* Commit with the message "Prepare for the next development iteration"
 * Release on npm
 
 ## Authors

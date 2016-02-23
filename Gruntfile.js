@@ -232,7 +232,7 @@ module.exports = function (grunt) {
 				// in the README
 				npm: false,
 				afterBump: ['replace:source'],
-				afterRelease: ['replace:readme-link'],
+				afterRelease: ['replace:readme-link', 'shell:commit-post-release'],
 				github: {
 					repo: 'js-cookie/js-cookie',
 					accessTokenVar: 'GH_JS_COOKIE_ACCESS_TOKEN'
@@ -255,6 +255,11 @@ module.exports = function (grunt) {
 					from: /\[View documentation for the latest release \([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}\).\]\(https:\/\/github\.com\/js-cookie\/js-cookie\/tree\/v[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}#readme\)/,
 					to: '[View documentation for the latest release (<%= pkg.version %>).](https://github.com/js-cookie/js-cookie/tree/v<%= pkg.version %>#readme)'
 				}]
+			}
+		},
+		shell: {
+			'commit-post-release': {
+				command: 'git commit -m "Prepare for the next development iteration"'
 			}
 		}
 	});
