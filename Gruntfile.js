@@ -241,7 +241,8 @@ module.exports = function (grunt) {
 					'shell:stage-post-release-message',
 					'shell:commit-post-release-message',
 					'prompt:choose-refspec-to-push-post-release-message',
-					'shell:push-post-release-message'
+					'shell:push-post-release-message',
+					'npm-publish'
 				],
 				github: {
 					repo: 'js-cookie/js-cookie',
@@ -279,6 +280,9 @@ module.exports = function (grunt) {
 					var refspec = grunt.config('jscookie.release.push.refspec') || 'HEAD';
 					return 'git push origin ' + refspec;
 				}
+			},
+			'npm-publish': {
+				command: 'npm publish ./'
 			}
 		},
 		prompt: {
