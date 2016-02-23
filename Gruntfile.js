@@ -228,6 +228,7 @@ module.exports = function (grunt) {
 			options: {
 				commitMessage: 'Release version <%= version %>',
 				tagName: 'v<%= version %>',
+				tagMessage: 'v<%= version %>',
 				// Release on npm should be done after linking the latest release documentation
 				// in the README
 				npm: false,
