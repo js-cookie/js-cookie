@@ -310,6 +310,12 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
 	grunt.registerTask('test', ['jshint', 'jscs', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('ship', function (target) {
+		if (!target) {
+			grunt.fail.fatal('You need to provide a target, such as grunt ship:patch');
+		}
+		grunt.task.run('default', 'release:' + target);
+	});
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
