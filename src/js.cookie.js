@@ -66,7 +66,7 @@
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 				key = key.replace(/[\(\)]/g, escape);
 				
-				if (typeof document !== 'undefined')
+				if (typeof document !== 'undefined') {
 					return (document.cookie = [
 						key, '=', value,
 						attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
@@ -74,7 +74,7 @@
 						attributes.domain  && '; domain=' + attributes.domain,
 						attributes.secure ? '; secure' : ''
 					].join(''));
-				else return '';
+				} else return '';
 			}
 
 			// Read
