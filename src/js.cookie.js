@@ -74,7 +74,9 @@
 						attributes.domain  && '; domain=' + attributes.domain,
 						attributes.secure ? '; secure' : ''
 					].join(''));
-				} else return '';
+				} else {
+					return '';
+				}
 			}
 
 			// Read
