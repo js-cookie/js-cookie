@@ -1,10 +1,10 @@
 /*!
- * JavaScript Cookie v2.1.0
- * https://github.com/js-cookie/js-cookie
- *
- * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
- * Released under the MIT license
- */
+* JavaScript Cookie v2.1.0
+* https://github.com/js-cookie/js-cookie
+*
+* Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+* Released under the MIT license
+*/
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
@@ -57,7 +57,7 @@
 
 				if (!converter.write) {
 					value = encodeURIComponent(String(value))
-						.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+					.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
 				} else {
 					value = converter.write(value, key);
 				}
@@ -65,11 +65,11 @@
 				key = encodeURIComponent(String(key));
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 				key = key.replace(/[\(\)]/g, escape);
-				
+
 				if (typeof document !== 'undefined') {
 					return (document.cookie = [
 						key, '=', value,
-						attributes.expires && '; expires=' + attributes.expires.toUTCString(), // use expires attribute, max-age is not supported by IE
+						attributes.expires && '; expires=' + attributes.expires.toUTCString(),// use expires attribute, max-age is not supported by IE
 						attributes.path    && '; path=' + attributes.path,
 						attributes.domain  && '; domain=' + attributes.domain,
 						attributes.secure ? '; secure' : ''
@@ -103,8 +103,8 @@
 
 				try {
 					cookie = converter.read ?
-						converter.read(cookie, name) : converter(cookie, name) ||
-						cookie.replace(rdecode, decodeURIComponent);
+					converter.read(cookie, name) : converter(cookie, name) ||
+					cookie.replace(rdecode, decodeURIComponent);
 
 					if (this.json) {
 						try {
