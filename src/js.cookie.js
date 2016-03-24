@@ -34,6 +34,7 @@
 	function init (converter) {
 		function api (key, value, attributes) {
 			var result;
+			var document = {};
 
 			// Write
 
