@@ -1,5 +1,5 @@
 /*jshint node:true */
-exports.commonjs = {
+exports.node = {
 	should_load_js_cookie: function (test) {
 		test.expect(1);
 		var Cookies = require('../src/js.cookie');
