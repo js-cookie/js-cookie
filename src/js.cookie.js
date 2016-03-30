@@ -34,6 +34,9 @@
 	function init (converter) {
 		function api (key, value, attributes) {
 			var result;
+			if (typeof document === 'undefined') {
+				return;
+			}
 
 			// Write
 
