@@ -125,7 +125,10 @@
 			return result;
 		}
 
-		api.get = api.set = api;
+		api.set = api;
+		api.get = function (key) {
+			return api(key);
+		};
 		api.getJSON = function () {
 			return api.apply({
 				json: true

@@ -89,6 +89,13 @@ QUnit.test('Call to read cookie when there is another unrelated cookie with malf
 	Cookies.withConverter(unescape).remove('invalid');
 });
 
+// github.com/js-cookie/js-cookie/issues/145
+QUnit.test('Call to read cookie when passing an Object Literal as the second argument', function (assert) {
+	assert.expect(1);
+	Cookies.get('name', { path: '' });
+	assert.strictEqual(document.cookie, '', 'should not create a cookie');
+});
+
 QUnit.module('write', lifecycle);
 
 QUnit.test('String primitive', function (assert) {
