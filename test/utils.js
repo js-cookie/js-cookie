@@ -111,4 +111,12 @@
 			setCookie: setCookie
 		};
 	};
+
+	window.loadFileSync = function (path) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', path, false);
+		xhr.send(null);
+		return xhr.status === 200 ? xhr.responseText : null;
+	};
+
 }());
