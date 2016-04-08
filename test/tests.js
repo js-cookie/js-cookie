@@ -63,6 +63,25 @@ QUnit.test('malformed cookie value in IE', function (assert) {
 	document.body.appendChild(iframe);
 });
 
+// github.com/js-cookie/js-cookie/pull/171
+QUnit.test('missing leading semicolon', function (assert) {
+	assert.expect(1);
+	var done = assert.async();
+	// Sandbox in an iframe so that we can poke around with document.cookie.
+	var iframe = document.createElement('iframe');
+	var loadedSuccessfully = true;
+	iframe.src = 'missing_semicolon.html';
+
+	addEvent(iframe, 'load', function () {
+		iframe.contentWindow.onerror = function () {
+			loadedSuccessfully = false;
+		};
+		assert.strictEqual(loadedSuccessfully, true, 'can\'t throw Object is not a function error');
+		done();
+	});
+	document.body.appendChild(iframe);
+});
+
 QUnit.test('Call to read all when there are cookies', function (assert) {
 	Cookies.set('c', 'v');
 	Cookies.set('foo', 'bar');

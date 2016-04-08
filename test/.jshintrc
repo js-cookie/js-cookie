@@ -10,6 +10,7 @@
 		"unescape": true,
 		"lifecycle": true,
 		"using": true,
-		"addEvent": true
+		"addEvent": true,
+	  	"loadFileSync": true
 	}
 }
