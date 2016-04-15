@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="../node_modules/qunitjs/qunit/qunit.css" rel="stylesheet">
+    <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+    <script src="utils.js"></script>
+    <script>
+        (function() {
+            var contents = window.loadFileSync('../src/js.cookie.js');
+
+            if (contents !== null) {
+                var script = document.createElement('script');
+                script.innerHTML = '(function (){ return {}; })() ' + contents;
+                document.getElementsByTagName('head')[0].appendChild(script);
+            }
+        })();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
