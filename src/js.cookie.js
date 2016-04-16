@@ -11,10 +11,10 @@
 	} else if (typeof exports === 'object') {
 		module.exports = factory();
 	} else {
-		var _OldCookies = window.Cookies;
+		var OldCookies = window.Cookies;
 		var api = window.Cookies = factory();
 		api.noConflict = function () {
-			window.Cookies = _OldCookies;
+			window.Cookies = OldCookies;
 			return api;
 		};
 	}
