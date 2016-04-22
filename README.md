@@ -26,7 +26,9 @@ A simple, lightweight JavaScript API for handling cookies
 
 ## Installation
 
-Include the script (unless you are packaging scripts somehow else):
+### Direct download
+
+Download the script [here](https://github.com/js-cookie/js-cookie/blob/v2.1.1/src/js.cookie.js) and include it (unless you are packaging scripts somehow else):
 
 ```html
 <script src="/path/to/js.cookie.js"></script>
@@ -35,9 +37,13 @@ Include the script (unless you are packaging scripts somehow else):
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
 in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
 
-js-cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`
+### Package Managers
 
-It can also be loaded as an AMD or CommonJS module.
+JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`.
+
+### Module Loaders
+
+JavaScript Cookie can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
@@ -271,6 +277,7 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Create version tag in git
 * Create a github release and upload the minified file
 * Link the documentation of the latest release tag in the `README.md`
+* Link the download link to the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
 * Release on npm
 
