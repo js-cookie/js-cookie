@@ -28,8 +28,8 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "1.0.0",
-    "grunt-compare-size": "0.4.0",
-    "grunt-contrib-connect": "1.0.0",
+    "grunt-compare-size": "0.4.2",
+    "grunt-contrib-connect": "1.0.2",
     "grunt-contrib-jshint": "1.0.0",
     "grunt-contrib-nodeunit": "1.0.0",
     "grunt-contrib-qunit": "1.2.0",
