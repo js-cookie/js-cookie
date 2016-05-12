@@ -93,7 +93,6 @@
 
 			for (; i < cookies.length; i++) {
 				var parts = cookies[i].split('=');
-				var name = parts[0].replace(rdecode, decodeURIComponent);
 				var cookie = parts.slice(1).join('=');
 
 				if (cookie.charAt(0) === '"') {
@@ -101,6 +100,7 @@
 				}
 
 				try {
+					var name = parts[0].replace(rdecode, decodeURIComponent);
 					cookie = converter.read ?
 						converter.read(cookie, name) : converter(cookie, name) ||
 						cookie.replace(rdecode, decodeURIComponent);
