@@ -98,6 +98,16 @@ QUnit.test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function (asser
 	assert.strictEqual(Cookies.get('c'), 'v', 'should simply ignore quoted strings');
 });
 
+// github.com/js-cookie/js-cookie/issues/196
+QUnit.test('Call to read cookie when there is another unrelated cookie with malformed encoding in the name', function (assert) {
+	assert.expect(2);
+	document.cookie = 'BS%BS=1';
+	document.cookie = 'c=v';
+	assert.strictEqual(Cookies.get('c'), 'v', 'should not throw a URI malformed exception when retrieving a single cookie');
+	assert.deepEqual(Cookies.get(), { c: 'v' }, 'should not throw a URI malformed exception when retrieving all cookies');
+	document.cookie = 'BS%BS=1; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+});
+
 // github.com/js-cookie/js-cookie/pull/62
 QUnit.test('Call to read cookie when there is another unrelated cookie with malformed encoding in the value', function (assert) {
 	assert.expect(2);
