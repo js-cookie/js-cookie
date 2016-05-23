@@ -86,7 +86,7 @@ Cookies.remove('name'); // fail!
 Cookies.remove('name', { path: '' }); // removed!
 ```
 
-*IMPORTANT! when deleting a cookie, you must pass the exact same path, domain and secure attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
+*IMPORTANT! when deleting a cookie, you must pass the exact same path and domain attributes that was used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
 
 ## Namespace conflicts
 
