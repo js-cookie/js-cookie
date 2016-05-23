@@ -41,6 +41,12 @@ QUnit.test('percent character in cookie value mixed with encoded values', functi
 	assert.strictEqual(Cookies.get('bad'), 'foo%bar"baz%bax=', 'should read the percent character');
 });
 
+QUnit.test('percent character in cookie value mixed with encoded values lower case', function (assert) {
+	assert.expect(1);
+	document.cookie = 'mybad=foo%bar%22baz%bax%3d';
+	assert.strictEqual(Cookies.get('mybad'), 'foo%bar"baz%bax=', 'should read the percent character');
+});
+
 // github.com/carhartl/jquery-cookie/pull/88
 // github.com/carhartl/jquery-cookie/pull/117
 QUnit.test('malformed cookie value in IE', function (assert) {
@@ -96,16 +102,6 @@ QUnit.test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function (asser
 	assert.expect(1);
 	document.cookie = 'c="v"';
 	assert.strictEqual(Cookies.get('c'), 'v', 'should simply ignore quoted strings');
-});
-
-// github.com/js-cookie/js-cookie/pull/62
-QUnit.test('Call to read cookie when there is another unrelated cookie with malformed encoding in the value', function (assert) {
-	assert.expect(2);
-	document.cookie = 'invalid=%A1';
-	document.cookie = 'c=v';
-	assert.strictEqual(Cookies.get('c'), 'v', 'should not throw a URI malformed exception when retrieving a single cookie');
-	assert.deepEqual(Cookies.get(), { c: 'v' }, 'should not throw a URI malformed exception when retrieving all cookies');
-	Cookies.withConverter(unescape).remove('invalid');
 });
 
 // github.com/js-cookie/js-cookie/issues/145

@@ -88,7 +88,14 @@
 			// in case there are no cookies at all. Also prevents odd result when
 			// calling "get()"
 			var cookies = document.cookie ? document.cookie.split('; ') : [];
-			var rdecode = /(%[0-9A-Z]{2})+/g;
+
+			// This regex matches all valid values for UTF-8 percent encoding.  See https://tools.ietf.org/html/rfc3629
+			// Values U+0000 - U+007F are 1 byte encoded
+			// Values U+0080 - U+07FF are 2 byte encoded.  The first byte begins with 110 ([CD]).  The continuation byte begins with 10 ([89AB])
+			// Values U+8000 - U+FFFF are 3 byte encoded.  The first byte begins with 1110 (E).  The continuation byte begins with 10 ([89AB])
+			// Values U+10000 - U+FFFFF are 4 byte encoded.  The first byte begins with 111100 (F[0-3]).  The continuation byte begins with 10 ([89AB])
+			// Values U+100000 - U+10FFFF are 4 byte encoded.  The first byte is 11110100 (F4).  The second byte begins with 1000 (8).  The continuation byte begins with 10 ([89AB])
+			var rdecode = /(%[0-7][0-9A-F])|(%[CD][0-9A-F]%[89AB][0-9A-F])|(%E[0-9A-F]%[89AB][0-9A-F]%[89AB][0-9A-F])|(%F3%[89AB][0-9A-F]%[89AB][0-9A-F]%[89AB][0-9A-F])|(%F4%8[0-9A-F]%[89AB][0-9A-F]%[89AB][0-9A-F])+/gi;
 			var i = 0;
 
 			for (; i < cookies.length; i++) {
