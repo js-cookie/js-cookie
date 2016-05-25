@@ -223,6 +223,81 @@ module.exports = function (grunt) {
 					}())
 				}
 			}
+		},
+		release: {
+			options: {
+				commitMessage: 'Release version <%= version %>',
+				tagName: 'v<%= version %>',
+				tagMessage: 'v<%= version %>',
+				// Release on npm should be done after linking the latest release documentation
+				// in the README
+				npm: false,
+				// The push is done via grunt-shell
+				push: false,
+				// As from the date of this comment, this is implicit, but undocumented
+				// remote: 'origin',
+				afterBump: ['replace:source'],
+				afterRelease: [
+					'replace:readme-link',
+					'shell:stage-post-release-message',
+					'shell:commit-post-release-message',
+					'prompt:choose-refspec-to-push-post-release-message',
+					'shell:push-post-release-message',
+					'npm-publish'
+				],
+				github: {
+					repo: 'js-cookie/js-cookie',
+					accessTokenVar: 'GH_JS_COOKIE_ACCESS_TOKEN'
+				}
+			}
+		},
+		replace: {
+			source: {
+				src: ['src/js.cookie.js'],
+				overwrite: true,
+				replacements: [{
+					from: /\* JavaScript Cookie v[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}/,
+					to: '* JavaScript Cookie v<%= pkg.version %>'
+				}]
+			},
+			'readme-link': {
+				src: ['README.md'],
+				overwrite: true,
+				replacements: [{
+					from: /\[View documentation for the latest release \([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}\).\]\(https:\/\/github\.com\/js-cookie\/js-cookie\/tree\/v[0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}#readme\)/,
+					to: '[View documentation for the latest release (<%= pkg.version %>).](https://github.com/js-cookie/js-cookie/tree/v<%= pkg.version %>#readme)'
+				}]
+			}
+		},
+		shell: {
+			'stage-post-release-message': {
+				command: 'git add README.md'
+			},
+			'commit-post-release-message': {
+				command: 'git commit -m "Prepare for the next development iteration"'
+			},
+			'push-post-release-message': {
+				command: function () {
+					var refspec = grunt.config('jscookie.release.push.refspec') || 'HEAD';
+					return 'git push origin ' + refspec;
+				}
+			},
+			'npm-publish': {
+				command: 'npm publish ./'
+			}
+		},
+		prompt: {
+			'choose-refspec-to-push-post-release-message': {
+				options: {
+					questions: [{
+						config: 'jscookie.release.push.refspec',
+						type: 'list',
+						message: 'Push all changes to:',
+						choices: ['HEAD', 'master'],
+						default: 'master'
+					}]
+				}
+			}
 		}
 	});
 
@@ -235,6 +310,12 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
 	grunt.registerTask('test', ['jshint', 'jscs', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('ship', function (target) {
+		if (!target) {
+			grunt.fail.fatal('You need to provide a target, such as grunt ship:patch');
+		}
+		grunt.task.run('default', 'release:' + target);
+	});
 
 	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
