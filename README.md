@@ -18,7 +18,7 @@ A simple, lightweight JavaScript API for handling cookies
 * **~800 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
-[View documentation for the latest release (2.1.1).](https://github.com/js-cookie/js-cookie/tree/v2.1.1#readme)**
+[View documentation for the latest release (2.1.2).](https://github.com/js-cookie/js-cookie/tree/v2.1.2#readme)**
 
 ## Build Status Matrix
 
@@ -28,7 +28,7 @@ A simple, lightweight JavaScript API for handling cookies
 
 ### Direct download
 
-Download the script [here](https://github.com/js-cookie/js-cookie/blob/v2.1.1/src/js.cookie.js) and include it (unless you are packaging scripts somehow else):
+Download the script [here](https://github.com/js-cookie/js-cookie/blob/v2.1.2/src/js.cookie.js) and include it (unless you are packaging scripts somehow else):
 
 ```html
 <script src="/path/to/js.cookie.js"></script>
