@@ -35,7 +35,7 @@
     "grunt-contrib-qunit": "1.2.0",
     "grunt-contrib-uglify": "1.0.1",
     "grunt-contrib-watch": "1.0.0",
-    "grunt-jscs": "2.8.0",
+    "grunt-jscs": "3.0.0",
     "grunt-saucelabs": "8.6.2",
     "gzip-js": "0.3.2",
     "qunitjs": "1.23.1",
