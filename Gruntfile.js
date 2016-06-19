@@ -70,10 +70,14 @@ module.exports = function (grunt) {
 		},
 		uglify: {
 			options: {
+				compress: {
+					unsafe: true
+				},
 				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */\n'
 			},
 			build: {
 				files: {
+					'build/js.cookie.min.js': 'src/js.cookie.js',
 					'build/js.cookie-<%= pkg.version %>.min.js': 'src/js.cookie.js'
 				}
 			}
@@ -234,9 +238,9 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['jshint', 'jscs', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('test', ['uglify', 'jshint', 'jscs', 'connect:build-qunit', 'qunit', 'nodeunit']);
 
-	grunt.registerTask('dev', ['test', 'uglify', 'compare_size']);
+	grunt.registerTask('dev', ['test', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
 
 	grunt.registerTask('default', 'dev');
