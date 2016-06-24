@@ -24,6 +24,11 @@
     "type": "git",
     "url": "git://github.com/js-cookie/js-cookie.git"
   },
+  "files": [
+    "src/**/*.js",
+    "SERVER_SIDE.md",
+    "CONTRIBUTING.md"
+  ],
   "author": "Klaus Hartl",
   "license": "MIT",
   "devDependencies": {
