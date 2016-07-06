@@ -36,7 +36,7 @@
     "grunt-contrib-uglify": "1.0.1",
     "grunt-contrib-watch": "1.0.0",
     "grunt-jscs": "3.0.1",
-    "grunt-saucelabs": "8.6.2",
+    "grunt-saucelabs": "9.0.0",
     "gzip-js": "0.3.2",
     "qunitjs": "1.23.1",
     "requirejs": "2.2.0"
