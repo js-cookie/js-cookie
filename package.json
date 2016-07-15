@@ -44,6 +44,7 @@
     "gzip-js": "0.3.2",
     "jsdom": "^9.4.1",
     "jsdomify": "^2.1.0",
+    "mocha": "^2.5.3",
     "qunitjs": "1.23.1",
     "requirejs": "2.2.0"
   }
