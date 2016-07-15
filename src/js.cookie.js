@@ -105,7 +105,7 @@
 						converter.read(cookie, name) : converter(cookie, name) ||
 						cookie.replace(rdecode, decodeURIComponent);
 
-					if (this.json) {
+					if (this && this.json) {
 						try {
 							cookie = JSON.parse(cookie);
 						} catch (e) {}

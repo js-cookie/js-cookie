@@ -27,6 +27,9 @@
   "author": "Klaus Hartl",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "6.10.4",
+    "babel-preset-es2015": "6.9.0",
+    "chai": "3.5.0",
     "grunt": "1.0.0",
     "grunt-compare-size": "0.4.2",
     "grunt-contrib-connect": "1.0.2",
@@ -36,8 +39,12 @@
     "grunt-contrib-uglify": "1.0.1",
     "grunt-contrib-watch": "1.0.0",
     "grunt-jscs": "3.0.1",
+    "grunt-mocha-test": "0.12.7",
     "grunt-saucelabs": "8.6.2",
     "gzip-js": "0.3.2",
+    "jsdom": "9.4.1",
+    "jsdomify": "2.1.0",
+    "mocha": "2.5.3",
     "qunitjs": "1.23.1",
     "requirejs": "2.2.0"
   }

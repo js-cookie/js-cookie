@@ -39,13 +39,21 @@ module.exports = function (grunt) {
 		nodeunit: {
 			all: 'test/node.js'
 		},
+		mochaTest: {
+			test: {
+				src: ['test/es6-import.js'],
+				options: {
+					require: 'babel-register'
+				}
+			}
+		},
 		jshint: {
 			options: {
 				jshintrc: true
 			},
 			grunt: 'Gruntfile.js',
 			source: 'src/**/*.js',
-			tests: ['test/**/*.js', '!test/polyfill.js']
+			tests: ['test/**/*.js', '!test/polyfill.js', '!test/es6-import.js']
 		},
 		jscs: {
 			options: {
@@ -238,7 +246,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
-	grunt.registerTask('test', ['uglify', 'jshint', 'jscs', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('test', ['uglify', 'jshint', 'jscs', 'mochaTest', 'connect:build-qunit', 'qunit', 'nodeunit']);
 
 	grunt.registerTask('dev', ['test', 'compare_size']);
 	grunt.registerTask('ci', ['test', 'saucelabs']);
