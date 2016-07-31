@@ -125,6 +125,15 @@ QUnit.test('Call to read cookie when passing an Object Literal as the second arg
 	assert.strictEqual(document.cookie, '', 'should not create a cookie');
 });
 
+// github.com/js-cookie/js-cookie/issues/238
+QUnit.test('Call to read cookie when there is a window.json variable globally', function (assert) {
+	assert.expect(1);
+	window.json = true;
+	Cookies.set('boolean', true);
+	assert.strictEqual(typeof Cookies.get('boolean'), 'string', 'should not change the returned type');
+	delete window.json;
+});
+
 QUnit.module('write', lifecycle);
 
 QUnit.test('String primitive', function (assert) {

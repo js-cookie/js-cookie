@@ -127,7 +127,7 @@
 
 		api.set = api;
 		api.get = function (key) {
-			return api(key);
+			return api.call(api, key);
 		};
 		api.getJSON = function () {
 			return api.apply({
