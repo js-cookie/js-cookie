@@ -73,6 +73,7 @@ module.exports = function (grunt) {
 				compress: {
 					unsafe: true
 				},
+				screwIE8: false,
 				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */\n'
 			},
 			build: {
