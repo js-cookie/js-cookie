@@ -131,7 +131,11 @@ QUnit.test('Call to read cookie when there is a window.json variable globally', 
 	window.json = true;
 	Cookies.set('boolean', true);
 	assert.strictEqual(typeof Cookies.get('boolean'), 'string', 'should not change the returned type');
-	delete window.json;
+	// IE 6-8 throw an exception if trying to delete a window property
+	// See stackoverflow.com/questions/1073414/deleting-a-window-property-in-ie/1824228
+	try {
+		delete window.json;
+	} catch (e) {}
 });
 
 QUnit.module('write', lifecycle);
