@@ -278,6 +278,9 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Commit with the message "Release version x.x.x"
 * Create version tag in git
 * Create a github release and upload the minified file
+* Change the `latest` tag pointer to the latest commit
+  * `git tag -fa latest`
+  * `git push <remote> :refs/tags/latest`
 * Link the documentation of the latest release tag in the `README.md`
 * Link the download link to the latest release tag in the `README.md`
 * Commit with the message "Prepare for the next development iteration"
