@@ -31,6 +31,7 @@ module.exports = function (grunt) {
 					urls: [
 						'http://127.0.0.1:9998/',
 						'http://127.0.0.1:9998/amd.html',
+						'http://127.0.0.1:9998/environment-with-amd-and-umd.html',
 						'http://127.0.0.1:9998/encoding.html?integration_baseurl=http://127.0.0.1:9998/'
 					]
 				}
