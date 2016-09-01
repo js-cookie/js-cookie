@@ -70,9 +70,9 @@
 					value = converter.write(value, key);
 				}
 
-				key = encodeURIComponent(String(key));
-				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
-				key = key.replace(/[\(\)]/g, escape);
+				key = encodeURIComponent(String(key))
+					.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
+					.replace(/[\(\)]/g, escape);
 
 				return (document.cookie = [
 					key, '=', value,
