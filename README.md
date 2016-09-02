@@ -279,9 +279,9 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 * Create version tag in git
 * Create a github release and upload the minified file
 * Change the `latest` tag pointer to the latest commit
-  * `git tag -fa latest`
+  * `git tag -f latest`
   * `git push <remote> :refs/tags/latest`
-* Commit with the message "Prepare for the next development iteration"
+  * `git push origin master --tags`
 * Release on npm
 
 ## Authors
