@@ -84,6 +84,17 @@ Delete cookie:
 Cookies.remove('name');
 ```
 
+Please notice that removing unexisting cookie does not raise any exception or value
+
+```javascript
+var whatWasTheValue = Cookies.remove('nothing');
+if (whatWasTheValue === undefined) {
+  console.log("I will be excuted");
+} else {
+  console.log("I will never be executed");
+}
+```
+
 Delete a cookie valid to the path of the current page:
 
 ```javascript
