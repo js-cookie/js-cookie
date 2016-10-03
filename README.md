@@ -84,10 +84,10 @@ Delete cookie:
 Cookies.remove('name');
 ```
 
-Please notice that removing unexisting cookie does not raise any exception or value
+Please notice that removing unexisting cookie does not raise any exception nor return any value
 
 ```javascript
-var whatWasTheValue = Cookies.remove('nothing');
+var  = Cookies.remove('nothing');
 if (whatWasTheValue === undefined) {
   console.log("I will be excuted");
 } else {
