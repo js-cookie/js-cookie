@@ -87,7 +87,7 @@ Cookies.remove('name');
 Please notice that removing unexisting cookie does not raise any exception nor return any value
 
 ```javascript
-var  = Cookies.remove('nothing');
+var whatWasTheValue = Cookies.remove('nothing');
 if (whatWasTheValue === undefined) {
   console.log("I will be excuted");
 } else {
