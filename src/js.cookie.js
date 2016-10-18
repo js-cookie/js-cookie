@@ -56,12 +56,14 @@
 					attributes.expires = expires;
 				}
 
-        if (attributes.samesite !== 'Strict' && attributes.samesite !== 'Lax') {
-          if (attributes.samesite === true)
-            attributes.samesite = 'Strict';
-          else
-            attributes.samesite = undefined;
-        }
+				if (attributes.samesite !== 'Strict' && attributes.samesite !== 'Lax') {
+					if (attributes.samesite === true) {
+						attributes.samesite = 'Strict';
+					}
+					else {
+						attributes.samesite = undefined;
+					}
+				}
 
 				try {
 					result = JSON.stringify(value);
