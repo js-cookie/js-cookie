@@ -57,11 +57,6 @@
 					attributes.expires = expires;
 				}
 
-				// github.com/js-cookie/js-cookie/issues/287
-				if (attributes.expires && attributes.path) {
-					delete attributes.path;
-				}
-
 				// We're using "expires" because "max-age" is not supported by IE
 				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
 

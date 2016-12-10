@@ -178,11 +178,12 @@ QUnit.test('undefined', function (assert) {
 
 QUnit.test('expires option as days from now', function (assert) {
 	assert.expect(1);
+	var quoted = function (input) { return '"' + input + '"'; };
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
-	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
-	var actual = Cookies.set('c', 'v', { expires: 21 }).substring(0, expected.length);
-	assert.strictEqual(actual, expected, 'should write the cookie string with expires');
+	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: 21 });
+	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
 QUnit.test('expires option as fraction of a day', function (assert) {
