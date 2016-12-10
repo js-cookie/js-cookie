@@ -24,12 +24,6 @@
 		};
 	}
 }(function () {
-	var officialAttributes = {
-		'expires': 1,
-		'path': 1,
-		'domain': 1,
-		'secure': 1
-	};
 
 	function extend () {
 		var i = 0;
@@ -63,6 +57,14 @@
 					attributes.expires = expires;
 				}
 
+				// github.com/js-cookie/js-cookie/issues/287
+				if (attributes.expires && attributes.path) {
+					delete attributes.path;
+				}
+
+				// We're using "expires" because "max-age" is not supported by IE
+				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
+
 				try {
 					result = JSON.stringify(value);
 					if (/^[\{\[]/.test(result)) {
@@ -81,21 +83,16 @@
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 				key = key.replace(/[\(\)]/g, escape);
 
-				var cookieParts = [
-					key, '=', value,
-					attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-					attributes.path ? '; path=' + attributes.path : '',
-					attributes.domain ? '; domain=' + attributes.domain : '',
-					attributes.secure ? '; secure' : ''
-				];
+				var stringifiedAttributes = '';
 
-				for (var attribute in attributes) {
-					if (!officialAttributes[attribute] && attributes[attribute]) {
-						cookieParts.push('; ' + attribute + '=' + attributes[attribute]);
+				for (var attributeName in attributes) {
+					if (!attributes[attributeName]) {
+						continue;
 					}
+					stringifiedAttributes += '; ' + attributeName + '=' + attributes[attributeName];
 				}
 
-				return (document.cookie = cookieParts.join(''));
+				return (document.cookie = key + '=' + value + stringifiedAttributes);
 			}
 
 			// Read

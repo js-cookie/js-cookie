@@ -241,11 +241,14 @@ QUnit.test('false secure value', function (assert) {
 	assert.strictEqual(actual, expected, 'false should not modify path in cookie string');
 });
 
+// github.com/js-cookie/js-cookie/issues/276
 QUnit.test('unofficial attribute', function (assert) {
 	assert.expect(1);
-	assert.strictEqual(Cookies.set('c', 'v', {
+	var expected = 'c=v; path=/; unofficial=anything';
+	var actual = Cookies.set('c', 'v', {
 		unofficial: 'anything'
-	}), 'c=v; path=/; unofficial=anything', 'should write the cookie string with unofficial attribute');
+	});
+	assert.strictEqual(expected, actual, 'should write the cookie string with unofficial attribute');
 });
 
 QUnit.test('undefined attribute value', function (assert) {
