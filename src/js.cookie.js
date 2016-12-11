@@ -84,9 +84,12 @@
 					if (!attributes[attributeName]) {
 						continue;
 					}
-					stringifiedAttributes += '; ' + attributeName + '=' + attributes[attributeName];
+					stringifiedAttributes += '; ' + attributeName;
+					if (attributes[attributeName] === true) {
+						continue;
+					}
+					stringifiedAttributes += '=' + attributes[attributeName];
 				}
-
 				return (document.cookie = key + '=' + value + stringifiedAttributes);
 			}
 
