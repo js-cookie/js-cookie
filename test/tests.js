@@ -186,26 +186,43 @@ QUnit.test('expires option as days from now', function (assert) {
 	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
+// github.com/carhartl/jquery-cookie/issues/246
 QUnit.test('expires option as fraction of a day', function (assert) {
 	assert.expect(1);
 
-	var now = new Date().getTime();
-	var stringifiedDate = Cookies.set('c', 'v', { expires: 0.5 }).split('; ')[1].split('=')[1];
-	var expires = Date.parse(stringifiedDate);
+	var quoted = function (input) { return '"' + input + '"'; };
+	var findValueForAttributeName = function (createdCookie, attributeName) {
+		var pairs = createdCookie.split('; ');
+		var foundAttributeValue;
+		pairs.forEach(function (pair) {
+			if (pair.split('=')[0] === attributeName) {
+				foundAttributeValue = pair.split('=')[1];
+			}
+		});
+		return foundAttributeValue;
+	};
+	var now = new Date();
+	var stringifiedDate = findValueForAttributeName(Cookies.set('c', 'v', { expires: 0.5 }), 'expires');
+	var expires = new Date(stringifiedDate);
 
 	// When we were using Date.setDate() fractions have been ignored
 	// and expires resulted in the current date. Allow 1000 milliseconds
-	// difference for execution time.
-	assert.ok(expires > now + 1000, 'should write expires attribute with the correct date');
+	// difference for execution time because new Date() can be different,
+	// even when it's run synchronously.
+	// See https://github.com/js-cookie/js-cookie/commit/ecb597b65e4c477baa2b30a2a5a67fdaee9870ea#commitcomment-20146048.
+	var assertion = expires.getTime() > now.getTime() + 1000;
+	var message = quoted(expires.getTime()) + ' should be greater than ' + quoted(now.getTime());
+	assert.ok(assertion, message);
 });
 
 QUnit.test('expires option as Date instance', function (assert) {
 	assert.expect(1);
+	var quoted = function (input) { return '"' + input + '"'; };
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
-	var actual = Cookies.set('c', 'v', { expires: sevenDaysFromNow }).substring(0, expected.length);
-	assert.strictEqual(actual, expected, 'should write the cookie string with expires');
+	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: sevenDaysFromNow });
+	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
 QUnit.test('return value', function (assert) {
