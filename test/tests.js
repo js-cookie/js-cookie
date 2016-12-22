@@ -1,3 +1,5 @@
+"use strict";
+
 /*global lifecycle: true*/
 
 QUnit.module('read', lifecycle);
