@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 				requireSpaceBeforeObjectValues: true,
 				validateIndentation: '\t',
 				validateLineBreaks: 'LF',
-				validateQuoteMarks: true,
+				validateQuoteMarks: {mark: '\'', escape: false},
 				disallowSpacesInsideArrayBrackets: 'all',
 				disallowSpacesInsideParentheses: true,
 				disallowTrailingWhitespace: true
