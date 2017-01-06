@@ -38,7 +38,7 @@
     "grunt-jscs": "3.0.1",
     "grunt-saucelabs": "9.0.0",
     "gzip-js": "0.3.2",
-    "qunitjs": "1.23.1",
+    "qunitjs": "2.1.1",
     "requirejs": "2.3.2"
   }
 }
