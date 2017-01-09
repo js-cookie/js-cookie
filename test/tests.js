@@ -243,8 +243,22 @@ QUnit.test('false secure value', function (assert) {
 	assert.strictEqual(actual, expected, 'false should not modify path in cookie string');
 });
 
+QUnit.test('false samesite value', function (assert) {
+	assert.expect(1);
+	var expected = 'c=v; path=/';
+	var actual = Cookies.set('c', 'v', {samesite: 'false'});
+	assert.strictEqual(actual, expected, 'false should not modify path in cookie string');
+});
+
+QUnit.test('adopted samesite value', function (assert) {
+	assert.expect(1);
+	var expected = 'c=v; path=/; SameSite=Strict';
+	var actual = Cookies.set('c', 'v', {samesite: true});
+	assert.strictEqual(actual, expected, 'true should be changed to Strict');
+});
+
 QUnit.test('undefined attribute value', function (assert) {
-	assert.expect(4);
+	assert.expect(5);
 	assert.strictEqual(Cookies.set('c', 'v', {
 		expires: undefined
 	}), 'c=v; path=/', 'should not write undefined expires attribute');
@@ -257,6 +271,9 @@ QUnit.test('undefined attribute value', function (assert) {
 	assert.strictEqual(Cookies.set('c', 'v', {
 		secure: undefined
 	}), 'c=v; path=/', 'should not write undefined secure attribute');
+	assert.strictEqual(Cookies.set('c', 'v', {
+		samesite: undefined
+	}), 'c=v; path=/', 'should not write undefined samesite attribute');
 });
 
 QUnit.module('remove', lifecycle);

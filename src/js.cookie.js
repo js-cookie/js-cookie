@@ -56,6 +56,15 @@
 					attributes.expires = expires;
 				}
 
+				if (attributes.samesite !== 'Strict' && attributes.samesite !== 'Lax') {
+					if (attributes.samesite === true) {
+						attributes.samesite = 'Strict';
+					}
+					else {
+						attributes.samesite = undefined;
+					}
+				}
+
 				try {
 					result = JSON.stringify(value);
 					if (/^[\{\[]/.test(result)) {
@@ -79,7 +88,8 @@
 					attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 					attributes.path ? '; path=' + attributes.path : '',
 					attributes.domain ? '; domain=' + attributes.domain : '',
-					attributes.secure ? '; secure' : ''
+					attributes.secure ? '; secure' : '',
+					attributes.samesite ? '; SameSite=' + attributes.samesite : ''
 				].join(''));
 			}
 
