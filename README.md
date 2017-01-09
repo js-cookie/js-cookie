@@ -15,7 +15,7 @@ A simple, lightweight JavaScript API for handling cookies
 * [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
 * Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
 * Enable [custom encoding/decoding](#converters)
-* **~985 bytes** gzipped!
+* **~900 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
