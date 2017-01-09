@@ -94,6 +94,8 @@ Cookies.remove('name', { path: '' }); // removed!
 
 *IMPORTANT! when deleting a cookie, you must pass the exact same path and domain attributes that was used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
 
+*Note: Removing unexisting cookie does not raise any exception nor return any value*
+
 ## Namespace conflicts
 
 If there is any danger of a conflict with the namespace `Cookies`, the `noConflict` method will allow you to define a new namespace and preserve the original one. This is especially useful when running the script on third party sites e.g. as part of a widget or SDK.
