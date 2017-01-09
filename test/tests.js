@@ -182,31 +182,46 @@ QUnit.test('expires option as days from now', function (assert) {
 	assert.expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
-	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
-	var actual = Cookies.set('c', 'v', { expires: 21 }).substring(0, expected.length);
-	assert.strictEqual(actual, expected, 'should write the cookie string with expires');
+	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: 21 });
+	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
+// github.com/carhartl/jquery-cookie/issues/246
 QUnit.test('expires option as fraction of a day', function (assert) {
 	assert.expect(1);
 
-	var now = new Date().getTime();
-	var stringifiedDate = Cookies.set('c', 'v', { expires: 0.5 }).split('; ')[1].split('=')[1];
-	var expires = Date.parse(stringifiedDate);
+	var findValueForAttributeName = function (createdCookie, attributeName) {
+		var pairs = createdCookie.split('; ');
+		var foundAttributeValue;
+		pairs.forEach(function (pair) {
+			if (pair.split('=')[0] === attributeName) {
+				foundAttributeValue = pair.split('=')[1];
+			}
+		});
+		return foundAttributeValue;
+	};
+	var now = new Date();
+	var stringifiedDate = findValueForAttributeName(Cookies.set('c', 'v', { expires: 0.5 }), 'expires');
+	var expires = new Date(stringifiedDate);
 
 	// When we were using Date.setDate() fractions have been ignored
 	// and expires resulted in the current date. Allow 1000 milliseconds
-	// difference for execution time.
-	assert.ok(expires > now + 1000, 'should write expires attribute with the correct date');
+	// difference for execution time because new Date() can be different,
+	// even when it's run synchronously.
+	// See https://github.com/js-cookie/js-cookie/commit/ecb597b65e4c477baa2b30a2a5a67fdaee9870ea#commitcomment-20146048.
+	var assertion = expires.getTime() > now.getTime() + 1000;
+	var message = quoted(expires.getTime()) + ' should be greater than ' + quoted(now.getTime());
+	assert.ok(assertion, message);
 });
 
 QUnit.test('expires option as Date instance', function (assert) {
 	assert.expect(1);
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
-	var expected = 'c=v; expires=' + sevenDaysFromNow.toUTCString();
-	var actual = Cookies.set('c', 'v', { expires: sevenDaysFromNow }).substring(0, expected.length);
-	assert.strictEqual(actual, expected, 'should write the cookie string with expires');
+	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
+	var actual = Cookies.set('c', 'v', { expires: sevenDaysFromNow });
+	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
 QUnit.test('return value', function (assert) {
@@ -235,6 +250,13 @@ QUnit.test('API for changing defaults', function (assert) {
 	assert.ok(Cookies.set('c', 'v').match(/path=\//), 'should roll back to the default path');
 });
 
+QUnit.test('true secure value', function (assert) {
+	assert.expect(1);
+	var expected = 'c=v; path=/; secure';
+	var actual = Cookies.set('c', 'v', {secure: true});
+	assert.strictEqual(actual, expected, 'should add secure attribute');
+});
+
 // github.com/js-cookie/js-cookie/pull/54
 QUnit.test('false secure value', function (assert) {
 	assert.expect(1);
@@ -243,8 +265,18 @@ QUnit.test('false secure value', function (assert) {
 	assert.strictEqual(actual, expected, 'false should not modify path in cookie string');
 });
 
+// github.com/js-cookie/js-cookie/issues/276
+QUnit.test('unofficial attribute', function (assert) {
+	assert.expect(1);
+	var expected = 'c=v; path=/; unofficial=anything';
+	var actual = Cookies.set('c', 'v', {
+		unofficial: 'anything'
+	});
+	assert.strictEqual(expected, actual, 'should write the cookie string with unofficial attribute');
+});
+
 QUnit.test('undefined attribute value', function (assert) {
-	assert.expect(4);
+	assert.expect(5);
 	assert.strictEqual(Cookies.set('c', 'v', {
 		expires: undefined
 	}), 'c=v; path=/', 'should not write undefined expires attribute');
@@ -257,6 +289,9 @@ QUnit.test('undefined attribute value', function (assert) {
 	assert.strictEqual(Cookies.set('c', 'v', {
 		secure: undefined
 	}), 'c=v; path=/', 'should not write undefined secure attribute');
+	assert.strictEqual(Cookies.set('c', 'v', {
+		unofficial: undefined
+	}), 'c=v; path=/', 'should not write undefined unofficial attribute');
 });
 
 QUnit.module('remove', lifecycle);
