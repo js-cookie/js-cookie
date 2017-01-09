@@ -1,3 +1,5 @@
+'use strict';
+
 /*global lifecycle: true*/
 
 QUnit.module('read', lifecycle);
@@ -402,7 +404,7 @@ QUnit.test('Object Constructor', function (assert) {
 
 QUnit.test('Use String(value) for unsupported objects that do not stringify into JSON', function (assert) {
 	assert.expect(2);
-	Cookies.set('date', new Date(2015, 04, 13, 0, 0, 0, 0));
+	Cookies.set('date', new Date(2015, 4, 13, 0, 0, 0, 0));
 	assert.strictEqual(Cookies.get('date').indexOf('"'), -1, 'should not quote the stringified Date object');
 	assert.strictEqual(Cookies.getJSON('date').indexOf('"'), -1, 'should not quote the stringified Date object');
 });
