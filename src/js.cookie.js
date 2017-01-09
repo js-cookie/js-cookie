@@ -24,6 +24,13 @@
 		};
 	}
 }(function () {
+	var officialAttributes = {
+		'expires': 1,
+		'path': 1,
+		'domain': 1,
+		'secure': 1
+	};
+
 	function extend () {
 		var i = 0;
 		var result = {};
@@ -74,13 +81,25 @@
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 				key = key.replace(/[\(\)]/g, escape);
 
-				return (document.cookie = [
+				var cookieParts = [
 					key, '=', value,
 					attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
 					attributes.path ? '; path=' + attributes.path : '',
 					attributes.domain ? '; domain=' + attributes.domain : '',
 					attributes.secure ? '; secure' : ''
-				].join(''));
+				];
+
+				for (var attribute in attributes) {
+					if (attributes.hasOwnProperty(attribute) && !officialAttributes.hasOwnProperty(attribute)) {
+						if (typeof attributes[attribute] === 'boolean' && attributes[attribute]) {
+							cookieParts.push('; ' + attribute);
+						} else if (attributes[attribute]) {
+							cookieParts.push(';' + attribute + '=' + attributes[attribute]);
+						}
+					}
+				}
+
+				return (document.cookie = cookieParts.join(''));
 			}
 
 			// Read
