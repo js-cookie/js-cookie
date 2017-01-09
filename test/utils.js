@@ -119,4 +119,8 @@
 		return xhr.status === 200 ? xhr.responseText : null;
 	};
 
+	window.quoted = function (input) {
+		return '"' + input + '"';
+	};
+
 }());

@@ -178,7 +178,6 @@ QUnit.test('undefined', function (assert) {
 
 QUnit.test('expires option as days from now', function (assert) {
 	assert.expect(1);
-	var quoted = function (input) { return '"' + input + '"'; };
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 21);
 	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
@@ -190,7 +189,6 @@ QUnit.test('expires option as days from now', function (assert) {
 QUnit.test('expires option as fraction of a day', function (assert) {
 	assert.expect(1);
 
-	var quoted = function (input) { return '"' + input + '"'; };
 	var findValueForAttributeName = function (createdCookie, attributeName) {
 		var pairs = createdCookie.split('; ');
 		var foundAttributeValue;
@@ -217,7 +215,6 @@ QUnit.test('expires option as fraction of a day', function (assert) {
 
 QUnit.test('expires option as Date instance', function (assert) {
 	assert.expect(1);
-	var quoted = function (input) { return '"' + input + '"'; };
 	var sevenDaysFromNow = new Date();
 	sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
 	var expected = 'expires=' + sevenDaysFromNow.toUTCString();
