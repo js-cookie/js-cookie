@@ -78,6 +78,13 @@ Read all visible cookies:
 Cookies.get(); // => { name: 'value' }
 ```
 
+Check if cookie exists:
+
+```javascript
+Cookies.has('name'); // => true
+Cookies.has('nothing'); // => false
+```
+
 Delete cookie:
 
 ```javascript
