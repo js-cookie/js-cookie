@@ -225,7 +225,7 @@ Cookies.get('name'); // => 'value'
 Cookies.remove('name', { secure: true });
 ```
 
-## Converters <a name="converter"></a>
+## Converters
 
 ### Read
 
