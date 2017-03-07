@@ -15,7 +15,7 @@
 		module.exports = factory();
 		registeredInModuleLoader = true;
 	}
-	if (!registeredInModuleLoader) {
+	if (!registeredInModuleLoader && window) {
 		var OldCookies = window.Cookies;
 		var api = window.Cookies = factory();
 		api.noConflict = function () {
