@@ -140,8 +140,14 @@
 		}
 
 		api.set = api;
-		api.get = function (key) {
-			return api.call(api, key);
+		api.get = function (key, defaultValue) {
+			var result = api.call(api, key);
+
+			if(result == undefined){
+				return defaultValue;
+			}else{
+				return result;
+			}
 		};
 		api.getJSON = function () {
 			return api.apply({
