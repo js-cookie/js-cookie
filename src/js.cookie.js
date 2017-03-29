@@ -143,9 +143,9 @@
 		api.get = function (key, defaultValue) {
 			var result = api.call(api, key);
 
-			if(result === undefined && defaultValue){
+			if (result === undefined && defaultValue) {
 				return defaultValue;
-			}else{
+			} else {
 				return result;
 			}
 		};
