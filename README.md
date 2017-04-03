@@ -273,6 +273,10 @@ Check out the [Servers Docs](SERVER_SIDE.md)
 
 Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
+## Security
+
+For vulnerability reports, send an e-mail to `jscookie at gmail dot com`
+
 ## Manual release steps
 
 * Increment the "version" attribute of `package.json`
