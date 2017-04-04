@@ -23,6 +23,11 @@ QUnit.test('not existing', function (assert) {
 	assert.strictEqual(Cookies.get('whatever'), undefined, 'return undefined');
 });
 
+QUnit.test('not existing & return default value', function (assert) {
+	assert.expect(1);
+	assert.strictEqual(Cookies.get('whatever', 'nice'), 'nice', 'return nice');
+});
+
 // github.com/carhartl/jquery-cookie/issues/50
 QUnit.test('equality sign in cookie value', function (assert) {
 	assert.expect(1);

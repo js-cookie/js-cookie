@@ -70,6 +70,7 @@ Read cookie:
 ```javascript
 Cookies.get('name'); // => 'value'
 Cookies.get('nothing'); // => undefined
+Cookies.get('nothing', 'nice'); // => nice
 ```
 
 Read all visible cookies:
