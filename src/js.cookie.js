@@ -158,6 +158,10 @@
 
 		api.withConverter = init;
 
+		api.has = function (key) {
+			return typeof api.get(key) !== 'undefined';
+		};
+
 		return api;
 	}
 
