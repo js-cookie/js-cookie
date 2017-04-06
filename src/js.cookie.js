@@ -156,6 +156,12 @@
 			}));
 		};
 
+		api.removeAll = function (attributes) {
+			Object.keys(api.get()).forEach(function (cookie) {
+				api.remove(cookie, attributes);
+			});
+		};
+
 		api.withConverter = init;
 
 		return api;
