@@ -61,7 +61,7 @@
 
 				try {
 					result = JSON.stringify(value);
-					if (/^[\{\[]/.test(result)) {
+					if (/^[{[]/.test(result)) {
 						value = result;
 					}
 				} catch (e) {}
@@ -75,7 +75,7 @@
 
 				key = encodeURIComponent(String(key));
 				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
-				key = key.replace(/[\(\)]/g, escape);
+				key = key.replace(/[()]/g, function (s) { return '%' + s.charCodeAt(0).toString(16); });
 
 				var stringifiedAttributes = '';
 
