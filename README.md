@@ -43,12 +43,12 @@ JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [B
 
 - #### Bower
   ```
-  bower install --save jquery.cookie
+  bower install js-cookie --save
   ```
 
 - #### NPM
   ```
-  npm install js-cookie
+  npm install js-cookie --save
   ```
 
 ### Module Loaders
