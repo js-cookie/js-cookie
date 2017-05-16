@@ -41,9 +41,27 @@ in Internet Explorer on Windows 7 for instance (because of the wrong MIME type).
 
 JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`.
 
+- #### Bower
+  ```
+  bower install --save jquery.cookie
+  ```
+
+- #### NPM
+  ```
+  npm install js-cookie
+  ```
+
 ### Module Loaders
 
 JavaScript Cookie can also be loaded as an AMD, CommonJS or [ES6](https://github.com/js-cookie/js-cookie/issues/233#issuecomment-233187386) module.
+
+```
+import Cookie from 'js-cookie';
+```
+
+```
+const Cookie = require('js-cookie');
+```
 
 ## Basic Usage
 
