@@ -4,6 +4,8 @@
 
 # JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/js-cookie/js-cookie.svg)](https://greenkeeper.io/)
+
 A simple, lightweight JavaScript API for handling cookies
 
 * Works in [all](https://saucelabs.com/u/js-cookie) browsers
