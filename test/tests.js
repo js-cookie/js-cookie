@@ -451,6 +451,19 @@ QUnit.test('Call to read all cookies with mixed json', function (assert) {
 	assert.deepEqual(Cookies.get(), { c: '{"foo":"bar"}', c2: 'v' }, 'returns unparsed cookies');
 });
 
+QUnit.test('Cookies with escaped quotes in json', function (assert) {
+	Cookies.withConverter({
+		read: function (value) {
+			return value;
+		},
+		write: function (value) {
+			return value;
+		}
+	}).set('c', '"{ \\"foo\\": \\"bar\\" }"');
+	assert.deepEqual(Cookies.getJSON('c'), '{ "foo": "bar" }', 'returns JSON parsed cookie');
+	assert.deepEqual(Cookies.get('c'), '{ \\"foo\\": \\"bar\\" }', 'returns unparsed cookie');
+});
+
 QUnit.module('noConflict', lifecycle);
 
 QUnit.test('do not conflict with existent globals', function (assert) {
