@@ -224,7 +224,7 @@ Either `true` or `false`, indicating if the cookie transmission requires a secur
 ```javascript
 Cookies.set('name', 'value', { secure: true });
 Cookies.get('name'); // => 'value'
-Cookies.remove('name', { secure: true });
+Cookies.remove('name');
 ```
 
 ## Converters
