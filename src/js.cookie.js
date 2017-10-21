@@ -151,9 +151,13 @@
 		api.defaults = {};
 
 		api.remove = function (key, attributes) {
+			var value = api.get(key);
+
 			api(key, '', extend(attributes, {
 				expires: -1
 			}));
+
+			return value;
 		};
 
 		api.withConverter = init;

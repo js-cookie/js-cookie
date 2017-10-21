@@ -297,10 +297,12 @@ QUnit.test('undefined attribute value', function (assert) {
 QUnit.module('remove', lifecycle);
 
 QUnit.test('deletion', function (assert) {
-	assert.expect(1);
-	Cookies.set('c', 'v');
-	Cookies.remove('c');
+	assert.expect(2);
+	var value = 'v';
+	Cookies.set('c', value);
+	var removedValue = Cookies.remove('c');
 	assert.strictEqual(document.cookie, '', 'should delete the cookie');
+	assert.strictEqual(removedValue, value, 'should return the deleted value');
 });
 
 QUnit.test('with attributes', function (assert) {
