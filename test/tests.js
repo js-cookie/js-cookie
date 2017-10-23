@@ -451,7 +451,7 @@ QUnit.test('Call to read all cookies with mixed json', function (assert) {
 	assert.deepEqual(Cookies.get(), { c: '{"foo":"bar"}', c2: 'v' }, 'returns unparsed cookies');
 });
 
-QUnit.test('Cookies with escaped quotes in json', function (assert) {
+QUnit.test('Cookies with escaped quotes in json using raw converters', function (assert) {
 	Cookies.withConverter({
 		read: function (value) {
 			return value;
