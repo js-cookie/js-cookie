@@ -460,8 +460,8 @@ QUnit.test('Cookies with escaped quotes in json', function (assert) {
 			return value;
 		}
 	}).set('c', '"{ \\"foo\\": \\"bar\\" }"');
-	assert.deepEqual(Cookies.getJSON('c'), '{ "foo": "bar" }', 'returns JSON parsed cookie');
-	assert.deepEqual(Cookies.get('c'), '{ \\"foo\\": \\"bar\\" }', 'returns unparsed cookie with enclosing quotes removed');
+	assert.strictEqual(Cookies.getJSON('c'), '{ "foo": "bar" }', 'returns JSON parsed cookie');
+	assert.strictEqual(Cookies.get('c'), '{ \\"foo\\": \\"bar\\" }', 'returns unparsed cookie with enclosing quotes removed');
 });
 
 QUnit.module('noConflict', lifecycle);
