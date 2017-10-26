@@ -37,7 +37,7 @@ Download the script [here](https://github.com/js-cookie/js-cookie/blob/latest/sr
 Or include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 ```
 
 **Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
