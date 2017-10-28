@@ -287,6 +287,7 @@ For vulnerability reports, send an e-mail to `jscookie at gmail dot com`
 
 * Increment the "version" attribute of `package.json`
 * Increment the version number in the `src/js.cookie.js` file
+* If `major` bump, update jsDelivr CDN major version link on README
 * Commit with the message "Release version x.x.x"
 * Create version tag in git
 * Create a github release and upload the minified file
