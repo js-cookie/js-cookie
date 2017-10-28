@@ -169,12 +169,12 @@ module.exports = function (grunt) {
 								version: '8.0'
 							}, {
 								browserName: 'firefox',
-								platform: 'OS X 10.10',
-								version: '36.0'
+								platform: 'OS X 10.11',
+								version: '56.0'
 							}, {
 								browserName: 'chrome',
 								platform: 'OS X 10.10',
-								version: '41.0'
+								version: '61.0'
 							}],
 							'windows7': [{
 								browserName: 'internet explorer',
@@ -196,11 +196,11 @@ module.exports = function (grunt) {
 							'linux': [{
 								browserName: 'firefox',
 								platform: 'Linux',
-								version: '37.0'
+								version: '45.0'
 							}, {
 								browserName: 'chrome',
 								platform: 'Linux',
-								version: '41.0'
+								version: '48.0'
 							}]
 						};
 
