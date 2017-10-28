@@ -32,7 +32,7 @@
   "author": "Klaus Hartl",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "1.0.0",
+    "grunt": "1.0.1",
     "grunt-compare-size": "0.4.2",
     "grunt-contrib-connect": "1.0.2",
     "grunt-contrib-jshint": "1.1.0",
@@ -44,6 +44,6 @@
     "grunt-saucelabs": "9.0.0",
     "gzip-js": "0.3.2",
     "qunitjs": "1.23.1",
-    "requirejs": "2.3.3"
+    "requirejs": "2.3.5"
   }
 }
