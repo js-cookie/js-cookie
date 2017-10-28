@@ -174,7 +174,7 @@ module.exports = function (grunt) {
 							}, {
 								browserName: 'chrome',
 								platform: 'OS X 10.10',
-								versiono: '41.0'
+								version: '41.0'
 							}],
 							'windows7': [{
 								browserName: 'internet explorer',
