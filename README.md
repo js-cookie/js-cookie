@@ -281,7 +281,7 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Security
 
-For vulnerability reports, send an e-mail to `jscookie at gmail dot com`
+For vulnerability reports, send an e-mail to `jscookieproject at gmail dot com`
 
 ## Manual release steps
 
