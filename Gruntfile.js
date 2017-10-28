@@ -188,29 +188,8 @@ module.exports = function (grunt) {
 								browserName: 'internet explorer',
 								platform: 'Windows 7',
 								version: '9.0'
-							}, {
-								browserName: 'opera',
-								platform: 'Windows 7',
-								version: '12.12'
-							}],
-							'windowsXP': [{
-								browserName: 'internet explorer',
-								platform: 'Windows XP',
-								version: '8.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows XP',
-								version: '7.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows XP',
-								version: '6.0'
 							}],
 							'linux': [{
-								browserName: 'opera',
-								platform: 'Linux',
-								version: '12.15'
-							}, {
 								browserName: 'firefox',
 								platform: 'Linux',
 								version: '37.0'
