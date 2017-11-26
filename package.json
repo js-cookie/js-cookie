@@ -38,7 +38,7 @@
     "grunt-contrib-jshint": "1.1.0",
     "grunt-contrib-nodeunit": "1.0.0",
     "grunt-contrib-qunit": "2.0.0",
-    "grunt-contrib-uglify": "2.3.0",
+    "grunt-contrib-uglify": "3.2.1",
     "grunt-contrib-watch": "1.0.0",
     "grunt-jscs": "3.0.1",
     "grunt-saucelabs": "9.0.0",
