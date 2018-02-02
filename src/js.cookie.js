@@ -95,9 +95,7 @@
 					// Consume the characters of the unparsed-attributes up to,
 					// not including, the first %x3B (";") character.
 					// ...
-					attributes[attributeName] = attributes[attributeName].split(';')[0];
-
-					stringifiedAttributes += '=' + attributes[attributeName];
+					stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
 				}
 				return (document.cookie = key + '=' + value + stringifiedAttributes);
 			}
