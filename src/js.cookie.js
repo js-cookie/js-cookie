@@ -51,9 +51,7 @@
 				}, api.defaults, attributes);
 
 				if (typeof attributes.expires === 'number') {
-					var expires = new Date();
-					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
-					attributes.expires = expires;
+					attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
 				}
 
 				// We're using "expires" because "max-age" is not supported by IE
