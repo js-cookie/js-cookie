@@ -38,7 +38,6 @@
 
 	function init (converter) {
 		function api (key, value, attributes) {
-			var result;
 			if (typeof document === 'undefined') {
 				return;
 			}
@@ -58,7 +57,7 @@
 				attributes.expires = attributes.expires ? attributes.expires.toUTCString() : '';
 
 				try {
-					result = JSON.stringify(value);
+					var result = JSON.stringify(value);
 					if (/^[\{\[]/.test(result)) {
 						value = result;
 					}
@@ -98,10 +97,7 @@
 
 			// Read
 
-			if (!key) {
-				result = {};
-			}
-
+			var jar = {};
 			var decode = function (s) {
 				return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
 			};
@@ -129,18 +125,15 @@
 						} catch (e) {}
 					}
 
-					if (key === name) {
-						result = cookie;
-						break;
-					}
+					jar[name] = cookie;
 
-					if (!key) {
-						result[name] = cookie;
+					if (key === name) {
+						break;
 					}
 				} catch (e) {}
 			}
 
-			return result;
+			return key ? jar[key] : jar;
 		}
 
 		api.set = api;
