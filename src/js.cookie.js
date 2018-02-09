@@ -156,13 +156,13 @@
 				json: true
 			}, [].slice.call(arguments));
 		};
-		api.defaults = {};
-
 		api.remove = function (key, attributes) {
 			api(key, '', extend(attributes, {
 				expires: -1
 			}));
 		};
+
+		api.defaults = {};
 
 		api.withConverter = init;
 
