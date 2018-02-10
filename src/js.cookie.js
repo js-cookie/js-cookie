@@ -78,7 +78,6 @@
 				key = key.replace(/[\(\)]/g, escape);
 
 				var stringifiedAttributes = '';
-
 				for (var attributeName in attributes) {
 					if (!attributes[attributeName]) {
 						continue;
@@ -97,6 +96,7 @@
 					// ...
 					stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
 				}
+
 				return (document.cookie = key + '=' + value + stringifiedAttributes);
 			}
 
