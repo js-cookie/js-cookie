@@ -6,7 +6,7 @@
  * Released under the MIT license
  */
 ;(function (factory) {
-	var registeredInModuleLoader = false;
+	var registeredInModuleLoader;
 	if (typeof define === 'function' && define.amd) {
 		define(factory);
 		registeredInModuleLoader = true;
