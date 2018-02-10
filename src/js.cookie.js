@@ -143,7 +143,7 @@
 		api.getJSON = function () {
 			return api.apply({
 				json: true
-			}, [].slice.call(arguments));
+			}, arguments);
 		};
 		api.remove = function (key, attributes) {
 			api(key, '', extend(attributes, {
