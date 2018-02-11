@@ -294,6 +294,16 @@ QUnit.test('undefined attribute value', function (assert) {
 	}), 'c=v; path=/', 'should not write undefined unofficial attribute');
 });
 
+// github.com/js-cookie/js-cookie/issues/396
+QUnit.test('sanitization of attributes to prevent XSS from untrusted input', function (assert) {
+	assert.expect(1);
+	assert.strictEqual(Cookies.set('c', 'v', {
+		path: '/;domain=sub.domain.com',
+		domain: 'site.com;remove_this',
+		customAttribute: 'value;;remove_this'
+	}), 'c=v; path=/; domain=site.com; customAttribute=value', 'should not allow semicolon in a cookie attribute');
+});
+
 QUnit.module('remove', lifecycle);
 
 QUnit.test('deletion', function (assert) {
