@@ -87,7 +87,15 @@
 					if (attributes[attributeName] === true) {
 						continue;
 					}
-					stringifiedAttributes += '=' + attributes[attributeName];
+
+					// Considers RFC 6265 section 5.2:
+					// ...
+					// 3.  If the remaining unparsed-attributes contains a %x3B (";")
+					//     character:
+					// Consume the characters of the unparsed-attributes up to,
+					// not including, the first %x3B (";") character.
+					// ...
+					stringifiedAttributes += '=' + attributes[attributeName].split(';')[0];
 				}
 				return (document.cookie = key + '=' + value + stringifiedAttributes);
 			}
