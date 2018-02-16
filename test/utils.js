@@ -34,14 +34,14 @@
 
 	window.lifecycle = {
 		afterEach: function () {
-			// Remove the cookies created using js-cookie default attributes
-			Object.keys(Cookies.get()).forEach(Cookies.remove);
-			// Remove the cookies created using browser default attributes
-			Object.keys(Cookies.get()).forEach(function (cookie) {
+			for (var cookie in Cookies.get()) {
+				// Remove the cookies created using js-cookie default attributes
+				Cookies.remove(cookie);
+				// Remove the cookies created using browser default attributes
 				Cookies.remove(cookie, {
 					path: ''
 				});
-			});
+			}
 		}
 	};
 
