@@ -32,7 +32,7 @@ var PHPCookies = Cookies.withConverter({
     write: function (value) {
         // Encode all characters according to the "encodeURIComponent" spec
         return encodeURIComponent(value)
-            // Revert the characters that are unnecessarly encoded but are
+            // Revert the characters that are unnecessarily encoded but are
             // allowed in a cookie value, except for the plus sign (%2B)
             .replace(/%(23|24|26|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
     },
@@ -62,7 +62,7 @@ var TomcatCookies = Cookies.withConverter({
   write: function (value) {
       // Encode all characters according to the "encodeURIComponent" spec
       return encodeURIComponent(value)
-          // Revert the characters that are unnecessarly encoded but are
+          // Revert the characters that are unnecessarily encoded but are
           // allowed in a cookie value
           .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent)
           // Encode the parens that are interpreted incorrectly by Tomcat
@@ -95,7 +95,7 @@ var JBossCookies = Cookies.withConverter({
     write: function (value) {
         // Encode all characters according to the "encodeURIComponent" spec
         return encodeURIComponent(value)
-            // Revert the characters that are unnecessarly encoded but are
+            // Revert the characters that are unnecessarily encoded but are
             // allowed in a cookie value
             .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent)
             // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
