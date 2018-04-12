@@ -180,10 +180,10 @@ QUnit.test('undefined', function (assert) {
 
 QUnit.test('expires option as days from now', function (assert) {
 	assert.expect(1);
-	var expires = new Date();
-	expires.setDate(expires.getDate() + 1);
+	var days = 200;
+	var expires = new Date(new Date().valueOf() + days * 24 * 60 * 60 * 1000);
 	var expected = 'expires=' + expires.toUTCString();
-	var actual = Cookies.set('c', 'v', { expires: 1 });
+	var actual = Cookies.set('c', 'v', { expires: days });
 	assert.ok(actual.indexOf(expected) !== -1, quoted(actual) + ' includes ' + quoted(expected));
 });
 
