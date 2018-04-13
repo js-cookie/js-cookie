@@ -141,87 +141,65 @@ module.exports = function (grunt) {
 					urls: ['http://127.0.0.1:9999'],
 					testname: 'Sauce Test for js-cookie',
 					build: process.env.TRAVIS_JOB_ID,
-					pollInterval: 10000,
-					statusCheckAttempts: 90,
+					statusCheckAttempts: -1,
 					throttled: 3,
-					browsers: (function () {
-						var browsers = {
-							'iOS': [{
-								browserName: 'iphone',
-								platform: 'OS X 10.10',
-								version: '8.2',
-								deviceName: 'iPhone Simulator'
-							}, {
-								browserName: 'iphone',
-								platform: 'OS X 10.10',
-								version: '8.2',
-								deviceName: 'iPad Simulator'
-							}],
-							'android': [{
-								browserName: 'android',
-								platform: 'Linux',
-								version: '5.1',
-								deviceName: 'Android Emulator'
-							}],
-							'mac': [{
-								browserName: 'safari',
-								platform: 'OS X 10.10',
-								version: '8.0'
-							}, {
-								browserName: 'safari',
-								platform: 'OS X 10.11',
-								version: '9.0'
-							}, {
-								browserName: 'safari',
-								platform: 'OS X 10.11',
-								version: '10.0'
-							}, {
-								browserName: 'safari',
-								platform: 'OS X 10.12',
-								version: '11.0'
-							}, {
-								browserName: 'firefox',
-								platform: 'OS X 10.11',
-								version: '56.0'
-							}, {
-								browserName: 'chrome',
-								platform: 'OS X 10.10',
-								version: '61.0'
-							}],
-							'windows7': [{
-								browserName: 'internet explorer',
-								platform: 'Windows 7',
-								version: '11.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows 7',
-								version: '10.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows 7',
-								version: '9.0'
-							}, {
-								browserName: 'internet explorer',
-								platform: 'Windows 7',
-								version: '8.0'
-							}],
-							'linux': [{
-								browserName: 'firefox',
-								platform: 'Linux',
-								version: '45.0'
-							}, {
-								browserName: 'chrome',
-								platform: 'Linux',
-								version: '48.0'
-							}]
-						};
-
-						var matrix = [];
-						for (var os in browsers) {
-							matrix = matrix.concat(browsers[os]);
+					browsers: [
+						{
+							browserName: 'safari',
+							platform: 'OS X 10.11',
+							version: '10.0'
+						},
+						{
+							browserName: 'safari',
+							platform: 'OS X 10.12',
+							version: '10.1'
+						},
+						{
+							browserName: 'safari',
+							platform: 'OS X 10.13',
+							version: '11.0'
+						},
+						{
+							browserName: 'firefox',
+							platform: 'OS X 10.11',
+							version: '56.0'
+						},
+						{
+							browserName: 'chrome',
+							platform: 'OS X 10.10',
+							version: '61.0'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
+							version: '11.0'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
+							version: '10.0'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
+							version: '9.0'
+						},
+						{
+							browserName: 'internet explorer',
+							platform: 'Windows 7',
+							version: '8.0'
+						},
+						{
+							browserName: 'firefox',
+							platform: 'Linux',
+							version: '45.0'
+						},
+						{
+							browserName: 'chrome',
+							platform: 'Linux',
+							version: '48.0'
 						}
-						return matrix;
-					}())
+					]
 				}
 			}
 		}
