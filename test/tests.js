@@ -474,6 +474,11 @@ QUnit.test('Cookies with escaped quotes in json using raw converters', function 
 	assert.strictEqual(Cookies.get('c'), '{ \\"foo\\": \\"bar\\" }', 'returns unparsed cookie with enclosing quotes removed');
 });
 
+QUnit.test('Prevent accidentally writing cookie when passing unexpected argument', function (assert) {
+	Cookies.getJSON('c', { foo: 'bar' });
+	assert.strictEqual(Cookies.get('c'), undefined, 'should not write any cookie');
+});
+
 QUnit.module('noConflict', lifecycle);
 
 QUnit.test('do not conflict with existent globals', function (assert) {

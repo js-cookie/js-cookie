@@ -140,10 +140,10 @@
 		api.get = function (key) {
 			return api.call(api, key);
 		};
-		api.getJSON = function () {
-			return api.apply({
+		api.getJSON = function (key) {
+			return api.call({
 				json: true
-			}, arguments);
+			}, key);
 		};
 		api.remove = function (key, attributes) {
 			api(key, '', extend(attributes, {

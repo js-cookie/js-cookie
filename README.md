@@ -95,6 +95,16 @@ Read all visible cookies:
 Cookies.get(); // => { name: 'value' }
 ```
 
+*Note: It is not possible to read a particular cookie by passing one of the cookie attributes (which may or may not
+have been used when writing the cookie in question):*
+
+```javascript
+Cookies.get('foo', domain: { 'sub.example.com' }); // `domain` won't have any effect...!
+```
+
+The cookie with the name `foo` will only be available on `.get()` if it's visible from where the
+code is called; the domain and/or path attribute will not have an effect when reading.
+
 Delete cookie:
 
 ```javascript
