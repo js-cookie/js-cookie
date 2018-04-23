@@ -99,7 +99,7 @@ Cookies.get(); // => { name: 'value' }
 have been used when writing the cookie in question):*
 
 ```javascript
-Cookies.get('foo', domain: { 'sub.example.com' }); // `domain` won't have any effect...!
+Cookies.get('foo', { domain: 'sub.example.com' }); // `domain` won't have any effect...!
 ```
 
 The cookie with the name `foo` will only be available on `.get()` if it's visible from where the
