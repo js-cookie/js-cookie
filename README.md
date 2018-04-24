@@ -54,13 +54,7 @@ JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [B
 
 ### Module Loaders
 
-JavaScript Cookie can also be loaded as an AMD, CommonJS or [ES6](https://github.com/js-cookie/js-cookie/issues/233#issuecomment-233187386) module.
-
-#### ES6
-
-```javascript
-import Cookies from 'js-cookie';
-```
+JavaScript Cookie can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
