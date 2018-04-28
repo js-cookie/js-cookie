@@ -20,7 +20,7 @@ A simple, lightweight JavaScript API for handling cookies
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
 
-## Build Status Matrix
+## Build Status Matrix ([including active Pull Requests](https://github.com/js-cookie/js-cookie/issues/286))
 
 [![Selenium Test Status](https://saucelabs.com/browser-matrix/js-cookie.svg)](https://saucelabs.com/u/js-cookie)
 
