@@ -3,6 +3,9 @@ node_js:
   - '6'
   - '8'
   - '10'
+cache:
+  directories:
+    - node_modules
 # Only use grunt-ci for commits pushed to this repo. Fall back to regular test
 # for pull requests (as secure variables won't be exposed there).
 script:
