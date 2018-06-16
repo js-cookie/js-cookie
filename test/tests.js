@@ -1,6 +1,6 @@
 'use strict';
 
-/*global lifecycle: true*/
+/* global lifecycle: true */
 
 QUnit.module('read', lifecycle);
 
@@ -149,6 +149,7 @@ QUnit.test('String primitive', function (assert) {
 });
 
 QUnit.test('String object', function (assert) {
+	/* eslint-disable no-new-wrappers */
 	assert.expect(1);
 	Cookies.set('c', new String('v'));
 	assert.strictEqual(Cookies.get('c'), 'v', 'should write value');
@@ -421,7 +422,7 @@ QUnit.test('Array Literal', function (assert) {
 });
 
 QUnit.test('Array Constructor', function (assert) {
-	/*jshint -W009 */
+	/* eslint-disable no-array-constructor */
 	assert.expect(2);
 	var value = new Array();
 	value[0] = 'v';
@@ -438,7 +439,7 @@ QUnit.test('Object Literal', function (assert) {
 });
 
 QUnit.test('Object Constructor', function (assert) {
-	/*jshint -W010 */
+	/* eslint-disable no-new-object */
 	assert.expect(2);
 	var value = new Object();
 	value.k = 'v';

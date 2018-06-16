@@ -1,4 +1,4 @@
-/*jshint unused:false */
+/* eslint-disable no-unused-vars */
 
 var require = {
 	paths: {
