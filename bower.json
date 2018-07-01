@@ -2,7 +2,7 @@
   "name": "js-cookie",
   "license": "MIT",
   "main": [
-    "src/js.cookie.js"
+    "lib/js.cookie.umd.js"
   ],
   "ignore": [
     "travis.sh",

@@ -1,10 +1,12 @@
 {
   "extends": "../.eslintrc",
   "env": {
-    "browser": true,
-    "amd": true
+    "browser": true
   },
   "rules": {
     "camelcase": "error"
+  },
+  "parserOptions": {
+    "sourceType": "module"
   }
 }

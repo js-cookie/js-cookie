@@ -30,5 +30,11 @@
     "no-array-constructor": "error",
     "no-new-object": "error",
     "no-new-wrappers": "error"
-  }
+  },
+  "overrides": [{
+    "files": ["rollup.config.js"],
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  }]
 }

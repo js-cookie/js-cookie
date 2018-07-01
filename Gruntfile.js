@@ -42,6 +42,7 @@ module.exports = function (grunt) {
 		},
 		eslint: {
 			grunt: 'Gruntfile.js',
+			rollup: 'rollup.config.js',
 			source: 'src/**/*.js',
 			tests: ['test/**/*.js', '!test/polyfill.js']
 		},
@@ -55,8 +56,9 @@ module.exports = function (grunt) {
 			},
 			build: {
 				files: {
-					'build/js.cookie.min.js': 'src/js.cookie.js',
-					'build/js.cookie-<%= pkg.version %>.min.js': 'src/js.cookie.js'
+					'build/js.cookie.min.js': 'lib/js.cookie.umd.js',
+					'build/js.cookie-<%= pkg.version %>.min.js': 'lib/js.cookie.umd.js',
+					'build/js.cookie.cjs.min.js': 'lib/js.cookie.js',
 				}
 			}
 		},
@@ -70,7 +72,10 @@ module.exports = function (grunt) {
 		compare_size: {
 			files: [
 				'build/js.cookie-<%= pkg.version %>.min.js',
-				'src/js.cookie.js'
+				'build/js.cookie.cjs.min.js',
+				'lib/js.cookie.js',
+				'lib/js.cookie.umd.js',
+				'lib/js.cookie.esm.js'
 			],
 			options: {
 				compress: {

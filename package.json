@@ -2,7 +2,7 @@
   "name": "js-cookie",
   "version": "2.2.0",
   "description": "A simple, lightweight JavaScript API for handling cookies",
-  "main": "src/js.cookie.js",
+  "main": "lib/js.cookie.js",
   "directories": {
     "test": "test"
   },
@@ -18,14 +18,15 @@
     "browserify"
   ],
   "scripts": {
-    "test": "grunt test"
+    "test": "npm run build && grunt test",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/js-cookie/js-cookie.git"
   },
   "files": [
-    "src/**/*.js",
+    "lib/**/*.js",
     "SERVER_SIDE.md",
     "CONTRIBUTING.md"
   ],
@@ -43,6 +44,7 @@
     "grunt-saucelabs": "9.0.0",
     "gzip-js": "0.3.2",
     "qunitjs": "1.23.1",
-    "requirejs": "2.3.5"
+    "requirejs": "2.3.5",
+    "rollup": "^0.62.0"
   }
 }
