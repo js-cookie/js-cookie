@@ -36,6 +36,10 @@
 		return result;
 	}
 
+	function decode (s) {
+		return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+	}
+
 	function init (converter) {
 		function api() {}
 
@@ -100,9 +104,6 @@
 			}
 
 			var jar = {};
-			var decode = function (s) {
-				return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
-			};
 			// To prevent the for loop in the first place assign an empty array
 			// in case there are no cookies at all.
 			var cookies = document.cookie ? document.cookie.split('; ') : [];
