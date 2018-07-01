@@ -1,0 +1,17 @@
+{
+  "extends": "../.eslintrc",
+  "env": {
+    "browser": true,
+    "qunit": true
+  },
+  "globals": {
+    "require": true,
+    "unescape": true,
+    "lifecycle": true,
+    "using": true,
+    "quoted": true,
+    "addEvent": true,
+    "loadFileSync": true
+  },
+  "rules": {}
+}

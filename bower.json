@@ -10,8 +10,8 @@
     "Gruntfile.js",
     "package.json",
     ".gitignore",
-    ".jshintignore",
-    ".jshintrc",
+    ".eslintintignore",
+    ".eslintrc",
     ".tm_properties",
     ".travis.yml"
   ]

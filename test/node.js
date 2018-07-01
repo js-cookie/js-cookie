@@ -1,4 +1,4 @@
-/*jshint node:true */
+/* eslint-env node */
 exports.node = {
 	should_load_js_cookie: function (test) {
 		test.expect(1);

@@ -1,0 +1,10 @@
+{
+  "extends": "../.eslintrc",
+  "env": {
+    "browser": true,
+    "amd": true
+  },
+  "rules": {
+    "camelcase": "error"
+  }
+}
