@@ -34,7 +34,7 @@
   "devDependencies": {
     "grunt": "1.0.2",
     "grunt-compare-size": "0.4.2",
-    "grunt-contrib-connect": "1.0.2",
+    "grunt-contrib-connect": "2.0.0",
     "grunt-contrib-nodeunit": "2.0.0",
     "grunt-contrib-qunit": "2.0.0",
     "grunt-contrib-uglify": "2.3.0",
