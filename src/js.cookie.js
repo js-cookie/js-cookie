@@ -37,7 +37,7 @@
 	}
 
 	function decode (s) {
-		return s.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
+		return s.replace(/(%[0-9A-Z]{2})+/gi, decodeURIComponent);
 	}
 
 	function init (converter) {
