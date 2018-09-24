@@ -113,7 +113,11 @@ Cookies.remove('name'); // fail!
 Cookies.remove('name', { path: '' }); // removed!
 ```
 
-*IMPORTANT! When deleting a cookie, you must pass the exact same path and domain attributes that were used to set the cookie, unless you're relying on the [default attributes](#cookie-attributes).*
+*IMPORTANT! When deleting a cookie and you're not relying on the [default attributes](#cookie-attributes), you must pass the exact same path and domain attributes that were used to set the cookie:*
+
+```javascript
+Cookies.remove('name', { path: '', domain: '.yourdomain.com' });
+```
 
 *Note: Removing a nonexistent cookie does not raise any exception nor return any value.*
 
