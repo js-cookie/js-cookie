@@ -183,11 +183,10 @@ module.exports = function (grunt) {
 		}
 	}
 
-	grunt.registerTask('saucelabs', ['connect:build-sauce', 'saucelabs-qunit']);
 	grunt.registerTask('test', ['uglify', 'eslint', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('saucelabs', ['uglify', 'connect:build-sauce', 'saucelabs-qunit']);
 
 	grunt.registerTask('dev', ['test', 'compare_size']);
-	grunt.registerTask('ci', ['test', 'saucelabs']);
 
 	grunt.registerTask('default', 'dev');
 };

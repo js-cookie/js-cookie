@@ -6,10 +6,17 @@ node_js:
 cache:
   directories:
     - node_modules
-# Only use grunt-ci for commits pushed to this repo. Fall back to regular test
-# for pull requests (as secure variables won't be exposed there).
-script:
-  - ./travis.sh
+stages:
+  - test
+  - name: saucelabs
+    if: fork IS false
+jobs:
+  include:
+    - stage: saucelabs
+      node_js: '10'
+      script: grunt saucelabs
+      addons:
+        sauce_connect: true
 env:
   # Encrypted SAUCE_USERNAME and SAUCE_ACCESS_KEY used by travis
   global:
