@@ -138,8 +138,10 @@ However, it's still quite a handful to do. To avoid that situation, writing a cu
 var ExpressCookies = Cookies.withConverter({
     write: function (value) {
         // Prepend j: prefix if it is JSON
-        if (typeof value === 'object')
-            value = 'j:' + JSON.stringify(value);
+        try {
+            JSON.parse(value);
+            value = 'j:' + value;
+        } catch (e) {}
 
         // Encode all characters according to the "encodeURIComponent" spec
         return encodeURIComponent(value)
