@@ -105,3 +105,54 @@ var JBossCookies = Cookies.withConverter({
 ```
 
 Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.
+
+## Express
+
+[Express](https://github.com/expressjs/express) handles cookies with JSON value quite differently by [prepending](https://github.com/expressjs/express/blob/master/lib/response.js#L827) a `j:` prefix to [verify](https://github.com/expressjs/cookie-parser/blob/master/index.js#L83) if it contains a JSON value later.
+
+An example to solve this:
+
+**Write**
+```js
+// Client
+Cookies.set('name', 'j:' + JSON.stringify({ key: value }));
+
+// Or in Express server to prevent prepending of j: prefix
+res.cookie('name', JSON.stringify({ key: value }));
+```
+
+**Read**
+```js
+// Client
+var myCookie = JSON.parse(Cookies.get('name').slice(2));
+
+// Express already parses JSON cookies if `cookie-parser` middleware is installed.
+// If you used the solution for Express above:
+var myCookie = JSON.parse(req.cookies.name);
+```
+
+However, it's still quite a handful to do. To avoid that situation, writing a custom converter is recommended.
+
+**Example**:
+```js
+var ExpressCookies = Cookies.withConverter({
+    write: function (value) {
+        // Prepend j: prefix if it is JSON
+        if (typeof value === 'object')
+            value = 'j:' + JSON.stringify(value);
+
+        // Encode all characters according to the "encodeURIComponent" spec
+        return encodeURIComponent(value)
+            // Revert the characters that are unnecessarily encoded but are
+            // allowed in a cookie value
+            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
+    },
+    read: function (value) {
+        // Decode all characters according to the "encodeURIComponent" spec
+        value = value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
+
+        // Check if the value contains j: prefix otherwise return as is
+        return value.slice(0, 2) === 'j:' ? value.slice(2) : value;
+    }
+});
+```
