@@ -139,15 +139,6 @@
 			return key ? jar[key] : jar;
 		}
 
-		function isEnabled() {
-			var testKey = 'js-cookie.js';
-			api.set(testKey, 1, {});
-			var testCookie = api.get(testKey);
-			var isEnabled = (testCookie !== undefined);
-			api.remove(testKey);
-			return isEnabled;
-		}
-
 		api.set = set;
 		api.get = function (key) {
 			return get(key, false /* read as raw */);
@@ -161,7 +152,14 @@
 			}));
 		};
 
-		api.enabled = isEnabled();
+		api.enabled = function() {
+			var testKey = 'js-cookie.js';
+			api.set(testKey, 1, {});
+			var testCookie = api.get(testKey);
+			var isEnabled = (testCookie !== undefined);
+			api.remove(testKey);
+			return isEnabled;
+		};
 
 		api.defaults = {};
 

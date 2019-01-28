@@ -495,6 +495,6 @@ QUnit.module('enabled', lifecycle);
 
 QUnit.test('check that cookies are enabled', function (assert) {
 	assert.expect(1);
-	var isEnabled = Cookies.enabled;
+	var isEnabled = Cookies.enabled();
 	assert.strictEqual(isEnabled, true, 'browser has not disabled cookies');
 });
