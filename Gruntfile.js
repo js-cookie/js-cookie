@@ -91,12 +91,6 @@ module.exports = function (grunt) {
 					}
 				}
 			},
-			'build-sauce': {
-				options: {
-					port: 9999,
-					base: ['.', 'test']
-				}
-			},
 			tests: {
 				options: {
 					port: 10000,
@@ -111,73 +105,8 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		'saucelabs-qunit': {
-			all: {
-				options: {
-					urls: ['http://127.0.0.1:9999'],
-					testname: 'Sauce Test for js-cookie',
-					build: process.env.TRAVIS_JOB_ID,
-					statusCheckAttempts: -1,
-					throttled: 3,
-					browsers: [
-						{
-							browserName: 'safari',
-							platform: 'macOS 10.13',
-							version: '12.0'
-						},
-						{
-							browserName: 'safari',
-							platform: 'macOS 10.13',
-							version: '11.1'
-						},
-						{
-							browserName: 'firefox',
-							platform: 'macOS 10.13',
-							version: '65.0'
-						},
-						{
-							browserName: 'chrome',
-							platform: 'macOS 10.13',
-							version: '72.0'
-						},
-						{
-							browserName: 'safari',
-							platform: 'macOS 10.12',
-							version: '11.0'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 10',
-							version: '11.285'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '11.0'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '10.0'
-						},
-						{
-							browserName: 'internet explorer',
-							platform: 'Windows 7',
-							version: '9.0'
-						},
-						{
-							browserName: 'firefox',
-							platform: 'Linux',
-							version: '45.0'
-						},
-						{
-							browserName: 'chrome',
-							platform: 'Linux',
-							version: '48.0'
-						}
-					]
-				}
-			}
+		exec: {
+			'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
 		}
 	});
 
@@ -189,7 +118,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('test', ['uglify', 'eslint', 'connect:build-qunit', 'qunit', 'nodeunit']);
-	grunt.registerTask('saucelabs', ['uglify', 'connect:build-sauce', 'saucelabs-qunit']);
+	grunt.registerTask('browserstack', ['uglify', 'exec:browserstack-runner']);
 
 	grunt.registerTask('dev', ['test', 'compare_size']);
 
