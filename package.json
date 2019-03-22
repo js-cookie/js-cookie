@@ -31,7 +31,7 @@
   "author": "Klaus Hartl",
   "license": "MIT",
   "devDependencies": {
-    "grunt": "1.0.3",
+    "grunt": "1.0.4",
     "grunt-compare-size": "0.4.2",
     "grunt-contrib-connect": "2.0.0",
     "grunt-contrib-nodeunit": "2.0.0",
