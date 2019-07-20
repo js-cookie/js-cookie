@@ -148,7 +148,7 @@
 		}
 				
 		function toggle (key, value, attributes) {
-			if (existing.indexOf(value)>=0)
+			if (get(key).indexOf(value)>=0)
 			{
 				delete(key, value, attributes);
 			}
