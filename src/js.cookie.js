@@ -139,6 +139,16 @@
 			return key ? jar[key] : jar;
 		}
 
+		function add (key, value, attributes) {
+			var existing = get(key);
+			set(key, existing + value, attributes);
+		}
+		
+		function replace (key, value, attributes) {
+			var existing = get(key);
+			set(key, existing.Replace(value,""), attributes);
+		}
+		
 		api.set = set;
 		api.get = function (key) {
 			return get(key, false /* read as raw */);
