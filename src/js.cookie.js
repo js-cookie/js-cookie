@@ -139,14 +139,23 @@
 			return key ? jar[key] : jar;
 		}
 
-		function add (key, value, attributes) {
-			var existing = get(key);
-			set(key, existing + value, attributes);
+		function append (key, value, attributes) {
+			set(key, get(key) + value, attributes);
 		}
 		
-		function replace (key, value, attributes) {
-			var existing = get(key);
-			set(key, existing.Replace(value,""), attributes);
+		function delete (key, value, attributes) { 
+			set(key, get(key).Replace(value,""), attributes);
+		}
+				
+		function toggle (key, value, attributes) {
+			if (existing.indexOf(value)>=0)
+			{
+				delete(key, value, attributes);
+			}
+			else
+			{
+				append(key, value, attributes);
+			}
 		}
 		
 		api.set = set;
