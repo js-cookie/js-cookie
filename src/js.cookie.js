@@ -144,7 +144,7 @@
 		}
 		
 		function delete (key, value, attributes) { 
-			set(key, get(key).Replace(value,""), attributes);
+			set(key, get(key).replace(value,""), attributes);
 		}
 				
 		function toggle (key, value, attributes) {
