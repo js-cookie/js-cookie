@@ -52,8 +52,12 @@
 				path: '/'
 			}, api.defaults, attributes);
 
-			if (typeof attributes.expires === 'number') {
-				attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e+5);
+			// Check Date validity
+			if (attributes.expires instanceof Date) {
+				attributes.expires = isNaN(Number(attributes.expires)) ? '' : attributes.expires;
+			} else if (attributes.expires) {
+				var expires = parseFloat(attributes.expires);
+				attributes.expires = isNaN(expires) ? '' : new Date(new Date() * 1 + expires * 864e+5);
 			}
 
 			// We're using "expires" because "max-age" is not supported by IE
