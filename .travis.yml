@@ -9,7 +9,7 @@ cache:
 stages:
   - test
   - name: saucelabs
-    if: fork IS false
+    if: env(SAUCE_USERNAME) IS present
 jobs:
   include:
     - stage: saucelabs
@@ -17,8 +17,3 @@ jobs:
       script: grunt saucelabs
       addons:
         sauce_connect: true
-env:
-  # Encrypted SAUCE_USERNAME and SAUCE_ACCESS_KEY used by travis
-  global:
-    - secure: IkMOa/8r4sWyzUMxecsfqoPzZyIqVAMwPkQ6/HxXPbT8X7UnvqAdaicAMeHEKtOnOac+rx6pGB9HQvC8P/ZzkEBtsKLP4nEh9vsAInZvb3pXg+qbIgIK6/19X0kU4UkpDqVdWmBuFTamJvMDMstUTgEaM3869bB5vGp9taBgfVo=
-    - secure: DKrQplF0CBiBh+cbQ8D7EKebCeklUWEELblIJdU4475Occ4G9b8ZFYO9HFwl1B8F/XapB7CsMyxbJCWor030FySeqn8bhJs9NoAVoYGg+MtWniv1EOHuZLWuOGfgQDv7qj5U0Af9Y655MmUpXSN2aDlCmQweWnYdpFTM9Dfsdd8=
