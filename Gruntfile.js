@@ -122,8 +122,8 @@ module.exports = function (grunt) {
 					browsers: [
 						{
 							browserName: 'safari',
-							platform: 'macOS 10.14',
-							version: '12.0'
+							platform: 'macOS 10.13',
+							version: '12.1'
 						},
 						{
 							browserName: 'safari',
@@ -132,12 +132,12 @@ module.exports = function (grunt) {
 						},
 						{
 							browserName: 'firefox',
-							platform: 'macOS 10.14',
+							platform: 'macOS 10.13',
 							version: '68.0'
 						},
 						{
 							browserName: 'chrome',
-							platform: 'macOS 10.14',
+							platform: 'macOS 10.13',
 							version: '76.0'
 						},
 						{
