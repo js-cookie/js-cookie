@@ -119,6 +119,9 @@ module.exports = function (grunt) {
 					build: process.env.TRAVIS_JOB_ID,
 					statusCheckAttempts: -1,
 					throttled: 3,
+					sauceConfig: {
+						'video-upload-on-pass': false
+					},
 					browsers: [
 						{
 							browserName: 'safari',
