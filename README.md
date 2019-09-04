@@ -2,11 +2,11 @@
   <img src="https://cloud.githubusercontent.com/assets/835857/14581711/ba623018-0436-11e6-8fce-d2ccd4d379c9.gif">
 </p>
 
-# JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=Y2xZRXJTK0dxYXQ3RlVFOVJMbDF5cG9zaWVmTDJQWnVwcVdSSWlDdzY0VT0tLW5ZUzY1Y1oyQ3JtTm1ZSWpjRXlaVUE9PQ==--81a8196ff92a5833081d711db43c1e33dedcb3e3)](https://www.browserstack.com/automate/public-build/Y2xZRXJTK0dxYXQ3RlVFOVJMbDF5cG9zaWVmTDJQWnVwcVdSSWlDdzY0VT0tLW5ZUzY1Y1oyQ3JtTm1ZSWpjRXlaVUE9PQ==--81a8196ff92a5833081d711db43c1e33dedcb3e3) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/js-cookie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/js-cookie)
+# JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=QkpFeUZPS1d3cGVtdjIvUHR2VzNTTmQxbHdPUHc5RVFzbnpoZ3ZJWUFFYz0tLVhpSStmK2dpMG5OMDlpbGJBZzNxSEE9PQ==--7f5d9c7e35fed17bc6967cdb06bf79dc4d5bafd8 )](https://www.browserstack.com/automate/public-build/QkpFeUZPS1d3cGVtdjIvUHR2VzNTTmQxbHdPUHc5RVFzbnpoZ3ZJWUFFYz0tLVhpSStmK2dpMG5OMDlpbGJBZzNxSEE9PQ==--7f5d9c7e35fed17bc6967cdb06bf79dc4d5bafd8 ) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/js-cookie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/js-cookie)
 
 A simple, lightweight JavaScript API for handling cookies
 
-* Works in [all](https://www.browserstack.com/automate/public-build/Y2xZRXJTK0dxYXQ3RlVFOVJMbDF5cG9zaWVmTDJQWnVwcVdSSWlDdzY0VT0tLW5ZUzY1Y1oyQ3JtTm1ZSWpjRXlaVUE9PQ==--81a8196ff92a5833081d711db43c1e33dedcb3e3) browsers
+* Works in [all](https://www.browserstack.com/automate/public-build/QkpFeUZPS1d3cGVtdjIvUHR2VzNTTmQxbHdPUHc5RVFzbnpoZ3ZJWUFFYz0tLVhpSStmK2dpMG5OMDlpbGJBZzNxSEE9PQ==--7f5d9c7e35fed17bc6967cdb06bf79dc4d5bafd8 ) browsers
 * Accepts [any](#encoding) character
 * [Heavily](test) tested
 * No dependency
