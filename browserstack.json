@@ -1,29 +1,27 @@
 {
-    "test_framework" : "qunit",
-    "test_path": [
-        "test/index.html"
-    ],
-    "exit_with_fail": true,
-    "browsers": [
-        "chrome_latest",
-        "chrome_previous",
-        "firefox_latest",
-        "firefox_previous",
-        "ie_11",
-        "ie_10",
-        "ie_9",
-        "opera_latest",
-        {
-            "browser": "safari",
-            "browser_version": "latest",
-            "os": "OS X",
-            "os_version": "Mojave"
-        },
-        {
-            "browser": "safari",
-            "browser_version": "latest",
-            "os": "OS X",
-            "os_version": "High Sierra"
-        }
-    ]
+  "test_framework": "qunit",
+  "test_path": ["test/index.html"],
+  "exit_with_fail": true,
+  "browsers": [
+    "chrome_latest",
+    "chrome_previous",
+    "firefox_latest",
+    "firefox_previous",
+    "ie_11",
+    "ie_10",
+    "ie_9",
+    "opera_latest",
+    {
+      "browser": "safari",
+      "browser_version": "latest",
+      "os": "OS X",
+      "os_version": "Mojave"
+    },
+    {
+      "browser": "safari",
+      "browser_version": "latest",
+      "os": "OS X",
+      "os_version": "High Sierra"
+    }
+  ]
 }
