@@ -316,6 +316,14 @@ For vulnerability reports, send an e-mail to `jscookieproject at gmail dot com`
   * `git push origin master --tags`
 * Release on npm
 
+## Supporters
+
+<p>
+  <a href="https://www.browserstack.com/"><img src="https://raw.githubusercontent.com/wiki/js-cookie/js-cookie/Browserstack-logo%402x.png" width="150"></a>
+</p>
+
+Many thanks to [BrowserStack](https://www.browserstack.com/) for providing unlimited browser testing free of cost.
+
 ## Authors
 
 * [Klaus Hartl](https://github.com/carhartl)
