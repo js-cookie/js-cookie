@@ -2,11 +2,11 @@
   <img src="https://cloud.githubusercontent.com/assets/835857/14581711/ba623018-0436-11e6-8fce-d2ccd4d379c9.gif">
 </p>
 
-# JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/js-cookie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/js-cookie)
+# JavaScript Cookie [![Build Status](https://travis-ci.org/js-cookie/js-cookie.svg?branch=master)](https://travis-ci.org/js-cookie/js-cookie) [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=QkpFeUZPS1d3cGVtdjIvUHR2VzNTTmQxbHdPUHc5RVFzbnpoZ3ZJWUFFYz0tLVhpSStmK2dpMG5OMDlpbGJBZzNxSEE9PQ==--7f5d9c7e35fed17bc6967cdb06bf79dc4d5bafd8 )](https://www.browserstack.com/automate/public-build/QkpFeUZPS1d3cGVtdjIvUHR2VzNTTmQxbHdPUHc5RVFzbnpoZ3ZJWUFFYz0tLVhpSStmK2dpMG5OMDlpbGJBZzNxSEE9PQ==--7f5d9c7e35fed17bc6967cdb06bf79dc4d5bafd8 ) [![Code Climate](https://codeclimate.com/github/js-cookie/js-cookie.svg)](https://codeclimate.com/github/js-cookie/js-cookie) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/js-cookie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/js-cookie)
 
 A simple, lightweight JavaScript API for handling cookies
 
-* Works in [all](https://saucelabs.com/u/js-cookie) browsers
+* Works in [all](https://www.browserstack.com/automate/public-build/QkpFeUZPS1d3cGVtdjIvUHR2VzNTTmQxbHdPUHc5RVFzbnpoZ3ZJWUFFYz0tLVhpSStmK2dpMG5OMDlpbGJBZzNxSEE9PQ==--7f5d9c7e35fed17bc6967cdb06bf79dc4d5bafd8 ) browsers
 * Accepts [any](#encoding) character
 * [Heavily](test) tested
 * No dependency
@@ -19,10 +19,6 @@ A simple, lightweight JavaScript API for handling cookies
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
-
-## Build Status Matrix ([including active Pull Requests](https://github.com/js-cookie/js-cookie/issues/286))
-
-[![Selenium Test Status](https://saucelabs.com/browser-matrix/js-cookie.svg)](https://saucelabs.com/u/js-cookie)
 
 ## Installation
 
@@ -319,6 +315,14 @@ For vulnerability reports, send an e-mail to `jscookieproject at gmail dot com`
   * `git push <remote> :refs/tags/latest`
   * `git push origin master --tags`
 * Release on npm
+
+## Supporters
+
+<p>
+  <a href="https://www.browserstack.com/"><img src="https://raw.githubusercontent.com/wiki/js-cookie/js-cookie/Browserstack-logo%402x.png" width="150"></a>
+</p>
+
+Many thanks to [BrowserStack](https://www.browserstack.com/) for providing unlimited browser testing free of cost.
 
 ## Authors
 

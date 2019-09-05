@@ -1,3 +1,8 @@
+addons:
+  browserstack:
+    username: ${BROWSERSTACK_USERNAME}
+    access_key: ${BROWSERSTACK_ACCESS_KEY}
+    forcelocal: true
 language: node_js
 node_js:
   - '6'
@@ -8,12 +13,10 @@ cache:
     - node_modules
 stages:
   - test
-  - name: saucelabs
-    if: env(SAUCE_USERNAME) IS present
+  - name: browserstack
+    if: env(BROWSERSTACK_USERNAME) IS present
 jobs:
   include:
-    - stage: saucelabs
+    - stage: browserstack
       node_js: '10'
-      script: grunt saucelabs
-      addons:
-        sauce_connect: true
+      script: grunt browserstack

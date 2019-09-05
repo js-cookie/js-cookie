@@ -117,7 +117,7 @@ QUnit.test('Call to read cookie when there is another unrelated cookie with malf
 	document.cookie = 'c=v';
 	assert.strictEqual(Cookies.get('c'), 'v', 'should not throw a URI malformed exception when retrieving a single cookie');
 	assert.deepEqual(Cookies.get(), { c: 'v' }, 'should not throw a URI malformed exception when retrieving all cookies');
-	Cookies.withConverter(unescape).remove('invalid');
+	document.cookie = 'invalid=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT';
 });
 
 // github.com/js-cookie/js-cookie/issues/145
