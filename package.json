@@ -37,7 +37,7 @@
     "grunt-contrib-connect": "2.1.0",
     "grunt-contrib-nodeunit": "2.0.0",
     "grunt-contrib-qunit": "3.1.0",
-    "grunt-contrib-uglify": "4.0.1",
+    "grunt-contrib-uglify": "gruntjs/grunt-contrib-uglify#harmony",
     "grunt-contrib-watch": "1.1.0",
     "grunt-eslint": "22.0.0",
     "grunt-exec": "3.0.0",
