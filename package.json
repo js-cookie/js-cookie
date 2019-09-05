@@ -36,7 +36,7 @@
     "grunt-compare-size": "0.4.2",
     "grunt-contrib-connect": "2.1.0",
     "grunt-contrib-nodeunit": "2.0.0",
-    "grunt-contrib-qunit": "2.0.0",
+    "grunt-contrib-qunit": "3.1.0",
     "grunt-contrib-uglify": "4.0.1",
     "grunt-contrib-watch": "1.1.0",
     "grunt-eslint": "22.0.0",
