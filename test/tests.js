@@ -43,28 +43,6 @@ QUnit.test('percent character in cookie value mixed with encoded values', functi
 	assert.strictEqual(Cookies.get('bad'), 'foo%bar"baz%bax=', 'should read the percent character');
 });
 
-// github.com/carhartl/jquery-cookie/pull/88
-// github.com/carhartl/jquery-cookie/pull/117
-QUnit.test('malformed cookie value in IE', function (assert) {
-	assert.expect(1);
-	var done = assert.async();
-	// Sandbox in an iframe so that we can poke around with document.cookie.
-	var iframe = document.createElement('iframe');
-	iframe.src = 'malformed_cookie.html';
-	addEvent(iframe, 'load', function () {
-		if (iframe.contentWindow.ok) {
-			assert.strictEqual(iframe.contentWindow.testValue, 'two', 'reads all cookie values, skipping duplicate occurences of "; "');
-		} else {
-			// Skip the test where we can't stub document.cookie using
-			// Object.defineProperty. Seems to work fine in
-			// Chrome, Firefox and IE 8+.
-			assert.ok(true, 'N/A');
-		}
-		done();
-	});
-	document.body.appendChild(iframe);
-});
-
 // github.com/js-cookie/js-cookie/pull/171
 QUnit.test('missing leading semicolon', function (assert) {
 	assert.expect(1);
@@ -74,7 +52,7 @@ QUnit.test('missing leading semicolon', function (assert) {
 	var loadedSuccessfully = true;
 	iframe.src = 'missing_semicolon.html';
 
-	addEvent(iframe, 'load', function () {
+	iframe.addEventListener('load', function () {
 		iframe.contentWindow.onerror = function () {
 			loadedSuccessfully = false;
 		};
@@ -133,11 +111,7 @@ QUnit.test('Call to read cookie when there is a window.json variable globally', 
 	window.json = true;
 	Cookies.set('boolean', true);
 	assert.strictEqual(typeof Cookies.get('boolean'), 'string', 'should not change the returned type');
-	// IE 6-8 throw an exception if trying to delete a window property
-	// See stackoverflow.com/questions/1073414/deleting-a-window-property-in-ie/1824228
-	try {
-		delete window.json;
-	} catch (e) {}
+	delete window.json;
 });
 
 QUnit.module('write', lifecycle);

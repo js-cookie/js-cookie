@@ -10,7 +10,6 @@
     "lifecycle": true,
     "using": true,
     "quoted": true,
-    "addEvent": true,
     "loadFileSync": true
   },
   "rules": {}

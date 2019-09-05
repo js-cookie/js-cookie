@@ -4,10 +4,6 @@
 	window.lifecycle = {
 		afterEach: function () {
 			// Remove the cookies created using js-cookie default attributes
-			// Note: Using `Object.keys(Cookies.get()).forEach(Cookies.remove)`
-			// would cause IE 6 + 7 to break with a "Object doesn't support
-			// this property or method" error, thus wrapping it with a
-			// function.
 			Object.keys(Cookies.get()).forEach(function (cookie) {
 				Cookies.remove(cookie);
 			});
@@ -18,15 +14,6 @@
 				});
 			});
 		}
-	};
-
-	window.addEvent = function (element, eventName, fn) {
-		var method = 'addEventListener';
-		if (element.attachEvent) {
-			eventName = 'on' + eventName;
-			method = 'attachEvent';
-		}
-		element[ method ](eventName, fn);
 	};
 
 	window.using = function (assert) {
@@ -58,7 +45,7 @@
 							'&value=' + encodeURIComponent(value)
 						].join('');
 						var done = assert.async();
-						addEvent(iframe, 'load', function () {
+						iframe.addEventListener('load', function () {
 							var iframeDocument = iframe.contentWindow.document;
 							var root = iframeDocument.documentElement;
 							var content = root.textContent;

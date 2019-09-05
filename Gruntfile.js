@@ -43,14 +43,13 @@ module.exports = function (grunt) {
 		eslint: {
 			grunt: 'Gruntfile.js',
 			source: 'src/**/*.js',
-			tests: ['test/**/*.js', '!test/polyfill.js']
+			tests: 'test/**/*.js'
 		},
 		uglify: {
 			options: {
 				compress: {
 					unsafe: true
 				},
-				screwIE8: false,
 				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */\n'
 			},
 			build: {
