@@ -54,6 +54,7 @@ module.exports = function (grunt) {
 		},
 		compare_size: {
 			files: [
+				'build/js.cookie-<%= pkg.version %>.min.mjs',
 				'build/js.cookie-<%= pkg.version %>.min.js',
 				'src/js.cookie.js'
 			],
