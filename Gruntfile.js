@@ -49,7 +49,7 @@ module.exports = function (grunt) {
 			options: {
 				livereload: true
 			},
-			files: '{src,test}/**/*.js',
+			files: ['src/**/*.mjs', 'test/**/*.js'],
 			tasks: 'default'
 		},
 		compare_size: {
