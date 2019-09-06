@@ -45,20 +45,6 @@ module.exports = function (grunt) {
 			source: 'src/**/*.js',
 			tests: 'test/**/*.js'
 		},
-		uglify: {
-			options: {
-				compress: {
-					unsafe: true
-				},
-				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */\n'
-			},
-			build: {
-				files: {
-					'build/js.cookie.min.js': 'src/js.cookie.js',
-					'build/js.cookie-<%= pkg.version %>.min.js': 'src/js.cookie.js'
-				}
-			}
-		},
 		watch: {
 			options: {
 				livereload: true
@@ -105,6 +91,7 @@ module.exports = function (grunt) {
 			}
 		},
 		exec: {
+			'rollup': './node_modules/.bin/rollup -c',
 			'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
 		}
 	});
@@ -116,8 +103,8 @@ module.exports = function (grunt) {
 		}
 	}
 
-	grunt.registerTask('test', ['uglify', 'eslint', 'connect:build-qunit', 'qunit', 'nodeunit']);
-	grunt.registerTask('browserstack', ['uglify', 'exec:browserstack-runner']);
+	grunt.registerTask('test', ['exec:rollup', 'eslint', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('browserstack', ['exec:rollup', 'exec:browserstack-runner']);
 
 	grunt.registerTask('dev', ['test', 'compare_size']);
 
