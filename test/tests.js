@@ -453,14 +453,3 @@ QUnit.test('Prevent accidentally writing cookie when passing unexpected argument
 	Cookies.getJSON('c', { foo: 'bar' });
 	assert.strictEqual(Cookies.get('c'), undefined, 'should not write any cookie');
 });
-
-QUnit.module('noConflict', lifecycle);
-
-QUnit.test('do not conflict with existent globals', function (assert) {
-	assert.expect(2);
-	var Cookies = window.Cookies.noConflict();
-	Cookies.set('c', 'v');
-	assert.strictEqual(Cookies.get('c'), 'v', 'should work correctly');
-	assert.strictEqual(window.Cookies, 'existent global', 'should restore the original global');
-	window.Cookies = Cookies;
-});
