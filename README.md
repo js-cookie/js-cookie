@@ -41,7 +41,7 @@ in Internet Explorer on Windows 7 for instance (because of the wrong MIME type).
 
 ### Package Managers
 
-JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`.
+JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under the name `js-cookie`.
 
 #### NPM
 ```
