@@ -42,7 +42,6 @@
     "grunt-exec": "3.0.0",
     "gzip-js": "0.3.2",
     "qunitjs": "1.23.1",
-    "requirejs": "2.3.5",
     "rollup": "^1.20.3",
     "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-license": "^0.12.1",
