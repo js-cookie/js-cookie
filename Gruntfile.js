@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 		},
 		eslint: {
 			grunt: 'Gruntfile.js',
-			source: 'src/**/*.js',
+			source: 'src/**/*.mjs',
 			tests: 'test/**/*.js'
 		},
 		watch: {
