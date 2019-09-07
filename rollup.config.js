@@ -17,7 +17,8 @@ export default [
         dir: "dist",
         name: "Cookies",
         entryFileNames: "[name].js",
-        format: "umd"
+        format: "umd",
+        noConflict: true
       }
     ]
   },
@@ -35,7 +36,8 @@ export default [
         dir: "dist",
         name: "Cookies",
         entryFileNames: "[name].min.js",
-        format: "umd"
+        format: "umd",
+        noConflict: true
       }
     ],
     plugins: [
