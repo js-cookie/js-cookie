@@ -42,7 +42,7 @@
     "grunt-eslint": "22.0.0",
     "grunt-exec": "3.0.0",
     "gzip-js": "0.3.2",
-    "qunitjs": "1.23.1",
+    "qunit": "2.9.2",
     "rollup": "^1.20.3",
     "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-license": "^0.12.1",
