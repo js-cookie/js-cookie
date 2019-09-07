@@ -24,7 +24,6 @@ module.exports = function (grunt) {
 	}
 
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
 		qunit: {
 			all: {
 				options: {
@@ -52,8 +51,8 @@ module.exports = function (grunt) {
 		},
 		compare_size: {
 			files: [
-				'build/js.cookie-<%= pkg.version %>.min.mjs',
-				'build/js.cookie-<%= pkg.version %>.min.js',
+				'dist/js.cookie.min.mjs',
+				'dist/js.cookie.min.js',
 				'src/js.cookie.mjs'
 			],
 			options: {

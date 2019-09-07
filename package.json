@@ -2,7 +2,8 @@
   "name": "js-cookie",
   "version": "2.2.1",
   "description": "A simple, lightweight JavaScript API for handling cookies",
-  "main": "src/js.cookie.js",
+  "main": "dist/js.cookie.js",
+  "module": "dist/js.cookie.mjs",
   "directories": {
     "test": "test"
   },
@@ -24,7 +25,7 @@
     "url": "git://github.com/js-cookie/js-cookie.git"
   },
   "files": [
-    "src/**/*.js",
+    "dist/**/*",
     "SERVER_SIDE.md",
     "CONTRIBUTING.md"
   ],
