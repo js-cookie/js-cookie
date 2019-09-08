@@ -39,13 +39,13 @@
     "grunt-contrib-nodeunit": "2.0.0",
     "grunt-contrib-qunit": "3.1.0",
     "grunt-contrib-watch": "1.1.0",
-    "grunt-eslint": "22.0.0",
     "grunt-exec": "3.0.0",
     "gzip-js": "0.3.2",
     "qunit": "2.9.2",
     "rollup": "^1.20.3",
     "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-license": "^0.12.1",
-    "rollup-plugin-terser": "^5.1.1"
+    "rollup-plugin-terser": "^5.1.1",
+    "standard": "^14.1.0"
   }
 }
