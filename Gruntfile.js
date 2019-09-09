@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
   function encodingMiddleware (request, response, next) {
+    const URL = require('url').URL
     var url = new URL(request.url, 'http://localhost')
 
     if (url.pathname !== '/encoding') {
