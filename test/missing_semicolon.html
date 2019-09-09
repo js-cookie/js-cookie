@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link href="../node_modules/qunitjs/qunit/qunit.css" rel="stylesheet">
-    <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
-    <script src="utils.js"></script>
     <script>
         (function() {
-            var contents = window.loadFileSync('../build/js.cookie.min.js');
+            var contents = window.loadFileSync('../dist/js.cookie.min.js');
 
             if (contents !== null) {
                 var script = document.createElement('script');

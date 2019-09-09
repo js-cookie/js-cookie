@@ -13,7 +13,7 @@
 ### Tools
 We use the following tools for development:
 
-- [Qunit](http://qunitjs.com/) for tests.
+- [QUnit](http://qunitjs.com/) for tests.
 - [NodeJS](http://nodejs.org/download/) required to run grunt.
 - [Grunt](http://gruntjs.com/getting-started) for task management.
 

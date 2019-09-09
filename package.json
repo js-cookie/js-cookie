@@ -2,7 +2,8 @@
   "name": "js-cookie",
   "version": "2.2.1",
   "description": "A simple, lightweight JavaScript API for handling cookies",
-  "main": "src/js.cookie.js",
+  "main": "dist/js.cookie.js",
+  "module": "dist/js.cookie.mjs",
   "directories": {
     "test": "test"
   },
@@ -24,7 +25,7 @@
     "url": "git://github.com/js-cookie/js-cookie.git"
   },
   "files": [
-    "src/**/*.js",
+    "dist/**/*",
     "SERVER_SIDE.md",
     "CONTRIBUTING.md"
   ],
@@ -37,12 +38,14 @@
     "grunt-contrib-connect": "2.1.0",
     "grunt-contrib-nodeunit": "2.0.0",
     "grunt-contrib-qunit": "3.1.0",
-    "grunt-contrib-uglify": "4.0.1",
     "grunt-contrib-watch": "1.1.0",
     "grunt-eslint": "22.0.0",
     "grunt-exec": "3.0.0",
     "gzip-js": "0.3.2",
-    "qunitjs": "1.23.1",
-    "requirejs": "2.3.5"
+    "qunit": "2.9.2",
+    "rollup": "^1.20.3",
+    "rollup-plugin-filesize": "^6.2.0",
+    "rollup-plugin-license": "^0.12.1",
+    "rollup-plugin-terser": "^5.1.1"
   }
 }

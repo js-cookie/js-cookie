@@ -11,6 +11,7 @@ A simple, lightweight JavaScript API for handling cookies
 * [Heavily](test) tested
 * No dependency
 * [Unobtrusive](#json) JSON support
+* Supports ES modules
 * Supports AMD/CommonJS
 * [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
 * Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
@@ -22,35 +23,61 @@ A simple, lightweight JavaScript API for handling cookies
 
 ## Installation
 
-### Direct download
+### NPM
 
-Download the script [here](https://github.com/js-cookie/js-cookie/blob/latest/src/js.cookie.js) and include it (unless you are packaging scripts somehow else):
+JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under the name `js-cookie`.
 
-```html
-<script src="/path/to/js.cookie.js"></script>
+```
+$ npm install js-cookie --save
 ```
 
-Or include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie):
+### Direct download
+
+The source comes as an ES module. If you download it [here](https://github.com/js-cookie/js-cookie/blob/latest/src/js.cookie.mjs) directly, you must include it as such.
+
+Example:
+
+```html
+<script type="module" src="./js.cookie.mjs"></script>
+<script type="module">
+  import Cookies from "./js.cookie.mjs";
+
+  Cookies.set('foo', 'bar');
+</script>
+```
+
+*Not all browsers support ES modules natively yet*. For this reason the npm package/release
+comes with both an ES module as well as an UMD module variant. Include the module along
+with the fallback to account for this:
+
+```html
+<script type="module" src="/path/to/js.cookie.mjs"></script>
+<script nomodule src="/path/to/js.cookie.js"></script>
+```
+
+Note the different extensions: `.mjs` denotes an ES module.
+
+### CDN 
+
+Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie):
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 ```
 
-**Do not include the script directly from GitHub (http://raw.github.com/...).** The file is being served as text/plain and as such being blocked
-in Internet Explorer on Windows 7 for instance (because of the wrong MIME type). Bottom line: GitHub is not a CDN.
+**Never include the source directly from GitHub (http://raw.github.com/...).** The file
+is being served as text/plain and as such may be blocked because of the wrong MIME type.
+Bottom line: GitHub is not a CDN.
 
-### Package Managers
+## ES Module
 
-JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) and [Bower](http://bower.io/search/?q=js-cookie) under the name `js-cookie`.
+Example for how to import the ES module from another module:
 
-#### NPM
+```javascript
+import Cookies from "./node_modules/js-cookie/dist/js.cookie.mjs";
+
+Cookies.set('foo', 'bar');
 ```
-  $ npm install js-cookie --save
-```
-
-### Module Loaders
-
-JavaScript Cookie can also be loaded as an AMD or CommonJS module.
 
 ## Basic Usage
 
@@ -303,7 +330,7 @@ For vulnerability reports, send an e-mail to `jscookieproject at gmail dot com`
 ## Manual release steps
 
 * Increment the "version" attribute of `package.json`
-* Increment the version number in the `src/js.cookie.js` file
+* Increment the version number in the `src/js.cookie.mjs` file
 * If `major` bump, update jsDelivr CDN major version link on README
 * Commit with the message "Release version x.x.x"
 * Create version tag in git

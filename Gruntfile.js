@@ -24,14 +24,12 @@ module.exports = function (grunt) {
 	}
 
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
 		qunit: {
 			all: {
 				options: {
 					urls: [
 						'http://127.0.0.1:9998/',
-						'http://127.0.0.1:9998/amd.html',
-						'http://127.0.0.1:9998/environment-with-amd-and-umd.html',
+						'http://127.0.0.1:9998/module.html',
 						'http://127.0.0.1:9998/encoding.html?integration_baseurl=http://127.0.0.1:9998/'
 					]
 				}
@@ -42,34 +40,21 @@ module.exports = function (grunt) {
 		},
 		eslint: {
 			grunt: 'Gruntfile.js',
-			source: 'src/**/*.js',
+			source: 'src/**/*.mjs',
 			tests: 'test/**/*.js'
-		},
-		uglify: {
-			options: {
-				compress: {
-					unsafe: true
-				},
-				banner: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */\n'
-			},
-			build: {
-				files: {
-					'build/js.cookie.min.js': 'src/js.cookie.js',
-					'build/js.cookie-<%= pkg.version %>.min.js': 'src/js.cookie.js'
-				}
-			}
 		},
 		watch: {
 			options: {
 				livereload: true
 			},
-			files: '{src,test}/**/*.js',
+			files: ['src/**/*.mjs', 'test/**/*.js'],
 			tasks: 'default'
 		},
 		compare_size: {
 			files: [
-				'build/js.cookie-<%= pkg.version %>.min.js',
-				'src/js.cookie.js'
+				'dist/js.cookie.min.mjs',
+				'dist/js.cookie.min.js',
+				'src/js.cookie.mjs'
 			],
 			options: {
 				compress: {
@@ -105,6 +90,7 @@ module.exports = function (grunt) {
 			}
 		},
 		exec: {
+			'rollup': './node_modules/.bin/rollup -c',
 			'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
 		}
 	});
@@ -116,8 +102,8 @@ module.exports = function (grunt) {
 		}
 	}
 
-	grunt.registerTask('test', ['uglify', 'eslint', 'connect:build-qunit', 'qunit', 'nodeunit']);
-	grunt.registerTask('browserstack', ['uglify', 'exec:browserstack-runner']);
+	grunt.registerTask('test', ['exec:rollup', 'eslint', 'connect:build-qunit', 'qunit', 'nodeunit']);
+	grunt.registerTask('browserstack', ['exec:rollup', 'exec:browserstack-runner']);
 
 	grunt.registerTask('dev', ['test', 'compare_size']);
 
