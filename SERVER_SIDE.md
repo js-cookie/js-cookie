@@ -4,7 +4,7 @@ There are some servers that are not compliant with the [RFC 6265](http://tools.i
 
 Here we document the most important server-side peculiarities and their workarounds. Feel free to send a [Pull Request](https://github.com/js-cookie/js-cookie/blob/master/CONTRIBUTING.md#pull-requests) if you see something that can be improved.
 
-*Disclaimer: This documentation is entirely based on community provided information. The examples below should be used only as a reference.*
+_Disclaimer: This documentation is entirely based on community provided information. The examples below should be used only as a reference._
 
 ## PHP
 
@@ -29,22 +29,29 @@ setrawcookie($name, rawurlencode($value));
 
 ```javascript
 var PHPCookies = Cookies.withConverter({
-    write: function (value) {
-        // Encode all characters according to the "encodeURIComponent" spec
-        return encodeURIComponent(value)
-            // Revert the characters that are unnecessarily encoded but are
-            // allowed in a cookie value, except for the plus sign (%2B)
-            .replace(/%(23|24|26|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
-    },
-    read: function (value) {
-        return value
-            // Decode the plus sign to spaces first, otherwise "legit" encoded pluses
-            // will be replaced incorrectly
-            .replace(/\+/g, ' ')
-            // Decode all characters according to the "encodeURIComponent" spec
-            .replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent);
-    }
-});
+  write: function (value) {
+    // Encode all characters according to the "encodeURIComponent" spec
+    return (
+      encodeURIComponent(value)
+        // Revert the characters that are unnecessarily encoded but are
+        // allowed in a cookie value, except for the plus sign (%2B)
+        .replace(
+          /%(23|24|26|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+          decodeURIComponent
+        )
+    )
+  },
+  read: function (value) {
+    return (
+      value
+        // Decode the plus sign to spaces first, otherwise "legit" encoded pluses
+        // will be replaced incorrectly
+        .replace(/\+/g, ' ')
+        // Decode all characters according to the "encodeURIComponent" spec
+        .replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
+    )
+  }
+})
 ```
 
 Rack seems to have [a similar problem](https://github.com/js-cookie/js-cookie/issues/70#issuecomment-132503017).
@@ -60,15 +67,20 @@ It seems that there is a situation where Tomcat does not [read the parens correc
 ```javascript
 var TomcatCookies = Cookies.withConverter({
   write: function (value) {
-      // Encode all characters according to the "encodeURIComponent" spec
-      return encodeURIComponent(value)
-          // Revert the characters that are unnecessarily encoded but are
-          // allowed in a cookie value
-          .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent)
-          // Encode the parens that are interpreted incorrectly by Tomcat
-          .replace(/[\(\)]/g, escape);
+    // Encode all characters according to the "encodeURIComponent" spec
+    return (
+      encodeURIComponent(value)
+        // Revert the characters that are unnecessarily encoded but are
+        // allowed in a cookie value
+        .replace(
+          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+          decodeURIComponent
+        )
+        // Encode the parens that are interpreted incorrectly by Tomcat
+        .replace(/[()]/g, escape)
+    )
   }
-});
+})
 ```
 
 ### Version >= 8.0.15
@@ -80,6 +92,7 @@ Since Tomcat 8.0.15, it is possible to configure RFC 6265 compliance by changing
   <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"/>
 </context>
 ```
+
 And you're all done.
 
 Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.
@@ -92,16 +105,21 @@ It seems that the servlet implementation of JBoss 7.1.1 [does not read some char
 
 ```javascript
 var JBossCookies = Cookies.withConverter({
-    write: function (value) {
-        // Encode all characters according to the "encodeURIComponent" spec
-        return encodeURIComponent(value)
-            // Revert the characters that are unnecessarily encoded but are
-            // allowed in a cookie value
-            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent)
-            // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
-            .replace(/[\[\]]/g, encodeURIComponent);
-    }
-});
+  write: function (value) {
+    // Encode all characters according to the "encodeURIComponent" spec
+    return (
+      encodeURIComponent(value)
+        // Revert the characters that are unnecessarily encoded but are
+        // allowed in a cookie value
+        .replace(
+          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+          decodeURIComponent
+        )
+        // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
+        .replace(/[[\]]/g, encodeURIComponent)
+    )
+  }
+})
 ```
 
 Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java-cookie) project, which integrates nicely with JavaScript Cookie.

@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title></title>
     <script>
-        (function() {
-            var contents = window.loadFileSync('../dist/js.cookie.min.js');
+      ;(function () {
+        var contents = window.loadFileSync('../dist/js.cookie.min.js')
 
-            if (contents !== null) {
-                var script = document.createElement('script');
-                script.innerHTML = '(function (){ return {}; })() ' + contents;
-                document.getElementsByTagName('head')[0].appendChild(script);
-            }
-        })();
+        if (contents !== null) {
+          var script = document.createElement('script')
+          script.innerHTML = '(function (){ return {}; })() ' + contents
+          document.getElementsByTagName('head')[0].appendChild(script)
+        }
+      })()
     </script>
-</head>
-<body>
-
-</body>
+  </head>
+  <body></body>
 </html>

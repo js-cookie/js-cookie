@@ -6,17 +6,17 @@
 
 A simple, lightweight JavaScript API for handling cookies
 
-* Works in [all](https://www.browserstack.com/automate/public-build/b3VDaHAxVDg0NDdCRmtUOWg0SlQzK2NsRVhWTjlDQS9qdGJoak1GMzJiVT0tLVhwZHNvdGRoY284YVRrRnI3eU1JTnc9PQ==--5e88ffb3ca116001d7ef2cfb97a4128ac31174c2) browsers
-* Accepts [any](#encoding) character
-* [Heavily](test) tested
-* No dependency
-* [Unobtrusive](#json) JSON support
-* Supports ES modules
-* Supports AMD/CommonJS
-* [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
-* Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
-* Enable [custom encoding/decoding](#converters)
-* **~900 bytes** gzipped!
+- Works in [all](https://www.browserstack.com/automate/public-build/b3VDaHAxVDg0NDdCRmtUOWg0SlQzK2NsRVhWTjlDQS9qdGJoak1GMzJiVT0tLVhwZHNvdGRoY284YVRrRnI3eU1JTnc9PQ==--5e88ffb3ca116001d7ef2cfb97a4128ac31174c2) browsers
+- Accepts [any](#encoding) character
+- [Heavily](test) tested
+- No dependency
+- [Unobtrusive](#json) JSON support
+- Supports ES modules
+- Supports AMD/CommonJS
+- [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
+- Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
+- Enable [custom encoding/decoding](#converters)
+- **~900 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
@@ -40,13 +40,13 @@ Example:
 ```html
 <script type="module" src="./js.cookie.mjs"></script>
 <script type="module">
-  import Cookies from "./js.cookie.mjs";
+  import Cookies from './js.cookie.mjs'
 
-  Cookies.set('foo', 'bar');
+  Cookies.set('foo', 'bar')
 </script>
 ```
 
-*Not all browsers support ES modules natively yet*. For this reason the npm package/release
+_Not all browsers support ES modules natively yet_. For this reason the npm package/release
 comes with both an ES module as well as an UMD module variant. Include the module along
 with the fallback to account for this:
 
@@ -57,7 +57,7 @@ with the fallback to account for this:
 
 Note the different extensions: `.mjs` denotes an ES module.
 
-### CDN 
+### CDN
 
 Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie):
 
@@ -74,9 +74,9 @@ Bottom line: GitHub is not a CDN.
 Example for how to import the ES module from another module:
 
 ```javascript
-import Cookies from "./node_modules/js-cookie/dist/js.cookie.mjs";
+import Cookies from './node_modules/js-cookie/dist/js.cookie.mjs'
 
-Cookies.set('foo', 'bar');
+Cookies.set('foo', 'bar')
 ```
 
 ## Basic Usage
@@ -84,39 +84,39 @@ Cookies.set('foo', 'bar');
 Create a cookie, valid across the entire site:
 
 ```javascript
-Cookies.set('name', 'value');
+Cookies.set('name', 'value')
 ```
 
 Create a cookie that expires 7 days from now, valid across the entire site:
 
 ```javascript
-Cookies.set('name', 'value', { expires: 7 });
+Cookies.set('name', 'value', { expires: 7 })
 ```
 
 Create an expiring cookie, valid to the path of the current page:
 
 ```javascript
-Cookies.set('name', 'value', { expires: 7, path: '' });
+Cookies.set('name', 'value', { expires: 7, path: '' })
 ```
 
 Read cookie:
 
 ```javascript
-Cookies.get('name'); // => 'value'
-Cookies.get('nothing'); // => undefined
+Cookies.get('name') // => 'value'
+Cookies.get('nothing') // => undefined
 ```
 
 Read all visible cookies:
 
 ```javascript
-Cookies.get(); // => { name: 'value' }
+Cookies.get() // => { name: 'value' }
 ```
 
-*Note: It is not possible to read a particular cookie by passing one of the cookie attributes (which may or may not
-have been used when writing the cookie in question):*
+_Note: It is not possible to read a particular cookie by passing one of the cookie attributes (which may or may not
+have been used when writing the cookie in question):_
 
 ```javascript
-Cookies.get('foo', { domain: 'sub.example.com' }); // `domain` won't have any effect...!
+Cookies.get('foo', { domain: 'sub.example.com' }) // `domain` won't have any effect...!
 ```
 
 The cookie with the name `foo` will only be available on `.get()` if it's visible from where the
@@ -125,24 +125,24 @@ code is called; the domain and/or path attribute will not have an effect when re
 Delete cookie:
 
 ```javascript
-Cookies.remove('name');
+Cookies.remove('name')
 ```
 
 Delete a cookie valid to the path of the current page:
 
 ```javascript
-Cookies.set('name', 'value', { path: '' });
-Cookies.remove('name'); // fail!
-Cookies.remove('name', { path: '' }); // removed!
+Cookies.set('name', 'value', { path: '' })
+Cookies.remove('name') // fail!
+Cookies.remove('name', { path: '' }) // removed!
 ```
 
-*IMPORTANT! When deleting a cookie and you're not relying on the [default attributes](#cookie-attributes), you must pass the exact same path and domain attributes that were used to set the cookie:*
+_IMPORTANT! When deleting a cookie and you're not relying on the [default attributes](#cookie-attributes), you must pass the exact same path and domain attributes that were used to set the cookie:_
 
 ```javascript
-Cookies.remove('name', { path: '', domain: '.yourdomain.com' });
+Cookies.remove('name', { path: '', domain: '.yourdomain.com' })
 ```
 
-*Note: Removing a nonexistent cookie does not raise any exception nor return any value.*
+_Note: Removing a nonexistent cookie does not raise any exception nor return any value._
 
 ## Namespace conflicts
 
@@ -150,11 +150,11 @@ If there is any danger of a conflict with the namespace `Cookies`, the `noConfli
 
 ```javascript
 // Assign the js-cookie api to a different variable and restore the original "window.Cookies"
-var Cookies2 = Cookies.noConflict();
-Cookies2.set('name', 'value');
+var Cookies2 = Cookies.noConflict()
+Cookies2.set('name', 'value')
 ```
 
-*Note: The `.noConflict` method is not necessary when using AMD or CommonJS, thus it is not exposed in those environments.*
+_Note: The `.noConflict` method is not necessary when using AMD or CommonJS, thus it is not exposed in those environments._
 
 ## JSON
 
@@ -163,27 +163,27 @@ js-cookie provides unobtrusive JSON storage for cookies.
 When creating a cookie you can pass an Array or Object Literal instead of a string in the value. If you do so, js-cookie will store the string representation of the object according to `JSON.stringify`:
 
 ```javascript
-Cookies.set('name', { foo: 'bar' });
+Cookies.set('name', { foo: 'bar' })
 ```
 
 When reading a cookie with the default `Cookies.get` api, you receive the string representation stored in the cookie:
 
 ```javascript
-Cookies.get('name'); // => '{"foo":"bar"}'
+Cookies.get('name') // => '{"foo":"bar"}'
 ```
 
 ```javascript
-Cookies.get(); // => { name: '{"foo":"bar"}' }
+Cookies.get() // => { name: '{"foo":"bar"}' }
 ```
 
 When reading a cookie with the `Cookies.getJSON` api, you receive the parsed representation of the string stored in the cookie according to `JSON.parse`:
 
 ```javascript
-Cookies.getJSON('name'); // => { foo: 'bar' }
+Cookies.getJSON('name') // => { foo: 'bar' }
 ```
 
 ```javascript
-Cookies.getJSON(); // => { name: { foo: 'bar' } }
+Cookies.getJSON() // => { name: { foo: 'bar' } }
 ```
 
 ## Encoding
@@ -192,7 +192,7 @@ This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) com
 The only character in cookie-name or cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret percent input as literal.  
 Please note that the default encoding/decoding strategy is meant to be interoperable [only between cookies that are read/written by js-cookie](https://github.com/js-cookie/js-cookie/pull/200#discussion_r63270778). To override the default encoding/decoding strategy you need to use a [converter](#converters).
 
-*Note: According to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-6.1), your cookies may get deleted if they are too big or there are too many cookies in the same domain, [more details here](https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions#why-are-my-cookies-being-deleted).*
+_Note: According to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-6.1), your cookies may get deleted if they are too big or there are too many cookies in the same domain, [more details here](https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions#why-are-my-cookies-being-deleted)._
 
 ## Cookie Attributes
 
@@ -209,9 +209,9 @@ To create a cookie that expires in less than a day, you can check the [FAQ on th
 **Examples:**
 
 ```javascript
-Cookies.set('name', 'value', { expires: 365 });
-Cookies.get('name'); // => 'value'
-Cookies.remove('name');
+Cookies.set('name', 'value', { expires: 365 })
+Cookies.get('name') // => 'value'
+Cookies.remove('name')
 ```
 
 ### path
@@ -223,9 +223,9 @@ A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 **Examples:**
 
 ```javascript
-Cookies.set('name', 'value', { path: '' });
-Cookies.get('name'); // => 'value'
-Cookies.remove('name', { path: '' });
+Cookies.set('name', 'value', { path: '' })
+Cookies.get('name') // => 'value'
+Cookies.remove('name', { path: '' })
 ```
 
 **Note regarding Internet Explorer:**
@@ -249,8 +249,8 @@ A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 Assuming a cookie that is being created on `site.com`:
 
 ```javascript
-Cookies.set('name', 'value', { domain: 'subdomain.site.com' });
-Cookies.get('name'); // => undefined (need to read at 'subdomain.site.com')
+Cookies.set('name', 'value', { domain: 'subdomain.site.com' })
+Cookies.get('name') // => undefined (need to read at 'subdomain.site.com')
 ```
 
 **Note regarding Internet Explorer default behavior:**
@@ -272,9 +272,9 @@ Either `true` or `false`, indicating if the cookie transmission requires a secur
 **Examples:**
 
 ```javascript
-Cookies.set('name', 'value', { secure: true });
-Cookies.get('name'); // => 'value'
-Cookies.remove('name');
+Cookies.set('name', 'value', { secure: true })
+Cookies.get('name') // => 'value'
+Cookies.remove('name')
 ```
 
 ## Converters
@@ -288,16 +288,16 @@ The returning String will be used as the cookie value.
 Example from reading one of the cookies that can only be decoded using the `escape` function:
 
 ```javascript
-document.cookie = 'escaped=%u5317';
-document.cookie = 'default=%E5%8C%97';
+document.cookie = 'escaped=%u5317'
+document.cookie = 'default=%E5%8C%97'
 var cookies = Cookies.withConverter(function (value, name) {
-    if ( name === 'escaped' ) {
-        return unescape(value);
-    }
-});
-cookies.get('escaped'); // 北
-cookies.get('default'); // 北
-cookies.get(); // { escaped: '北', default: '北' }
+  if (name === 'escaped') {
+    return unescape(value)
+  }
+})
+cookies.get('escaped') // 北
+cookies.get('default') // 北
+cookies.get() // { escaped: '北', default: '北' }
 ```
 
 ### Write
@@ -306,13 +306,13 @@ Create a new instance of the api that overrides the default encoding implementat
 
 ```javascript
 Cookies.withConverter({
-    read: function (value, name) {
-        // Read converter
-    },
-    write: function (value, name) {
-        // Write converter
-    }
-});
+  read: function (value, name) {
+    // Read converter
+  },
+  write: function (value, name) {
+    // Write converter
+  }
+})
 ```
 
 ## Server-side integration
@@ -329,17 +329,17 @@ For vulnerability reports, send an e-mail to `jscookieproject at gmail dot com`
 
 ## Manual release steps
 
-* Increment the "version" attribute of `package.json`
-* Increment the version number in the `src/js.cookie.mjs` file
-* If `major` bump, update jsDelivr CDN major version link on README
-* Commit with the message "Release version x.x.x"
-* Create version tag in git
-* Create a github release and upload the minified file
-* Change the `latest` tag pointer to the latest commit
-  * `git tag -f latest`
-  * `git push <remote> :refs/tags/latest`
-  * `git push origin master --tags`
-* Release on npm
+- Increment the "version" attribute of `package.json`
+- Increment the version number in the `src/js.cookie.mjs` file
+- If `major` bump, update jsDelivr CDN major version link on README
+- Commit with the message "Release version x.x.x"
+- Create version tag in git
+- Create a github release and upload the minified file
+- Change the `latest` tag pointer to the latest commit
+  - `git tag -f latest`
+  - `git push <remote> :refs/tags/latest`
+  - `git push origin master --tags`
+- Release on npm
 
 ## Supporters
 
@@ -351,6 +351,6 @@ Many thanks to [BrowserStack](https://www.browserstack.com/) for providing unlim
 
 ## Authors
 
-* [Klaus Hartl](https://github.com/carhartl)
-* [Fagner Brack](https://github.com/FagnerMartinsBrack)
-* And awesome [contributors](https://github.com/js-cookie/js-cookie/graphs/contributors)
+- [Klaus Hartl](https://github.com/carhartl)
+- [Fagner Brack](https://github.com/FagnerMartinsBrack)
+- And awesome [contributors](https://github.com/js-cookie/js-cookie/graphs/contributors)

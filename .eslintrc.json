@@ -1,0 +1,9 @@
+{
+  "extends": "standard",
+  "rules": {
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "space-before-function-paren": "error"
+  },
+  "plugins": ["html", "markdown"]
+}

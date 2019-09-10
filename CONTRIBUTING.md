@@ -4,6 +4,7 @@
 - If reporting a bug, please add a [simplified example](http://sscce.org/).
 
 ## Pull requests
+
 - Create a new topic branch for every separate change you make.
 - Create a test case if you are fixing a bug or implementing an important feature.
 - Make sure the build runs successfully.
@@ -11,13 +12,15 @@
 ## Development
 
 ### Tools
+
 We use the following tools for development:
 
 - [QUnit](http://qunitjs.com/) for tests.
 - [NodeJS](http://nodejs.org/download/) required to run grunt.
 - [Grunt](http://gruntjs.com/getting-started) for task management.
 
-### Getting started 
+### Getting started
+
 Install [NodeJS](http://nodejs.org/).  
 Install globally grunt-cli using the following command:
 
@@ -36,6 +39,7 @@ You should see a green message in the console:
     Done, without errors.
 
 ### Tests
+
 You can also run the tests in the browser.  
 Start a test server from the project root:
 
@@ -46,6 +50,7 @@ This will automatically open the test suite at http://127.0.0.1:10000 in the def
 _Note: we recommend cleaning all the browser cookies before running the tests, that can avoid false positive failures._
 
 ### Automatic build
+
 You can build automatically after a file change using the following command:
 
     $ grunt watch
@@ -76,4 +81,4 @@ If the server fails to respond with this specification in any request, the relat
 
 This hook is being used in the following projects:
 
-* [Java Cookie](https://github.com/js-cookie/java-cookie).
+- [Java Cookie](https://github.com/js-cookie/java-cookie).
