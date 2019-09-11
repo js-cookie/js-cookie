@@ -43,7 +43,6 @@ function init (converter) {
       )
     }
 
-    // We're using "expires" because "max-age" is not supported by IE
     attributes.expires = attributes.expires
       ? attributes.expires.toUTCString()
       : ''
