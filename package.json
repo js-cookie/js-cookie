@@ -20,6 +20,7 @@
   "scripts": {
     "test": "grunt test",
     "format": "standard --fix && prettier -l --write --single-quote --no-semi '**/*.{html,json,md}' && eslint '**/*.{html,md}' --fix",
+    "dist": "rm -rf dist/* && rollup -c",
     "release": "release-it"
   },
   "repository": {
