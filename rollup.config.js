@@ -18,7 +18,8 @@ export default [
         name: 'Cookies',
         entryFileNames: '[name].js',
         format: 'umd',
-        noConflict: true
+        noConflict: true,
+        banner: ';'
       }
     ]
   },
