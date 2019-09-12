@@ -45,16 +45,10 @@ QUnit.test('percent character in cookie value mixed with encoded values', functi
 QUnit.test('missing leading semicolon', function (assert) {
   assert.expect(1)
   var done = assert.async()
-  // Sandbox in an iframe so that we can poke around with document.cookie.
   var iframe = document.createElement('iframe')
-  var loadedSuccessfully = true
   iframe.src = 'missing_semicolon.html'
-
   iframe.addEventListener('load', function () {
-    iframe.contentWindow.onerror = function () {
-      loadedSuccessfully = false
-    }
-    assert.strictEqual(loadedSuccessfully, true, 'can\'t throw Object is not a function error')
+    assert.strictEqual(iframe.contentWindow.__ok, true, 'can\'t throw Object is not a function error')
     done()
   })
   document.body.appendChild(iframe)
