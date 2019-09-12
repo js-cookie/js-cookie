@@ -48,11 +48,12 @@ Example:
 
 _Not all browsers support ES modules natively yet_. For this reason the npm package/release
 comes with both an ES module as well as an UMD module variant. Include the module along
-with the fallback to account for this:
+with the fallback to account for this. You may want to load the nomodule script in a deferred
+fashion (modules are deferred by default):
 
 ```html
 <script type="module" src="/path/to/js.cookie.mjs"></script>
-<script nomodule src="/path/to/js.cookie.js"></script>
+<script nomodule defer src="/path/to/js.cookie.js"></script>
 ```
 
 Note the different extensions: `.mjs` denotes an ES module.
