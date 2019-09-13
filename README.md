@@ -328,19 +328,21 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 For vulnerability reports, send an e-mail to `jscookieproject at gmail dot com`
 
-## Manual release steps
+## Releasing
 
-- Increment the "version" attribute of `package.json`
-- Increment the version number in the `src/js.cookie.mjs` file
-- If `major` bump, update jsDelivr CDN major version link on README
-- Commit with the message "Release version x.x.x"
-- Create version tag in git
-- Create a github release and upload the minified file
-- Change the `latest` tag pointer to the latest commit
-  - `git tag -f latest`
-  - `git push <remote> :refs/tags/latest`
-  - `git push origin master --tags`
-- Release on npm
+We are using [release-it](https://www.npmjs.com/package/release-it) for automated releasing.
+
+Start a dry run to see what would happen:
+
+```
+$ npm run release minor -- --dry-run
+```
+
+Do a real release (publishes both to npm as well as create a new release on GitHub):
+
+```
+$ npm run release minor
+```
 
 ## Supporters
 
