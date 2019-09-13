@@ -1,0 +1,20 @@
+{
+  "git": {
+    "changelog": null,
+    "commitMessage": "Craft v${version} release",
+    "requireCleanWorkingDir": false,
+    "tagAnnotation": "Release v${version}",
+    "tagName": "v${version}"
+  },
+  "github": {
+    "assets": ["dist/*.mjs", "dist/*.js"],
+    "draft": true,
+    "release": true,
+    "releaseName": "v${version}"
+  },
+  "hooks": {
+    "after:bump": "npm run dist",
+    "after:release": "echo Successfully created a release draft v${version} for ${repo.repository}. Please add release notes when necessary and publish it!",
+    "before:init": "npm test"
+  }
+}

@@ -19,7 +19,9 @@
   ],
   "scripts": {
     "test": "grunt test",
-    "format": "standard --fix && prettier -l --write --single-quote --no-semi '**/*.{html,json,md}' && eslint '**/*.{html,md}' --fix"
+    "format": "standard --fix && prettier -l --write --single-quote --no-semi '**/*.{html,json,md}' && eslint '**/*.{html,md}' --fix",
+    "dist": "rm -rf dist/* && rollup -c",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -48,6 +50,7 @@
     "gzip-js": "0.3.2",
     "prettier": "1.18.2",
     "qunit": "2.9.2",
+    "release-it": "^12.3.6",
     "rollup": "^1.20.3",
     "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-license": "^0.12.1",
