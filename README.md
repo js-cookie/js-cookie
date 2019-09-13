@@ -344,6 +344,9 @@ Do a real release (publishes both to npm as well as create a new release on GitH
 $ npm run release minor
 ```
 
+_GitHub releases are created as a draft and need to be published manually!
+(This is so we are able to craft suitable release notes before publishing.)_
+
 ## Supporters
 
 <p>
