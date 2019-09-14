@@ -82,6 +82,7 @@ module.exports = function (grunt) {
     exec: {
       rollup: './node_modules/.bin/rollup -c',
       lint: './node_modules/.bin/standard',
+      format: './node_modules/.bin/prettier -c "**/*.{html,json,md}"',
       'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
     }
   })
