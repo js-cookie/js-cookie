@@ -12,10 +12,12 @@ module.exports = function (grunt) {
     var cookieValue = url.searchParams.get('value')
 
     response.setHeader('content-type', 'application/json')
-    response.end(JSON.stringify({
-      name: cookieName,
-      value: cookieValue
-    }))
+    response.end(
+      JSON.stringify({
+        name: cookieName,
+        value: cookieValue
+      })
+    )
   }
 
   grunt.initConfig({
@@ -82,7 +84,8 @@ module.exports = function (grunt) {
     exec: {
       rollup: './node_modules/.bin/rollup -c',
       lint: './node_modules/.bin/standard',
-      format: './node_modules/.bin/prettier -c "**/*.{html,json,md}"',
+      format:
+        './node_modules/.bin/prettier -l --write --single-quote --no-semi "**/*.{html,js,json,md,mjs}" && ./node_modules/.bin/eslint "**/*.{html,md}" --fix && ./node_modules/.bin/standard --fix',
       'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
     }
   })
@@ -94,10 +97,19 @@ module.exports = function (grunt) {
     }
   }
 
-  grunt.registerTask('test', ['exec:lint', 'exec:rollup', 'connect:build-qunit', 'qunit', 'nodeunit'])
-  grunt.registerTask('browserstack', ['exec:rollup', 'exec:browserstack-runner'])
+  grunt.registerTask('test', [
+    'exec:lint',
+    'exec:rollup',
+    'connect:build-qunit',
+    'qunit',
+    'nodeunit'
+  ])
+  grunt.registerTask('browserstack', [
+    'exec:rollup',
+    'exec:browserstack-runner'
+  ])
 
-  grunt.registerTask('dev', ['test', 'compare_size'])
+  grunt.registerTask('dev', ['exec:format', 'test', 'compare_size'])
 
   grunt.registerTask('default', 'dev')
 }

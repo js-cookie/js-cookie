@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "test": "grunt test",
-    "format": "standard --fix && prettier -l --write --single-quote --no-semi '**/*.{html,json,md}' && eslint '**/*.{html,md}' --fix",
+    "format": "grunt exec:format",
     "dist": "rm -rf dist/* && rollup -c",
     "release": "release-it"
   },

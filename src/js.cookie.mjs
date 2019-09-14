@@ -31,9 +31,7 @@ function init (converter) {
     )
 
     if (typeof attributes.expires === 'number') {
-      attributes.expires = new Date(
-        new Date() * 1 + attributes.expires * 864e5
-      )
+      attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e5)
     }
 
     attributes.expires = attributes.expires
@@ -45,7 +43,7 @@ function init (converter) {
       if (/^[{[]/.test(result)) {
         value = result
       }
-    } catch (e) { }
+    } catch (e) {}
 
     value = converter.write
       ? converter.write(value, key)
@@ -107,7 +105,7 @@ function init (converter) {
         if (json) {
           try {
             cookie = JSON.parse(cookie)
-          } catch (e) { }
+          } catch (e) {}
         }
 
         jar[name] = cookie
@@ -115,7 +113,7 @@ function init (converter) {
         if (key === name) {
           break
         }
-      } catch (e) { }
+      } catch (e) {}
     }
 
     return key ? jar[key] : jar
@@ -149,4 +147,4 @@ function init (converter) {
   }
 }
 
-export default init(function () { })
+export default init(function () {})

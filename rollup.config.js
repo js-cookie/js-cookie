@@ -4,8 +4,7 @@ import license from 'rollup-plugin-license'
 
 const licenseBanner = license({
   banner: {
-    content:
-      '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */',
+    content: '/*! <%= pkg.name %> v<%= pkg.version %> | <%= pkg.license %> */',
     commentStyle: 'none'
   }
 })
@@ -30,9 +29,7 @@ export default [
         banner: ';'
       }
     ],
-    plugins: [
-      licenseBanner
-    ]
+    plugins: [licenseBanner]
   },
   {
     input: 'src/js.cookie.mjs',

@@ -1,6 +1,6 @@
 /* global Cookies, QUnit */
 
-(function () {
+;(function () {
   window.lifecycle = {
     afterEach: function () {
       // Remove the cookies created using js-cookie default attributes
@@ -50,10 +50,12 @@
               var root = iframeDocument.documentElement
               var content = root.textContent
               if (!content) {
-                QUnit.ok(false, [
-                  '"' + requestURL + '"',
-                  'content should not be empty'
-                ].join(' '))
+                QUnit.ok(
+                  false,
+                  ['"' + requestURL + '"', 'content should not be empty'].join(
+                    ' '
+                  )
+                )
                 done()
                 return
               }
@@ -77,4 +79,4 @@
   window.quoted = function (input) {
     return '"' + input + '"'
   }
-}())
+})()
