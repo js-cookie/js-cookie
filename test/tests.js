@@ -106,6 +106,20 @@ QUnit.test('Call to read cookie when there is a window.json variable globally', 
   delete window.json
 })
 
+QUnit.test('Passing `undefined` first argument', function (assert) {
+  assert.expect(2)
+  Cookies.set('foo', 'bar')
+  assert.strictEqual(Cookies.get(undefined), undefined, 'should not attempt to retrieve all cookies')
+  assert.strictEqual(Cookies.getJSON(undefined), undefined, 'should not attempt to retrieve all JSON cookies')
+})
+
+QUnit.test('Passing `null` first argument', function (assert) {
+  assert.expect(2)
+  Cookies.set('foo', 'bar')
+  assert.strictEqual(Cookies.get(null), undefined, 'should not attempt to retrieve all cookies')
+  assert.strictEqual(Cookies.getJSON(null), undefined, 'should not attempt to retrieve all JSON cookies')
+})
+
 QUnit.module('write', lifecycle)
 
 QUnit.test('String primitive', function (assert) {

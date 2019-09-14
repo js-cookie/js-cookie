@@ -123,9 +123,15 @@ function init (converter) {
 
   api.set = set
   api.get = function (key) {
-    return get(key, false /* read as raw */)
+    if (arguments.length && !key) {
+      return
+    }
+    return get(key /* read as raw */)
   }
   api.getJSON = function (key) {
+    if (arguments.length && !key) {
+      return
+    }
     return get(key, true /* read as json */)
   }
   api.remove = function (key, attributes) {
