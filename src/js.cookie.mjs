@@ -15,7 +15,7 @@ function decode (s) {
 }
 
 function init (converter) {
-  function api () { }
+  var defaults = {}
 
   function set (key, value, attributes) {
     if (typeof document === 'undefined') {
@@ -26,7 +26,7 @@ function init (converter) {
       {
         path: '/'
       },
-      api.defaults,
+      defaults,
       attributes
     )
 
@@ -121,34 +121,32 @@ function init (converter) {
     return key ? jar[key] : jar
   }
 
-  api.set = set
-  api.get = function (key) {
-    if (arguments.length && !key) {
-      return
-    }
-    return get(key /* read as raw */)
+  return {
+    defaults: defaults,
+    set: set,
+    get: function (key) {
+      if (arguments.length && !key) {
+        return
+      }
+      return get(key /* read as raw */)
+    },
+    getJSON: function (key) {
+      if (arguments.length && !key) {
+        return
+      }
+      return get(key, true /* read as json */)
+    },
+    remove: function (key, attributes) {
+      set(
+        key,
+        '',
+        extend(attributes, {
+          expires: -1
+        })
+      )
+    },
+    withConverter: init
   }
-  api.getJSON = function (key) {
-    if (arguments.length && !key) {
-      return
-    }
-    return get(key, true /* read as json */)
-  }
-  api.remove = function (key, attributes) {
-    set(
-      key,
-      '',
-      extend(attributes, {
-        expires: -1
-      })
-    )
-  }
-
-  api.defaults = {}
-
-  api.withConverter = init
-
-  return api
 }
 
 export default init(function () { })
