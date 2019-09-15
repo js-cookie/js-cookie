@@ -63,10 +63,9 @@ QUnit.test('missing leading semicolon', function (assert) {
   var iframe = document.createElement('iframe')
   iframe.src = 'missing_semicolon.html'
   iframe.addEventListener('load', function () {
-    assert.strictEqual(
+    assert.ok(
       iframe.contentWindow.__ok,
-      true,
-      "can't throw Object is not a function error"
+      'concatenate with 3rd party script without error'
     )
     done()
   })
