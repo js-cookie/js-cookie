@@ -302,12 +302,9 @@ QUnit.test('return value', function (assert) {
   assert.strictEqual(actual, expected, 'should return written cookie string')
 })
 
-QUnit.test('default path attribute', function (assert) {
+QUnit.test('predefined defaults', function (assert) {
   assert.expect(1)
-  assert.ok(
-    Cookies.set('c', 'v').match(/path=\//),
-    'should read the default path'
-  )
+  assert.deepEqual(Cookies.defaults, { path: '/' }, 'should contain the path')
 })
 
 QUnit.test('API for changing defaults', function (assert) {
