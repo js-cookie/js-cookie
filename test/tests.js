@@ -318,7 +318,7 @@ QUnit.test('API for changing defaults', function (assert) {
     Cookies.set('c', 'v').match(/path=\/foo/),
     'should use attributes from defaults'
   )
-  Cookies.remove('c', { path: '/foo' })
+  Cookies.remove('c')
 
   assert.ok(
     Cookies.set('c', 'v', { path: '/bar' }).match(/path=\/bar/),
@@ -327,10 +327,9 @@ QUnit.test('API for changing defaults', function (assert) {
   Cookies.remove('c', { path: '/bar' })
 
   delete Cookies.defaults.path
-  assert.ok(
-    Cookies.set('c', 'v').match(/path=\//),
-    'should roll back to the default path'
-  )
+  assert.notOk(Cookies.set('c', 'v').match(/path=/), 'should not set any path')
+  Cookies.remove('c')
+  Cookies.defaults.path = '/'
 })
 
 QUnit.test('true secure value', function (assert) {

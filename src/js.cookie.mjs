@@ -15,20 +15,15 @@ function decode (s) {
 }
 
 function init (converter) {
-  var defaults = {}
+  var defaults = {
+    path: '/'
+  }
 
   function set (key, value, attributes) {
     if (typeof document === 'undefined') {
       return
     }
-
-    attributes = extend(
-      {
-        path: '/'
-      },
-      defaults,
-      attributes
-    )
+    attributes = extend(defaults, attributes)
 
     if (typeof attributes.expires === 'number') {
       attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e5)
