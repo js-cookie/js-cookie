@@ -15,15 +15,11 @@ function decode (s) {
 }
 
 function init (converter) {
-  var defaults = {
-    path: '/'
-  }
-
   function set (key, value, attributes) {
     if (typeof document === 'undefined') {
       return
     }
-    attributes = extend(defaults, attributes)
+    attributes = extend(api.defaults, attributes)
 
     if (typeof attributes.expires === 'number') {
       attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e5)
@@ -114,8 +110,10 @@ function init (converter) {
     return key ? jar[key] : jar
   }
 
-  return {
-    defaults: defaults,
+  var api = {
+    defaults: {
+      path: '/'
+    },
     set: set,
     get: function (key) {
       if (arguments.length && !key) {
@@ -140,6 +138,8 @@ function init (converter) {
     },
     withConverter: init
   }
+
+  return api
 }
 
 export default init(function () {})
