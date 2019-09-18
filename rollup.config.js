@@ -1,6 +1,7 @@
 import { terser } from 'rollup-plugin-terser'
 import filesize from 'rollup-plugin-filesize'
 import license from 'rollup-plugin-license'
+import pkg from './package.json'
 
 const licenseBanner = license({
   banner: {
@@ -15,16 +16,14 @@ export default [
     output: [
       // config for <script type="module">
       {
-        dir: 'dist',
-        entryFileNames: '[name].mjs',
+        file: pkg.module,
         format: 'esm'
       },
       // config for <script nomodule>
       {
-        dir: 'dist',
-        name: 'Cookies',
-        entryFileNames: '[name].js',
+        file: pkg.browser,
         format: 'umd',
+        name: 'Cookies',
         noConflict: true,
         banner: ';'
       }
@@ -43,9 +42,9 @@ export default [
       // config for <script nomodule>
       {
         dir: 'dist',
-        name: 'Cookies',
         entryFileNames: '[name].min.js',
         format: 'umd',
+        name: 'Cookies',
         noConflict: true
       }
     ],
