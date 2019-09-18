@@ -108,8 +108,6 @@ module.exports = function (grunt) {
     'exec:rollup',
     'exec:browserstack-runner'
   ])
-
   grunt.registerTask('dev', ['exec:format', 'test', 'compare_size'])
-
   grunt.registerTask('default', 'dev')
 }

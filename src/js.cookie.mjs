@@ -1,7 +1,6 @@
 function extend () {
-  var i = 0
   var result = {}
-  for (; i < arguments.length; i++) {
+  for (var i = 0; i < arguments.length; i++) {
     var attributes = arguments[i]
     for (var key in attributes) {
       result[key] = attributes[key]
@@ -19,6 +18,7 @@ function init (converter) {
     if (typeof document === 'undefined') {
       return
     }
+
     attributes = extend(api.defaults, attributes)
 
     if (typeof attributes.expires === 'number') {
@@ -75,13 +75,11 @@ function init (converter) {
       return
     }
 
-    var jar = {}
     // To prevent the for loop in the first place assign an empty array
     // in case there are no cookies at all.
     var cookies = document.cookie ? document.cookie.split('; ') : []
-    var i = 0
-
-    for (; i < cookies.length; i++) {
+    var jar = {}
+    for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
       var cookie = parts.slice(1).join('=')
 
@@ -91,6 +89,7 @@ function init (converter) {
 
       try {
         var name = decode(parts[0])
+
         cookie = (converter.read || converter)(cookie, name) || decode(cookie)
 
         if (json) {
