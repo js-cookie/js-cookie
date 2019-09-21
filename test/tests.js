@@ -105,7 +105,7 @@ QUnit.test(
   'Call to read cookie when there is another unrelated cookie with malformed encoding in the name',
   function (assert) {
     assert.expect(2)
-    document.cookie = 'BS%BS=1'
+    document.cookie = '%A1=foo'
     document.cookie = 'c=v'
     assert.strictEqual(
       Cookies.get('c'),
@@ -117,7 +117,7 @@ QUnit.test(
       { c: 'v' },
       'should not throw a URI malformed exception when retrieving all cookies'
     )
-    document.cookie = 'BS%BS=1; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    document.cookie = '%A1=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
   }
 )
 
