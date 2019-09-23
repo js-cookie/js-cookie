@@ -10,7 +10,7 @@ function extend () {
 }
 
 function decode (s) {
-  return s.replace(/(%[0-9A-F]{2})+/g, decodeURIComponent)
+  return s.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
 }
 
 function init (converter) {

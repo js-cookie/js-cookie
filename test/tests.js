@@ -44,17 +44,24 @@ QUnit.test('percent character in cookie value', function (assert) {
 })
 
 QUnit.test(
-  'percent character in cookie value mixed with encoded values',
+  'unencoded percent character in cookie value mixed with encoded values not permitted',
   function (assert) {
     assert.expect(1)
-    document.cookie = 'bad=foo%bar%22baz%bax%3D'
-    assert.strictEqual(
-      Cookies.get('bad'),
-      'foo%bar"baz%bax=',
-      'should read the percent character'
-    )
+    document.cookie = 'bad=foo%bar%22baz%qux'
+    assert.strictEqual(Cookies.get('bad'), undefined, 'should skip reading')
+    document.cookie = 'bad=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
   }
 )
+
+QUnit.test('lowercase percent character in cookie value', function (assert) {
+  assert.expect(1)
+  document.cookie = 'c=%d0%96'
+  assert.strictEqual(
+    Cookies.get('c'),
+    'Ж',
+    'should decode percent characters case insensitive'
+  )
+})
 
 // github.com/js-cookie/js-cookie/pull/171
 QUnit.test('missing leading semicolon', function (assert) {
