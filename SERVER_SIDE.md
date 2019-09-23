@@ -131,51 +131,59 @@ Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java
 An example to solve this:
 
 **Write**
+
 ```js
 // Client
-Cookies.set('name', 'j:' + JSON.stringify({ key: value }));
+Cookies.set('name', 'j:' + JSON.stringify({ key: value }))
 
 // Or in Express server to prevent prepending of j: prefix
-res.cookie('name', JSON.stringify({ key: value }));
+res.cookie('name', JSON.stringify({ key: value }))
 ```
 
 **Read**
+
 ```js
 // Client
-var myCookie = JSON.parse(Cookies.get('name').slice(2));
+JSON.parse(Cookies.get('name').slice(2))
 
 // Express already parses JSON cookies if `cookie-parser` middleware is installed.
 // If you used the solution for Express above:
-var myCookie = JSON.parse(req.cookies.name);
+JSON.parse(req.cookies.name)
 ```
 
 However, it's still quite a handful to do. To avoid that situation, writing a custom converter is recommended.
 
 **Example**:
+
 ```js
 var ExpressCookies = Cookies.withConverter({
-    write: function (value) {
-        // Prepend j: prefix if it is JSON object
-        try {
-            var tmp = JSON.parse(value);
-            if (typeof tmp !== 'object') {
-                throw undefined;
-            }
-            value = 'j:' + JSON.stringify(tmp);
-        } catch (e) {}
+  write: function (value) {
+    // Prepend j: prefix if it is JSON object
+    try {
+      var tmp = JSON.parse(value)
+      if (typeof tmp !== 'object') {
+        throw new Error()
+      }
+      value = 'j:' + JSON.stringify(tmp)
+    } catch (e) {}
 
-        // Encode all characters according to the "encodeURIComponent" spec
-        return encodeURIComponent(value)
-            // Revert the characters that are unnecessarily encoded but are
-            // allowed in a cookie value
-            .replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
-    },
-    read: function (value) {
-        // Decode all characters according to the "encodeURIComponent" spec
-        value = value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
+    // Encode all characters according to the "encodeURIComponent" spec
+    return (
+      encodeURIComponent(value)
+        // Revert the characters that are unnecessarily encoded but are
+        // allowed in a cookie value
+        .replace(
+          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+          decodeURIComponent
+        )
+    )
+  },
+  read: function (value) {
+    // Decode all characters according to the "encodeURIComponent" spec
+    value = value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
 
-        // Check if the value contains j: prefix otherwise return as is
-        return value.slice(0, 2) === 'j:' ? value.slice(2) : value;
-    }
-});
+    // Check if the value contains j: prefix otherwise return as is
+    return value.slice(0, 2) === 'j:' ? value.slice(2) : value
+  }
+})
 ```
