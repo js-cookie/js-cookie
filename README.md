@@ -31,32 +31,33 @@ JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under 
 $ npm install js-cookie --save
 ```
 
+The npm package has a `module` property that is pointing to an ES module, to provide support for ES module aware bundlers.
+
 ### Direct download
 
-The source comes as an ES module. If you download it [here](https://github.com/js-cookie/js-cookie/blob/latest/src/js.cookie.mjs) directly, you must include it as such.
+Starting with version 3 [releases](https://github.com/js-cookie/js-cookie/releases) are distributed with two variants of this library, an ES module as well as an UMD module.
 
-Example:
+Note the different extensions: `.mjs` denotes the ES module, whereas `.js` is the UMD one.
+
+Example for how to load the ES module in a browser:
 
 ```html
-<script type="module" src="./js.cookie.mjs"></script>
+<script type="module" src="/path/to/js.cookie.mjs"></script>
 <script type="module">
-  import Cookies from './js.cookie.mjs'
+  import Cookies from '/path/to/js.cookie.mjs'
 
   Cookies.set('foo', 'bar')
 </script>
 ```
 
-_Not all browsers support ES modules natively yet_. For this reason the npm package/release
-comes with both an ES module as well as an UMD module variant. Include the module along
-with the fallback to account for this. You may want to load the nomodule script in a deferred
-fashion (modules are deferred by default):
+_Not all browsers support ES modules natively yet_. For this reason the npm package/release provides both the ES and UMD module variant and you may want to include the ES module along with the UMD fallback to account for this:
 
 ```html
 <script type="module" src="/path/to/js.cookie.mjs"></script>
 <script nomodule defer src="/path/to/js.cookie.js"></script>
 ```
 
-Note the different extensions: `.mjs` denotes an ES module.
+Here we're loading the nomodule script in a deferred fashion, because ES modules are deferred by default. This may not be strictly necessary depending on how you're using the library.
 
 ### CDN
 
