@@ -1,9 +1,17 @@
+<!--
+⚠️ Before posting your issue, please check our FAQ:
+
+https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions
+-->
+
 ---
+
 name: Bug report
 about: Create a report to help us improve
 title: ''
 labels: ''
 assignees: ''
+
 ---
 
 **Describe the bug**
