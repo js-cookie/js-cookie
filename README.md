@@ -92,13 +92,13 @@ Cookies.set('name', 'value')
 Create a cookie that expires 7 days from now, valid across the entire site:
 
 ```javascript
-Cookies.set('name', 'value', { expires: 7 })
+Cookies.set('name', 'value', { maxAge: 7 * 24 * 60 * 60 })
 ```
 
 Create an expiring cookie, valid to the path of the current page:
 
 ```javascript
-Cookies.set('name', 'value', { expires: 7, path: '' })
+Cookies.set('name', 'value', { maxAge: 3600, path: '' })
 ```
 
 Read cookie:
@@ -200,18 +200,18 @@ _Note: According to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-6.1),
 
 Cookie attributes defaults can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set(...)` by passing a plain object in the last argument. Per-call attributes override the default attributes.
 
-### expires
+### maxAge
 
-Define when the cookie will be removed. Value can be a [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) which will be interpreted as days from time of creation or a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) instance. If omitted, the cookie becomes a session cookie.
-
-To create a cookie that expires in less than a day, you can check the [FAQ on the Wiki](https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions#expire-cookies-in-less-than-a-day).
+Define when the cookie will be removed. Value is the [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) of seconds until the cookie is supposed to expire. If omitted, the cookie becomes a session cookie.
 
 **Default:** Cookie is removed when the user closes the browser.
 
 **Examples:**
 
+Assuming a cookie that is going to expire after one year:
+
 ```javascript
-Cookies.set('name', 'value', { expires: 365 })
+Cookies.set('name', 'value', { maxAge: 365 * 24 * 60 * 60 })
 Cookies.get('name') // => 'value'
 Cookies.remove('name')
 ```
