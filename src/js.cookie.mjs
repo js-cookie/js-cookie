@@ -24,10 +24,9 @@ function init (converter) {
     if (typeof attributes.expires === 'number') {
       attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e5)
     }
-
-    attributes.expires = attributes.expires
-      ? attributes.expires.toUTCString()
-      : ''
+    if (attributes.expires) {
+      attributes.expires = attributes.expires.toUTCString()
+    }
 
     try {
       var result = JSON.stringify(value)
@@ -47,12 +46,17 @@ function init (converter) {
       .replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
       .replace(/[()]/g, escape)
 
+    var attributeMapping = { maxAge: 'max-age' }
     var stringifiedAttributes = ''
     for (var attributeName in attributes) {
-      if (!attributes[attributeName]) {
+      if (
+        attributes[attributeName] == null ||
+        attributes[attributeName] === false
+      ) {
         continue
       }
-      stringifiedAttributes += '; ' + attributeName
+      stringifiedAttributes +=
+        '; ' + (attributeMapping[attributeName] || attributeName)
       if (attributes[attributeName] === true) {
         continue
       }
@@ -64,7 +68,8 @@ function init (converter) {
       // Consume the characters of the unparsed-attributes up to,
       // not including, the first %x3B (";") character.
       // ...
-      stringifiedAttributes += '=' + attributes[attributeName].split(';')[0]
+      stringifiedAttributes +=
+        '=' + String(attributes[attributeName]).split(';')[0]
     }
 
     return (document.cookie = key + '=' + value + stringifiedAttributes)
@@ -131,7 +136,7 @@ function init (converter) {
         key,
         '',
         extend(attributes, {
-          expires: -1
+          maxAge: 0
         })
       )
     },

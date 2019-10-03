@@ -244,6 +244,16 @@ QUnit.test('undefined', function (assert) {
   assert.strictEqual(Cookies.get('c'), 'undefined', 'should write value')
 })
 
+QUnit.test('maxAge option', function (assert) {
+  assert.expect(1)
+  var expected = 'max-age=60'
+  var actual = Cookies.set('c', 'v', { maxAge: 60 })
+  assert.ok(
+    actual.indexOf(expected) !== -1,
+    quoted(actual) + ' includes ' + quoted(expected)
+  )
+})
+
 QUnit.test('expires option as days from now', function (assert) {
   assert.expect(1)
   var days = 200
@@ -376,7 +386,14 @@ QUnit.test('unofficial attribute', function (assert) {
 })
 
 QUnit.test('undefined attribute value', function (assert) {
-  assert.expect(5)
+  assert.expect(6)
+  assert.strictEqual(
+    Cookies.set('c', 'v', {
+      maxAge: undefined
+    }),
+    'c=v; path=/',
+    'should not write undefined max-age attribute'
+  )
   assert.strictEqual(
     Cookies.set('c', 'v', {
       expires: undefined
