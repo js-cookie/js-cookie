@@ -76,7 +76,7 @@ Bottom line: GitHub is not a CDN.
 Example for how to import the ES module from another module:
 
 ```javascript
-import Cookies from './node_modules/js-cookie/dist/js.cookie.mjs'
+import Cookies from 'js-cookie'
 
 Cookies.set('foo', 'bar')
 ```
