@@ -49,7 +49,7 @@ QUnit.test(
     assert.expect(1)
     document.cookie = 'bad=foo%bar%22baz%qux'
     assert.strictEqual(Cookies.get('bad'), undefined, 'should skip reading')
-    document.cookie = 'bad=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    document.cookie = 'bad=foo; max-age=0'
   }
 )
 
@@ -124,7 +124,7 @@ QUnit.test(
       { c: 'v' },
       'should not throw a URI malformed exception when retrieving all cookies'
     )
-    document.cookie = '%A1=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    document.cookie = '%A1=foo; max-age=0'
   }
 )
 
@@ -145,7 +145,7 @@ QUnit.test(
       { c: 'v' },
       'should not throw a URI malformed exception when retrieving all cookies'
     )
-    document.cookie = 'invalid=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+    document.cookie = 'invalid=foo; max-age=0'
   }
 )
 
@@ -254,64 +254,6 @@ QUnit.test('maxAge option', function (assert) {
   )
 })
 
-QUnit.test('expires option as days from now', function (assert) {
-  assert.expect(1)
-  var days = 200
-  var expires = new Date(new Date().valueOf() + days * 24 * 60 * 60 * 1000)
-  var expected = 'expires=' + expires.toUTCString()
-  var actual = Cookies.set('c', 'v', { expires: days })
-  assert.ok(
-    actual.indexOf(expected) !== -1,
-    quoted(actual) + ' includes ' + quoted(expected)
-  )
-})
-
-// github.com/carhartl/jquery-cookie/issues/246
-QUnit.test('expires option as fraction of a day', function (assert) {
-  assert.expect(1)
-
-  var findValueForAttributeName = function (createdCookie, attributeName) {
-    var pairs = createdCookie.split('; ')
-    var foundAttributeValue
-    pairs.forEach(function (pair) {
-      if (pair.split('=')[0] === attributeName) {
-        foundAttributeValue = pair.split('=')[1]
-      }
-    })
-    return foundAttributeValue
-  }
-  var now = new Date()
-  var stringifiedDate = findValueForAttributeName(
-    Cookies.set('c', 'v', { expires: 0.5 }),
-    'expires'
-  )
-  var expires = new Date(stringifiedDate)
-
-  // When we were using Date.setDate() fractions have been ignored
-  // and expires resulted in the current date. Allow 1000 milliseconds
-  // difference for execution time because new Date() can be different,
-  // even when it's run synchronously.
-  // See https://github.com/js-cookie/js-cookie/commit/ecb597b65e4c477baa2b30a2a5a67fdaee9870ea#commitcomment-20146048.
-  var assertion = expires.getTime() > now.getTime() + 1000
-  var message =
-    quoted(expires.getTime()) +
-    ' should be greater than ' +
-    quoted(now.getTime())
-  assert.ok(assertion, message)
-})
-
-QUnit.test('expires option as Date instance', function (assert) {
-  assert.expect(1)
-  var sevenDaysFromNow = new Date()
-  sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7)
-  var expected = 'expires=' + sevenDaysFromNow.toUTCString()
-  var actual = Cookies.set('c', 'v', { expires: sevenDaysFromNow })
-  assert.ok(
-    actual.indexOf(expected) !== -1,
-    quoted(actual) + ' includes ' + quoted(expected)
-  )
-})
-
 QUnit.test('return value', function (assert) {
   assert.expect(1)
   var expected = 'c=v'
@@ -386,20 +328,13 @@ QUnit.test('unofficial attribute', function (assert) {
 })
 
 QUnit.test('undefined attribute value', function (assert) {
-  assert.expect(6)
+  assert.expect(5)
   assert.strictEqual(
     Cookies.set('c', 'v', {
       maxAge: undefined
     }),
     'c=v; path=/',
     'should not write undefined max-age attribute'
-  )
-  assert.strictEqual(
-    Cookies.set('c', 'v', {
-      expires: undefined
-    }),
-    'c=v; path=/',
-    'should not write undefined expires attribute'
   )
   assert.strictEqual(
     Cookies.set('c', 'v', {
