@@ -79,10 +79,10 @@ const config = {
     }
   },
   exec: {
-    rollup: './node_modules/.bin/rollup -c',
-    lint: './node_modules/.bin/standard',
+    rollup: 'npx rollup -c',
+    lint: 'npx standard',
     format:
-      './node_modules/.bin/prettier -l --write --single-quote --no-semi "**/*.{html,js,json,md,mjs}" && ./node_modules/.bin/eslint "**/*.{html,md}" --fix && ./node_modules/.bin/standard --fix',
+      'npx prettier -l --write --single-quote --no-semi "**/*.{html,js,json,md,mjs}" && npx eslint "**/*.{html,md}" --fix && npx standard --fix',
     'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
   }
 }
