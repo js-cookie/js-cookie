@@ -1,6 +1,5 @@
 {
   "git": {
-    "changelog": null,
     "commitMessage": "Craft v${version} release",
     "requireCleanWorkingDir": false,
     "tagAnnotation": "Release v${version}",
