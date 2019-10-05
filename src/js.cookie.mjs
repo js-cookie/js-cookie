@@ -24,10 +24,9 @@ function init (converter) {
     if (typeof attributes.expires === 'number') {
       attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e5)
     }
-
-    attributes.expires = attributes.expires
-      ? attributes.expires.toUTCString()
-      : ''
+    if (attributes.expires) {
+      attributes.expires = attributes.expires.toUTCString()
+    }
 
     try {
       var result = JSON.stringify(value)
