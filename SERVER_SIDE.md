@@ -126,7 +126,7 @@ Alternatively, you can check the [Java Cookie](https://github.com/js-cookie/java
 
 ## Express
 
-[Express](https://github.com/expressjs/express) handles cookies with JSON value quite differently by [prepending](https://github.com/expressjs/express/blob/master/lib/response.js#L827) a `j:` prefix to [verify](https://github.com/expressjs/cookie-parser/blob/master/index.js#L83) if it contains a JSON value later.
+[Express](https://github.com/expressjs/express) handles cookies with JSON by [prepending](https://github.com/expressjs/express/blob/master/lib/response.js#L827) a `j:` prefix to [verify](https://github.com/expressjs/cookie-parser/blob/master/index.js#L83) if it contains a JSON value later.
 
 An example to solve this:
 

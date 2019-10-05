@@ -159,49 +159,23 @@ QUnit.test(
   }
 )
 
-// github.com/js-cookie/js-cookie/issues/238
-QUnit.test(
-  'Call to read cookie when there is a window.json variable globally',
-  function (assert) {
-    assert.expect(1)
-    window.json = true
-    Cookies.set('boolean', true)
-    assert.strictEqual(
-      typeof Cookies.get('boolean'),
-      'string',
-      'should not change the returned type'
-    )
-    delete window.json
-  }
-)
-
 QUnit.test('Passing `undefined` first argument', function (assert) {
-  assert.expect(2)
+  assert.expect(1)
   Cookies.set('foo', 'bar')
   assert.strictEqual(
     Cookies.get(undefined),
     undefined,
     'should not attempt to retrieve all cookies'
   )
-  assert.strictEqual(
-    Cookies.getJSON(undefined),
-    undefined,
-    'should not attempt to retrieve all JSON cookies'
-  )
 })
 
 QUnit.test('Passing `null` first argument', function (assert) {
-  assert.expect(2)
+  assert.expect(1)
   Cookies.set('foo', 'bar')
   assert.strictEqual(
     Cookies.get(null),
     undefined,
     'should not attempt to retrieve all cookies'
-  )
-  assert.strictEqual(
-    Cookies.getJSON(null),
-    undefined,
-    'should not attempt to retrieve all JSON cookies'
   )
 })
 
@@ -556,133 +530,3 @@ QUnit.test('should be able to use read and write decoder', function (assert) {
   })
   assert.strictEqual(cookies.get('c'), '+', 'should call the read converter')
 })
-
-QUnit.module('JSON handling', lifecycle)
-
-QUnit.test('Number', function (assert) {
-  assert.expect(2)
-  Cookies.set('c', 1)
-  assert.strictEqual(Cookies.getJSON('c'), 1, 'should handle a Number')
-  assert.strictEqual(Cookies.get('c'), '1', 'should return a String')
-})
-
-QUnit.test('Boolean', function (assert) {
-  assert.expect(2)
-  Cookies.set('c', true)
-  assert.strictEqual(Cookies.getJSON('c'), true, 'should handle a Boolean')
-  assert.strictEqual(Cookies.get('c'), 'true', 'should return a Boolean')
-})
-
-QUnit.test('Array Literal', function (assert) {
-  assert.expect(2)
-  Cookies.set('c', ['v'])
-  assert.deepEqual(Cookies.getJSON('c'), ['v'], 'should handle Array Literal')
-  assert.strictEqual(Cookies.get('c'), '["v"]', 'should return a String')
-})
-
-QUnit.test('Array Constructor', function (assert) {
-  /* eslint-disable no-array-constructor */
-  assert.expect(2)
-  var value = new Array()
-  value[0] = 'v'
-  Cookies.set('c', value)
-  assert.deepEqual(
-    Cookies.getJSON('c'),
-    ['v'],
-    'should handle Array Constructor'
-  )
-  assert.strictEqual(Cookies.get('c'), '["v"]', 'should return a String')
-})
-
-QUnit.test('Object Literal', function (assert) {
-  assert.expect(2)
-  Cookies.set('c', { k: 'v' })
-  assert.deepEqual(
-    Cookies.getJSON('c'),
-    { k: 'v' },
-    'should handle Object Literal'
-  )
-  assert.strictEqual(Cookies.get('c'), '{"k":"v"}', 'should return a String')
-})
-
-QUnit.test('Object Constructor', function (assert) {
-  /* eslint-disable no-new-object */
-  assert.expect(2)
-  var value = new Object()
-  value.k = 'v'
-  Cookies.set('c', value)
-  assert.deepEqual(
-    Cookies.getJSON('c'),
-    { k: 'v' },
-    'should handle Object Constructor'
-  )
-  assert.strictEqual(Cookies.get('c'), '{"k":"v"}', 'should return a String')
-})
-
-QUnit.test(
-  'Use String(value) for unsupported objects that do not stringify into JSON',
-  function (assert) {
-    assert.expect(2)
-    Cookies.set('date', new Date(2015, 4, 13, 0, 0, 0, 0))
-    assert.strictEqual(
-      Cookies.get('date').indexOf('"'),
-      -1,
-      'should not quote the stringified Date object'
-    )
-    assert.strictEqual(
-      Cookies.getJSON('date').indexOf('"'),
-      -1,
-      'should not quote the stringified Date object'
-    )
-  }
-)
-
-QUnit.test('Call to read all cookies with mixed json', function (assert) {
-  Cookies.set('c', { foo: 'bar' })
-  Cookies.set('c2', 'v')
-  assert.deepEqual(
-    Cookies.getJSON(),
-    { c: { foo: 'bar' }, c2: 'v' },
-    'returns JSON parsed cookies'
-  )
-  assert.deepEqual(
-    Cookies.get(),
-    { c: '{"foo":"bar"}', c2: 'v' },
-    'returns unparsed cookies'
-  )
-})
-
-QUnit.test('Cookies with escaped quotes in json using raw converters', function (
-  assert
-) {
-  Cookies.withConverter({
-    read: function (value) {
-      return value
-    },
-    write: function (value) {
-      return value
-    }
-  }).set('c', '"{ \\"foo\\": \\"bar\\" }"')
-  assert.strictEqual(
-    Cookies.getJSON('c'),
-    '{ "foo": "bar" }',
-    'returns JSON parsed cookie'
-  )
-  assert.strictEqual(
-    Cookies.get('c'),
-    '{ \\"foo\\": \\"bar\\" }',
-    'returns unparsed cookie with enclosing quotes removed'
-  )
-})
-
-QUnit.test(
-  'Prevent accidentally writing cookie when passing unexpected argument',
-  function (assert) {
-    Cookies.getJSON('c', { foo: 'bar' })
-    assert.strictEqual(
-      Cookies.get('c'),
-      undefined,
-      'should not write any cookie'
-    )
-  }
-)

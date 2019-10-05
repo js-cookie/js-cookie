@@ -28,13 +28,6 @@ function init (converter) {
       attributes.expires = attributes.expires.toUTCString()
     }
 
-    try {
-      var result = JSON.stringify(value)
-      if (/^[{[]/.test(result)) {
-        value = result
-      }
-    } catch (e) {}
-
     value = converter.write
       ? converter.write(value, key)
       : encodeURIComponent(String(value)).replace(
@@ -69,8 +62,8 @@ function init (converter) {
     return (document.cookie = key + '=' + value + stringifiedAttributes)
   }
 
-  function get (key, json) {
-    if (typeof document === 'undefined') {
+  function get (key) {
+    if (typeof document === 'undefined' || (arguments.length && !key)) {
       return
     }
 
@@ -82,22 +75,14 @@ function init (converter) {
       var parts = cookies[i].split('=')
       var cookie = parts.slice(1).join('=')
 
-      if (!json && cookie.charAt(0) === '"') {
+      if (cookie.charAt(0) === '"') {
         cookie = cookie.slice(1, -1)
       }
 
       try {
         var name = decode(parts[0])
-
-        cookie = (converter.read || converter)(cookie, name) || decode(cookie)
-
-        if (json) {
-          try {
-            cookie = JSON.parse(cookie)
-          } catch (e) {}
-        }
-
-        jar[name] = cookie
+        jar[name] =
+          (converter.read || converter)(cookie, name) || decode(cookie)
 
         if (key === name) {
           break
@@ -113,18 +98,7 @@ function init (converter) {
       path: '/'
     },
     set: set,
-    get: function (key) {
-      if (arguments.length && !key) {
-        return
-      }
-      return get(key /* read as raw */)
-    },
-    getJSON: function (key) {
-      if (arguments.length && !key) {
-        return
-      }
-      return get(key, true /* read as json */)
-    },
+    get: get,
     remove: function (key, attributes) {
       set(
         key,
