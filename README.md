@@ -15,7 +15,7 @@ A simple, lightweight JavaScript API for handling cookies
 - [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
 - Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
 - Enable [custom encoding/decoding](#converters)
-- **~900 bytes** gzipped!
+- **< 800 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
@@ -62,8 +62,19 @@ Here we're loading the nomodule script in a deferred fashion, because ES modules
 
 Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie):
 
+UMD:
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+```
+
+ES module:
+
+```html
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.mjs"
+></script>
 ```
 
 **Never include the source directly from GitHub (http://raw.github.com/...).** The file
