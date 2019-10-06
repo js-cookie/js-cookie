@@ -30,7 +30,7 @@ JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under 
 $ npm i js-cookie
 ```
 
-The npm package has a `module` property that is pointing to an ES module, to provide support for ES module aware bundlers.
+The npm package has a `module` field pointing to an ES module variant of the library, mainly to provide support for ES module aware bundlers, whereas its `browser` field points to an UMD module for full backward compatibility.
 
 ### Direct download
 
