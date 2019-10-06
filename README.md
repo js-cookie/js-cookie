@@ -27,7 +27,7 @@ A simple, lightweight JavaScript API for handling cookies
 JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under the name `js-cookie`.
 
 ```
-$ npm install js-cookie --save
+$ npm i js-cookie
 ```
 
 The npm package has a `module` property that is pointing to an ES module, to provide support for ES module aware bundlers.
