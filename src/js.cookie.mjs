@@ -44,7 +44,9 @@ function init (converter) {
       if (!attributes[attributeName]) {
         continue
       }
+
       stringifiedAttributes += '; ' + attributeName
+
       if (attributes[attributeName] === true) {
         continue
       }
