@@ -22,7 +22,7 @@ function init (converter) {
     attributes = extend(api.defaults, attributes)
 
     if (typeof attributes.expires === 'number') {
-      attributes.expires = new Date(new Date() * 1 + attributes.expires * 864e5)
+      attributes.expires = new Date(Date.now() + attributes.expires * 864e5)
     }
     if (attributes.expires) {
       attributes.expires = attributes.expires.toUTCString()
