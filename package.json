@@ -47,7 +47,7 @@
     "grunt-exec": "3.0.0",
     "gzip-js": "0.3.2",
     "prettier": "1.18.2",
-    "qunit": "2.9.2",
+    "qunit": "2.9.3",
     "release-it": "^12.3.6",
     "rollup": "^1.20.3",
     "rollup-plugin-filesize": "^6.2.0",
