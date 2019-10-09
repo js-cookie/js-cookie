@@ -154,7 +154,7 @@ _IMPORTANT! When deleting a cookie and you're not relying on the [default attrib
 Cookies.remove('name', { path: '', domain: '.yourdomain.com' })
 ```
 
-_Note: Removing a nonexistent cookie does not raise any exception nor return any value._
+_Note: Removing a nonexistent cookie neither raises any exception nor returns any value._
 
 ## Namespace conflicts
 
