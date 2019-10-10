@@ -259,6 +259,20 @@ Cookies.get('name') // => 'value'
 Cookies.remove('name')
 ```
 
+### sameSite
+
+A [`String`], either `lax` or `strict`, prevents the browser from sending cookie along with cross-site requests.
+
+Default: not set, i.e. include cookie in any request.
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { sameSite: 'lax' })
+Cookies.get('name') // => 'value'
+Cookies.remove('name')
+```
+
 ## Converters
 
 ### Read
