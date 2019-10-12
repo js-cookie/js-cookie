@@ -311,6 +311,12 @@ Cookies.withConverter({
 })
 ```
 
+## TypeScript declarations
+
+```
+$ npm i @types/js-cookie
+```
+
 ## Server-side integration
 
 Check out the [Servers Docs](SERVER_SIDE.md)
