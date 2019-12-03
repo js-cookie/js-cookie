@@ -7,6 +7,7 @@ language: node_js
 node_js:
   - '8'
   - '10'
+  - '12'
 cache:
   directories:
     - node_modules
@@ -17,5 +18,5 @@ stages:
 jobs:
   include:
     - stage: browserstack
-      node_js: '10'
+      node_js: '12'
       script: grunt browserstack
