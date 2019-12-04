@@ -29,27 +29,13 @@ setrawcookie($name, rawurlencode($value));
 
 ```javascript
 var PHPCookies = Cookies.withConverter({
-  write: function (value) {
-    // Encode all characters according to the "encodeURIComponent" spec
-    return (
-      encodeURIComponent(value)
-        // Revert the characters that are unnecessarily encoded but are
-        // allowed in a cookie value, except for the plus sign (%2B)
-        .replace(
-          /%(23|24|26|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
-          decodeURIComponent
-        )
-    )
-  },
+  write: Cookies.rfc6265Converter.write,
   read: function (value) {
-    return (
-      value
-        // Decode the plus sign to spaces first, otherwise "legit" encoded pluses
-        // will be replaced incorrectly
-        .replace(/\+/g, ' ')
-        // Decode all characters according to the "encodeURIComponent" spec
-        .replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
-    )
+    // Decode the plus sign to spaces first, otherwise "legit" encoded pluses
+    // will be replaced incorrectly
+    value = value.replace(/\+/g, ' ')
+    // Decode all characters according to the "encodeURIComponent" spec
+    return Cookies.rfc6265Converter.read(value)
   }
 })
 ```
@@ -67,19 +53,11 @@ It seems that there is a situation where Tomcat does not [read the parens correc
 ```javascript
 var TomcatCookies = Cookies.withConverter({
   write: function (value) {
-    // Encode all characters according to the "encodeURIComponent" spec
-    return (
-      encodeURIComponent(value)
-        // Revert the characters that are unnecessarily encoded but are
-        // allowed in a cookie value
-        .replace(
-          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
-          decodeURIComponent
-        )
-        // Encode the parens that are interpreted incorrectly by Tomcat
-        .replace(/[()]/g, escape)
-    )
-  }
+    return Cookies.rfc6265Converter.write(value)
+      // Encode the parens that are interpreted incorrectly by Tomcat
+      .replace(/[()]/g, escape)
+  },
+  read: Cookies.rfc6265Converter.read
 })
 ```
 
@@ -106,19 +84,11 @@ It seems that the servlet implementation of JBoss 7.1.1 [does not read some char
 ```javascript
 var JBossCookies = Cookies.withConverter({
   write: function (value) {
-    // Encode all characters according to the "encodeURIComponent" spec
-    return (
-      encodeURIComponent(value)
-        // Revert the characters that are unnecessarily encoded but are
-        // allowed in a cookie value
-        .replace(
-          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
-          decodeURIComponent
-        )
-        // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
-        .replace(/[[\]]/g, encodeURIComponent)
-    )
-  }
+    return Cookies.rfc6265Converter.write(value)
+      // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
+      .replace(/[[\]]/g, encodeURIComponent)
+  },
+  read: Cookies.rfc6265Converter.read
 })
 ```
 
@@ -167,20 +137,10 @@ var ExpressCookies = Cookies.withConverter({
       value = 'j:' + JSON.stringify(tmp)
     } catch (e) {}
 
-    // Encode all characters according to the "encodeURIComponent" spec
-    return (
-      encodeURIComponent(value)
-        // Revert the characters that are unnecessarily encoded but are
-        // allowed in a cookie value
-        .replace(
-          /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
-          decodeURIComponent
-        )
-    )
+    return Cookies.rfc6265Converter.write(value)
   },
   read: function (value) {
-    // Decode all characters according to the "encodeURIComponent" spec
-    value = value.replace(/(%[0-9A-Z]{2})+/g, decodeURIComponent)
+    value = Cookies.rfc6265Converter.read(value)
 
     // Check if the value contains j: prefix otherwise return as is
     return value.slice(0, 2) === 'j:' ? value.slice(2) : value
