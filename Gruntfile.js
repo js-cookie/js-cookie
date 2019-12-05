@@ -82,7 +82,7 @@ const config = {
     rollup: 'npx rollup -c',
     lint: 'npx standard',
     format:
-      'npx prettier -l --write --single-quote --no-semi "**/*.{html,js,json,md,mjs}" && npx eslint "**/*.{html,md}" --fix && npx standard --fix',
+      'npx prettier -l --write --single-quote --no-semi "**/*.{html,js,json,md,mjs,yml}" && npx eslint "**/*.{html,md}" --fix && npx standard --fix',
     'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
   }
 }
