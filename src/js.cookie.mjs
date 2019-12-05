@@ -9,11 +9,27 @@ function extend () {
   return result
 }
 
-function decode (s) {
-  return s.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
+var rfc6265Converter = {
+  read: function (value, key) {
+    return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
+  },
+  write: function (value, key) {
+    return encodeURIComponent(value).replace(
+      /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+      decodeURIComponent
+    )
+  }
 }
 
 function init (converter) {
+  // normalize converter
+  if (!converter.read) {
+    converter = {
+      read: converter,
+      write: converter.write || rfc6265Converter.write
+    }
+  }
+
   function set (key, value, attributes) {
     if (typeof document === 'undefined') {
       return
@@ -28,12 +44,7 @@ function init (converter) {
       attributes.expires = attributes.expires.toUTCString()
     }
 
-    value = converter.write
-      ? converter.write(value, key)
-      : encodeURIComponent(value).replace(
-        /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
-        decodeURIComponent
-      )
+    value = converter.write(value, key)
 
     key = encodeURIComponent(key)
       .replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
@@ -82,9 +93,8 @@ function init (converter) {
       }
 
       try {
-        var name = decode(parts[0])
-        jar[name] =
-          (converter.read || converter)(cookie, name) || decode(cookie)
+        var name = rfc6265Converter.read(parts[0])
+        jar[name] = converter.read(cookie, name) || rfc6265Converter.read(cookie, name)
 
         if (key === name) {
           break
@@ -110,10 +120,11 @@ function init (converter) {
         })
       )
     },
-    withConverter: init
+    withConverter: init,
+    rfc6265Converter: rfc6265Converter
   }
 
   return api
 }
 
-export default init(function () {})
+export default init(rfc6265Converter)
