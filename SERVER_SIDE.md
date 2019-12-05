@@ -53,9 +53,12 @@ It seems that there is a situation where Tomcat does not [read the parens correc
 ```javascript
 var TomcatCookies = Cookies.withConverter({
   write: function (value) {
-    return Cookies.rfc6265Converter.write(value)
-      // Encode the parens that are interpreted incorrectly by Tomcat
-      .replace(/[()]/g, escape)
+    return (
+      Cookies.rfc6265Converter
+        .write(value)
+        // Encode the parens that are interpreted incorrectly by Tomcat
+        .replace(/[()]/g, escape)
+    )
   },
   read: Cookies.rfc6265Converter.read
 })
@@ -84,9 +87,12 @@ It seems that the servlet implementation of JBoss 7.1.1 [does not read some char
 ```javascript
 var JBossCookies = Cookies.withConverter({
   write: function (value) {
-    return Cookies.rfc6265Converter.write(value)
-      // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
-      .replace(/[[\]]/g, encodeURIComponent)
+    return (
+      Cookies.rfc6265Converter
+        .write(value)
+        // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
+        .replace(/[[\]]/g, encodeURIComponent)
+    )
   },
   read: Cookies.rfc6265Converter.read
 })

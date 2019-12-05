@@ -94,7 +94,8 @@ function init (converter) {
 
       try {
         var name = rfc6265Converter.read(parts[0])
-        jar[name] = converter.read(cookie, name) || rfc6265Converter.read(cookie, name)
+        jar[name] =
+          converter.read(cookie, name) || rfc6265Converter.read(cookie, name)
 
         if (key === name) {
           break
