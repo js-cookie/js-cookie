@@ -14,7 +14,7 @@ cache:
 stages:
   - test
   - name: browserstack
-    if: env(BROWSERSTACK_USERNAME) IS present
+    if: fork IS false
 jobs:
   include:
     - stage: browserstack
