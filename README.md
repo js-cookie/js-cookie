@@ -178,7 +178,7 @@ _Note: According to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-6.1),
 
 ## Cookie Attributes
 
-Cookie attributes defaults can be set globally by setting properties of the `Cookies.defaults` object or individually for each call to `Cookies.set(...)` by passing a plain object in the last argument. Per-call attributes override the default attributes.
+Cookie attribute defaults can be set globally by creating an instance of the api via `withAttributes()`, or individually for each call to `Cookies.set(...)` by passing a plain object as the last argument. Per-call attributes override the default attributes.
 
 ### expires
 
@@ -271,6 +271,12 @@ Default: not set, i.e. include cookie in any request.
 Cookies.set('name', 'value', { sameSite: 'lax' })
 Cookies.get('name') // => 'value'
 Cookies.remove('name')
+```
+
+### Setting up defaults
+
+```javascript
+const api = Cookies.withAttributes({ path: '/', domain: '.example.com' })
 ```
 
 ## Converters
