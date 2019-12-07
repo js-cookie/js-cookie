@@ -277,7 +277,7 @@ Cookies.remove('name')
 
 ### Read
 
-Create a new instance of the api that overrides the default decoding implementation. All get methods that rely in a proper decoding to work, such as `Cookies.get()` and `Cookies.get('name')`, will run the converter first for each cookie. The returned value will be used as the cookie value.
+Create a new instance of the api that overrides the default decoding implementation. All get methods that rely in a proper decoding to work, such as `Cookies.get()` and `Cookies.get('name')`, will run the given converter for each cookie. The returned value will be used as the cookie value.
 
 Example from reading one of the cookies that can only be decoded using the `escape` function:
 
@@ -289,6 +289,8 @@ var cookies = Cookies.withConverter({
     if (name === 'escaped') {
       return unescape(value)
     }
+    // Fall back to default for all other cookies
+    return Cookies.rfc6265Converter.read(value, name)
   }
 })
 cookies.get('escaped') // 北
