@@ -277,18 +277,18 @@ Cookies.remove('name')
 
 ### Read
 
-Create a new instance of the api that overrides the default decoding implementation.  
-All get methods that rely in a proper decoding to work, such as `Cookies.get()` and `Cookies.get('name')`, will run the converter first for each cookie.  
-The returning String will be used as the cookie value.
+Create a new instance of the api that overrides the default decoding implementation. All get methods that rely in a proper decoding to work, such as `Cookies.get()` and `Cookies.get('name')`, will run the converter first for each cookie. The returned value will be used as the cookie value.
 
 Example from reading one of the cookies that can only be decoded using the `escape` function:
 
 ```javascript
 document.cookie = 'escaped=%u5317'
 document.cookie = 'default=%E5%8C%97'
-var cookies = Cookies.withConverter(function (value, name) {
-  if (name === 'escaped') {
-    return unescape(value)
+var cookies = Cookies.withConverter({
+  read: function (value, name) {
+    if (name === 'escaped') {
+      return unescape(value)
+    }
   }
 })
 cookies.get('escaped') // 北
@@ -302,11 +302,8 @@ Create a new instance of the api that overrides the default encoding implementat
 
 ```javascript
 Cookies.withConverter({
-  read: function (value, name) {
-    // Read converter
-  },
   write: function (value, name) {
-    // Write converter
+    return value.toUpperCase()
   }
 })
 ```
