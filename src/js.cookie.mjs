@@ -115,19 +115,14 @@ function init (converter, defaultAttributes) {
     withConverter: function (converter) {
       return init(extend(this.converter, converter), this.attributes)
     },
-    rfc6265Converter: rfc6265Converter
+    rfc6265Converter: rfc6265Converter,
+    attributes: Object.freeze(defaultAttributes),
+    converter: Object.freeze(converter)
   }
 
-  // Create an instance of the api while ensuring that defaults/converters
-  // cannot be tampered with...
-  return Object.create(api, {
-    attributes: {
-      value: defaultAttributes
-    },
-    converter: {
-      value: converter
-    }
-  })
+  // Create an instance of the api while ensuring it cannot
+  // be tampered with...
+  return Object.freeze(api)
 }
 
 export default init(rfc6265Converter, { path: '/' })
