@@ -115,7 +115,6 @@ function init (converter, defaultAttributes) {
     withConverter: function (converter) {
       return init(extend(this.converter, converter), this.attributes)
     },
-    rfc6265Converter: rfc6265Converter,
     attributes: Object.freeze(defaultAttributes),
     converter: Object.freeze(converter)
   }

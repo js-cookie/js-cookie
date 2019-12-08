@@ -296,7 +296,7 @@ var cookies = Cookies.withConverter({
       return unescape(value)
     }
     // Fall back to default for all other cookies
-    return Cookies.rfc6265Converter.read(value, name)
+    return Cookies.converter.read(value, name)
   }
 })
 cookies.get('escaped') // 北

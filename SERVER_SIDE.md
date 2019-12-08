@@ -29,13 +29,13 @@ setrawcookie($name, rawurlencode($value));
 
 ```javascript
 var PHPCookies = Cookies.withConverter({
-  write: Cookies.rfc6265Converter.write,
+  write: Cookies.converter.write,
   read: function (value) {
     // Decode the plus sign to spaces first, otherwise "legit" encoded pluses
     // will be replaced incorrectly
     value = value.replace(/\+/g, ' ')
     // Decode all characters according to the "encodeURIComponent" spec
-    return Cookies.rfc6265Converter.read(value)
+    return Cookies.converter.read(value)
   }
 })
 ```
@@ -54,13 +54,13 @@ It seems that there is a situation where Tomcat does not [read the parens correc
 var TomcatCookies = Cookies.withConverter({
   write: function (value) {
     return (
-      Cookies.rfc6265Converter
+      Cookies.converter
         .write(value)
         // Encode the parens that are interpreted incorrectly by Tomcat
         .replace(/[()]/g, escape)
     )
   },
-  read: Cookies.rfc6265Converter.read
+  read: Cookies.converter.read
 })
 ```
 
@@ -88,13 +88,13 @@ It seems that the servlet implementation of JBoss 7.1.1 [does not read some char
 var JBossCookies = Cookies.withConverter({
   write: function (value) {
     return (
-      Cookies.rfc6265Converter
+      Cookies.converter
         .write(value)
         // Encode again the characters that are not allowed in JBoss 7.1.1, like "[" and "]":
         .replace(/[[\]]/g, encodeURIComponent)
     )
   },
-  read: Cookies.rfc6265Converter.read
+  read: Cookies.converter.read
 })
 ```
 
@@ -143,10 +143,10 @@ var ExpressCookies = Cookies.withConverter({
       value = 'j:' + JSON.stringify(tmp)
     } catch (e) {}
 
-    return Cookies.rfc6265Converter.write(value)
+    return Cookies.converter.write(value)
   },
   read: function (value) {
-    value = Cookies.rfc6265Converter.read(value)
+    value = Cookies.converter.read(value)
 
     // Check if the value contains j: prefix otherwise return as is
     return value.slice(0, 2) === 'j:' ? value.slice(2) : value

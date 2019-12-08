@@ -556,11 +556,11 @@ QUnit.test('should be able to use read and write decoder', function (assert) {
 QUnit.test('should expose rfc 6265 converter', function (assert) {
   assert.expect(2)
   assert.ok(
-    !!Cookies.rfc6265Converter.read,
+    !!Cookies.converter.read,
     'rfc 6265 converter read method is exposed'
   )
   assert.ok(
-    !!Cookies.rfc6265Converter.write,
+    !!Cookies.converter.write,
     'rfc 6265 converter write method is exposed'
   )
 })
@@ -571,7 +571,7 @@ QUnit.test('should be able to reuse and extend read decoder', function (assert) 
   var cookies = Cookies.withConverter({
     read: function (value) {
       var decoded = value.replace('A', 'a')
-      return Cookies.rfc6265Converter.read(decoded)
+      return Cookies.converter.read(decoded)
     }
   })
   assert.strictEqual(cookies.get('c'), 'a#', 'should call both read converters')
@@ -584,7 +584,7 @@ QUnit.test('should be able to reuse and extend a write decoder', function (
   Cookies.withConverter({
     write: function (value) {
       var encoded = value.replace('a', 'A')
-      return Cookies.rfc6265Converter.write(encoded)
+      return Cookies.converter.write(encoded)
     }
   }).set('c', 'a%')
   assert.strictEqual(

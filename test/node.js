@@ -28,8 +28,8 @@ exports.node = {
   shouldExposeRfc6265Converter: function (test) {
     test.expect(2)
     var Cookies = require('../dist/js.cookie.min.js')
-    test.ok(!!Cookies.rfc6265Converter.read)
-    test.ok(!!Cookies.rfc6265Converter.write)
+    test.ok(!!Cookies.converter.read)
+    test.ok(!!Cookies.converter.write)
     test.done()
   }
 }
