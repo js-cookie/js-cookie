@@ -97,35 +97,37 @@ function init (converter, defaultAttributes) {
     return key ? jar[key] : jar
   }
 
-  function API () {}
-  API.prototype = extend(
-    {
-      set: set,
-      get: get,
-      remove: function (key, attributes) {
-        set(
-          key,
-          '',
-          extend(attributes, {
-            expires: -1
-          })
-        )
-      },
-      withAttributes: function (attributes) {
-        return init(this.converter, extend(this.attributes, attributes))
-      },
-      withConverter: function (converter) {
-        return init(extend(this.converter, converter), this.attributes)
-      },
-      rfc6265Converter: rfc6265Converter
+  var api = {
+    set: set,
+    get: get,
+    remove: function (key, attributes) {
+      set(
+        key,
+        '',
+        extend(attributes, {
+          expires: -1
+        })
+      )
     },
-    {
-      attributes: defaultAttributes,
-      converter: converter
-    }
-  )
+    withAttributes: function (attributes) {
+      return init(this.converter, extend(this.attributes, attributes))
+    },
+    withConverter: function (converter) {
+      return init(extend(this.converter, converter), this.attributes)
+    },
+    rfc6265Converter: rfc6265Converter
+  }
 
-  return new API()
+  // Create an instance of the api while ensuring that defaults/converters
+  // cannot be tampered with...
+  return Object.create(api, {
+    attributes: {
+      value: defaultAttributes
+    },
+    converter: {
+      value: converter
+    }
+  })
 }
 
 export default init(rfc6265Converter, { path: '/' })
