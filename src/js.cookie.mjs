@@ -4,7 +4,7 @@ var rfc6265Converter = {
   },
   write: function (value) {
     return encodeURIComponent(value).replace(
-      /%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g,
+      /%(2[346BF]|3[ACDEF]|40|5[BDE]|60|7[BCD])/g,
       decodeURIComponent
     )
   }
@@ -39,7 +39,7 @@ function init (converter, defaultAttributes) {
     value = converter.write(value, key)
 
     key = encodeURIComponent(key)
-      .replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent)
+      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
       .replace(/[()]/g, escape)
 
     var stringifiedAttributes = ''
