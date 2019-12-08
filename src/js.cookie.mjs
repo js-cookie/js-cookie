@@ -1,14 +1,3 @@
-function extend () {
-  var result = {}
-  for (var i = 0; i < arguments.length; i++) {
-    var attributes = arguments[i]
-    for (var key in attributes) {
-      result[key] = attributes[key]
-    }
-  }
-  return result
-}
-
 var rfc6265Converter = {
   read: function (value) {
     return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
@@ -19,6 +8,17 @@ var rfc6265Converter = {
       decodeURIComponent
     )
   }
+}
+
+function extend () {
+  var result = {}
+  for (var i = 0; i < arguments.length; i++) {
+    var attributes = arguments[i]
+    for (var key in attributes) {
+      result[key] = attributes[key]
+    }
+  }
+  return result
 }
 
 function init (converter, defaultAttributes) {
