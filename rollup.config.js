@@ -12,7 +12,7 @@ const licenseBanner = license({
 
 export default [
   {
-    input: 'src/js.cookie.mjs',
+    input: 'src/api.mjs',
     output: [
       // config for <script type="module">
       {
@@ -31,18 +31,16 @@ export default [
     plugins: [licenseBanner]
   },
   {
-    input: 'src/js.cookie.mjs',
+    input: 'src/api.mjs',
     output: [
       // config for <script type="module">
       {
-        dir: 'dist',
-        entryFileNames: '[name].min.mjs',
+        file: pkg.module.replace('.mjs', '.min.mjs'),
         format: 'esm'
       },
       // config for <script nomodule>
       {
-        dir: 'dist',
-        entryFileNames: '[name].min.js',
+        file: pkg.browser.replace('.js', '.min.js'),
         format: 'umd',
         name: 'Cookies',
         noConflict: true

@@ -43,9 +43,10 @@ const config = {
   },
   compare_size: {
     files: [
+      'dist/js.cookie.mjs',
       'dist/js.cookie.min.mjs',
-      'dist/js.cookie.min.js',
-      'src/js.cookie.mjs'
+      'dist/js.cookie.js',
+      'dist/js.cookie.min.js'
     ],
     options: {
       compress: {
