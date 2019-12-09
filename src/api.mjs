@@ -1,15 +1,5 @@
 import rfc6265Converter from './rfc6265'
-
-function extend () {
-  var result = {}
-  for (var i = 0; i < arguments.length; i++) {
-    var attributes = arguments[i]
-    for (var key in attributes) {
-      result[key] = attributes[key]
-    }
-  }
-  return result
-}
+import extend from './extend'
 
 function init (converter, defaultAttributes) {
   function set (key, value, attributes) {
