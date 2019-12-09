@@ -1,5 +1,5 @@
-import rfc6265Converter from './rfc6265'
-import extend from './extend'
+import rfc6265Converter from './rfc6265.mjs'
+import extend from './extend.mjs'
 
 function init (converter, defaultAttributes) {
   function set (key, value, attributes) {
