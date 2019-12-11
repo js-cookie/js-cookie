@@ -19,7 +19,7 @@ function init (converter, defaultAttributes) {
     value = converter.write(value, key)
 
     key = encodeURIComponent(key)
-      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+      .replace(/%(2[346b]|5e|60|7c)/gi, decodeURIComponent)
       .replace(/[()]/g, escape)
 
     var stringifiedAttributes = ''
