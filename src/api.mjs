@@ -77,9 +77,7 @@ function init (converter, defaultAttributes) {
     return key ? jar[key] : jar
   }
 
-  // Create an instance of the api while ensuring it cannot be
-  // tampered with...
-  return Object.freeze({
+  return {
     set: set,
     get: get,
     remove: function (key, attributes) {
@@ -99,7 +97,7 @@ function init (converter, defaultAttributes) {
     },
     attributes: Object.freeze(defaultAttributes),
     converter: Object.freeze(converter)
-  })
+  }
 }
 
 export default init(rfc6265Converter, { path: '/' })
