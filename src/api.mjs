@@ -60,7 +60,7 @@ function init (converter, defaultAttributes) {
       var parts = cookies[i].split('=')
       var cookie = parts.slice(1).join('=')
 
-      if (cookie.charAt(0) === '"') {
+      if (cookie[0] === '"') {
         cookie = cookie.slice(1, -1)
       }
 
