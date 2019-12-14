@@ -77,10 +77,6 @@ ES module:
 ></script>
 ```
 
-**Never include the source directly from GitHub (http://raw.github.com/...).** The file
-is being served as text/plain and as such may be blocked because of the wrong MIME type.
-Bottom line: GitHub is not a CDN.
-
 ## ES Module
 
 Example for how to import the ES module from another module:
