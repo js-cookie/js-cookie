@@ -643,6 +643,7 @@ QUnit.test('should be able to reuse and extend a write decoder', function (
 QUnit.module('noConflict', lifecycle)
 
 QUnit.test('do not conflict with existent globals', function (assert) {
+  assert.expect(2)
   var Cookies = window.Cookies.noConflict()
   Cookies.set('c', 'v')
   assert.strictEqual(Cookies.get('c'), 'v', 'should work correctly')
