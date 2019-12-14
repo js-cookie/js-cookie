@@ -39,6 +39,52 @@ QUnit.test('api instance creation', function (assert) {
   )
 })
 
+QUnit.test('api instance with attributes', function (assert) {
+  assert.expect(3)
+
+  // Create a new instance so we don't affect remaining tests...
+  var api = Cookies.withAttributes({ path: '/' })
+
+  delete api.attributes
+  assert.ok(api.attributes, "won't allow to delete property")
+
+  api.attributes = {}
+  assert.ok(api.attributes.path, "won't allow to reassign property")
+
+  api.attributes.path = '/foo'
+  assert.equal(
+    api.attributes.path,
+    '/',
+    "won't allow to reassign contained properties"
+  )
+})
+
+QUnit.test('api instance with converter', function (assert) {
+  assert.expect(3)
+
+  var readConverter = function (value) {
+    return value.toUpperCase()
+  }
+
+  // Create a new instance so we don't affect remaining tests...
+  var api = Cookies.withConverter({
+    read: readConverter
+  })
+
+  delete api.converter
+  assert.ok(api.converter, "won't allow to delete property")
+
+  api.converter = {}
+  assert.ok(api.converter.read, "won't allow to reassign property")
+
+  api.converter.read = function () {}
+  assert.equal(
+    api.converter.read.toString(),
+    readConverter.toString(),
+    "won't allow to reassign contained properties"
+  )
+})
+
 QUnit.module('read', lifecycle)
 
 QUnit.test('simple value', function (assert) {
@@ -597,7 +643,6 @@ QUnit.test('should be able to reuse and extend a write decoder', function (
 QUnit.module('noConflict', lifecycle)
 
 QUnit.test('do not conflict with existent globals', function (assert) {
-  assert.expect(2)
   var Cookies = window.Cookies.noConflict()
   Cookies.set('c', 'v')
   assert.strictEqual(Cookies.get('c'), 'v', 'should work correctly')

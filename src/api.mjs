@@ -77,27 +77,31 @@ function init (converter, defaultAttributes) {
     return key ? jar[key] : jar
   }
 
-  return {
-    set: set,
-    get: get,
-    remove: function (key, attributes) {
-      set(
-        key,
-        '',
-        assign({}, attributes, {
-          expires: -1
-        })
-      )
+  return Object.create(
+    {
+      set: set,
+      get: get,
+      remove: function (key, attributes) {
+        set(
+          key,
+          '',
+          assign({}, attributes, {
+            expires: -1
+          })
+        )
+      },
+      withAttributes: function (attributes) {
+        return init(this.converter, assign({}, this.attributes, attributes))
+      },
+      withConverter: function (converter) {
+        return init(assign({}, this.converter, converter), this.attributes)
+      }
     },
-    withAttributes: function (attributes) {
-      return init(this.converter, assign({}, this.attributes, attributes))
-    },
-    withConverter: function (converter) {
-      return init(assign({}, this.converter, converter), this.attributes)
-    },
-    attributes: Object.freeze(defaultAttributes),
-    converter: Object.freeze(converter)
-  }
+    {
+      attributes: { value: Object.freeze(defaultAttributes) },
+      converter: { value: Object.freeze(converter) }
+    }
+  )
 }
 
 export default init(rfc6265Converter, { path: '/' })
