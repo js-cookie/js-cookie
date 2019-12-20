@@ -28,6 +28,7 @@
     "url": "git://github.com/js-cookie/js-cookie.git"
   },
   "files": [
+    "index.js",
     "dist/**/*"
   ],
   "author": "Klaus Hartl",
