@@ -180,6 +180,8 @@ Cookie attribute defaults can be set globally by creating an instance of the api
 
 Define when the cookie will be removed. Value can be a [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) which will be interpreted as days from time of creation or a [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) instance. If omitted, the cookie becomes a session cookie.
 
+:warning: _If you migrate your code from another popular [`cookies-js`](https://github.com/ScottHamper/Cookies#cookiessetkey-value--options) library, which has typewise-identical API: note that numeric value of `expires` is interpreted as days in `js-cookie`, while in `cookies-js` it's interpreted as seconds!
+
 To create a cookie that expires in less than a day, you can check the [FAQ on the Wiki](https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions#expire-cookies-in-less-than-a-day).
 
 **Default:** Cookie is removed when the user closes the browser.
