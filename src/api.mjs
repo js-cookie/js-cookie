@@ -16,11 +16,9 @@ function init (converter, defaultAttributes) {
       attributes.expires = attributes.expires.toUTCString()
     }
 
-    value = converter.write(value, key)
+    key = rfc6265Converter.write(key).replace(/=/g, '%3D')
 
-    key = encodeURIComponent(key)
-      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
-      .replace(/[()]/g, escape)
+    value = converter.write(String(value), key)
 
     var stringifiedAttributes = ''
     for (var attributeName in attributes) {
@@ -34,13 +32,6 @@ function init (converter, defaultAttributes) {
         continue
       }
 
-      // Considers RFC 6265 section 5.2:
-      // ...
-      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
-      //     character:
-      // Consume the characters of the unparsed-attributes up to,
-      // not including, the first %x3B (";") character.
-      // ...
       stringifiedAttributes += '=' + attributes[attributeName].split(';')[0]
     }
 
@@ -59,19 +50,12 @@ function init (converter, defaultAttributes) {
     for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
       var cookie = parts.slice(1).join('=')
+      var name = rfc6265Converter.read(parts[0]).replace(/%3D/g, '=')
+      jar[name] = converter.read(cookie, name)
 
-      if (cookie[0] === '"') {
-        cookie = cookie.slice(1, -1)
+      if (key === name) {
+        break
       }
-
-      try {
-        var name = rfc6265Converter.read(parts[0])
-        jar[name] = converter.read(cookie, name)
-
-        if (key === name) {
-          break
-        }
-      } catch (e) {}
     }
 
     return key ? jar[key] : jar
