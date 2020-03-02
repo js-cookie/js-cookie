@@ -117,37 +117,6 @@ QUnit.test('equality sign in cookie value', function (assert) {
   )
 })
 
-// github.com/carhartl/jquery-cookie/issues/215
-QUnit.test('percent character in cookie value', function (assert) {
-  assert.expect(1)
-  document.cookie = 'bad=foo%'
-  assert.strictEqual(
-    Cookies.get('bad'),
-    'foo%',
-    'should read the percent character'
-  )
-})
-
-QUnit.test(
-  'unencoded percent character in cookie value mixed with encoded values not permitted',
-  function (assert) {
-    assert.expect(1)
-    document.cookie = 'bad=foo%bar%22baz%qux'
-    assert.strictEqual(Cookies.get('bad'), undefined, 'should skip reading')
-    document.cookie = 'bad=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
-  }
-)
-
-QUnit.test('lowercase percent character in cookie value', function (assert) {
-  assert.expect(1)
-  document.cookie = 'c=%d0%96'
-  assert.strictEqual(
-    Cookies.get('c'),
-    'Ж',
-    'should decode percent characters case insensitive'
-  )
-})
-
 // github.com/js-cookie/js-cookie/pull/171
 QUnit.test('missing leading semicolon', function (assert) {
   assert.expect(1)
@@ -179,60 +148,6 @@ QUnit.test('Call to read all when there are no cookies at all', function (
 ) {
   assert.deepEqual(Cookies.get(), {}, 'returns empty object')
 })
-
-QUnit.test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function (
-  assert
-) {
-  assert.expect(1)
-  document.cookie = 'c="v"'
-  assert.strictEqual(
-    Cookies.get('c'),
-    'v',
-    'should simply ignore quoted strings'
-  )
-})
-
-// github.com/js-cookie/js-cookie/issues/196
-QUnit.test(
-  'Call to read cookie when there is another unrelated cookie with malformed encoding in the name',
-  function (assert) {
-    assert.expect(2)
-    document.cookie = '%A1=foo'
-    document.cookie = 'c=v'
-    assert.strictEqual(
-      Cookies.get('c'),
-      'v',
-      'should not throw a URI malformed exception when retrieving a single cookie'
-    )
-    assert.deepEqual(
-      Cookies.get(),
-      { c: 'v' },
-      'should not throw a URI malformed exception when retrieving all cookies'
-    )
-    document.cookie = '%A1=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
-  }
-)
-
-// github.com/js-cookie/js-cookie/pull/62
-QUnit.test(
-  'Call to read cookie when there is another unrelated cookie with malformed encoding in the value',
-  function (assert) {
-    assert.expect(2)
-    document.cookie = 'invalid=%A1'
-    document.cookie = 'c=v'
-    assert.strictEqual(
-      Cookies.get('c'),
-      'v',
-      'should not throw a URI malformed exception when retrieving a single cookie'
-    )
-    assert.deepEqual(
-      Cookies.get(),
-      { c: 'v' },
-      'should not throw a URI malformed exception when retrieving all cookies'
-    )
-    document.cookie = 'invalid=foo; expires=Thu, 01 Jan 1970 00:00:00 GMT'
-  }
-)
 
 // github.com/js-cookie/js-cookie/issues/145
 QUnit.test(
@@ -283,12 +198,6 @@ QUnit.test('value "[object Object]"', function (assert) {
   assert.expect(1)
   Cookies.set('c', '[object Object]')
   assert.strictEqual(Cookies.get('c'), '[object Object]', 'should write value')
-})
-
-QUnit.test('number', function (assert) {
-  assert.expect(1)
-  Cookies.set('c', 1234)
-  assert.strictEqual(Cookies.get('c'), '1234', 'should write value')
 })
 
 QUnit.test('null', function (assert) {
@@ -511,67 +420,45 @@ QUnit.test('passing attributes reference', function (assert) {
   assert.deepEqual(attributes, { path: '/' }, "won't alter attributes object")
 })
 
+QUnit.module('RFC 6265', lifecycle)
+
+QUnit.test('writing name with semicolon', function (assert) {
+  assert.expect(1)
+  Cookies.set('c;', 'foo')
+  assert.strictEqual(document.cookie, 'c%3B=foo', 'must encode ";"')
+})
+
+QUnit.test('reading name with encoded semicolon', function (assert) {
+  assert.expect(1)
+  document.cookie = 'c%3B=foo'
+  assert.strictEqual(Cookies.get('c;'), 'foo', 'must encode ";"')
+})
+
+QUnit.test('writing value with semicolon', function (assert) {
+  assert.expect(1)
+  Cookies.set('c', 'x;y;z')
+  assert.strictEqual(document.cookie, 'c=x%3By%3Bz', 'must encode ";"')
+})
+
+QUnit.test('reading value with encoded semicolon', function (assert) {
+  assert.expect(1)
+  document.cookie = 'c=x%3By%3Bz'
+  assert.strictEqual(Cookies.get('c'), 'x;y;z', 'must decode ";"')
+})
+
+QUnit.test('writing name with equals sign', function (assert) {
+  assert.expect(1)
+  Cookies.set('c=', 'foo')
+  assert.strictEqual(document.cookie, 'c%3D=foo', 'must encode "="')
+})
+
+QUnit.test('reading name with encoded equals sign', function (assert) {
+  assert.expect(1)
+  document.cookie = 'c%3D=foo'
+  assert.strictEqual(Cookies.get('c='), 'foo', 'must encode "="')
+})
+
 QUnit.module('converters', lifecycle)
-
-// github.com/carhartl/jquery-cookie/pull/166
-QUnit.test(
-  'provide a way for decoding characters encoded by the escape function',
-  function (assert) {
-    assert.expect(1)
-    document.cookie = 'c=%u5317%u4eac'
-    assert.strictEqual(
-      Cookies.withConverter({ read: unescape }).get('c'),
-      '北京',
-      'should convert chinese characters correctly'
-    )
-  }
-)
-
-QUnit.test(
-  'should decode a malformed char that matches the decodeURIComponent regex',
-  function (assert) {
-    assert.expect(1)
-    document.cookie = 'c=%E3'
-    var cookies = Cookies.withConverter({ read: unescape })
-    assert.strictEqual(
-      cookies.get('c'),
-      'ã',
-      'should convert the character correctly'
-    )
-    cookies.remove('c', {
-      path: ''
-    })
-  }
-)
-
-QUnit.test(
-  'should be able to conditionally decode a single malformed cookie',
-  function (assert) {
-    assert.expect(2)
-    var cookies = Cookies.withConverter({
-      read: function (value, name) {
-        if (name === 'escaped') {
-          return unescape(value)
-        }
-      }
-    })
-
-    document.cookie = 'escaped=%u5317'
-    assert.strictEqual(
-      cookies.get('escaped'),
-      '北',
-      'should use custom read converter when retrieving single cookies'
-    )
-
-    assert.deepEqual(
-      cookies.get(),
-      {
-        escaped: '北'
-      },
-      'should use custom read converter when retrieving all cookies'
-    )
-  }
-)
 
 // github.com/js-cookie/js-cookie/issues/70
 QUnit.test('should be able to create a write decoder', function (assert) {
@@ -613,14 +500,14 @@ QUnit.test('should expose rfc 6265 converter', function (assert) {
 
 QUnit.test('should be able to reuse and extend read decoder', function (assert) {
   assert.expect(1)
-  document.cookie = 'c=A%23'
+  document.cookie = 'c=A%3B'
   var cookies = Cookies.withConverter({
     read: function (value) {
       var decoded = value.replace('A', 'a')
       return Cookies.converter.read(decoded)
     }
   })
-  assert.strictEqual(cookies.get('c'), 'a#', 'should call both read converters')
+  assert.strictEqual(cookies.get('c'), 'a;', 'should call both read converters')
 })
 
 QUnit.test('should be able to reuse and extend a write decoder', function (
@@ -632,10 +519,10 @@ QUnit.test('should be able to reuse and extend a write decoder', function (
       var encoded = value.replace('a', 'A')
       return Cookies.converter.write(encoded)
     }
-  }).set('c', 'a%')
+  }).set('c', 'a;')
   assert.strictEqual(
     document.cookie,
-    'c=A%25',
+    'c=A%3B',
     'should call both write converters'
   )
 })

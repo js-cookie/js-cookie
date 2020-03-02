@@ -1,33 +1,8 @@
-function encodingMiddleware (request, response, next) {
-  const URL = require('url').URL
-  var url = new URL(request.url, 'http://localhost')
-
-  if (url.pathname !== '/encoding') {
-    next()
-    return
-  }
-
-  var cookieName = url.searchParams.get('name')
-  var cookieValue = url.searchParams.get('value')
-
-  response.setHeader('content-type', 'application/json')
-  response.end(
-    JSON.stringify({
-      name: cookieName,
-      value: cookieValue
-    })
-  )
-}
-
 const config = {
   qunit: {
     all: {
       options: {
-        urls: [
-          'http://127.0.0.1:9998/',
-          'http://127.0.0.1:9998/module.html',
-          'http://127.0.0.1:9998/encoding.html?integration_baseurl=http://127.0.0.1:9998/'
-        ]
+        urls: ['http://127.0.0.1:9998/', 'http://127.0.0.1:9998/module.html']
       }
     }
   },
@@ -58,11 +33,7 @@ const config = {
     'build-qunit': {
       options: {
         port: 9998,
-        base: ['.', 'test'],
-        middleware: function (connect, options, middlewares) {
-          middlewares.unshift(encodingMiddleware)
-          return middlewares
-        }
+        base: ['.', 'test']
       }
     },
     tests: {
@@ -71,11 +42,7 @@ const config = {
         base: ['.', 'test'],
         open: 'http://127.0.0.1:10000',
         keepalive: true,
-        livereload: true,
-        middleware: function (connect, options, middlewares) {
-          middlewares.unshift(encodingMiddleware)
-          return middlewares
-        }
+        livereload: true
       }
     }
   },
