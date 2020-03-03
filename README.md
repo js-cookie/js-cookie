@@ -12,10 +12,9 @@ A simple, lightweight JavaScript API for handling cookies
 - No dependency
 - Supports ES modules
 - Supports AMD/CommonJS
-- [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
 - Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
 - Enable [custom encoding/decoding](#converters)
-- **< 800 bytes** gzipped!
+- **< 700 bytes** gzipped!
 
 **If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
@@ -166,11 +165,8 @@ _Note: The `.noConflict` method is not necessary when using AMD or CommonJS, thu
 
 ## Encoding
 
-This project is [RFC 6265](http://tools.ietf.org/html/rfc6265#section-4.1.1) compliant. All special characters that are not allowed in the cookie-name or cookie-value are encoded with each one's UTF-8 Hex equivalent using [percent-encoding](http://en.wikipedia.org/wiki/Percent-encoding).  
-The only character in cookie-name or cookie-value that is allowed and still encoded is the percent `%` character, it is escaped in order to interpret percent input as literal.  
+Special characters that are not permitted in the cookie name (";" and "=") or cookie value (";") are encoded with their UTF-8 Hex equivalent using [percent-encoding](http://en.wikipedia.org/wiki/Percent-encoding).
 Please note that the default encoding/decoding strategy is meant to be interoperable [only between cookies that are read/written by js-cookie](https://github.com/js-cookie/js-cookie/pull/200#discussion_r63270778). To override the default encoding/decoding strategy you need to use a [converter](#converters).
-
-_Note: According to [RFC 6265](https://tools.ietf.org/html/rfc6265#section-6.1), your cookies may get deleted if they are too big or there are too many cookies in the same domain, [more details here](https://github.com/js-cookie/js-cookie/wiki/Frequently-Asked-Questions#why-are-my-cookies-being-deleted)._
 
 ## Cookie Attributes
 
