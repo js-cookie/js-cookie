@@ -24,12 +24,5 @@ exports.node = {
     Cookies.remove('anything')
     Cookies.remove('anything', { path: '' })
     test.done()
-  },
-  shouldExposeRfc6265Converter: function (test) {
-    test.expect(2)
-    var Cookies = require('../dist/js.cookie.min.js')
-    test.ok(!!Cookies.converter.read)
-    test.ok(!!Cookies.converter.write)
-    test.done()
   }
 }

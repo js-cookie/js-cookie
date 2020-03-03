@@ -420,7 +420,7 @@ QUnit.test('passing attributes reference', function (assert) {
   assert.deepEqual(attributes, { path: '/' }, "won't alter attributes object")
 })
 
-QUnit.module('RFC 6265', lifecycle)
+QUnit.module('Default converters', lifecycle)
 
 QUnit.test('writing name with semicolon', function (assert) {
   assert.expect(1)
@@ -458,10 +458,10 @@ QUnit.test('reading name with encoded equals sign', function (assert) {
   assert.strictEqual(Cookies.get('c='), 'foo', 'must encode "="')
 })
 
-QUnit.module('converters', lifecycle)
+QUnit.module('Custom converters', lifecycle)
 
 // github.com/js-cookie/js-cookie/issues/70
-QUnit.test('should be able to create a write decoder', function (assert) {
+QUnit.test('should be able to set up a write decoder', function (assert) {
   assert.expect(1)
   Cookies.withConverter({
     write: function (value) {
@@ -475,7 +475,7 @@ QUnit.test('should be able to create a write decoder', function (assert) {
   )
 })
 
-QUnit.test('should be able to use read and write decoder', function (assert) {
+QUnit.test('should be able to set up a read decoder', function (assert) {
   assert.expect(1)
   document.cookie = 'c=%2B'
   var cookies = Cookies.withConverter({
@@ -486,19 +486,7 @@ QUnit.test('should be able to use read and write decoder', function (assert) {
   assert.strictEqual(cookies.get('c'), '+', 'should call the read converter')
 })
 
-QUnit.test('should expose rfc 6265 converter', function (assert) {
-  assert.expect(2)
-  assert.ok(
-    !!Cookies.converter.read,
-    'rfc 6265 converter read method is exposed'
-  )
-  assert.ok(
-    !!Cookies.converter.write,
-    'rfc 6265 converter write method is exposed'
-  )
-})
-
-QUnit.test('should be able to reuse and extend read decoder', function (assert) {
+QUnit.test('should be able to extend read decoder', function (assert) {
   assert.expect(1)
   document.cookie = 'c=A%3B'
   var cookies = Cookies.withConverter({
@@ -510,9 +498,7 @@ QUnit.test('should be able to reuse and extend read decoder', function (assert) 
   assert.strictEqual(cookies.get('c'), 'a;', 'should call both read converters')
 })
 
-QUnit.test('should be able to reuse and extend a write decoder', function (
-  assert
-) {
+QUnit.test('should be able to extend write decoder', function (assert) {
   assert.expect(1)
   Cookies.withConverter({
     write: function (value) {

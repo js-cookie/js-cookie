@@ -1,5 +1,5 @@
-import rfc6265Converter from './rfc6265.mjs'
 import assign from './assign.mjs'
+import defaultConverter from './converter.mjs'
 
 function init (converter, defaultAttributes) {
   function set (key, value, attributes) {
@@ -16,7 +16,7 @@ function init (converter, defaultAttributes) {
       attributes.expires = attributes.expires.toUTCString()
     }
 
-    key = rfc6265Converter.write(key).replace(/=/g, '%3D')
+    key = defaultConverter.write(key).replace(/=/g, '%3D')
 
     value = converter.write(String(value), key)
 
@@ -50,7 +50,7 @@ function init (converter, defaultAttributes) {
     for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
       var cookie = parts.slice(1).join('=')
-      var name = rfc6265Converter.read(parts[0]).replace(/%3D/g, '=')
+      var name = defaultConverter.read(parts[0]).replace(/%3D/g, '=')
       jar[name] = converter.read(cookie, name)
 
       if (key === name) {
@@ -88,4 +88,4 @@ function init (converter, defaultAttributes) {
   )
 }
 
-export default init(rfc6265Converter, { path: '/' })
+export default init(defaultConverter, { path: '/' })
