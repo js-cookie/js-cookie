@@ -18,7 +18,7 @@
     "browserify"
   ],
   "scripts": {
-    "test": "grunt test",
+    "test": "jest",
     "format": "grunt exec:format",
     "dist": "rm -rf dist/* && rollup -c",
     "release": "release-it"
@@ -34,6 +34,9 @@
   "author": "Klaus Hartl",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-jest": "^25.1.0",
     "browserstack-runner": "^0.9.0",
     "eslint": "^6.5.1",
     "eslint-config-standard": "^14.1.0",
@@ -47,6 +50,7 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "^3.0.0",
     "gzip-js": "^0.3.2",
+    "jest": "^25.1.0",
     "prettier": "^1.18.2",
     "qunit": "^2.9.3",
     "release-it": "^12.4.3",
