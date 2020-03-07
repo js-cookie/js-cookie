@@ -50,7 +50,7 @@
     "prettier": "^1.18.2",
     "qunit": "^2.9.3",
     "release-it": "^12.4.3",
-    "rollup": "^1.20.3",
+    "rollup": "^2.0.0",
     "rollup-plugin-filesize": "^6.2.0",
     "rollup-plugin-license": "^0.13.0",
     "rollup-plugin-terser": "^5.1.3",
