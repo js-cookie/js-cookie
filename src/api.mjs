@@ -43,15 +43,17 @@ function init (converter, defaultAttributes) {
       return
     }
 
-    var all = document.cookie
-    var scan = /(?:^|; )([^=]*)=([^;]*)/g
-    var match
+    // To prevent the for loop in the first place assign an empty array
+    // in case there are no cookies at all.
+    var cookies = document.cookie ? document.cookie.split('; ') : []
     var jar = {}
-    while ((match = scan.exec(all))) {
-      var foundKey = defaultConverter.read(match[1]).replace(/%3D/g, '=')
-      var value = converter.read(match[2], foundKey)
-      jar[foundKey] = value
-      if (key === foundKey) {
+    for (var i = 0; i < cookies.length; i++) {
+      var parts = cookies[i].split('=')
+      var cookie = parts.slice(1).join('=')
+      var name = defaultConverter.read(parts[0]).replace(/%3D/g, '=')
+      jar[name] = converter.read(cookie, name)
+
+      if (key === name) {
         break
       }
     }
