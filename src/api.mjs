@@ -49,11 +49,11 @@ function init (converter, defaultAttributes) {
     var jar = {}
     for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
-      var cookie = parts.slice(1).join('=')
-      var name = defaultConverter.read(parts[0]).replace(/%3D/g, '=')
-      jar[name] = converter.read(cookie, name)
+      var value = parts.slice(1).join('=')
+      var foundKey = defaultConverter.read(parts[0]).replace(/%3D/g, '=')
+      jar[foundKey] = converter.read(value, foundKey)
 
-      if (key === name) {
+      if (key === foundKey) {
         break
       }
     }
