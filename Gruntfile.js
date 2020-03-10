@@ -6,9 +6,6 @@ const config = {
       }
     }
   },
-  nodeunit: {
-    all: 'test/node.js'
-  },
   watch: {
     options: {
       livereload: true
@@ -67,8 +64,7 @@ module.exports = function (grunt) {
     'exec:lint',
     'exec:rollup',
     'connect:build-qunit',
-    'qunit',
-    'nodeunit'
+    'qunit'
   ])
   grunt.registerTask('browserstack', [
     'exec:rollup',
