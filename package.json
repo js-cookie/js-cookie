@@ -50,6 +50,7 @@
     "grunt-exec": "^3.0.0",
     "gzip-js": "^0.3.2",
     "jest": "^25.1.0",
+    "jest-environment-browserstack": "^1.2.0",
     "prettier": "^1.18.2",
     "qunit": "^2.9.3",
     "release-it": "^12.4.3",
