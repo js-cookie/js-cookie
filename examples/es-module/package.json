@@ -13,6 +13,6 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "js-cookie": "^3.0.0-beta.3"
+    "js-cookie": "^3.0.0-rc.0"
   }
 }
