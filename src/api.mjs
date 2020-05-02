@@ -18,7 +18,7 @@ function init (converter, defaultAttributes) {
 
     key = defaultConverter.write(key).replace(/=/g, '%3D')
 
-    value = converter.write(String(value), key)
+    value = converter.write(value, key)
 
     var stringifiedAttributes = ''
     for (var attributeName in attributes) {

@@ -513,6 +513,20 @@ QUnit.test('should be able to extend write decoder', function (assert) {
   )
 })
 
+QUnit.test('should be able to non-String values', function (assert) {
+  assert.expect(1)
+  Cookies.withConverter({
+    write: function (value) {
+      return JSON.stringify(value)
+    }
+  }).set('c', { foo: 'bar' })
+  assert.strictEqual(
+    document.cookie,
+    'c={"foo":"bar"}',
+    'should convert object as JSON string'
+  )
+})
+
 QUnit.module('noConflict', lifecycle)
 
 QUnit.test('do not conflict with existent globals', function (assert) {
