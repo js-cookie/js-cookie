@@ -513,7 +513,9 @@ QUnit.test('should be able to extend write decoder', function (assert) {
   )
 })
 
-QUnit.test('should be able to non-String values', function (assert) {
+QUnit.test('should be able to convert incoming, non-String values', function (
+  assert
+) {
   assert.expect(1)
   Cookies.withConverter({
     write: function (value) {
