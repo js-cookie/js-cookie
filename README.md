@@ -106,6 +106,12 @@ Create an expiring cookie, valid to the path of the current page:
 Cookies.set('name', 'value', { expires: 7, path: '' })
 ```
 
+Create a cookie with SameSite attributes:
+
+```javascript
+Cookies.set('name', 'value', { secure: true, sameSite: 'lax'})
+```
+
 Read cookie:
 
 ```javascript
