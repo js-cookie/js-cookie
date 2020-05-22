@@ -14,13 +14,13 @@
       "browser": "safari",
       "browser_version": "latest",
       "os": "OS X",
-      "os_version": "Mojave"
+      "os_version": "Catalina"
     },
     {
       "browser": "safari",
       "browser_version": "latest",
       "os": "OS X",
-      "os_version": "High Sierra"
+      "os_version": "Mojave"
     },
     {
       "device": "iPhone 11",
