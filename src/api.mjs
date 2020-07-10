@@ -51,7 +51,10 @@ function init (converter, defaultAttributes) {
       var parts = cookies[i].split('=')
       var value = parts.slice(1).join('=')
       var foundKey = defaultConverter.read(parts[0]).replace(/%3D/g, '=')
-      jar[foundKey] = converter.read(value, foundKey)
+      // To prevent overwriting cookie in same key
+      if (!jar[foundKey]) {
+        jar[foundKey] = converter.read(value, foundKey)
+      }
 
       if (key === foundKey) {
         break
