@@ -38,7 +38,7 @@ function init (converter, defaultAttributes) {
     return (document.cookie = key + '=' + value + stringifiedAttributes)
   }
 
-  function get (key) {
+  function get (key, position) {
     if (typeof document === 'undefined' || (arguments.length && !key)) {
       return
     }
@@ -46,6 +46,11 @@ function init (converter, defaultAttributes) {
     // To prevent the for loop in the first place assign an empty array
     // in case there are no cookies at all.
     var cookies = document.cookie ? document.cookie.split('; ') : []
+    // To get the last cookie when matching many cookies in same key
+    if (position === 'last') {
+      cookies.reverse()
+    }
+
     var jar = {}
     for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
