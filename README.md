@@ -253,14 +253,16 @@ Cookies.remove('name')
 
 ### sameSite
 
-A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), with possible values `lax` or `strict`, prevents the browser from sending cookie along with cross-site requests.
+A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), allowing to control whether the browser is sending a cookie along with cross-site requests.
 
-Default: not set, i.e. include cookie in any request.
+Default: not set.
+
+**Note that more recent browsers are making "Lax" the default value even without specifiying anything here.**
 
 **Examples:**
 
 ```javascript
-Cookies.set('name', 'value', { sameSite: 'lax' })
+Cookies.set('name', 'value', { sameSite: 'strict' })
 Cookies.get('name') // => 'value'
 Cookies.remove('name')
 ```
