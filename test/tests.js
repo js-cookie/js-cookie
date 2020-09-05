@@ -180,18 +180,6 @@ QUnit.test('Call to read all when there are no cookies at all', function (
   assert.deepEqual(Cookies.get(), {}, 'returns empty object')
 })
 
-QUnit.test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function (
-  assert
-) {
-  assert.expect(1)
-  document.cookie = 'c="v"'
-  assert.strictEqual(
-    Cookies.get('c'),
-    'v',
-    'should simply ignore quoted strings'
-  )
-})
-
 // github.com/js-cookie/js-cookie/issues/196
 QUnit.test(
   'Call to read cookie when there is another unrelated cookie with malformed encoding in the name',

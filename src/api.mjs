@@ -60,10 +60,6 @@ function init (converter, defaultAttributes) {
       var parts = cookies[i].split('=')
       var value = parts.slice(1).join('=')
 
-      if (value[0] === '"') {
-        value = value.slice(1, -1)
-      }
-
       try {
         var foundKey = defaultConverter.read(parts[0])
         jar[foundKey] = converter.read(value, foundKey)
