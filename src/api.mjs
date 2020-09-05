@@ -16,7 +16,9 @@ function init (converter, defaultAttributes) {
       attributes.expires = attributes.expires.toUTCString()
     }
 
-    key = defaultConverter.write(key).replace(/=/g, '%3D')
+    key = encodeURIComponent(key)
+      .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+      .replace(/[()]/g, escape)
 
     value = converter.write(value, key)
 
@@ -32,6 +34,13 @@ function init (converter, defaultAttributes) {
         continue
       }
 
+      // Considers RFC 6265 section 5.2:
+      // ...
+      // 3.  If the remaining unparsed-attributes contains a %x3B (";")
+      //     character:
+      // Consume the characters of the unparsed-attributes up to,
+      // not including, the first %x3B (";") character.
+      // ...
       stringifiedAttributes += '=' + attributes[attributeName].split(';')[0]
     }
 
@@ -50,12 +59,19 @@ function init (converter, defaultAttributes) {
     for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
       var value = parts.slice(1).join('=')
-      var foundKey = defaultConverter.read(parts[0]).replace(/%3D/g, '=')
-      jar[foundKey] = converter.read(value, foundKey)
 
-      if (key === foundKey) {
-        break
+      if (value[0] === '"') {
+        value = value.slice(1, -1)
       }
+
+      try {
+        var foundKey = defaultConverter.read(parts[0])
+        jar[foundKey] = converter.read(value, foundKey)
+
+        if (key === foundKey) {
+          break
+        }
+      } catch (e) {}
     }
 
     return key ? jar[key] : jar
