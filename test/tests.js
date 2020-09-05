@@ -85,6 +85,22 @@ QUnit.test('api instance with converter', function (assert) {
   )
 })
 
+// github.com/js-cookie/js-cookie/pull/171
+QUnit.test('missing leading semicolon', function (assert) {
+  assert.expect(1)
+  var done = assert.async()
+  var iframe = document.createElement('iframe')
+  iframe.src = 'missing_semicolon.html'
+  iframe.addEventListener('load', function () {
+    assert.ok(
+      iframe.contentWindow.__ok,
+      'concatenate with 3rd party script without error'
+    )
+    done()
+  })
+  document.body.appendChild(iframe)
+})
+
 QUnit.module('read', lifecycle)
 
 QUnit.test('simple value', function (assert) {
@@ -146,22 +162,6 @@ QUnit.test('lowercase percent character in cookie value', function (assert) {
     'Ж',
     'should decode percent characters case insensitive'
   )
-})
-
-// github.com/js-cookie/js-cookie/pull/171
-QUnit.test('missing leading semicolon', function (assert) {
-  assert.expect(1)
-  var done = assert.async()
-  var iframe = document.createElement('iframe')
-  iframe.src = 'missing_semicolon.html'
-  iframe.addEventListener('load', function () {
-    assert.ok(
-      iframe.contentWindow.__ok,
-      'concatenate with 3rd party script without error'
-    )
-    done()
-  })
-  document.body.appendChild(iframe)
 })
 
 QUnit.test('Call to read all when there are cookies', function (assert) {
