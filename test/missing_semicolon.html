@@ -13,7 +13,7 @@
           return xhr.status === 200 ? xhr.responseText : null
         }
 
-        var contents = loadFileSync('../dist/js.cookie.js')
+        var contents = loadFileSync('../dist/js.cookie.umd.js')
         if (contents !== null) {
           var script = document.createElement('script')
           script.innerHTML =
