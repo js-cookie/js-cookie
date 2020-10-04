@@ -46,7 +46,8 @@ const config = {
       'dist/js.cookie.mjs',
       'dist/js.cookie.min.mjs',
       'dist/js.cookie.js',
-      'dist/js.cookie.min.js'
+      'dist/js.cookie.umd.js',
+      'dist/js.cookie.umd.min.js'
     ],
     options: {
       compress: {
