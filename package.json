@@ -1,14 +1,14 @@
 {
   "name": "js-cookie",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "description": "A simple, lightweight JavaScript API for handling cookies",
   "main": "dist/js.cookie.js",
   "module": "dist/js.cookie.mjs",
   "unpkg": "dist/js.cookie.umd.min.js",
   "jsdelivr": "dist/js.cookie.umd.min.js",
   "exports": {
-    "import": "dist/js.cookie.mjs",
-    "require": "dist/js.cookie.js"
+    "import": "./dist/js.cookie.mjs",
+    "require": "./dist/js.cookie.js"
   },
   "directories": {
     "test": "test"
