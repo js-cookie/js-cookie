@@ -41,7 +41,7 @@
   "license": "MIT",
   "devDependencies": {
     "browserstack-runner": "^0.9.0",
-    "eslint": "^6.5.1",
+    "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-markdown": "^1.0.0",
