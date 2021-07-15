@@ -51,7 +51,7 @@ _Not all browsers support ES modules natively yet_. For this reason the npm pack
 
 ```html
 <script type="module" src="/path/to/js.cookie.mjs"></script>
-<script nomodule defer src="/path/to/js.cookie.js"></script>
+<script nomodule defer src="/path/to/js.cookie.umd.js"></script>
 ```
 
 Here we're loading the nomodule script in a deferred fashion, because ES modules are deferred by default. This may not be strictly necessary depending on how you're using the library.
