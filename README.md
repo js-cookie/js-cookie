@@ -17,8 +17,8 @@ A simple, lightweight JavaScript API for handling cookies
 - Enable [custom encoding/decoding](#converters)
 - **< 800 bytes** gzipped!
 
-**If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
-[View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme)**
+**👉👉 If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
+[View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme) 👈👈**
 
 ## Installation
 
