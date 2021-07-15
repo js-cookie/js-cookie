@@ -30,8 +30,6 @@ JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under 
 $ npm i js-cookie
 ```
 
-The npm package has a `module` field pointing to an ES module variant of the library, mainly to provide support for ES module aware bundlers, whereas its `browser` field points to an UMD module for full backward compatibility.
-
 ### Direct download
 
 Starting with version 3 [releases](https://github.com/js-cookie/js-cookie/releases) are distributed with two variants of this library, an ES module as well as an UMD module.
