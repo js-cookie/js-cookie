@@ -65,7 +65,7 @@ Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/np
 UMD:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.umd.min.js"></script>
 ```
 
 ES module:
@@ -73,7 +73,7 @@ ES module:
 ```html
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"
+  src="//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"
 ></script>
 ```
 
