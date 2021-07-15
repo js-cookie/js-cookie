@@ -7,8 +7,8 @@
   "unpkg": "dist/js.cookie.umd.min.js",
   "jsdelivr": "dist/js.cookie.umd.min.js",
   "exports": {
-    "import": "dist/js.cookie.mjs",
-    "require": "dist/js.cookie.js"
+    "import": "./dist/js.cookie.mjs",
+    "require": "./dist/js.cookie.js"
   },
   "directories": {
     "test": "test"
