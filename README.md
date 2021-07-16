@@ -58,22 +58,7 @@ Here we're loading the nomodule script in a deferred fashion, because ES modules
 
 ### CDN
 
-Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie):
-
-UMD:
-
-```html
-<script src="//cdn.jsdelivr.net/npm/js-cookie@rc"></script>
-```
-
-ES module:
-
-```html
-<script
-  type="module"
-  src="//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"
-></script>
-```
+Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie).
 
 ## ES Module
 
