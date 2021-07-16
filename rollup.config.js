@@ -21,16 +21,11 @@ export default [
       },
       // config for <script nomodule>
       {
-        file: pkg.unpkg.replace('.min.js', '.js'),
+        file: pkg.browser,
         format: 'umd',
         name: 'Cookies',
         noConflict: true,
         banner: ';'
-      },
-      // config for older Node.js versions
-      {
-        file: pkg.main,
-        format: 'cjs'
       }
     ],
     plugins: [licenseBanner]
@@ -45,7 +40,7 @@ export default [
       },
       // config for <script nomodule>
       {
-        file: pkg.unpkg,
+        file: pkg.browser.replace('.js', '.min.js'),
         format: 'umd',
         name: 'Cookies',
         noConflict: true
