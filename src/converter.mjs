@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 export default {
   read: function (value) {
     return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
@@ -9,3 +10,4 @@ export default {
     )
   }
 }
+/* eslint-enable no-var */

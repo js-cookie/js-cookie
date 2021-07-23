@@ -1,6 +1,6 @@
-var nodeStatic = require('node-static')
-var file = new nodeStatic.Server('./dist')
-var port = 8080
+const nodeStatic = require('node-static')
+const file = new nodeStatic.Server('./dist')
+const port = 8080
 
 require('http')
   .createServer(function (request, response) {

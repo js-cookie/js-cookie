@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 import assign from './assign.mjs'
 import defaultConverter from './converter.mjs'
 
@@ -105,3 +106,4 @@ function init (converter, defaultAttributes) {
 }
 
 export default init(defaultConverter, { path: '/' })
+/* eslint-enable no-var */

@@ -1,14 +1,14 @@
 function encodingMiddleware (request, response, next) {
   const URL = require('url').URL
-  var url = new URL(request.url, 'http://localhost')
+  const url = new URL(request.url, 'http://localhost')
 
   if (url.pathname !== '/encoding') {
     next()
     return
   }
 
-  var cookieName = url.searchParams.get('name')
-  var cookieValue = url.searchParams.get('value')
+  const cookieName = url.searchParams.get('name')
+  const cookieValue = url.searchParams.get('value')
 
   response.setHeader('content-type', 'application/json')
   response.end(

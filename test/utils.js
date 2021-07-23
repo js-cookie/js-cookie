@@ -1,4 +1,5 @@
 /* global Cookies, QUnit */
+/* eslint-disable no-var */
 
 ;(function () {
   window.lifecycle = {
@@ -80,3 +81,5 @@
     return '"' + input + '"'
   }
 })()
+
+/* eslint-enable no-var */

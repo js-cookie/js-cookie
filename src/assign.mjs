@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 export default function (target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i]
@@ -7,3 +8,4 @@ export default function (target) {
   }
   return target
 }
+/* eslint-enable no-var */

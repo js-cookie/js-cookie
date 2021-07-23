@@ -1,4 +1,5 @@
 /* global Cookies, QUnit, lifecycle, quoted */
+/* eslint-disable no-var */
 
 QUnit.module('setup', lifecycle)
 
@@ -659,3 +660,5 @@ QUnit.test('do not conflict with existent globals', function (assert) {
   )
   window.Cookies = Cookies
 })
+
+/* eslint-enable no-var */
