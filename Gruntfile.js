@@ -50,7 +50,7 @@ const config = {
     ],
     options: {
       compress: {
-        gz: fileContents => require('gzip-js').zip(fileContents, {}).length
+        gz: (fileContents) => require('gzip-js').zip(fileContents, {}).length
       }
     }
   },
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
 
   // Load dependencies
   Object.keys(grunt.file.readJSON('package.json').devDependencies)
-    .filter(key => key !== 'grunt' && key.startsWith('grunt'))
+    .filter((key) => key !== 'grunt' && key.startsWith('grunt'))
     .forEach(grunt.loadNpmTasks)
 
   grunt.registerTask('test', [

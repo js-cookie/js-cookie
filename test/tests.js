@@ -174,23 +174,25 @@ QUnit.test('Call to read all when there are cookies', function (assert) {
   )
 })
 
-QUnit.test('Call to read all when there are no cookies at all', function (
-  assert
-) {
-  assert.deepEqual(Cookies.get(), {}, 'returns empty object')
-})
+QUnit.test(
+  'Call to read all when there are no cookies at all',
+  function (assert) {
+    assert.deepEqual(Cookies.get(), {}, 'returns empty object')
+  }
+)
 
-QUnit.test('RFC 6265 - reading cookie-octet enclosed in DQUOTE', function (
-  assert
-) {
-  assert.expect(1)
-  document.cookie = 'c="v"'
-  assert.strictEqual(
-    Cookies.get('c'),
-    'v',
-    'should simply ignore quoted strings'
-  )
-})
+QUnit.test(
+  'RFC 6265 - reading cookie-octet enclosed in DQUOTE',
+  function (assert) {
+    assert.expect(1)
+    document.cookie = 'c="v"'
+    assert.strictEqual(
+      Cookies.get('c'),
+      'v',
+      'should simply ignore quoted strings'
+    )
+  }
+)
 
 // github.com/js-cookie/js-cookie/issues/196
 QUnit.test(
@@ -626,21 +628,22 @@ QUnit.test('should be able to extend write decoder', function (assert) {
   )
 })
 
-QUnit.test('should be able to convert incoming, non-String values', function (
-  assert
-) {
-  assert.expect(1)
-  Cookies.withConverter({
-    write: function (value) {
-      return JSON.stringify(value)
-    }
-  }).set('c', { foo: 'bar' })
-  assert.strictEqual(
-    document.cookie,
-    'c={"foo":"bar"}',
-    'should convert object as JSON string'
-  )
-})
+QUnit.test(
+  'should be able to convert incoming, non-String values',
+  function (assert) {
+    assert.expect(1)
+    Cookies.withConverter({
+      write: function (value) {
+        return JSON.stringify(value)
+      }
+    }).set('c', { foo: 'bar' })
+    assert.strictEqual(
+      document.cookie,
+      'c={"foo":"bar"}',
+      'should convert object as JSON string'
+    )
+  }
+)
 
 QUnit.module('noConflict', lifecycle)
 

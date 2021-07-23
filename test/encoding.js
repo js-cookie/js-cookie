@@ -37,61 +37,68 @@ QUnit.test('cookie-value with double quotes in the right', function (assert) {
     })
 })
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-value " "', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', ' ')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        ' ',
-        'should handle the whitespace character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=%20',
-        'whitespace is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-value " "',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', ' ')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          ' ',
+          'should handle the whitespace character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=%20',
+          'whitespace is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-value ","', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', ',')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, ',', 'should handle the comma character')
-      assert.strictEqual(
-        plainValue,
-        'c=%2C',
-        'comma is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-value ","',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', ',')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          ',',
+          'should handle the comma character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=%2C',
+          'comma is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-value ";"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', ';')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        ';',
-        'should handle the semicolon character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=%3B',
-        'semicolon is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-value ";"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', ';')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          ';',
+          'should handle the semicolon character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=%3B',
+          'semicolon is not allowed, need to encode'
+        )
+      })
+  }
+)
 
 QUnit.test(
   'RFC 6265 - character not allowed in the cookie-value "\\"',
@@ -135,354 +142,401 @@ QUnit.test(
   }
 )
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "#"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '#')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, '#', 'should handle the sharp character')
-      assert.strictEqual(
-        plainValue,
-        'c=#',
-        'sharp is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "#"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '#')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '#',
+          'should handle the sharp character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=#',
+          'sharp is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "$"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '$')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '$',
-        'should handle the dollar sign character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=$',
-        'dollar sign is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "$"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '$')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '$',
+          'should handle the dollar sign character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=$',
+          'dollar sign is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "%"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '%')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '%',
-        'should handle the percent character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=%25',
-        'percent is allowed, but need to be escaped'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "%"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '%')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '%',
+          'should handle the percent character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=%25',
+          'percent is allowed, but need to be escaped'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "&"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '&')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '&',
-        'should handle the ampersand character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=&',
-        'ampersand is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "&"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '&')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '&',
+          'should handle the ampersand character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=&',
+          'ampersand is allowed, should not encode'
+        )
+      })
+  }
+)
 
 // github.com/carhartl/jquery-cookie/pull/62
-QUnit.test('RFC 6265 - character allowed in the cookie-value "+"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '+')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, '+', 'should handle the plus character')
-      assert.strictEqual(
-        plainValue,
-        'c=+',
-        'plus is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "+"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '+')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '+',
+          'should handle the plus character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=+',
+          'plus is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value ":"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', ':')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, ':', 'should handle the colon character')
-      assert.strictEqual(
-        plainValue,
-        'c=:',
-        'colon is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value ":"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', ':')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          ':',
+          'should handle the colon character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=:',
+          'colon is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "<"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '<')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '<',
-        'should handle the less-than character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=<',
-        'less-than is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "<"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '<')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '<',
+          'should handle the less-than character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=<',
+          'less-than is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value ">"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '>')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '>',
-        'should handle the greater-than character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=>',
-        'greater-than is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value ">"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '>')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '>',
+          'should handle the greater-than character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=>',
+          'greater-than is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "="', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '=')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '=',
-        'should handle the equal sign character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c==',
-        'equal sign is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "="',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '=')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '=',
+          'should handle the equal sign character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c==',
+          'equal sign is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "/"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '/')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, '/', 'should handle the slash character')
-      assert.strictEqual(
-        plainValue,
-        'c=/',
-        'slash is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "/"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '/')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '/',
+          'should handle the slash character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=/',
+          'slash is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "?"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '?')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '?',
-        'should handle the question mark character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=?',
-        'question mark is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "?"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '?')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '?',
+          'should handle the question mark character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=?',
+          'question mark is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "@"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '@')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, '@', 'should handle the at character')
-      assert.strictEqual(plainValue, 'c=@', 'at is allowed, should not encode')
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "@"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '@')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(decodedValue, '@', 'should handle the at character')
+        assert.strictEqual(
+          plainValue,
+          'c=@',
+          'at is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "["', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '[')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '[',
-        'should handle the opening square bracket character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=[',
-        'opening square bracket is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "["',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '[')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '[',
+          'should handle the opening square bracket character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=[',
+          'opening square bracket is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "]"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', ']')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        ']',
-        'should handle the closing square bracket character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=]',
-        'closing square bracket is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "]"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', ']')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          ']',
+          'should handle the closing square bracket character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=]',
+          'closing square bracket is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "^"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '^')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, '^', 'should handle the caret character')
-      assert.strictEqual(
-        plainValue,
-        'c=^',
-        'caret is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "^"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '^')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '^',
+          'should handle the caret character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=^',
+          'caret is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "`"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '`')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '`',
-        'should handle the grave accent character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=`',
-        'grave accent is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "`"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '`')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '`',
+          'should handle the grave accent character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=`',
+          'grave accent is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "{"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '{')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '{',
-        'should handle the opening curly bracket character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c={',
-        'opening curly bracket is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "{"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '{')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '{',
+          'should handle the opening curly bracket character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c={',
+          'opening curly bracket is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "}"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '}')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        '}',
-        'should handle the closing curly bracket character'
-      )
-      assert.strictEqual(
-        plainValue,
-        'c=}',
-        'closing curly bracket is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "}"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '}')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '}',
+          'should handle the closing curly bracket character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=}',
+          'closing curly bracket is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-value "|"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('c', '|')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, '|', 'should handle the pipe character')
-      assert.strictEqual(
-        plainValue,
-        'c=|',
-        'pipe is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-value "|"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('c', '|')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          '|',
+          'should handle the pipe character'
+        )
+        assert.strictEqual(
+          plainValue,
+          'c=|',
+          'pipe is allowed, should not encode'
+        )
+      })
+  }
+)
 
 QUnit.test(
   'RFC 6265 - characters allowed in the cookie-value should globally not be encoded',
@@ -544,45 +598,47 @@ QUnit.test('cookie-value - 4 bytes character (𩸽)', function (assert) {
 
 QUnit.module('cookie-name', lifecycle)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "("', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('(', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the opening parens character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%28=v',
-        'opening parens is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "("',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('(', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the opening parens character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%28=v',
+          'opening parens is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name ")"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie(')', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the closing parens character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%29=v',
-        'closing parens is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name ")"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie(')', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the closing parens character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%29=v',
+          'closing parens is not allowed, need to encode'
+        )
+      })
+  }
+)
 
 QUnit.test('RFC 6265 - should replace parens globally', function (assert) {
   assert.expect(1)
@@ -597,289 +653,316 @@ QUnit.test('RFC 6265 - should replace parens globally', function (assert) {
     })
 })
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "<"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('<', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the less-than character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%3C=v',
-        'less-than is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "<"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('<', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the less-than character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%3C=v',
+          'less-than is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name ">"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('>', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the greater-than character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%3E=v',
-        'greater-than is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name ">"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('>', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the greater-than character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%3E=v',
+          'greater-than is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "@"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('@', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the at character')
-      assert.strictEqual(
-        plainValue,
-        '%40=v',
-        'at is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "@"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('@', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(decodedValue, 'v', 'should handle the at character')
+        assert.strictEqual(
+          plainValue,
+          '%40=v',
+          'at is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name ","', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie(',', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the comma character')
-      assert.strictEqual(
-        plainValue,
-        '%2C=v',
-        'comma is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name ","',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie(',', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the comma character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%2C=v',
+          'comma is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name ";"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie(';', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the semicolon character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%3B=v',
-        'semicolon is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name ";"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie(';', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the semicolon character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%3B=v',
+          'semicolon is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name ":"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie(':', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the colon character')
-      assert.strictEqual(
-        plainValue,
-        '%3A=v',
-        'colon is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name ":"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie(':', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the colon character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%3A=v',
+          'colon is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "\\"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('\\', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the backslash character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%5C=v',
-        'backslash is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "\\"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('\\', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the backslash character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%5C=v',
+          'backslash is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name """', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('"', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the double quote character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%22=v',
-        'double quote is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name """',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('"', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the double quote character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%22=v',
+          'double quote is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "/"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('/', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the slash character')
-      assert.strictEqual(
-        plainValue,
-        '%2F=v',
-        'slash is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "/"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('/', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the slash character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%2F=v',
+          'slash is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "["', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('[', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the opening square brackets character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%5B=v',
-        'opening square brackets is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "["',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('[', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the opening square brackets character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%5B=v',
+          'opening square brackets is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "]"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie(']', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the closing square brackets character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%5D=v',
-        'closing square brackets is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "]"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie(']', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the closing square brackets character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%5D=v',
+          'closing square brackets is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "?"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('?', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the question mark character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%3F=v',
-        'question mark is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "?"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('?', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the question mark character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%3F=v',
+          'question mark is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "="', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('=', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the equal sign character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%3D=v',
-        'equal sign is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "="',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('=', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the equal sign character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%3D=v',
+          'equal sign is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "{"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('{', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the opening curly brackets character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%7B=v',
-        'opening curly brackets is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "{"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('{', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the opening curly brackets character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%7B=v',
+          'opening curly brackets is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name "}"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('}', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the closing curly brackets character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%7D=v',
-        'closing curly brackets is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name "}"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('}', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the closing curly brackets character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%7D=v',
+          'closing curly brackets is not allowed, need to encode'
+        )
+      })
+  }
+)
 
 QUnit.test(
   'RFC 6265 - character not allowed in the cookie-name "\\t"',
@@ -902,167 +985,194 @@ QUnit.test(
   }
 )
 
-QUnit.test('RFC 6265 - character not allowed in the cookie-name " "', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie(' ', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the whitespace character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%20=v',
-        'whitespace is not allowed, need to encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character not allowed in the cookie-name " "',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie(' ', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the whitespace character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%20=v',
+          'whitespace is not allowed, need to encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "#"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('#', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the sharp character')
-      assert.strictEqual(
-        plainValue,
-        '#=v',
-        'sharp is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "#"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('#', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the sharp character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '#=v',
+          'sharp is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "$"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('$', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the dollar sign character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '$=v',
-        'dollar sign is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "$"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('$', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the dollar sign character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '$=v',
+          'dollar sign is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in cookie-name "%"', function (assert) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('%', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the percent character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '%25=v',
-        'percent is allowed, but need to be escaped'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in cookie-name "%"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('%', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the percent character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '%25=v',
+          'percent is allowed, but need to be escaped'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "&"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('&', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the ampersand character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '&=v',
-        'ampersand is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "&"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('&', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the ampersand character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '&=v',
+          'ampersand is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "+"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('+', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the plus character')
-      assert.strictEqual(
-        plainValue,
-        '+=v',
-        'plus is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "+"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('+', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the plus character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '+=v',
+          'plus is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "^"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('^', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the caret character')
-      assert.strictEqual(
-        plainValue,
-        '^=v',
-        'caret is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "^"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('^', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the caret character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '^=v',
+          'caret is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "`"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('`', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(
-        decodedValue,
-        'v',
-        'should handle the grave accent character'
-      )
-      assert.strictEqual(
-        plainValue,
-        '`=v',
-        'grave accent is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "`"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('`', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the grave accent character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '`=v',
+          'grave accent is allowed, should not encode'
+        )
+      })
+  }
+)
 
-QUnit.test('RFC 6265 - character allowed in the cookie-name "|"', function (
-  assert
-) {
-  assert.expect(2)
-  using(assert)
-    .setCookie('|', 'v')
-    .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the pipe character')
-      assert.strictEqual(
-        plainValue,
-        '|=v',
-        'pipe is allowed, should not encode'
-      )
-    })
-})
+QUnit.test(
+  'RFC 6265 - character allowed in the cookie-name "|"',
+  function (assert) {
+    assert.expect(2)
+    using(assert)
+      .setCookie('|', 'v')
+      .then(function (decodedValue, plainValue) {
+        assert.strictEqual(
+          decodedValue,
+          'v',
+          'should handle the pipe character'
+        )
+        assert.strictEqual(
+          plainValue,
+          '|=v',
+          'pipe is allowed, should not encode'
+        )
+      })
+  }
+)
 
 QUnit.test(
   'RFC 6265 - characters allowed in the cookie-name should globally not be encoded',
