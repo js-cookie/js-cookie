@@ -45,7 +45,7 @@
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-html": "^6.0.0",
-    "eslint-plugin-markdown": "^1.0.0",
+    "eslint-plugin-markdown": "^2.2.0",
     "grunt": "^1.0.4",
     "grunt-compare-size": "^0.4.2",
     "grunt-contrib-connect": "^3.0.0",
