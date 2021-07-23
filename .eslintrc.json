@@ -5,5 +5,17 @@
     "no-unused-vars": "off",
     "space-before-function-paren": "error"
   },
-  "plugins": ["html", "markdown"]
+  "plugins": ["html", "markdown"],
+  "overrides": [
+    {
+      "files": ["**/*.md"],
+      "processor": "markdown/markdown"
+    },
+    {
+      "files": ["**/*.md/*.javascript"],
+      "rules": {
+        "comma-dangle": ["error", "never"]
+      }
+    }
+  ]
 }
