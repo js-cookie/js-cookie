@@ -48,7 +48,7 @@
     "eslint-plugin-markdown": "^1.0.0",
     "grunt": "^1.0.4",
     "grunt-compare-size": "^0.4.2",
-    "grunt-contrib-connect": "^2.1.0",
+    "grunt-contrib-connect": "^3.0.0",
     "grunt-contrib-nodeunit": "^3.0.0",
     "grunt-contrib-qunit": "^3.1.0",
     "grunt-contrib-watch": "^1.1.0",
