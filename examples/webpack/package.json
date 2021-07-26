@@ -17,6 +17,6 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
-    "js-cookie": "^3.0.0-rc.0"
+    "js-cookie": "^3.0.0"
   }
 }
