@@ -3,6 +3,7 @@
   "rules": {
     "no-undef": "off",
     "no-unused-vars": "off",
+    "no-var": "off",
     "space-before-function-paren": "error"
   },
   "plugins": ["html", "markdown"],
