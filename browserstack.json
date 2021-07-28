@@ -29,14 +29,6 @@
       "os_version": "13",
       "browserstack.local": "false",
       "browserstack.appium_version": "1.14.0"
-    },
-    {
-      "device": "iPhone 8 Plus",
-      "real_mobile": "true",
-      "os": "ios",
-      "os_version": "12",
-      "browserstack.local": "false",
-      "browserstack.appium_version": "1.14.0"
     }
   ]
 }
