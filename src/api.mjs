@@ -21,8 +21,6 @@ function init (converter, defaultAttributes) {
       .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
       .replace(/[()]/g, escape)
 
-    value = converter.write(value, key)
-
     var stringifiedAttributes = ''
     for (var attributeName in attributes) {
       if (!attributes[attributeName]) {
@@ -45,7 +43,8 @@ function init (converter, defaultAttributes) {
       stringifiedAttributes += '=' + attributes[attributeName].split(';')[0]
     }
 
-    return (document.cookie = key + '=' + value + stringifiedAttributes)
+    return (document.cookie =
+      key + '=' + converter.write(value, key) + stringifiedAttributes)
   }
 
   function get (key) {
