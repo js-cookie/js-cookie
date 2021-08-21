@@ -65,7 +65,7 @@ function init (converter, defaultAttributes) {
       }
 
       try {
-        var foundKey = defaultConverter.read(parts[0])
+        var foundKey = decodeURIComponent(parts[0])
         jar[foundKey] = converter.read(value, foundKey)
 
         if (key === foundKey) {
