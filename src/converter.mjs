@@ -1,6 +1,9 @@
 /* eslint-disable no-var */
 export default {
   read: function (value) {
+    if (value[0] === '"') {
+      value = value.slice(1, -1)
+    }
     return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
   },
   write: function (value) {
