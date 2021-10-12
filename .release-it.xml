@@ -4,17 +4,17 @@
 # Build and Release Folders
 # bin-debug/
 # bin-release/
-# [¹1¹]=obj/bin-debug
-# [²2²]=bn/bin-release
-
-# Other files and folders
-# settings/
+#<[*¹1¹*]=obj/bin-debug
+#<[*²2²*]=bn/bin-release
+<2
+#Other_files_folders
+#<~$_settings/
 
 # Executables
-# [¹1¹]
-# [¹1¹]obj/bin-debug
-# [²2²]
-# [²2²]bn/bin-release
+#<[*¹1¹*]
+#<[*¹1¹*]obj/bin-debug
+#<[*²2²*]
+#<[*²2²*]bn/bin-release
 # NODE_ENV=development
 # - VI
 #<{
