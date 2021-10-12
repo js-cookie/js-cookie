@@ -1,3 +1,22 @@
+# vi_vi_vi
+# vi_vi_vi=VI
+# VI=vi_vi_vi
+# Build and Release Folders
+# bin-debug/
+# bin-release/
+# [¹1¹]=obj/bin-debug
+# [²2²]=bn/bin-release
+
+# Other files and folders
+# settings/
+
+# Executables
+# [¹1¹]
+# [¹1¹]obj/bin-debug
+# [²2²]
+# [²2²]bn/bin-release
+# NODE_ENV=development
+# - VI
 <p align="center">
   <img src="https://cloud.githubusercontent.com/assets/835857/14581711/ba623018-0436-11e6-8fce-d2ccd4d379c9.gif">
 </p>
