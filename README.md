@@ -20,6 +20,17 @@ A simple, lightweight JavaScript API for handling cookies
 **👉👉 If you're viewing this at https://github.com/js-cookie/js-cookie, you're reading the documentation for the master branch.
 [View documentation for the latest release.](https://github.com/js-cookie/js-cookie/tree/latest#readme) 👈👈**
 
+## Before You Start...
+
+Many Open Source developers [work below the poverty line](https://staltz.com/software-below-the-poverty-line.html). They need funds. Although the maintainers of js-cookie don't need it, the broad Open Source community does. If you are reading this and own any Crypto or a long time, use the wallets below to deposit any amount. Be generous. 100% of the funds, including any value increase over time, will be dedicated to fund other Open Source projects.
+
+Your contribution will forever be remembered in the blockchain.
+
+**BTC (Core):** [17DrceyuQ4YCF2ZQtV6PzpVoppdovTfFJ4](https://www.blockchain.com/btc/address/17DrceyuQ4YCF2ZQtV6PzpVoppdovTfFJ4)  
+**ETH:** [0xA0ce2AB0Ace498e9399C9e37424a5f21C7AA77A3](https://etherscan.io/address/0xA0ce2AB0Ace498e9399C9e37424a5f21C7AA77A3)
+
+Only [Fagner](https://github.com/FagnerMartinsBrack) and [Klaus](https://github.com/carhartl) have access to the private keys.
+
 ## Installation
 
 ### NPM
