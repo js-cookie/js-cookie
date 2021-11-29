@@ -22,7 +22,7 @@ A simple, lightweight JavaScript API for handling cookies
 
 ## Before You Start...
 
-Many Open Source developers [work below the poverty line](https://staltz.com/software-below-the-poverty-line.html). They need funds. Although the maintainers of js-cookie don't need it, the broad Open Source community does. If you are reading this and own any Crypto or a long time, use the wallets below to deposit any amount. Be generous. 100% of the funds, including any value increase over time, will be dedicated to fund other Open Source projects.
+Many Open Source developers [work below the poverty line](https://staltz.com/software-below-the-poverty-line.html). They need funds. Although the maintainers of js-cookie don't need it, the broad Open Source community does. If you are reading this and own any Crypto for a long time, use the wallets below to deposit any amount. Be generous. 100% of the funds, including any value increase over time, will be dedicated to fund other Open Source projects.
 
 Your contribution will forever be remembered in the blockchain.
 
