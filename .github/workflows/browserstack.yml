@@ -31,7 +31,6 @@ jobs:
           node-version: '16.x'
       - run: npm install
       - run: grunt browserstack
-      - run: npm run test:e2e
       - name: 'BrowserStackLocal Stop'
         uses: 'browserstack/github-actions/setup-local@master'
         with:
