@@ -29,6 +29,14 @@
       "os_version": "13",
       "browserstack.local": "false",
       "browserstack.appium_version": "1.14.0"
+    },
+    {
+      "device": "Google Pixel 6",
+      "real_mobile": "true",
+      "os": "android",
+      "os_version": "12.0",
+      "browserstack.local": "false",
+      "browserstack.appium_version": "1.14.0"
     }
   ]
 }
