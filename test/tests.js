@@ -508,10 +508,9 @@ QUnit.test('with attributes', function (assert) {
 
 QUnit.test('passing attributes reference', function (assert) {
   assert.expect(1)
-  var attributes = { path: '/' }
-  Cookies.set('c', 'v', attributes)
-  Cookies.remove('c', attributes)
-  assert.deepEqual(attributes, { path: '/' }, "won't alter attributes object")
+  var attributes = {}
+  Cookies.remove('foo', attributes)
+  assert.deepEqual(attributes, {}, "won't alter attributes object")
 })
 
 QUnit.module('Custom converters', lifecycle)
