@@ -1,6 +1,6 @@
 # Server-side integration
 
-There are some servers that are not compliant with the [RFC 6265](http://tools.ietf.org/html/rfc6265). For those, some characters that are not encoded by JavaScript Cookie might be treated differently.
+There are some servers that are not compliant with the [RFC 6265](https://tools.ietf.org/html/rfc6265). For those, some characters that are not encoded by JavaScript Cookie might be treated differently.
 
 Here we document the most important server-side peculiarities and their workarounds. Feel free to send a [Pull Request](https://github.com/js-cookie/js-cookie/blob/master/CONTRIBUTING.md#pull-requests) if you see something that can be improved.
 
