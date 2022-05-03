@@ -58,7 +58,7 @@
     "gzip-js": "^0.3.2",
     "prettier": "^2.3.2",
     "qunit": "^2.9.3",
-    "release-it": "^14.10.0",
+    "release-it": "^15.0.0",
     "rollup": "^2.0.0",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-license": "^2.5.0",
