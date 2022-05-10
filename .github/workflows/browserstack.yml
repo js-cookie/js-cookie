@@ -14,14 +14,14 @@ jobs:
     if: ${{ ! startsWith(github.event_name, 'pull_request') }}
     steps:
       - name: 'BrowserStack Env Setup'
-        uses: 'browserstack/github-actions/setup-env@master'
+        uses: 'browserstack/github-actions/setup-env@00ce173eae311a7838f80682a5fad5144c4219ad'
         with:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: BUILD_INFO
           project-name: REPO_NAME
       - name: 'BrowserStack Local Tunnel Setup'
-        uses: 'browserstack/github-actions/setup-local@master'
+        uses: 'browserstack/github-actions/setup-local@00ce173eae311a7838f80682a5fad5144c4219ad'
         with:
           local-testing: start
           local-identifier: random
@@ -32,6 +32,6 @@ jobs:
       - run: npm install
       - run: grunt browserstack
       - name: 'BrowserStackLocal Stop'
-        uses: 'browserstack/github-actions/setup-local@master'
+        uses: 'browserstack/github-actions/setup-local@00ce173eae311a7838f80682a5fad5144c4219ad'
         with:
           local-testing: stop
