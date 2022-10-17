@@ -59,7 +59,7 @@
     "prettier": "^2.3.2",
     "qunit": "^2.9.3",
     "release-it": "^15.0.0",
-    "rollup": "^2.0.0",
+    "rollup": "^3.2.2",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-license": "^2.5.0",
     "rollup-plugin-terser": "^7.0.2",
