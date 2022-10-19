@@ -78,7 +78,7 @@ QUnit.test('api instance with converter', function (assert) {
   api.converter = {}
   assert.ok(api.converter.read, "won't allow to reassign property")
 
-  api.converter.read = function () {}
+  api.converter.read = function () { }
   assert.equal(
     api.converter.read.toString(),
     readConverter.toString(),
@@ -661,3 +661,14 @@ QUnit.test('do not conflict with existent globals', function (assert) {
 })
 
 /* eslint-enable no-var */
+
+QUnit.module('removeAll', lifecycle)
+
+QUnit.test('remove all cookies', function (assert) {
+  assert.expect(1)
+  Cookies.set('c', 'v')
+  Cookies.set('a', 'b')
+  Cookies.set('g', 'f')
+  Cookies.removeAll()
+  assert.strictEqual(document.cookie, '', 'should delete all cookies')
+})

@@ -67,25 +67,39 @@ function init (converter, defaultAttributes) {
         if (name === found) {
           break
         }
-      } catch (e) {}
+      } catch (e) { }
     }
 
     return name ? jar[name] : jar
+  }
+
+  function remove (name, attributes) {
+    set(
+      name,
+      '',
+      assign({}, attributes, {
+        expires: -1
+      })
+    )
+  }
+
+  function removeAll () {
+    var cookies = document.cookie ? document.cookie.split('; ') : []
+    for (var i = 0; i < cookies.length; i++) {
+      var parts = cookies[i].split('=')
+      try {
+        var found = decodeURIComponent(parts[0])
+        remove(found)
+      } catch (e) { }
+    }
   }
 
   return Object.create(
     {
       set: set,
       get: get,
-      remove: function (name, attributes) {
-        set(
-          name,
-          '',
-          assign({}, attributes, {
-            expires: -1
-          })
-        )
-      },
+      remove: remove,
+      removeAll: removeAll,
       withAttributes: function (attributes) {
         return init(this.converter, assign({}, this.attributes, attributes))
       },
