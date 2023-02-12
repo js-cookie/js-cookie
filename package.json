@@ -9,7 +9,16 @@
   "exports": {
     ".": {
       "import": "./dist/js.cookie.mjs",
-      "require": "./dist/js.cookie.js"
+      "browser": "./dist/js.cookie.js",
+      "default": "./dist/js.cookie.js"
+    },
+    "./dist/js.cookie": {
+      "import": "./dist/js.cookie.mjs",
+      "default": "./dist/js.cookie.js"
+    },
+    "./dist/js.cookie.min": {
+      "import": "./dist/js.cookie.min.mjs",
+      "default": "./dist/js.cookie.min.js"
     },
     "./package.json": "./package.json"
   },
