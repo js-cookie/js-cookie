@@ -60,7 +60,7 @@
     "prettier": "^2.3.2",
     "qunit": "^2.9.3",
     "release-it": "^15.0.0",
-    "rollup": "^2.0.0",
+    "rollup": "^3.16.0",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-license": "^3.0.0",
     "standard": "^17.0.0"
