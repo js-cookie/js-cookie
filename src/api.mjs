@@ -75,8 +75,8 @@ function init (converter, defaultAttributes) {
 
   return Object.create(
     {
-      set: set,
-      get: get,
+      set,
+      get,
       remove: function (name, attributes) {
         set(
           name,

@@ -73,7 +73,7 @@
       }
     }
     return {
-      setCookie: setCookie
+      setCookie
     }
   }
 
