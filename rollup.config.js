@@ -1,4 +1,4 @@
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import filesize from 'rollup-plugin-filesize'
 import license from 'rollup-plugin-license'
 import pkg from './package.json'
