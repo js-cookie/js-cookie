@@ -7,8 +7,6 @@
     "chrome_previous",
     "firefox_latest",
     "firefox_previous",
-    "ie_11",
-    "ie_10",
     "opera_latest",
     {
       "browser": "safari",
