@@ -63,10 +63,6 @@ js-cookie allows integrating the encoding test suite with solutions written in o
 
 Specify the base url to pass the cookies into the server through a query string. If `integration_baseurl` query is not present, then js-cookie will assume there's no server.
 
-### window.global_test_results
-
-After the test suite has finished, js-cookie exposes the global `window.global_test_results` property containing an Object Literal that represents the [QUnit's details](http://api.qunitjs.com/QUnit.done/). js-cookie also adds an additional property representing an Array containing the tests data.
-
 ### Handling requests
 
 When js-cookie encoding tests are executed, it will request a url in the server through an iframe representing each test being run. js-cookie expects the server to handle the input and return the proper `Set-Cookie` headers in the response. js-cookie will then read the response and verify if the encoding is consistent with js-cookie default encoding mechanism
