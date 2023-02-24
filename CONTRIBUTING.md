@@ -21,10 +21,7 @@ We use the following tools for development:
 
 ### Getting started
 
-Install [NodeJS](http://nodejs.org/).  
-Install globally grunt-cli using the following command:
-
-    $ npm install -g grunt-cli
+Install [NodeJS](http://nodejs.org/).
 
 Browse to the project root directory and install the dev dependencies:
 
@@ -32,7 +29,7 @@ Browse to the project root directory and install the dev dependencies:
 
 To execute the build and tests run the following command in the root of the project:
 
-    $ grunt
+    $ npx grunt
 
 You should see a green message in the console:
 
@@ -43,7 +40,7 @@ You should see a green message in the console:
 You can also run the tests in the browser.  
 Start a test server from the project root:
 
-    $ grunt connect:tests
+    $ npx grunt connect:tests
 
 This will automatically open the test suite at http://127.0.0.1:10000 in the default browser, with livereload enabled.
 
@@ -53,7 +50,7 @@ _Note: we recommend cleaning all the browser cookies before running the tests, t
 
 You can build automatically after a file change using the following command:
 
-    $ grunt watch
+    $ npx grunt watch
 
 ## Integration with server-side
 
