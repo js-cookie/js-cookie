@@ -26,8 +26,8 @@ A simple, lightweight JavaScript API for handling cookies
 
 JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under the name `js-cookie`.
 
-```
-$ npm i js-cookie
+```bash
+npm i js-cookie
 ```
 
 The npm package has a `module` field pointing to an ES module variant of the library, mainly to provide support for ES module aware bundlers, whereas its `browser` field points to an UMD module for full backward compatibility.
@@ -301,8 +301,8 @@ Cookies.withConverter({
 
 ## TypeScript declarations
 
-```
-$ npm i @types/js-cookie
+```bash
+npm i @types/js-cookie
 ```
 
 ## Server-side integration
@@ -323,14 +323,14 @@ We are using [release-it](https://www.npmjs.com/package/release-it) for automate
 
 Start a dry run to see what would happen:
 
-```
-$ npm run release minor -- --dry-run
+```bash
+npm run release minor -- --dry-run
 ```
 
 Do a real release (publishes both to npm as well as create a new release on GitHub):
 
-```
-$ npm run release minor
+```bash
+npm run release minor
 ```
 
 _GitHub releases are created as a draft and need to be published manually!

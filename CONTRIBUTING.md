@@ -25,22 +25,30 @@ Install [NodeJS](http://nodejs.org/).
 
 Browse to the project root directory and install the dev dependencies:
 
-    $ npm install -d
+```bash
+npm install -d
+```
 
 To execute the build and tests run the following command in the root of the project:
 
-    $ npx grunt
+```bash
+npx grunt
+```
 
 You should see a green message in the console:
 
-    Done, without errors.
+```
+Done, without errors.
+```
 
 ### Tests
 
 You can also run the tests in the browser.  
 Start a test server from the project root:
 
-    $ npx grunt connect:tests
+```bash
+npx grunt connect:tests
+```
 
 This will automatically open the test suite at http://127.0.0.1:10000 in the default browser, with livereload enabled.
 
@@ -50,7 +58,9 @@ _Note: we recommend cleaning all the browser cookies before running the tests, t
 
 You can build automatically after a file change using the following command:
 
-    $ npx grunt watch
+```bash
+npx grunt watch
+```
 
 ## Integration with server-side
 
