@@ -39,4 +39,5 @@ jobs:
       - run: npm i
       - run: npm run release ${{ github.event.inputs.bump }}${{ github.event.inputs.dry-run && ' -- --dry-run' || '' }}
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
