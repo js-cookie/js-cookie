@@ -1,6 +1,6 @@
 {
   "name": "js-cookie",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "A simple, lightweight JavaScript API for handling cookies",
   "browser": "dist/js.cookie.js",
   "module": "dist/js.cookie.mjs",
