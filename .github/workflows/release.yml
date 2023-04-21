@@ -35,6 +35,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm
       - run: npm i
-      - run: npm run release ${{ github.event.inputs.bump }}${{ github.event.inputs.dry-run && '-- --dry-run' || '' }}
+      - run: npm run release ${{ github.event.inputs.bump }}${{ github.event.inputs.dry-run && ' -- --dry-run' || '' }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
