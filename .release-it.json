@@ -18,6 +18,7 @@
     "before:init": "npm test"
   },
   "npm": {
-    "publishArgs": ["--provenance"]
+    "publishArgs": ["--provenance"],
+    "skipChecks": true
   }
 }
