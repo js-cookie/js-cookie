@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        type: choice
+        description: Semver version to bump
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+      dry-run:
+        type: boolean
+        description: Perform dry-run
+        default: true
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g npm
+      - run: npm i
+      - run: npm run release ${{ github.event.inputs.bump }}${{ github.event.inputs.dry-run && '-- --dry-run'}}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -319,19 +319,7 @@ For vulnerability reports, send an e-mail to `js-cookie at googlegroups dot com`
 
 ## Releasing
 
-We are using [release-it](https://www.npmjs.com/package/release-it) for automated releasing.
-
-Start a dry run to see what would happen:
-
-```bash
-npm run release minor -- --dry-run
-```
-
-Do a real release (publishes both to npm as well as create a new release on GitHub):
-
-```bash
-npm run release minor
-```
+For releasing there's the `Release` GitHub Actions workflow, which will create a new release along with package provenance on npmjs.com.
 
 _GitHub releases are created as a draft and need to be published manually!
 (This is so we are able to craft suitable release notes before publishing.)_
