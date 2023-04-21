@@ -37,6 +37,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm
       - run: npm i
+      - name: Set up Git user
+        run: |
+          git config user.name "${{ github.workflow }}"
+          # This email identifies the commit as GitHub Actions - see https://github.com/orgs/community/discussions/26560
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
       - run: npm run release ${{ github.event.inputs.bump }}${{ github.event.inputs.dry-run == 'true' && ' -- --dry-run' || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
