@@ -47,7 +47,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           # This email identifies the commit as GitHub Actions - see https://github.com/orgs/community/discussions/26560
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      - run: npm run release ${{ github.event.inputs.bump }}${{ github.event.inputs.dry-run == 'true' && ' -- --dry-run' || '' }}
+      - run: npm run release ${{ github.event.inputs.bump }}${{ (github.event.inputs.dry-run == 'true' || github.event.inputs.skip-npm == 'true') && ' --' || '' }}${{ github.event.inputs.dry-run == 'true' && ' --dry-run' || '' }}${{ github.event.inputs.skip-npm == 'true' && ' --no-npm' || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
