@@ -319,10 +319,10 @@ For vulnerability reports, send an e-mail to `js-cookie at googlegroups dot com`
 
 ## Releasing
 
-For releasing there's the `Release` GitHub Actions workflow, which will create a new release along with package provenance on npmjs.com.
+Releasing should be done via the `Release` GitHub Actions workflow, so that published packages on npmjs.com have package provenance.
 
-_GitHub releases are created as a draft and need to be published manually!
-(This is so we are able to craft suitable release notes before publishing.)_
+GitHub releases are created as a draft and need to be published manually!
+(This is so we are able to craft suitable release notes before publishing.)
 
 ## Supporters
 
