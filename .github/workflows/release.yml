@@ -15,6 +15,10 @@ on:
         type: boolean
         description: Perform dry-run
         default: true
+      skip-npm:
+        type: boolean
+        description: Skip npm publish
+        default: false
 
 defaults:
   run:
