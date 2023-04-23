@@ -6,7 +6,6 @@
     "tagName": "v${version}"
   },
   "github": {
-    "assets": ["dist/*.mjs", "dist/*.js"],
     "draft": true,
     "release": true,
     "releaseName": "v${version}"

@@ -32,45 +32,11 @@ npm i js-cookie
 
 The npm package has a `module` field pointing to an ES module variant of the library, mainly to provide support for ES module aware bundlers, whereas its `browser` field points to an UMD module for full backward compatibility.
 
-### Direct download
-
-Starting with version 3 [releases](https://github.com/js-cookie/js-cookie/releases) are distributed with two variants of this library, an ES module as well as an UMD module.
-
-Note the different extensions: `.mjs` denotes the ES module, whereas `.js` is the UMD one.
-
-Example for how to load the ES module in a browser:
-
-```html
-<script type="module" src="/path/to/js.cookie.mjs"></script>
-<script type="module">
-  import Cookies from '/path/to/js.cookie.mjs'
-
-  Cookies.set('foo', 'bar')
-</script>
-```
-
 _Not all browsers support ES modules natively yet_. For this reason the npm package/release provides both the ES and UMD module variant and you may want to include the ES module along with the UMD fallback to account for this:
-
-```html
-<script type="module" src="/path/to/js.cookie.mjs"></script>
-<script nomodule defer src="/path/to/js.cookie.js"></script>
-```
-
-Here we're loading the nomodule script in a deferred fashion, because ES modules are deferred by default. This may not be strictly necessary depending on how you're using the library.
 
 ### CDN
 
-Alternatively, include it via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie).
-
-## ES Module
-
-Example for how to import the ES module from another module:
-
-```javascript
-import Cookies from 'js-cookie'
-
-Cookies.set('foo', 'bar')
-```
+Alternatively, include js-cookie via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/js-cookie).
 
 ## Basic Usage
 
