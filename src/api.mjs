@@ -47,36 +47,57 @@ function init (converter, defaultAttributes) {
       name + '=' + converter.write(value, name) + stringifiedAttributes)
   }
 
-  function get (name) {
-    if (typeof document === 'undefined' || (arguments.length && !name)) {
+  // Iterate over all cookies set in the document and invoke the callback for each
+  // callback expects to be called as cb(name: string, value: string)
+  // if callback returns true, signals that work is done
+  // and we do not need to continue iterating
+  function forEachCookie (cb) {
+    if (typeof document === 'undefined') {
       return
     }
 
     // To prevent the for loop in the first place assign an empty array
     // in case there are no cookies at all.
     var cookies = document.cookie ? document.cookie.split('; ') : []
-    var jar = {}
+
     for (var i = 0; i < cookies.length; i++) {
       var parts = cookies[i].split('=')
       var value = parts.slice(1).join('=')
 
       try {
         var found = decodeURIComponent(parts[0])
-        jar[found] = converter.read(value, found)
-
-        if (name === found) {
+        if (cb(found, converter.read(value, found))) {
           break
         }
       } catch (e) {}
     }
+  }
 
+  function get (name) {
+    if (arguments.length && !name) {
+      return
+    }
+    var jar = {}
+    forEachCookie(function (cookieName, value) {
+      jar[cookieName] = value
+      return cookieName === name
+    })
     return name ? jar[name] : jar
+  }
+
+  function all () {
+    var cookies = []
+    forEachCookie(function (name, value) {
+      cookies.push({ name, value })
+    })
+    return cookies
   }
 
   return Object.create(
     {
       set,
       get,
+      all,
       remove: function (name, attributes) {
         set(
           name,

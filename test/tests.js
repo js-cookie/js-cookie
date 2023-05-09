@@ -165,20 +165,76 @@ QUnit.test('lowercase percent character in cookie value', function (assert) {
   )
 })
 
+QUnit.test(
+  'Call to read all via get when there are cookies',
+  function (assert) {
+    Cookies.set('c', 'v')
+    Cookies.set('foo', 'bar')
+    assert.deepEqual(
+      Cookies.get(),
+      { c: 'v', foo: 'bar' },
+      'returns object containing all cookies'
+    )
+  }
+)
+
+QUnit.test(
+  'Call to read all via get when there are no cookies at all',
+  function (assert) {
+    assert.deepEqual(Cookies.get(), {}, 'returns empty object')
+  }
+)
+
 QUnit.test('Call to read all when there are cookies', function (assert) {
   Cookies.set('c', 'v')
   Cookies.set('foo', 'bar')
   assert.deepEqual(
-    Cookies.get(),
-    { c: 'v', foo: 'bar' },
-    'returns object containing all cookies'
+    Cookies.all(),
+    [
+      { name: 'c', value: 'v' },
+      { name: 'foo', value: 'bar' }
+    ],
+    'returns array containing all cookies'
   )
 })
 
 QUnit.test(
+  'Call to read all when there are multiple cookies of the same name',
+  function (assert) {
+    assert.expect(1)
+    var done = assert.async()
+    // In order to create a duplicate cookie scenario, we can either differ on domain, or differ on path
+    // creating a subdomain in a unit test seems dubious
+    // so we instead create a child document inside an iframe, and let it read the cookies back to us
+    Cookies.set('key', 'value')
+    // We can set this cookie from path: '/', but we can't read it ourselves!
+    Cookies.set('key', 'value2', { path: '/duplicate_cookie.html' })
+
+    var iframe = document.createElement('iframe')
+    iframe.src = 'duplicate_cookie.html'
+    iframe.addEventListener('load', function () {
+      // The objects in the contentWindow have a different constructor
+      // so assert.deepEqual fails
+      // quick and dirty hack - serialize and deserialize them to use the constructor of the parent window
+      var result = JSON.parse(JSON.stringify(iframe.contentWindow.__result))
+      assert.deepEqual(
+        result,
+        [
+          { name: 'key', value: 'value2' },
+          { name: 'key', value: 'value' }
+        ],
+        'reads cookies'
+      )
+      done()
+    })
+    document.body.appendChild(iframe)
+  }
+)
+
+QUnit.test(
   'Call to read all when there are no cookies at all',
   function (assert) {
-    assert.deepEqual(Cookies.get(), {}, 'returns empty object')
+    assert.deepEqual(Cookies.all(), [], 'returns empty array')
   }
 )
 

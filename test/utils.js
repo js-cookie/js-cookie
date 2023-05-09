@@ -14,6 +14,12 @@
           path: ''
         })
       })
+      // Remove duplicate cookie test
+      Object.keys(Cookies.get()).forEach(function (cookie) {
+        Cookies.remove(cookie, {
+          path: '/duplicate_cookie.html'
+        })
+      })
     }
   }
 
