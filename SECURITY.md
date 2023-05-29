@@ -1,12 +1,11 @@
 # Security Policy
 
-## js-cookie/js-cookie
-
-### Supported Versions
+## Supported Versions
 
 | Version | Supported          |
 | ------- | ------------------ |
-| All | :white_check_mark: |
+| 3.x     | :white_check_mark: |
+| < 3.0   | :x:                |
 
 ## Reporting a Vulnerability
 
