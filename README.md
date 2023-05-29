@@ -279,10 +279,6 @@ Check out the [Servers Docs](SERVER_SIDE.md)
 
 Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
-## Security
-
-For vulnerability reports, send an e-mail to `js-cookie at googlegroups dot com`
-
 ## Releasing
 
 Releasing should be done via the `Release` GitHub Actions workflow, so that published packages on npmjs.com have package provenance.
