@@ -165,7 +165,7 @@ QUnit.test('lowercase percent character in cookie value', function (assert) {
   )
 })
 
-QUnit.test('Call to read all when there are cookies', function (assert) {
+QUnit.test('Read all when there are cookies', function (assert) {
   Cookies.set('c', 'v')
   Cookies.set('foo', 'bar')
   assert.deepEqual(
@@ -175,12 +175,9 @@ QUnit.test('Call to read all when there are cookies', function (assert) {
   )
 })
 
-QUnit.test(
-  'Call to read all when there are no cookies at all',
-  function (assert) {
-    assert.deepEqual(Cookies.get(), {}, 'returns empty object')
-  }
-)
+QUnit.test('Read all when there are no cookies at all', function (assert) {
+  assert.deepEqual(Cookies.get(), {}, 'returns empty object')
+})
 
 QUnit.test(
   'RFC 6265 - reading cookie-octet enclosed in DQUOTE',
