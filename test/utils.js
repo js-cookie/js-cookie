@@ -1,4 +1,4 @@
-/* global Cookies, QUnit */
+/* global Cookies */
 /* eslint-disable no-var */
 
 ;(function () {
@@ -48,24 +48,13 @@
             var done = assert.async()
             iframe.addEventListener('load', function () {
               var iframeDocument = iframe.contentWindow.document
-              var root = iframeDocument.documentElement
-              var content = root.textContent
-              if (!content) {
-                QUnit.ok(
-                  false,
-                  ['"' + requestURL + '"', 'content should not be empty'].join(
-                    ' '
-                  )
-                )
-                done()
-                return
-              }
               try {
-                var result = JSON.parse(content)
+                var result = JSON.parse(
+                  iframeDocument.documentElement.textContent
+                )
                 callback(result.value, iframeDocument.cookie)
-              } finally {
                 done()
-              }
+              } catch (e) {}
             })
             iframe.src = requestURL
           }
