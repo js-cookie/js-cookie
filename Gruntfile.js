@@ -21,6 +21,12 @@ function encodingMiddleware (request, response, next) {
 
 const config = {
   qunit: {
+    options: {
+      inject: [
+        'test/fix-qunit-reference.js', // => https://github.com/gruntjs/grunt-contrib-qunit/issues/202
+        'node_modules/grunt-contrib-qunit/chrome/bridge.js'
+      ]
+    },
     all: {
       options: {
         urls: [
