@@ -22,6 +22,9 @@ function encodingMiddleware (request, response, next) {
 const config = {
   qunit: {
     options: {
+      puppeteer: {
+        headless: 'new'
+      },
       inject: [
         'test/fix-qunit-reference.js', // => https://github.com/gruntjs/grunt-contrib-qunit/issues/202
         'node_modules/grunt-contrib-qunit/chrome/bridge.js'
