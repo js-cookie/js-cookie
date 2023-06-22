@@ -11,16 +11,54 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
-
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm test
+      - name: Install dependencies
+        run: npm i
+      - name: Unit tests
+        run: npm test
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    # Skip pull requests!
+    if: ${{ ! startsWith(github.event_name, 'pull_request') }}
+    needs:
+      - test
+    steps:
+      - name: Set up BrowserStack env
+        # Third-party action, pin to commit SHA!
+        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+        uses: browserstack/github-actions/setup-env@00ce173eae311a7838f80682a5fad5144c4219ad
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          build-name: BUILD_INFO
+          project-name: REPO_NAME
+      - name: Set up BrowserStack local tunnel
+        # Third-party action, pin to commit SHA!
+        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+        uses: browserstack/github-actions/setup-local@00ce173eae311a7838f80682a5fad5144c4219ad
+        with:
+          local-testing: start
+          local-identifier: random
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Install dependencies
+        run: npm i
+      - name: Run BrowserStack E2E tests
+        run: grunt browserstack
+      - name: Stop BrowserStackLocal
+        # Third-party action, pin to commit SHA!
+        # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+        uses: browserstack/github-actions/setup-local@00ce173eae311a7838f80682a5fad5144c4219ad
+        with:
+          local-testing: stop
