@@ -28,8 +28,8 @@
   ],
   "scripts": {
     "test": "grunt test",
-    "format": "prettier --list-different --write .",
-    "format:check": "prettier --list-different .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "eslint --ext .js,.mjs --fix .",
     "lint:check": "eslint --ext .js,.mjs .",
     "dist": "rm -rf dist/* && rollup -c",
