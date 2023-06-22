@@ -48,7 +48,7 @@ jobs:
     # Skip pull requests!
     if: ${{ ! startsWith(github.event_name, 'pull_request') }}
     needs:
-      - test
+      - build
     steps:
       - name: Set up BrowserStack env
         # Third-party action, pin to commit SHA!
