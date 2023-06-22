@@ -21,20 +21,20 @@
       "os_version": "Monterey"
     },
     {
-      "device": "iPhone 11",
-      "real_mobile": "true",
+      "device": "iPhone 14",
       "os": "ios",
-      "os_version": "13",
+      "os_version": "16",
+      "browserstack.appium_version": "1.22.0",
       "browserstack.local": "false",
-      "browserstack.appium_version": "1.14.0"
+      "real_mobile": "true"
     },
     {
-      "device": "Google Pixel 6",
-      "real_mobile": "true",
+      "device": "Google Pixel 7",
       "os": "android",
-      "os_version": "12.0",
+      "os_version": "13.0",
+      "browserstack.appium_version": "1.22.0",
       "browserstack.local": "false",
-      "browserstack.appium_version": "1.14.0"
+      "real_mobile": "true"
     }
   ]
 }
