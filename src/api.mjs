@@ -1,9 +1,8 @@
-/* eslint-disable no-var */
 import assign from './assign.mjs'
 import defaultConverter from './converter.mjs'
 
-function init (converter, defaultAttributes) {
-  function set (name, value, attributes) {
+function init(converter, defaultAttributes) {
+  function set(name, value, attributes) {
     if (typeof document === 'undefined') {
       return
     }
@@ -47,7 +46,7 @@ function init (converter, defaultAttributes) {
       name + '=' + converter.write(value, name) + stringifiedAttributes)
   }
 
-  function get (name) {
+  function get(name) {
     if (typeof document === 'undefined' || (arguments.length && !name)) {
       return
     }
@@ -67,7 +66,9 @@ function init (converter, defaultAttributes) {
         if (name === found) {
           break
         }
-      } catch (e) {}
+      } catch (e) {
+        // Do nothing...
+      }
     }
 
     return name ? jar[name] : jar
@@ -101,4 +102,3 @@ function init (converter, defaultAttributes) {
 }
 
 export default init(defaultConverter, { path: '/' })
-/* eslint-enable no-var */

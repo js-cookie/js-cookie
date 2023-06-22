@@ -1,22 +1,13 @@
 {
-  "extends": "standard",
-  "rules": {
-    "no-undef": "off",
-    "no-unused-vars": "off",
-    "no-var": "off",
-    "space-before-function-paren": "error"
+  "env": {
+    "browser": true,
+    "es2021": true
   },
-  "plugins": ["html", "markdown"],
-  "overrides": [
-    {
-      "files": ["**/*.md"],
-      "processor": "markdown/markdown"
-    },
-    {
-      "files": ["**/*.md/*.javascript"],
-      "rules": {
-        "comma-dangle": ["error", "never"]
-      }
-    }
-  ]
+  "extends": ["eslint:recommended", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {}
 }

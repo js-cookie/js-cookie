@@ -1,5 +1,4 @@
 /* global QUnit, lifecycle, using */
-/* eslint-disable no-var */
 
 QUnit.module('cookie-value', lifecycle)
 
@@ -1169,5 +1168,3 @@ QUnit.test('cookie-name - 4 bytes characters', function (assert) {
       )
     })
 })
-
-/* eslint-enable no-var */

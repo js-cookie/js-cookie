@@ -1,4 +1,5 @@
-function encodingMiddleware (request, response, next) {
+/* eslint-env node */
+function encodingMiddleware(request, response, next) {
   const URL = require('url').URL
   const url = new URL(request.url, 'http://localhost')
 
@@ -90,10 +91,9 @@ const config = {
     }
   },
   exec: {
+    format: 'npm run format',
+    lint: 'npm run lint',
     rollup: 'npx rollup -c',
-    lint: 'npx standard',
-    format:
-      'npx prettier -l --write --single-quote --no-semi "**/*.{html,js,json,md,mjs,yml}" && npx eslint "**/*.{html,md}" --fix && npx standard --fix',
     'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
   }
 }
@@ -107,7 +107,6 @@ module.exports = function (grunt) {
     .forEach(grunt.loadNpmTasks)
 
   grunt.registerTask('test', [
-    'exec:lint',
     'exec:rollup',
     'connect:build-qunit',
     'qunit',
@@ -117,6 +116,11 @@ module.exports = function (grunt) {
     'exec:rollup',
     'exec:browserstack-runner'
   ])
-  grunt.registerTask('dev', ['exec:format', 'test', 'compare_size'])
+  grunt.registerTask('dev', [
+    'exec:format',
+    'exec:lint',
+    'test',
+    'compare_size'
+  ])
   grunt.registerTask('default', 'dev')
 }

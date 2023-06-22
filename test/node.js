@@ -1,3 +1,4 @@
+/* eslint-env node */
 exports.node = {
   shouldLoadApi: function (test) {
     test.expect(1)

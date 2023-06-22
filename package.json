@@ -28,7 +28,10 @@
   ],
   "scripts": {
     "test": "grunt test",
-    "format": "grunt exec:format",
+    "format": "prettier --list-different --write .",
+    "format:check": "prettier --list-different .",
+    "lint": "eslint --ext .js,.mjs --fix .",
+    "lint:check": "eslint --ext .js,.mjs .",
     "dist": "rm -rf dist/* && rollup -c",
     "release": "release-it"
   },
@@ -46,7 +49,7 @@
     "@rollup/plugin-terser": "^0.4.0",
     "browserstack-runner": "github:browserstack/browserstack-runner#1e85e559951bdf97ffe2a7c744ee67ca83589fde",
     "eslint": "^8.43.0",
-    "eslint-config-standard": "^17.1.0",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-html": "^7.0.0",
     "eslint-plugin-markdown": "^3.0.0",
     "grunt": "^1.0.4",
@@ -62,8 +65,7 @@
     "release-it": "^15.0.0",
     "rollup": "^3.17.2",
     "rollup-plugin-filesize": "^10.0.0",
-    "rollup-plugin-license": "^3.0.0",
-    "standard": "^17.0.0"
+    "rollup-plugin-license": "^3.0.0"
   },
   "engines": {
     "node": ">=16"

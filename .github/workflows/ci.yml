@@ -9,7 +9,6 @@ on:
       - 'examples/**'
       - '**.md'
       - .gitignore
-      - .prettierignore
       - .release-it.json
   pull_request:
     branches: [main]
@@ -19,13 +18,12 @@ on:
       - 'examples/**'
       - '**.md'
       - .gitignore
-      - .prettierignore
       - .release-it.json
   schedule:
     - cron: '0 0 1 * *' # Every month
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -38,7 +36,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm i
-      - name: Unit tests
+      - name: Check formatting
+        run: npm run format:check
+      - name: Lint
+        run: npm run lint:check
+      - name: Run unit tests
         run: npm test
 
   e2e-test:

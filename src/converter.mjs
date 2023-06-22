@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 export default {
   read: function (value) {
     if (value[0] === '"') {
@@ -13,4 +12,3 @@ export default {
     )
   }
 }
-/* eslint-enable no-var */

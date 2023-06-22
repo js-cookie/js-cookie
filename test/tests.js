@@ -1,5 +1,4 @@
 /* global Cookies, QUnit, lifecycle, quoted */
-/* eslint-disable no-var */
 
 QUnit.module('setup', lifecycle)
 
@@ -18,7 +17,7 @@ QUnit.test('api instance creation', function (assert) {
   )
 
   api = Cookies.withConverter({
-    write: function (value, name) {
+    write: function (value) {
       return value.toUpperCase()
     }
   }).withAttributes({ path: '/foo' })
@@ -28,7 +27,7 @@ QUnit.test('api instance creation', function (assert) {
   )
 
   api = Cookies.withAttributes({ path: '/foo' }).withConverter({
-    write: function (value, name) {
+    write: function (value) {
       return value.toUpperCase()
     }
   })
@@ -252,7 +251,7 @@ QUnit.test('String primitive', function (assert) {
 })
 
 QUnit.test('String object', function (assert) {
-  /* eslint-disable no-new-wrappers */
+  // eslint-disable-next-line no-new-wrappers
   Cookies.set('c', new String('v'))
   assert.strictEqual(Cookies.get('c'), 'v', 'should write value')
 })
@@ -605,5 +604,3 @@ QUnit.test('do not conflict with existent globals', function (assert) {
   )
   window.Cookies = Cookies
 })
-
-/* eslint-enable no-var */

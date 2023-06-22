@@ -1,5 +1,4 @@
 /* global Cookies */
-/* eslint-disable no-var */
 
 ;(function () {
   window.lifecycle = {
@@ -18,7 +17,7 @@
   }
 
   window.using = function (assert) {
-    function getQuery (key) {
+    function getQuery(key) {
       var queries = window.location.href.split('?')[1]
       if (!queries) {
         return
@@ -30,7 +29,7 @@
         return decodeURIComponent(result)
       }
     }
-    function setCookie (name, value) {
+    function setCookie(name, value) {
       return {
         then: function (callback) {
           var iframe = document.getElementById('request_target')
@@ -54,7 +53,9 @@
                 )
                 callback(result.value, iframeDocument.cookie)
                 done()
-              } catch (e) {}
+              } catch (e) {
+                // Do nothing...
+              }
             })
             iframe.src = requestURL
           }
@@ -70,5 +71,3 @@
     return '"' + input + '"'
   }
 })()
-
-/* eslint-enable no-var */
