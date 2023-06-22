@@ -12,13 +12,13 @@
       "browser": "safari",
       "browser_version": "latest",
       "os": "OS X",
-      "os_version": "Big Sur"
+      "os_version": "Ventura"
     },
     {
       "browser": "safari",
       "browser_version": "latest",
       "os": "OS X",
-      "os_version": "Catalina"
+      "os_version": "Monterey"
     },
     {
       "device": "iPhone 11",
