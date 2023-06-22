@@ -41,6 +41,12 @@ npm install -d
 
 More information on this issue can be found [here](https://github.com/puppeteer/puppeteer/issues/7740) and [here](https://broddin.be/2022/09/19/fixing-the-chromium-binary-is-not-available-for-arm64/).
 
+Optional: install Git hooks:
+
+```bash
+npx simple-git-hooks
+```
+
 To execute the build and tests run the following command in the root of the project:
 
 ```bash
