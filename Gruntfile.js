@@ -42,9 +42,6 @@ const config = {
       }
     }
   },
-  nodeunit: {
-    all: 'test/node.js'
-  },
   watch: {
     options: {
       livereload: true
@@ -94,6 +91,7 @@ const config = {
     format: 'npm run format',
     lint: 'npm run lint',
     rollup: 'npx rollup -c',
+    'test-node': 'npx qunit test/node.js',
     'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
   }
 }
@@ -110,7 +108,7 @@ module.exports = function (grunt) {
     'exec:rollup',
     'connect:build-qunit',
     'qunit',
-    'nodeunit'
+    'exec:test-node'
   ])
   grunt.registerTask('browserstack', [
     'exec:rollup',
