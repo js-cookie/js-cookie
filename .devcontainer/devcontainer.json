@@ -1,0 +1,13 @@
+{
+  "name": "Node.js",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "capAdd": ["SYS_ADMIN"],
+  "containerEnv": {
+    "DISPLAY": ":99",
+    "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium",
+    "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true"
+  },
+  "postStartCommand": "Xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp -nolisten unix &"
+}
