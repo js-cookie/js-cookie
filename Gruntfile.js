@@ -24,7 +24,13 @@ const config = {
   qunit: {
     options: {
       puppeteer: {
-        headless: 'new'
+        headless: 'new',
+        args: [
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--disable-setuid-sandbox',
+          '--no-sandbox'
+        ]
       },
       inject: [
         'test/fix-qunit-reference.js', // => https://github.com/gruntjs/grunt-contrib-qunit/issues/202
