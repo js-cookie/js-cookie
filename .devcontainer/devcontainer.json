@@ -3,9 +3,11 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "privileged": true,
   "containerEnv": {
-    "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true",
-    "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/google-chrome-stable"
+    "DISPLAY": ":99",
+    "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium",
+    "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD": "true"
   },
-  "postCreateCommand": "npm i"
+  "postStartCommand": "Xvfb :99 -ac -screen 0 1280x720x16 -nolisten tcp -nolisten unix &"
 }
