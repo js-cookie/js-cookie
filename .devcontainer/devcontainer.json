@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-  "privileged": true,
+  "capAdd": ["SYS_ADMIN"],
   "containerEnv": {
     "DISPLAY": ":99",
     "PUPPETEER_EXECUTABLE_PATH": "/usr/bin/chromium",
