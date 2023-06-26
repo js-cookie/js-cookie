@@ -4,9 +4,10 @@ on:
   push:
     branches: [main]
     paths-ignore:
+      - '.devcontainer/**'
       - '.github/**'
       - '!.github/workflows/ci.yml'
-      - '.devcontainer/**'
+      - '.vscode/**'
       - 'examples/**'
       - '**.md'
       - .gitignore
@@ -14,9 +15,10 @@ on:
   pull_request:
     branches: [main]
     paths-ignore:
+      - '.devcontainer/**'
       - '.github/**'
       - '!.github/workflows/ci.yml'
-      - '.devcontainer/**'
+      - '.vscode/**'
       - 'examples/**'
       - '**.md'
       - .gitignore
