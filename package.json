@@ -60,7 +60,7 @@
     "grunt-exec": "^3.0.0",
     "gzip-js": "^0.3.2",
     "nano-staged": "^0.8.0",
-    "prettier": "^2.3.2",
+    "prettier": "^3.0.0",
     "qunit": "^2.19.4",
     "release-it": "^16.0.0",
     "rollup": "^3.17.2",
