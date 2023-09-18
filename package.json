@@ -55,7 +55,7 @@
     "grunt": "^1.0.4",
     "grunt-compare-size": "^0.4.2",
     "grunt-contrib-connect": "^4.0.0",
-    "grunt-contrib-qunit": "^7.0.0",
+    "grunt-contrib-qunit": "^8.0.1",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "^3.0.0",
     "gzip-js": "^0.3.2",
