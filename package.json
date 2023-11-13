@@ -62,7 +62,7 @@
     "nano-staged": "^0.8.0",
     "prettier": "^3.0.0",
     "qunit": "^2.19.4",
-    "release-it": "^16.0.0",
+    "release-it": "^17.0.0",
     "rollup": "^4.1.4",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-license": "^3.0.0",
