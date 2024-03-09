@@ -73,7 +73,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version-file: package.json
+          check-latest: true
       - name: Install dependencies
         run: npm i
       - name: Run BrowserStack E2E tests
