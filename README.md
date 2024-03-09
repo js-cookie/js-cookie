@@ -43,9 +43,9 @@ Alternatively, include js-cookie via [jsDelivr CDN](https://www.jsdelivr.com/pac
 Import the library:
 
 ```javascript
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookie'
 // or
-const Cookies = require('js-cookie');
+const Cookies = require('js-cookie')
 ```
 
 Create a cookie, valid across the entire site:
