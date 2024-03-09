@@ -46,7 +46,7 @@
   "author": "Klaus Hartl",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "browserstack-runner": "github:browserstack/browserstack-runner#1e85e559951bdf97ffe2a7c744ee67ca83589fde",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^9.0.0",
@@ -65,10 +65,10 @@
     "release-it": "^17.0.0",
     "rollup": "^4.1.4",
     "rollup-plugin-filesize": "^10.0.0",
-    "rollup-plugin-license": "^3.0.0",
+    "rollup-plugin-license": "^3.2.0",
     "simple-git-hooks": "^2.8.1"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   }
 }
