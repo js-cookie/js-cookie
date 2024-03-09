@@ -6,7 +6,7 @@
 
 A simple, lightweight JavaScript API for handling cookies
 
-- Works in [all](https://www.browserstack.com/automate/public-build/b3VDaHAxVDg0NDdCRmtUOWg0SlQzK2NsRVhWTjlDQS9qdGJoak1GMzJiVT0tLVhwZHNvdGRoY284YVRrRnI3eU1JTnc9PQ==--5e88ffb3ca116001d7ef2cfb97a4128ac31174c2) browsers
+- Extensive browser support
 - Accepts [any](#encoding) character
 - [Heavily](test) tested
 - No dependency
