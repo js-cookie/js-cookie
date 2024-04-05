@@ -48,7 +48,7 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "browserstack-runner": "github:browserstack/browserstack-runner#1e85e559951bdf97ffe2a7c744ee67ca83589fde",
-    "eslint": "^8.43.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-html": "^8.0.0",
     "eslint-plugin-markdown": "^4.0.1",
