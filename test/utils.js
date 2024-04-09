@@ -53,7 +53,7 @@
                 )
                 callback(result.value, iframeDocument.cookie)
                 done()
-              } catch (e) {
+              } catch {
                 // Do nothing...
               }
             })

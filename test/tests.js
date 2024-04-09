@@ -251,7 +251,6 @@ QUnit.test('String primitive', function (assert) {
 })
 
 QUnit.test('String object', function (assert) {
-  // eslint-disable-next-line no-new-wrappers
   Cookies.set('c', new String('v'))
   assert.strictEqual(Cookies.get('c'), 'v', 'should write value')
 })

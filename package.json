@@ -30,8 +30,8 @@
     "test": "grunt test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --ext .js,.mjs --fix .",
-    "lint:check": "eslint --ext .js,.mjs .",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint .",
     "dist": "rm -rf dist/* && rollup -c",
     "release": "release-it"
   },
@@ -48,7 +48,7 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "browserstack-runner": "github:browserstack/browserstack-runner#1e85e559951bdf97ffe2a7c744ee67ca83589fde",
-    "eslint": "^8.43.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-html": "^8.0.0",
     "eslint-plugin-markdown": "^4.0.1",

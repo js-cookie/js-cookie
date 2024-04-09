@@ -65,7 +65,7 @@ function init(converter, defaultAttributes) {
         if (name === found) {
           break
         }
-      } catch (e) {
+      } catch {
         // Do nothing...
       }
     }
