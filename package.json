@@ -23,8 +23,7 @@
     "amd",
     "commonjs",
     "client",
-    "js-cookie",
-    "browserify"
+    "js-cookie"
   ],
   "scripts": {
     "test": "grunt test",
