@@ -53,7 +53,7 @@
     "eslint-plugin-markdown": "^5.0.0",
     "grunt": "^1.0.4",
     "grunt-compare-size": "^0.4.2",
-    "grunt-contrib-connect": "^4.0.0",
+    "grunt-contrib-connect": "^5.0.0",
     "grunt-contrib-qunit": "^8.0.1",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-exec": "^3.0.0",
