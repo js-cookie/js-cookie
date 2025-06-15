@@ -220,7 +220,7 @@ A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 
 Default: not set.
 
-**Note that more recent browsers are making "Lax" the default value even without specifiying anything here.**
+**Note that more recent browsers are making "Lax" the default value even without specifying anything here.**
 
 **Examples:**
 
