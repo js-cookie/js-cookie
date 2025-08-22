@@ -111,6 +111,9 @@ Cookies.remove('name', { path: '', domain: '.yourdomain.com', secure: true })
 
 _Note: Removing a nonexistent cookie neither raises any exception nor returns any value._
 
+> [!IMPORTANT]
+> `HttpOnly` cookies cannot be controlled with JavaScript. That means this library will not work on cookies of that type.
+
 ## Namespace conflicts
 
 If there is any danger of a conflict with the namespace `Cookies`, the `noConflict` method will allow you to define a new namespace and preserve the original one. This is especially useful when running the script on third party sites e.g. as part of a widget or SDK.
