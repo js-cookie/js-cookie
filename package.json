@@ -62,7 +62,7 @@
     "prettier": "^3.0.0",
     "qunit": "^2.19.4",
     "release-it": "^19.0.1",
-    "rollup": "^4.1.4",
+    "rollup": "^4.53.3",
     "rollup-plugin-filesize": "^10.0.0",
     "rollup-plugin-license": "^3.2.0",
     "simple-git-hooks": "^2.8.1"
