@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
-        run: npm i
+        run: npm ci
       - name: Check formatting
         run: npm run format:check
       - name: Lint
@@ -76,7 +76,7 @@ jobs:
           node-version-file: package.json
           check-latest: true
       - name: Install dependencies
-        run: npm i
+        run: npm ci
       - name: Run BrowserStack E2E tests
         run: grunt browserstack
       - name: Stop BrowserStackLocal

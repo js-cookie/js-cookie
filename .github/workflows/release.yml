@@ -36,7 +36,7 @@ jobs:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm i -g npm@latest # Ensure npm 11.5.1 or later is installed
-      - run: npm i
+      - run: npm ci
       - uses: chainguard-dev/actions/setup-gitsign@5478b1fb59c858e26e88f3564e196f1637e6d718
       - name: Set up Git user
         run: |
