@@ -4,11 +4,11 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-      cooldown:
-        default-days: 7
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
+    cooldown:
+      default-days: 7
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
