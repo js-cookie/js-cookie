@@ -68,6 +68,6 @@
     "simple-git-hooks": "^2.8.1"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
