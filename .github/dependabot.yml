@@ -4,6 +4,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+      cooldown:
+        default-days: 7
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
@@ -11,8 +13,6 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-      cooldown:
-        default-days: 7
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-patch']
