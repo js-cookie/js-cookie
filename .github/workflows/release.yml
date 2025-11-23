@@ -39,7 +39,7 @@ jobs:
       - run: |
           npm ci
           npm install --no-save rollup # https://github.com/npm/cli/issues/4828
-      - uses: chainguard-dev/actions/setup-gitsign@5478b1fb59c858e26e88f3564e196f1637e6d718
+      - uses: chainguard-dev/actions/setup-gitsign@3e8a2a226fad9e1ecbf2d359b8a7697554a4ac6d
       - name: Set up Git user
         run: |
           git config --local user.name "github-actions[bot]"
