@@ -35,7 +35,6 @@ jobs:
         with:
           node-version: 24.x
           registry-url: https://registry.npmjs.org
-      - run: npm i -g npm@latest # Ensure npm 11.5.1 or later is installed
       - run: |
           npm i -g npm@latest
           npm ci
