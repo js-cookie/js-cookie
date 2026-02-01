@@ -30,6 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
+          npm install -d picomatch@4.0.3
           npm ci
           npm install --no-save rollup # https://github.com/npm/cli/issues/4828
       - name: Check formatting
