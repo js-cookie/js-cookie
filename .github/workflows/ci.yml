@@ -30,8 +30,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
+          npm i -g npm@latest
           npm ci
-          npm install --no-save rollup # https://github.com/npm/cli/issues/4828
       - name: Check formatting
         run: npm run format:check
       - name: Lint
@@ -69,8 +69,8 @@ jobs:
           check-latest: true
       - name: Install dependencies
         run: |
+          npm i -g npm@latest
           npm ci
-          npm install --no-save rollup # https://github.com/npm/cli/issues/4828
       - name: Run BrowserStack E2E tests
         run: grunt browserstack
       - name: Stop BrowserStackLocal
