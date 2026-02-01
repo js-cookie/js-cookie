@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  push:
+  push: &trigger
     branches: [main]
     paths-ignore:
       - '.devcontainer/**'
@@ -12,17 +12,7 @@ on:
       - '**.md'
       - .gitignore
       - .release-it.json
-  pull_request:
-    branches: [main]
-    paths-ignore:
-      - '.devcontainer/**'
-      - '.github/**'
-      - '!.github/workflows/ci.yml'
-      - '.vscode/**'
-      - 'examples/**'
-      - '**.md'
-      - .gitignore
-      - .release-it.json
+  pull_request: *trigger
   schedule:
     - cron: '0 0 1 * *' # Every month
 
