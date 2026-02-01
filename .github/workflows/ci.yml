@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
-          npm install -d picomatch@4.0.3
+          npm i -g npm@latest
           npm ci
           npm install --no-save rollup # https://github.com/npm/cli/issues/4828
       - name: Check formatting
@@ -70,6 +70,7 @@ jobs:
           check-latest: true
       - name: Install dependencies
         run: |
+          npm i -g npm@latest
           npm ci
           npm install --no-save rollup # https://github.com/npm/cli/issues/4828
       - name: Run BrowserStack E2E tests
