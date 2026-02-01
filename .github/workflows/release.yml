@@ -35,10 +35,9 @@ jobs:
         with:
           node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm i -g npm@latest # Ensure npm 11.5.1 or later is installed
       - run: |
+          npm i -g npm@latest
           npm ci
-          npm install --no-save rollup # https://github.com/npm/cli/issues/4828
       - uses: chainguard-dev/actions/setup-gitsign@3e8a2a226fad9e1ecbf2d359b8a7697554a4ac6d
       - name: Set up Git user
         run: |
