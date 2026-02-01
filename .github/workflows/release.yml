@@ -36,7 +36,7 @@ jobs:
           node-version: 24.x
           registry-url: https://registry.npmjs.org
       - run: |
-          npm i -g npm@latest
+          npm i -g npm@11.8.0
           npm ci
       - uses: chainguard-dev/actions/setup-gitsign@3e8a2a226fad9e1ecbf2d359b8a7697554a4ac6d
       - name: Set up Git user

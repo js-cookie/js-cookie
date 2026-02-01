@@ -30,7 +30,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: |
-          npm i -g npm@latest
+          npm i -g npm@11.8.0
           npm ci
       - name: Check formatting
         run: npm run format:check
@@ -69,7 +69,7 @@ jobs:
           check-latest: true
       - name: Install dependencies
         run: |
-          npm i -g npm@latest
+          npm i -g npm@11.8.0
           npm ci
       - name: Run BrowserStack E2E tests
         run: grunt browserstack
