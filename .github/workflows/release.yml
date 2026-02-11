@@ -38,7 +38,7 @@ jobs:
       - run: |
           npm i -g npm@11.8.0
           npm ci
-      - uses: chainguard-dev/actions/setup-gitsign@3e8a2a226fad9e1ecbf2d359b8a7697554a4ac6d
+      - uses: chainguard-dev/actions/setup-gitsign@081e79ee578199ef583d4ca74edc376b50b9409c
       - name: Set up Git user
         run: |
           git config --local user.name "github-actions[bot]"
