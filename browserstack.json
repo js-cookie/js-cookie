@@ -9,12 +9,6 @@
     "firefox_previous",
     "opera_latest",
     {
-      "browser": "IE",
-      "browser_version": "11.0",
-      "os": "Windows",
-      "os_version": "10"
-    },
-    {
       "browser": "safari",
       "browser_version": "latest",
       "os": "OS X",
