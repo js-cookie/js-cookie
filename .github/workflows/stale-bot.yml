@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Close stale issues/pull requests
-        uses: actions/stale@v10.1.0
+        uses: actions/stale@v10.2.0
         with:
           stale-issue-message: 'This issue has been marked as stale because it has been open for 90 days with no activity. This thread will be automatically closed in 30 days if no further activity occurs.'
           stale-pr-message: 'This pull request has been marked as stale because it has been open for 90 days with no activity. This thread will be automatically closed in 30 days if no further activity occurs.'
