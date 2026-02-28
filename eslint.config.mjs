@@ -1,3 +1,4 @@
+import { defineConfig } from 'eslint/config'
 import globals from 'globals'
 import js from '@eslint/js'
 
@@ -6,7 +7,7 @@ const languageOptions = {
     ...globals.browser
   }
 }
-export default [
+export default defineConfig([
   {
     ignores: ['dist/*']
   },
@@ -27,4 +28,4 @@ export default [
       ecmaVersion: 2021
     }
   }
-]
+])

@@ -1,5 +1,4 @@
 /* global QUnit */
-/* eslint-env node */
 const Cookies = require('../dist/js.cookie.min.js')
 
 QUnit.test('api', (assert) => {

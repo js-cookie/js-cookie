@@ -1,4 +1,3 @@
-/* eslint-env node */
 const nodeStatic = require('node-static')
 const file = new nodeStatic.Server('./dist')
 const port = 8080
