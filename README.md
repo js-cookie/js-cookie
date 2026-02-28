@@ -214,6 +214,20 @@ Cookies.get('name') // => 'value'
 Cookies.remove('name')
 ```
 
+### partitioned
+
+Either `true` or `false`, indicating if the cookie opts into partitioned storage. Must also set `secure: true`.
+
+**Default:** No partitioned storage.
+
+**Examples:**
+
+```javascript
+Cookies.set('name', 'value', { partitioned: true })
+Cookies.get('name') // => 'value'
+Cookies.remove('name')
+```
+
 ### sameSite
 
 A [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String), allowing to control whether the browser is sending a cookie along with cross-site requests.
