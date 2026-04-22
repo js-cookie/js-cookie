@@ -10,13 +10,13 @@
     "opera_latest",
     {
       "browser": "Safari",
-      "browser_version": "latest",
+      "browser_version": "26.4",
       "os": "OS X",
       "os_version": "Tahoe"
     },
     {
       "browser": "Safari",
-      "browser_version": "latest",
+      "browser_version": "18.4",
       "os": "OS X",
       "os_version": "Sequoia"
     },
