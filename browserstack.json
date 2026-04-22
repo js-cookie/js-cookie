@@ -9,16 +9,16 @@
     "firefox_previous",
     "opera_latest",
     {
-      "browser": "safari",
+      "browser": "Safari",
       "browser_version": "latest",
       "os": "OS X",
-      "os_version": "Ventura"
+      "os_version": "Tahoe"
     },
     {
-      "browser": "safari",
+      "browser": "Safari",
       "browser_version": "latest",
       "os": "OS X",
-      "os_version": "Monterey"
+      "os_version": "Sequoia"
     },
     {
       "device": "iPhone 14",
