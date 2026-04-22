@@ -24,7 +24,7 @@
       "device": "iPhone 17",
       "os": "ios",
       "os_version": "26",
-      "browserstack.appium_version": "1.22.0",
+      "browserstack.appium_version": "2.19.0",
       "browserstack.local": "false",
       "real_mobile": "true"
     },
@@ -32,7 +32,7 @@
       "device": "Google Pixel 10",
       "os": "android",
       "os_version": "16.0",
-      "browserstack.appium_version": "1.22.0",
+      "browserstack.appium_version": "2.19.0",
       "browserstack.local": "false",
       "real_mobile": "true"
     }
