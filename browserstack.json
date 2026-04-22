@@ -21,9 +21,9 @@
       "os_version": "Sequoia"
     },
     {
-      "device": "iPhone 14",
+      "device": "iPhone 17",
       "os": "ios",
-      "os_version": "16",
+      "os_version": "26",
       "browserstack.appium_version": "1.22.0",
       "browserstack.local": "false",
       "real_mobile": "true"
