@@ -29,9 +29,9 @@
       "real_mobile": "true"
     },
     {
-      "device": "Google Pixel 7",
+      "device": "Google Pixel 10",
       "os": "android",
-      "os_version": "13.0",
+      "os_version": "16.0",
       "browserstack.appium_version": "1.22.0",
       "browserstack.local": "false",
       "real_mobile": "true"
