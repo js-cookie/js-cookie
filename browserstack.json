@@ -7,8 +7,6 @@
       "device": "iPhone 17 Pro",
       "os": "ios",
       "os_version": "26",
-      "browserstack.appium_version": "3.2.0",
-      "browserstack.local": "false",
       "real_mobile": "true"
     }
   ]
