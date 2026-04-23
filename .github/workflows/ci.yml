@@ -73,6 +73,7 @@ jobs:
       - name: Run BrowserStack E2E tests
         run: grunt browserstack
       - name: Stop BrowserStackLocal
+        if: always() # Ensure this runs even if the previous step fails
         # Third-party action, pin to commit SHA!
         # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
         uses: browserstack/github-actions/setup-local@00ce173eae311a7838f80682a5fad5144c4219ad
