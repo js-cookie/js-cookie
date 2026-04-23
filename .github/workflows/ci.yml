@@ -58,8 +58,9 @@ jobs:
         # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
         uses: browserstack/github-actions/setup-local@00ce173eae311a7838f80682a5fad5144c4219ad
         with:
-          local-testing: start
           local-identifier: random
+          local-logging-level: all-logs
+          local-testing: start
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6.3.0
         with:
