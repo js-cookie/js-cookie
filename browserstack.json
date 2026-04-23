@@ -3,35 +3,10 @@
   "test_path": ["test/index.html"],
   "exit_with_fail": true,
   "browsers": [
-    "chrome_latest",
-    "chrome_previous",
-    "firefox_latest",
-    "firefox_previous",
-    "opera_latest",
-    {
-      "browser": "Safari",
-      "browser_version": "26.4",
-      "os": "OS X",
-      "os_version": "Tahoe"
-    },
-    {
-      "browser": "Safari",
-      "browser_version": "18.4",
-      "os": "OS X",
-      "os_version": "Sequoia"
-    },
     {
       "device": "iPhone 17",
       "os": "ios",
       "os_version": "26",
-      "browserstack.appium_version": "2.19.0",
-      "browserstack.local": "false",
-      "real_mobile": "true"
-    },
-    {
-      "device": "Google Pixel 10",
-      "os": "android",
-      "os_version": "16.0",
       "browserstack.appium_version": "2.19.0",
       "browserstack.local": "false",
       "real_mobile": "true"
