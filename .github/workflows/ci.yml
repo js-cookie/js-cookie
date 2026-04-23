@@ -41,8 +41,6 @@ jobs:
 
   e2e-test:
     runs-on: ubuntu-latest
-    # Skip pull requests!
-    if: ${{ ! startsWith(github.event_name, 'pull_request') }}
     needs:
       - build
     steps:
