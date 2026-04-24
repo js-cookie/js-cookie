@@ -32,7 +32,12 @@ const config = {
     },
     all: {
       options: {
-        urls: ['http://bs-local.com:9998/']
+        urls: [
+          'http://127.0.0.1:9998/',
+          'http://127.0.0.1:9998/sub',
+          'http://127.0.0.1:9998/module.html',
+          'http://127.0.0.1:9998/encoding.html?integration_baseurl=http://127.0.0.1:9998/'
+        ]
       }
     }
   },
