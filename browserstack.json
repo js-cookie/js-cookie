@@ -4,7 +4,6 @@
   "exit_with_fail": true,
   "browsers": [
     {
-      "browser": "Safari",
       "device": "iPhone 17 Pro",
       "os": "ios",
       "os_version": "26",
