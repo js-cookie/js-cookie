@@ -25,7 +25,7 @@
       "os": "ios",
       "os_version": "26",
       "browserstack.appium_version": "2.19.0",
-      "browserstack.local": "true",
+      "browserstack.local": "false",
       "real_mobile": "true"
     },
     {
