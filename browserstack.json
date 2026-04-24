@@ -7,6 +7,7 @@
       "device": "iPhone 17 Pro",
       "os": "ios",
       "os_version": "26",
+      "browserstack.local": "true",
       "real_mobile": "true"
     }
   ]
