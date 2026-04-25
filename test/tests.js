@@ -7,7 +7,7 @@ QUnit.test('api instance creation', function (assert) {
 
   api = Cookies.withAttributes({ path: '/bar' })
   assert.ok(
-    api.set('c', 'v').match(/c=v; path=\/xxx/),
+    api.set('c', 'v').match(/c=v; path=\/bar/),
     'should set up default cookie attributes'
   )
   api = Cookies.withAttributes({ sameSite: 'Lax' })
