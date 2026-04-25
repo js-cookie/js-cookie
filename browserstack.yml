@@ -1,0 +1,51 @@
+accessKey: ${BROWSERSTACK_ACCESS_KEY}
+userName: ${BROWSERSTACK_USERNAME}
+
+accessibility: false
+browserstackLocal: true
+buildIdentifier: '#${BUILD_NUMBER}'
+consoleLogs: errors
+debug: false
+networkLogs: false
+parallelsPerPlatform: 2
+percy: false
+platforms:
+  - browserName: Chrome
+    browserVersion: latest
+    os: Windows
+    osVersion: 11
+  - browserName: Chrome
+    browserVersion: latest-1
+    os: Windows
+    osVersion: 11
+  - browserName: Edge
+    browserVersion: latest
+    os: Windows
+    osVersion: 11
+  - browserName: Firefox
+    browserVersion: latest
+    os: Windows
+    osVersion: 11
+  - browserName: Firefox
+    browserVersion: latest-1
+    os: Windows
+    osVersion: 11
+  - browserName: Safari
+    browserVersion: 26.4
+    os: OS X
+    osVersion: Tahoe
+  - browserName: Safari
+    browserVersion: 18.4
+    os: OS X
+    osVersion: Sequoia
+  - browserName: safari
+    deviceName: iPhone 17 Pro
+    osVersion: 26
+  - browserName: chromium
+    deviceName: iPhone 17 Pro
+    osVersion: 26
+  - browserName: chrome
+    deviceName: Google Pixel 10 Pro
+    osVersion: 16.0
+projectName: js-cookie
+testObservability: false
