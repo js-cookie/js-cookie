@@ -15,7 +15,6 @@ on:
   pull_request: *trigger
   schedule:
     - cron: '0 0 1 * *' # Every month
-  workflow_dispatch:
 
 jobs:
   build:
