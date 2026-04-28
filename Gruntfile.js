@@ -91,8 +91,7 @@ const config = {
     lint: 'npm run lint',
     rollup: 'npx rollup -c',
     'test-node': 'npx qunit test/node.js',
-    'browserstack-node-sdk':
-      'node_modules/.bin/browserstack-node-sdk vanilla test/browserstack/runner.js'
+    'browserstack-runner': 'node_modules/.bin/browserstack-runner --verbose'
   }
 }
 
@@ -112,8 +111,7 @@ module.exports = function (grunt) {
   ])
   grunt.registerTask('browserstack', [
     'exec:rollup',
-    'connect:build-qunit',
-    'exec:browserstack-node-sdk'
+    'exec:browserstack-runner'
   ])
   grunt.registerTask('dev', [
     'exec:format',

@@ -5,24 +5,6 @@
     <title>JavaScript Cookie Test Suite</title>
     <link href="../node_modules/qunit/qunit/qunit.css" rel="stylesheet" />
     <script src="../node_modules/qunit/qunit/qunit.js"></script>
-    <script src="../node_modules/js-reporters/dist/js-reporters.js"></script>
-    <script>
-      window.__qunitJsReporter = {
-        tests: [],
-        suite: null
-      }
-      ;(function () {
-        var reporter = new JsReporters.QUnitAdapter(QUnit)
-
-        reporter.on('testEnd', function (test) {
-          window.__qunitJsReporter.tests.push(test)
-        })
-
-        reporter.on('runEnd', function (suite) {
-          window.__qunitJsReporter.suite = suite
-        })
-      })()
-    </script>
     <script>
       Cookies = 'existent global'
     </script>
