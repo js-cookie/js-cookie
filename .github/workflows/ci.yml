@@ -73,9 +73,6 @@ jobs:
           npm ci
       - name: Run BrowserStack E2E tests
         run: grunt browserstack
-        env:
-          BROWSERSTACK_USERNAME: ${{ secrets.BROWSERSTACK_USERNAME }}
-          BROWSERSTACK_ACCESS_KEY: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
       - name: Stop BrowserStackLocal
         if: always() # Ensure this runs even if the previous step fails
         # Third-party action, pin to commit SHA!

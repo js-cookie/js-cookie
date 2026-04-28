@@ -1,5 +1,5 @@
-userName: ${BROWSERSTACK_USERNAME}
-accessKey: ${BROWSERSTACK_ACCESS_KEY}
+userName: YOUR_USERNAME
+accessKey: YOUR_ACCESS_KEY
 
 projectName: js-cookie
 buildName: browserstack-iphone
