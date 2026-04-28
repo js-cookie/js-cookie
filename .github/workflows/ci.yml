@@ -72,7 +72,7 @@ jobs:
           npm i -g npm@11.8.0
           npm ci
       - name: Run BrowserStack E2E tests
-        run: grunt browserstack
+        run: npm run test:browserstack
       - name: Stop BrowserStackLocal
         # Third-party action, pin to commit SHA!
         # See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
