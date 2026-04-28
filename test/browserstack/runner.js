@@ -6,6 +6,19 @@ const TEST_TIMEOUT_MS = 5 * 60 * 1000
 
 function getSummary(report) {
   const counts = report.testCounts || {}
+  const tests = Array.isArray(report.tests) ? report.tests : []
+
+  if (tests.length > 0) {
+    const failed = tests.filter((test) => test.status === 'failed').length
+    const passed = tests.filter((test) => test.status === 'passed').length
+
+    return {
+      failed,
+      passed,
+      total: tests.length
+    }
+  }
+
   return {
     failed: Number(counts.failed || 0),
     passed: Number(counts.passed || 0),
