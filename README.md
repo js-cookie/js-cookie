@@ -4,14 +4,13 @@
 
 # JavaScript Cookie [![CI](https://github.com/js-cookie/js-cookie/actions/workflows/ci.yml/badge.svg)](https://github.com/js-cookie/js-cookie/actions/workflows/ci.yml) [![npm](https://img.shields.io/github/package-json/v/js-cookie/js-cookie)](https://www.npmjs.com/package/js-cookie) [![size](https://img.shields.io/bundlephobia/minzip/js-cookie/3)](https://www.npmjs.com/package/js-cookie) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/js-cookie/badge?style=rounded)](https://www.jsdelivr.com/package/npm/js-cookie)
 
-A simple, lightweight JavaScript API for handling cookies
+A simple, lightweight JavaScript API for handling cookies, client-side.
 
 - Extensive browser support
 - Accepts [any](#encoding) character
 - [Heavily](test) tested
 - No dependency
-- Supports ES modules
-- Supports AMD/CommonJS
+- Supports both ES and AMD/CommonJS modules
 - [RFC 6265](https://tools.ietf.org/html/rfc6265) compliant
 - Useful [Wiki](https://github.com/js-cookie/js-cookie/wiki)
 - Enable [custom encoding/decoding](#converters)
@@ -23,8 +22,6 @@ A simple, lightweight JavaScript API for handling cookies
 ## Installation
 
 ### NPM
-
-JavaScript Cookie supports [npm](https://www.npmjs.com/package/js-cookie) under the name `js-cookie`.
 
 ```bash
 npm i js-cookie
