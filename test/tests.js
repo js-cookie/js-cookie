@@ -445,6 +445,18 @@ QUnit.test(
   }
 )
 
+QUnit.test(
+  'sanitization of attributes to prevent prototype pollution from untrusted input',
+  function (assert) {
+    var untrusted = JSON.parse('{"__proto__":{"foo":"bar"}}')
+    assert.strictEqual(
+      Cookies.set('c', 'v', untrusted),
+      'c=v; path=/',
+      'should prevent attribute-injection via prototype pollution'
+    )
+  }
+)
+
 QUnit.module('remove', lifecycle)
 
 QUnit.test('deletion', function (assert) {
