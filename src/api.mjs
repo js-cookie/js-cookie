@@ -18,7 +18,8 @@ function init(converter, defaultAttributes) {
 
     name = encodeURIComponent(name)
       .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
-      .replace(/[()]/g, escape)
+      .replace(/\(/g, '%28')
+      .replace(/\)/g, '%29')
 
     var stringifiedAttributes = ''
     for (var attributeName in attributes) {
