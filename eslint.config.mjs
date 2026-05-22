@@ -27,5 +27,42 @@ export default defineConfig([
       ...languageOptions,
       ecmaVersion: 2021
     }
+  },
+  {
+    files: ['src/**/*.mjs'],
+    rules: {
+      'no-unused-vars': ['error', { caughtErrorsIgnorePattern: '^_' }],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ArrowFunctionExpression',
+          message: 'Arrow functions are not ES5 compatible.'
+        },
+        {
+          selector: 'VariableDeclaration[kind="const"]',
+          message: 'const declarations are not ES5 compatible.'
+        },
+        {
+          selector: 'VariableDeclaration[kind="let"]',
+          message: 'let declarations are not ES5 compatible.'
+        },
+        {
+          selector: 'TemplateLiteral',
+          message: 'Template literals are not ES5 compatible.'
+        },
+        {
+          selector: 'Property[shorthand=true]',
+          message: 'Shorthand properties are not ES5 compatible.'
+        },
+        {
+          selector: 'Property[method=true]',
+          message: 'Shorthand method definitions are not ES5 compatible.'
+        },
+        {
+          selector: 'CatchClause[param=null]',
+          message: 'Optional catch binding is not ES5 compatible.'
+        }
+      ]
+    }
   }
 ])
