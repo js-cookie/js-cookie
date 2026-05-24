@@ -61,7 +61,8 @@ function init(converter, defaultAttributes) {
 
       try {
         var found = decodeURIComponent(parts[0])
-        if (!(found in jar)) jar[found] = converter.read(value, found)
+        if (!Object.hasOwn(jar, found))
+          jar[found] = converter.read(value, found)
         if (name === found) {
           break
         }
