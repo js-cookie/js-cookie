@@ -1160,7 +1160,7 @@ QUnit.test('cookie-name - 4 bytes characters', function (assert) {
   using(assert)
     .setCookie('𩸽', 'v')
     .then(function (decodedValue, plainValue) {
-      assert.strictEqual(decodedValue, 'v', 'should handle the 𩸽 character')
+      assert.strictEqual(decodedValue, 'v', 'should_handle the 𩸽 character')
       assert.strictEqual(
         plainValue,
         '%F0%A9%B8%BD=v',
