@@ -30,6 +30,10 @@ platforms:
     browserVersion: latest-1
     os: Windows
     osVersion: 11
+  - browserName: IE
+    browserVersion: 11.0
+    os: Windows
+    osVersion: 10
   - browserName: Safari
     browserVersion: 26.4
     os: OS X
@@ -38,14 +42,5 @@ platforms:
     browserVersion: 18.4
     os: OS X
     osVersion: Sequoia
-  - browserName: safari
-    deviceName: iPhone 17 Pro
-    osVersion: 26
-  - browserName: chromium
-    deviceName: iPhone 17 Pro
-    osVersion: 26
-  - browserName: chrome
-    deviceName: Google Pixel 10 Pro
-    osVersion: 16.0
 projectName: js-cookie
 testObservability: false
