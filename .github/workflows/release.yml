@@ -37,9 +37,7 @@ jobs:
         with:
           node-version: 24.x
           registry-url: https://registry.npmjs.org
-      - run: |
-          npm i -g npm@11.8.0
-          npm ci
+      - run: npm ci
       - uses: chainguard-dev/actions/setup-gitsign@081e79ee578199ef583d4ca74edc376b50b9409c
       - run: npm run release ${GITHUB_EVENT_INPUTS_BUMP}${{ github.event.inputs.dry-run == 'true' && ' -- --dry-run' || '' }}
         env:
