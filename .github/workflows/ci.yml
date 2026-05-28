@@ -42,6 +42,11 @@ jobs:
         run: npm run lint:check
       - name: Run unit tests
         run: npm test
+      - name: Check ECMAScript compatibility
+        run: |
+          npm run dist
+          npx eslint --no-config-lookup --parser espree --parser-options 'ecmaVersion:5,sourceType:script' 'dist/*.js'
+          npx eslint --no-config-lookup --parser-options 'ecmaVersion:6' 'dist/*.mjs'
 
   e2e-test:
     runs-on: ubuntu-latest

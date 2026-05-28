@@ -65,7 +65,7 @@ function init(converter, defaultAttributes) {
         if (name === found) {
           break
         }
-      } catch {
+      } catch (_e) {
         // Do nothing...
       }
     }
@@ -75,8 +75,8 @@ function init(converter, defaultAttributes) {
 
   return Object.create(
     {
-      set,
-      get,
+      set: set,
+      get: get,
       remove: function (name, attributes) {
         set(
           name,
