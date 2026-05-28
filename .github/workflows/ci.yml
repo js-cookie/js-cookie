@@ -36,6 +36,7 @@ jobs:
         run: |
           npm i -g npm@11.8.0
           npm ci
+          npx puppeteer browsers install chrome
       - name: Check formatting
         run: npm run format:check
       - name: Lint
