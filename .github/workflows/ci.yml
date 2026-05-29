@@ -40,6 +40,11 @@ jobs:
         run: npm run format:check
       - name: Lint
         run: npm run lint:check
+      - run: |
+          echo "PUPPETEER CACHE: $HOME/.cache/puppeteer"
+          ls -R $HOME/.cache/puppeteer || true
+          npm ls puppeteer || true
+          npx -p puppeteer puppeteer browsers list || true
       - name: Run unit tests
         run: npm test
       - name: Check ECMAScript compatibility
