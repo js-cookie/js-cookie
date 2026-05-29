@@ -300,10 +300,9 @@ Check out the [Contributing Guidelines](CONTRIBUTING.md)
 
 ## Releasing
 
-Releasing should be done via the `Release` GitHub Actions workflow, so that published packages on npmjs.com have package provenance.
+Releases must be created via the `Release` GitHub Actions workflow (trusted publishing with OIDC).
 
-GitHub releases are created as a draft and need to be published manually!
-(This is so we are able to craft suitable release notes before publishing.)
+GitHub releases are created as a draft and need to be published manually! (This is so we are able to craft suitable release notes before publishing.)
 
 ## Supporters
 
