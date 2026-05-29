@@ -25,7 +25,6 @@ jobs:
       matrix:
         node-version: [20.x, 22.x, 24.x]
     env:
-      CHROME_BIN: /usr/bin/google-chrome
       PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
       PUPPETEER_SKIP_DOWNLOAD: 'true'
     steps:
