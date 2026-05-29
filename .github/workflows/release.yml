@@ -49,4 +49,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_EVENT_INPUTS_BUMP: ${{ github.event.inputs.bump }}
-          NODE_OPTIONS: --disable-warning=DEP0044
