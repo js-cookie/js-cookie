@@ -64,6 +64,7 @@
     "js-reporters": "^2.1.0",
     "nano-staged": "^1.0.2",
     "prettier": "^3.0.0",
+    "puppeteer": "^24.0.0",
     "qunit": "^2.19.4",
     "release-it": "^20.0.0",
     "rollup": "^4.53.3",
