@@ -4,7 +4,6 @@ on:
   push: &trigger
     branches: [main]
     paths-ignore:
-      - '.devcontainer/**'
       - '.github/**'
       - '!.github/workflows/ci.yml'
       - '.vscode/**'

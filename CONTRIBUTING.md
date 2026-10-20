@@ -27,19 +27,8 @@ Browse to the project root directory and install the dev dependencies:
 
 ```bash
 npm install -d
+npx puppeteer browsers install chrome
 ```
-
-Note: when running `npm install` on Apple Silicon (M1/M2), the Puppeteer dependency will fail to install. To fix this, install dependencies while skipping to install the Puppeteer executable (not available for Apple Silicon, i.e. arm64):
-
-```bash
-export PUPPETEER_EXECUTABLE_PATH=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
-export PUPPETEER_SKIP_DOWNLOAD=true
-npm install -d
-```
-
-^ For this to work you must have installed Google Chrome in the default location.
-
-More information on this issue can be found [here](https://github.com/puppeteer/puppeteer/issues/7740) and [here](https://broddin.be/2022/09/19/fixing-the-chromium-binary-is-not-available-for-arm64/).
 
 To execute the build and tests run the following command in the root of the project:
 
@@ -55,7 +44,7 @@ Done, without errors.
 
 ### Tests
 
-You can also run the tests in the browser.  
+You can also run the tests in the browser.
 Start a test server from the project root:
 
 ```bash
