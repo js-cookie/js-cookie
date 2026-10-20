@@ -64,7 +64,7 @@
     "js-reporters": "^2.1.0",
     "nano-staged": "^1.0.2",
     "prettier": "^3.0.0",
-    "qunit": "^2.19.4",
+    "qunit": "^3.0.0",
     "release-it": "^21.0.0",
     "rollup": "^4.53.3",
     "rollup-plugin-filesize": "^10.0.0",
