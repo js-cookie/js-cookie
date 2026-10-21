@@ -176,6 +176,25 @@ QUnit.test(
   }
 )
 
+QUnit.test(
+  'RFC 6265 - unclosed DQUOTE should not strip trailing character or single quote',
+  function (assert) {
+    document.cookie = 'c="hello'
+    assert.strictEqual(
+      Cookies.get('c'),
+      '"hello',
+      'should not strip last character when quote is unclosed'
+    )
+
+    document.cookie = 'c="'
+    assert.strictEqual(
+      Cookies.get('c'),
+      '"',
+      'single quote character should remain untouched'
+    )
+  }
+)
+
 // github.com/js-cookie/js-cookie/issues/196
 QUnit.test(
   'Call to read cookie when there is another unrelated cookie with malformed encoding in the name',

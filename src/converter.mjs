@@ -1,6 +1,10 @@
 export default {
   read: function (value) {
-    if (value[0] === '"') {
+    if (
+      value.length >= 2 &&
+      value[0] === '"' &&
+      value[value.length - 1] === '"'
+    ) {
       value = value.slice(1, -1)
     }
     return value.replace(/(%[\dA-F]{2})+/gi, decodeURIComponent)
