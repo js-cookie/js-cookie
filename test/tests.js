@@ -286,6 +286,21 @@ QUnit.test('expires option as days from now', function (assert) {
   )
 })
 
+QUnit.test('expires option as zero days', function (assert) {
+  var before = Date.now()
+  var actual = Cookies.set('c', 'v', { expires: 0 })
+  var match = /; expires=([^;]+)/.exec(actual)
+
+  assert.ok(match, 'should write an expires attribute for zero days')
+  if (!match) return
+
+  var expires = Date.parse(match[1])
+  assert.ok(
+    expires >= before - 1000 && expires <= Date.now(),
+    'should expire at the current time'
+  )
+})
+
 // github.com/carhartl/jquery-cookie/issues/246
 QUnit.test('expires option as fraction of a day', function (assert) {
   var findValueForAttributeName = function (createdCookie, attributeName) {
