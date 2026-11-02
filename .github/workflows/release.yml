@@ -44,7 +44,7 @@ jobs:
       - run: |
           npm i -g npm@11.8.0
           npm ci
-      - uses: chainguard-dev/actions/setup-gitsign@081e79ee578199ef583d4ca74edc376b50b9409c
+      - uses: chainguard-dev/actions/setup-gitsign@8f31e9482b447ff2c69eca944a09b4b31a4a85d0
       - run: npm run release ${GITHUB_EVENT_INPUTS_BUMP}${{ github.event.inputs.dry-run == 'true' && ' -- --dry-run' || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
